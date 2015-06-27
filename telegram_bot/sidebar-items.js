@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["API_URL","API-URL prefix"]],"enum":[["Error","Telegram-Bot Error: Anything that may fail (HTTP, JSON, ...)"]],"mod":[["types","Types of the Telegram API."]],"struct":[["Bot","The Bot. Main type for doing nearly everything."]],"type":[["Result","Telegram-Bot Result"]]});
