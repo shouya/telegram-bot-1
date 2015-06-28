@@ -436,6 +436,101 @@
 <span id="394">394</span>
 <span id="395">395</span>
 <span id="396">396</span>
+<span id="397">397</span>
+<span id="398">398</span>
+<span id="399">399</span>
+<span id="400">400</span>
+<span id="401">401</span>
+<span id="402">402</span>
+<span id="403">403</span>
+<span id="404">404</span>
+<span id="405">405</span>
+<span id="406">406</span>
+<span id="407">407</span>
+<span id="408">408</span>
+<span id="409">409</span>
+<span id="410">410</span>
+<span id="411">411</span>
+<span id="412">412</span>
+<span id="413">413</span>
+<span id="414">414</span>
+<span id="415">415</span>
+<span id="416">416</span>
+<span id="417">417</span>
+<span id="418">418</span>
+<span id="419">419</span>
+<span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
+<span id="447">447</span>
+<span id="448">448</span>
+<span id="449">449</span>
+<span id="450">450</span>
+<span id="451">451</span>
+<span id="452">452</span>
+<span id="453">453</span>
+<span id="454">454</span>
+<span id="455">455</span>
+<span id="456">456</span>
+<span id="457">457</span>
+<span id="458">458</span>
+<span id="459">459</span>
+<span id="460">460</span>
+<span id="461">461</span>
+<span id="462">462</span>
+<span id="463">463</span>
+<span id="464">464</span>
+<span id="465">465</span>
+<span id="466">466</span>
+<span id="467">467</span>
+<span id="468">468</span>
+<span id="469">469</span>
+<span id="470">470</span>
+<span id="471">471</span>
+<span id="472">472</span>
+<span id="473">473</span>
+<span id="474">474</span>
+<span id="475">475</span>
+<span id="476">476</span>
+<span id="477">477</span>
+<span id="478">478</span>
+<span id="479">479</span>
+<span id="480">480</span>
+<span id="481">481</span>
+<span id="482">482</span>
+<span id="483">483</span>
+<span id="484">484</span>
+<span id="485">485</span>
+<span id="486">486</span>
+<span id="487">487</span>
+<span id="488">488</span>
+<span id="489">489</span>
+<span id="490">490</span>
+<span id="491">491</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Types of the Telegram API.</span>
 <span class='doccomment'>//!</span>
@@ -450,6 +545,7 @@
 <span class='doccomment'>//!</span>
 
 <span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::{<span class='ident'>Decodable</span>, <span class='ident'>Encodable</span>, <span class='ident'>Decoder</span>, <span class='ident'>Encoder</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>convert</span>::<span class='ident'>Into</span>;
 
 <span class='comment'>// ===========================================================================</span>
 <span class='comment'>// Helpers</span>
@@ -500,7 +596,7 @@
 <span class='comment'>// Types not explicitly mentioned or somehow different from Telegram types</span>
 <span class='comment'>// ===========================================================================</span>
 <span class='doccomment'>/// All API responses are from this type. Mostly used internal.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Response</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Decodable</span><span class='op'>&gt;</span> {
     <span class='kw'>pub</span> <span class='ident'>ok</span>: <span class='ident'>bool</span>,
     <span class='kw'>pub</span> <span class='ident'>description</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
@@ -508,9 +604,103 @@
 }
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
+<span class='doccomment'>/// Represents one of &quot;ReplyKeyboardMarkup&quot;, &quot;ReplyKeyboardHide&quot; or</span>
+<span class='doccomment'>/// &quot;ForceReply&quot;. Used for the &quot;reply_markup&quot; field.</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>ReplyMarkup</span> {
+    <span class='ident'>Keyboard</span>(<span class='ident'>ReplyKeyboardMarkup</span>),
+    <span class='doccomment'>/// The boolean corresponds to the &quot;selective&quot; field of &quot;ReplyKeyboardHide&quot;</span>
+    <span class='ident'>KeyboardHide</span>(<span class='ident'>bool</span>),
+    <span class='doccomment'>/// The boolean corresponds to the &quot;selective&quot; field of &quot;ForceReply&quot;</span>
+    <span class='ident'>ForceReply</span>(<span class='ident'>bool</span>),
+}
+
+<span class='kw'>impl</span> <span class='ident'>Encodable</span> <span class='kw'>for</span> <span class='ident'>ReplyMarkup</span> {
+    <span class='kw'>fn</span> <span class='ident'>encode</span><span class='op'>&lt;</span><span class='ident'>E</span>: <span class='ident'>Encoder</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>e</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>E</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>E</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+            <span class='ident'>ReplyMarkup</span>::<span class='ident'>Keyboard</span>(<span class='kw-2'>ref</span> <span class='ident'>k</span>) <span class='op'>=&gt;</span> <span class='ident'>k</span>.<span class='ident'>encode</span>(<span class='ident'>e</span>),
+            <span class='ident'>ReplyMarkup</span>::<span class='ident'>KeyboardHide</span>(<span class='ident'>b</span>) <span class='op'>=&gt;</span> {
+                <span class='ident'>e</span>.<span class='ident'>emit_struct</span>(<span class='string'>&quot;ReplyKeyboardHide&quot;</span>, <span class='number'>2</span>, <span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> {
+                    <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>e</span>.<span class='ident'>emit_struct_field</span>(<span class='string'>&quot;hide_keyboard&quot;</span>, <span class='number'>0</span>, <span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> {
+                        <span class='boolval'>true</span>.<span class='ident'>encode</span>(<span class='ident'>e</span>)
+                    }));
+                    <span class='ident'>e</span>.<span class='ident'>emit_struct_field</span>(<span class='string'>&quot;selective&quot;</span>, <span class='number'>1</span>, <span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> <span class='ident'>b</span>.<span class='ident'>encode</span>(<span class='ident'>e</span>))
+                })
+            },
+            <span class='ident'>ReplyMarkup</span>::<span class='ident'>ForceReply</span>(<span class='ident'>b</span>) <span class='op'>=&gt;</span> {
+                <span class='ident'>e</span>.<span class='ident'>emit_struct</span>(<span class='string'>&quot;ForceReply&quot;</span>, <span class='number'>2</span>, <span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> {
+                    <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>e</span>.<span class='ident'>emit_struct_field</span>(<span class='string'>&quot;force_reply&quot;</span>, <span class='number'>0</span>, <span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> {
+                        <span class='boolval'>true</span>.<span class='ident'>encode</span>(<span class='ident'>e</span>)
+                    }));
+                    <span class='ident'>e</span>.<span class='ident'>emit_struct_field</span>(<span class='string'>&quot;selective&quot;</span>, <span class='number'>1</span>, <span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> <span class='ident'>b</span>.<span class='ident'>encode</span>(<span class='ident'>e</span>))
+                })
+            },
+        }
+    }
+}
+
+<span class='comment'>// ---------------------------------------------------------------------------</span>
+<span class='doccomment'>/// Strongly typed ChatAction. Instead of passing a String to the</span>
+<span class='doccomment'>/// `send_chat_action` method, this is used.</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>, <span class='ident'>Copy</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>ChatAction</span> {
+    <span class='ident'>Typing</span>,
+    <span class='ident'>UploadPhoto</span>,
+    <span class='ident'>RecordVideo</span>,
+    <span class='ident'>UploadVideo</span>,
+    <span class='ident'>RecordAudio</span>,
+    <span class='ident'>UploadAudio</span>,
+    <span class='ident'>UploadDocument</span>,
+    <span class='ident'>FindLocation</span>,
+}
+
+<span class='kw'>impl</span> <span class='ident'>Decodable</span> <span class='kw'>for</span> <span class='ident'>ChatAction</span> {
+    <span class='kw'>fn</span> <span class='ident'>decode</span><span class='op'>&lt;</span><span class='ident'>D</span>: <span class='ident'>Decoder</span><span class='op'>&gt;</span>(<span class='ident'>d</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>D</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='kw'>Self</span>, <span class='ident'>D</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+        <span class='prelude-val'>Ok</span>(<span class='kw'>match</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>d</span>.<span class='ident'>read_str</span>()) {
+            <span class='string'>&quot;typing&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>ChatAction</span>::<span class='ident'>Typing</span>,
+            <span class='string'>&quot;upload_photo&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>ChatAction</span>::<span class='ident'>UploadPhoto</span>,
+            <span class='string'>&quot;record_video&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>ChatAction</span>::<span class='ident'>RecordVideo</span>,
+            <span class='string'>&quot;upload_video&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>ChatAction</span>::<span class='ident'>UploadVideo</span>,
+            <span class='string'>&quot;record_audio&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>ChatAction</span>::<span class='ident'>RecordAudio</span>,
+            <span class='string'>&quot;upload_audio&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>ChatAction</span>::<span class='ident'>UploadAudio</span>,
+            <span class='string'>&quot;upload_document&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>ChatAction</span>::<span class='ident'>UploadDocument</span>,
+            <span class='string'>&quot;find_location&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>ChatAction</span>::<span class='ident'>FindLocation</span>,
+            _ <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>d</span>.<span class='ident'>error</span>(<span class='string'>&quot;Not a valid chat action&quot;</span>)),
+        })
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>Into</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>ChatAction</span> {
+    <span class='kw'>fn</span> <span class='ident'>into</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span> {
+        <span class='kw'>match</span> <span class='self'>self</span> {
+             <span class='ident'>ChatAction</span>::<span class='ident'>Typing</span> <span class='op'>=&gt;</span> <span class='string'>&quot;typing&quot;</span>,
+             <span class='ident'>ChatAction</span>::<span class='ident'>UploadPhoto</span> <span class='op'>=&gt;</span> <span class='string'>&quot;upload_photo&quot;</span>,
+             <span class='ident'>ChatAction</span>::<span class='ident'>RecordVideo</span> <span class='op'>=&gt;</span> <span class='string'>&quot;record_video&quot;</span>,
+             <span class='ident'>ChatAction</span>::<span class='ident'>UploadVideo</span> <span class='op'>=&gt;</span> <span class='string'>&quot;upload_video&quot;</span>,
+             <span class='ident'>ChatAction</span>::<span class='ident'>RecordAudio</span> <span class='op'>=&gt;</span> <span class='string'>&quot;record_audio&quot;</span>,
+             <span class='ident'>ChatAction</span>::<span class='ident'>UploadAudio</span> <span class='op'>=&gt;</span> <span class='string'>&quot;upload_audio&quot;</span>,
+             <span class='ident'>ChatAction</span>::<span class='ident'>UploadDocument</span> <span class='op'>=&gt;</span> <span class='string'>&quot;upload_document&quot;</span>,
+             <span class='ident'>ChatAction</span>::<span class='ident'>FindLocation</span> <span class='op'>=&gt;</span> <span class='string'>&quot;find_location&quot;</span>,
+        }
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>ToString</span> <span class='kw'>for</span> <span class='ident'>ChatAction</span> {
+    <span class='kw'>fn</span> <span class='ident'>to_string</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>String</span> {
+        <span class='ident'>Into</span>::<span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span>::<span class='ident'>into</span>(<span class='op'>*</span><span class='self'>self</span>).<span class='ident'>into</span>()
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>Encodable</span> <span class='kw'>for</span> <span class='ident'>ChatAction</span> {
+    <span class='kw'>fn</span> <span class='ident'>encode</span><span class='op'>&lt;</span><span class='ident'>E</span>: <span class='ident'>Encoder</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>e</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>E</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>E</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+        <span class='ident'>e</span>.<span class='ident'>emit_str</span>((<span class='op'>*</span><span class='self'>self</span>).<span class='ident'>into</span>())
+    }
+}
+
+<span class='comment'>// ---------------------------------------------------------------------------</span>
 <span class='doccomment'>/// Either a User or a GroupChat. Used in &quot;chat&quot; field of Message. Has some</span>
 <span class='doccomment'>/// useful methods for less typing.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Chat</span> {
     <span class='ident'>User</span>(<span class='ident'>User</span>),
     <span class='ident'>Group</span>(<span class='ident'>GroupChat</span>),
@@ -557,7 +747,7 @@
 }
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Message</span> {
     <span class='kw'>pub</span> <span class='ident'>message_id</span>: <span class='ident'>Integer</span>,
     <span class='kw'>pub</span> <span class='ident'>from</span>: <span class='ident'>User</span>,
@@ -597,7 +787,7 @@
     }
 }
 
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>MessageType</span> {
     <span class='ident'>Text</span>(<span class='ident'>String</span>),
     <span class='ident'>Audio</span>(<span class='ident'>Audio</span>),
@@ -664,7 +854,7 @@
 <span class='comment'>// Telegram types directly mapped to Rust types</span>
 <span class='comment'>// ===========================================================================</span>
 <span class='doccomment'>/// Telegram type &quot;User&quot; (directly mapped)</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>User</span> {
     <span class='kw'>pub</span> <span class='ident'>id</span>: <span class='ident'>Integer</span>,
     <span class='kw'>pub</span> <span class='ident'>first_name</span>: <span class='ident'>String</span>,
@@ -679,7 +869,7 @@
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
 <span class='doccomment'>/// Telegram type &quot;GroupChat&quot; (directly mapped)</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>RustcEncodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>RustcEncodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>GroupChat</span> {
     <span class='kw'>pub</span> <span class='ident'>id</span>: <span class='ident'>Integer</span>,
     <span class='kw'>pub</span> <span class='ident'>title</span>: <span class='ident'>String</span>,
@@ -687,7 +877,7 @@
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
 <span class='doccomment'>/// Telegram type &quot;PhotoSize&quot; (directly mapped)</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>PhotoSize</span> {
     <span class='kw'>pub</span> <span class='ident'>file_id</span>: <span class='ident'>String</span>,
     <span class='kw'>pub</span> <span class='ident'>width</span>: <span class='ident'>Integer</span>,
@@ -701,7 +891,7 @@
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
 <span class='doccomment'>/// Telegram type &quot;PhotoSize&quot; (directly mapped)</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Audio</span> {
     <span class='kw'>pub</span> <span class='ident'>file_id</span>: <span class='ident'>String</span>,
     <span class='kw'>pub</span> <span class='ident'>duration</span>: <span class='ident'>Integer</span>,
@@ -715,7 +905,7 @@
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
 <span class='doccomment'>/// Telegram type &quot;PhotoSize&quot; (directly mapped)</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Document</span> {
     <span class='kw'>pub</span> <span class='ident'>file_id</span>: <span class='ident'>String</span>,
     <span class='kw'>pub</span> <span class='ident'>thumb</span>: <span class='ident'>PhotoSize</span>,
@@ -730,7 +920,7 @@
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
 <span class='doccomment'>/// Telegram type &quot;PhotoSize&quot; (directly mapped)</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Sticker</span> {
     <span class='kw'>pub</span> <span class='ident'>file_id</span>: <span class='ident'>String</span>,
     <span class='kw'>pub</span> <span class='ident'>width</span>: <span class='ident'>Integer</span>,
@@ -745,7 +935,7 @@
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
 <span class='doccomment'>/// Telegram type &quot;PhotoSize&quot; (directly mapped)</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Video</span> {
     <span class='kw'>pub</span> <span class='ident'>file_id</span>: <span class='ident'>String</span>,
     <span class='kw'>pub</span> <span class='ident'>width</span>: <span class='ident'>Integer</span>,
@@ -763,7 +953,7 @@
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
 <span class='doccomment'>/// Telegram type &quot;Contact&quot; (directly mapped)</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Contact</span> {
     <span class='kw'>pub</span> <span class='ident'>phone_number</span>: <span class='ident'>String</span>,
     <span class='kw'>pub</span> <span class='ident'>first_name</span>: <span class='ident'>String</span>,
@@ -777,7 +967,7 @@
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
 <span class='doccomment'>/// Telegram type &quot;Location&quot; (directly mapped)</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>RustcEncodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>RustcEncodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>, <span class='ident'>Copy</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Location</span> {
     <span class='kw'>pub</span> <span class='ident'>longitude</span>: <span class='ident'>Float</span>,
     <span class='kw'>pub</span> <span class='ident'>latitude</span>: <span class='ident'>Float</span>,
@@ -785,7 +975,7 @@
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
 <span class='doccomment'>/// Telegram type &quot;Update&quot; (directly mapped)</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Update</span> {
     <span class='kw'>pub</span> <span class='ident'>update_id</span>: <span class='ident'>Integer</span>,
     <span class='kw'>pub</span> <span class='ident'>message</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Message</span><span class='op'>&gt;</span>
@@ -797,7 +987,7 @@
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
 <span class='doccomment'>/// Telegram type &quot;Location&quot; (directly mapped)</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>RustcEncodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>RustcEncodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>UserProfilePhotos</span> {
     <span class='kw'>pub</span> <span class='ident'>total_count</span>: <span class='ident'>Integer</span>,
     <span class='kw'>pub</span> <span class='ident'>photos</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>PhotoSize</span><span class='op'>&gt;&gt;</span>,
@@ -805,7 +995,7 @@
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
 <span class='doccomment'>/// Telegram type &quot;ReplyKeyboardMarkup&quot; (directly mapped)</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ReplyKeyboardMarkup</span> {
     <span class='kw'>pub</span> <span class='ident'>keyboard</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;&gt;</span>,
     <span class='kw'>pub</span> <span class='ident'>resize_keyboard</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>bool</span><span class='op'>&gt;</span>,
