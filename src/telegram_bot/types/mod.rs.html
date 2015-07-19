@@ -778,7 +778,7 @@
 <span class='kw'>impl</span> <span class='ident'>Decodable</span> <span class='kw'>for</span> <span class='ident'>Message</span> {
     <span class='kw'>fn</span> <span class='ident'>decode</span><span class='op'>&lt;</span><span class='ident'>D</span>: <span class='ident'>Decoder</span><span class='op'>&gt;</span>(<span class='ident'>d</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>D</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='kw'>Self</span>, <span class='ident'>D</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Decodes a field with a given name. If successful: Return decoded</span>
-        <span class='comment'>// value. If not: Exist function with error value.</span>
+        <span class='comment'>// value. If not: Exit function with error value.</span>
         <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>try_field</span> {
             (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>d</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {
                 <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>d</span>.<span class='ident'>read_struct_field</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>, <span class='number'>0</span>, <span class='op'>|</span><span class='ident'>d</span><span class='op'>|</span> <span class='ident'>Decodable</span>::<span class='ident'>decode</span>(<span class='ident'>d</span>)))
@@ -902,7 +902,7 @@
     [<span class='number'>3</span> <span class='op'>=&gt;</span> <span class='ident'>file_size</span>]);
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
-<span class='doccomment'>/// Telegram type &quot;PhotoSize&quot; (directly mapped)</span>
+<span class='doccomment'>/// Telegram type &quot;Audio&quot; (directly mapped)</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Audio</span> {
     <span class='kw'>pub</span> <span class='ident'>file_id</span>: <span class='ident'>String</span>,
@@ -916,7 +916,7 @@
     [<span class='number'>2</span> <span class='op'>=&gt;</span> <span class='ident'>mime_type</span>, <span class='number'>3</span> <span class='op'>=&gt;</span> <span class='ident'>file_size</span>]);
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
-<span class='doccomment'>/// Telegram type &quot;PhotoSize&quot; (directly mapped)</span>
+<span class='doccomment'>/// Telegram type &quot;Document&quot; (directly mapped)</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Document</span> {
     <span class='kw'>pub</span> <span class='ident'>file_id</span>: <span class='ident'>String</span>,
@@ -931,7 +931,7 @@
     [<span class='number'>2</span> <span class='op'>=&gt;</span> <span class='ident'>file_name</span>, <span class='number'>3</span> <span class='op'>=&gt;</span> <span class='ident'>mime_type</span>, <span class='number'>4</span> <span class='op'>=&gt;</span> <span class='ident'>file_size</span>]);
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
-<span class='doccomment'>/// Telegram type &quot;PhotoSize&quot; (directly mapped)</span>
+<span class='doccomment'>/// Telegram type &quot;Sticker&quot; (directly mapped)</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Sticker</span> {
     <span class='kw'>pub</span> <span class='ident'>file_id</span>: <span class='ident'>String</span>,
@@ -946,7 +946,7 @@
     [<span class='number'>4</span> <span class='op'>=&gt;</span> <span class='ident'>file_size</span>]);
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
-<span class='doccomment'>/// Telegram type &quot;PhotoSize&quot; (directly mapped)</span>
+<span class='doccomment'>/// Telegram type &quot;Video&quot; (directly mapped)</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Video</span> {
     <span class='kw'>pub</span> <span class='ident'>file_id</span>: <span class='ident'>String</span>,
@@ -998,7 +998,7 @@
 <span class='comment'>//     [1 =&gt; message]);</span>
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
-<span class='doccomment'>/// Telegram type &quot;Location&quot; (directly mapped)</span>
+<span class='doccomment'>/// Telegram type &quot;UserProfilePhotos&quot; (directly mapped)</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>RustcEncodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>UserProfilePhotos</span> {
     <span class='kw'>pub</span> <span class='ident'>total_count</span>: <span class='ident'>Integer</span>,
