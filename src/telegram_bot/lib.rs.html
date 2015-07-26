@@ -272,6 +272,18 @@
 <span id="230">230</span>
 <span id="231">231</span>
 <span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
 </pre><pre class='rust '>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>hyper</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rustc_serialize</span>;
@@ -287,6 +299,7 @@
 <span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::{<span class='ident'>json</span>, <span class='ident'>Decodable</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>Read</span>;
 <span class='kw'>use</span> <span class='ident'>hyper</span>::{<span class='ident'>Client</span>, <span class='ident'>Url</span>};
+<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>client</span>::<span class='ident'>IntoUrl</span>;
 <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>header</span>::<span class='ident'>Connection</span>;
 
 <span class='doccomment'>/// API-URL prefix</span>
@@ -420,6 +433,17 @@
         <span class='self'>self</span>.<span class='ident'>send_request</span>(<span class='string'>&quot;getUpdates&quot;</span>, <span class='ident'>params</span>)
     }
 
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_webhook</span><span class='op'>&lt;</span><span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>url</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>U</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>bool</span><span class='op'>&gt;</span> {
+        <span class='kw'>let</span> <span class='ident'>u</span> <span class='op'>=</span> <span class='ident'>url</span>.<span class='ident'>map_or</span>(<span class='string'>&quot;&quot;</span>.<span class='ident'>into</span>(), <span class='op'>|</span><span class='ident'>u</span><span class='op'>|</span> <span class='ident'>u</span>.<span class='ident'>into_url</span>().<span class='ident'>unwrap</span>().<span class='ident'>to_string</span>());
+
+        <span class='comment'>// Prepare parameters</span>
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>params</span> <span class='op'>=</span> <span class='ident'>Params</span>::<span class='ident'>new</span>();
+        <span class='ident'>params</span>.<span class='ident'>add_get</span>(<span class='string'>&quot;url&quot;</span>, <span class='ident'>u</span>);
+
+        <span class='comment'>// Execute request</span>
+        <span class='self'>self</span>.<span class='ident'>send_request</span>(<span class='string'>&quot;setWebhook&quot;</span>, <span class='ident'>params</span>)
+    }
+
 
     <span class='comment'>// =======================================================================</span>
     <span class='comment'>// Methods for receiving updates</span>
@@ -437,9 +461,9 @@
     <span class='doccomment'>/// If the bot is restarted, but the last received updates are not yet</span>
     <span class='doccomment'>/// confirmed (the last poll was not empty), there will be some duplicate</span>
     <span class='doccomment'>/// updates.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>long_poll</span><span class='op'>&lt;</span><span class='ident'>F</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>timeout</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Integer</span><span class='op'>&gt;</span>, <span class='ident'>handler</span>: <span class='ident'>F</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>long_poll</span><span class='op'>&lt;</span><span class='ident'>H</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>timeout</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Integer</span><span class='op'>&gt;</span>, <span class='ident'>handler</span>: <span class='ident'>H</span>)
                         <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>
-                        <span class='kw'>where</span> <span class='ident'>F</span>: <span class='ident'>Fn</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Bot</span>, <span class='ident'>Update</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+                        <span class='kw'>where</span> <span class='ident'>H</span>: <span class='ident'>Fn</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Bot</span>, <span class='ident'>Update</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='comment'>// Calculate final timeout: Given or default (30s)</span>
         <span class='kw'>let</span> <span class='ident'>timeout</span> <span class='op'>=</span> <span class='ident'>timeout</span>.<span class='ident'>or</span>(<span class='prelude-val'>Some</span>(<span class='number'>30</span>));
 
