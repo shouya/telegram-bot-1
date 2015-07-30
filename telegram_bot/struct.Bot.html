@@ -73,7 +73,7 @@ Telegram token. You can call <code>get_me</code> to execute a test request.</p>
 The method will not set the offset parameter on its own. To receive
 updates in a more high level way, see <code>long_poll</code>.</p>
 </div><h4 id='method.set_webhook' class='method'><code>fn <a href='#method.set_webhook' class='fnname'>set_webhook</a>&lt;U: <a class='trait' href='../hyper/client/trait.IntoUrl.html' title='hyper::client::IntoUrl'>IntoUrl</a>&gt;(&amp;mut self, url: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;U&gt;) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>&gt;</code></h4>
-<h4 id='method.long_poll' class='method'><code>fn <a href='#method.long_poll' class='fnname'>long_poll</a>&lt;H&gt;(&amp;mut self, timeout: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../telegram_bot/types/type.Integer.html' title='telegram_bot::types::Integer'>Integer</a>&gt;, handler: H) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt; <span class='where'>where H: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(&amp;mut <a class='struct' href='../telegram_bot/struct.Bot.html' title='telegram_bot::Bot'>Bot</a>, <a class='struct' href='../telegram_bot/types/struct.Update.html' title='telegram_bot::types::Update'>Update</a>) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</span></code></h4>
+<h4 id='method.long_poll' class='method'><code>fn <a href='#method.long_poll' class='fnname'>long_poll</a>&lt;H&gt;(&amp;mut self, timeout: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../telegram_bot/types/type.Integer.html' title='telegram_bot::types::Integer'>Integer</a>&gt;, handler: H) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt; <span class='where'>where H: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;mut <a class='struct' href='../telegram_bot/struct.Bot.html' title='telegram_bot::Bot'>Bot</a>, <a class='struct' href='../telegram_bot/types/struct.Update.html' title='telegram_bot::types::Update'>Update</a>) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</span></code></h4>
 <div class='docblock'><p>Receive and handle updates via &quot;getUpdates&quot;.</p>
 
 <p>This method will repeatedly call <code>get_updates</code> to receive new updates.
@@ -81,7 +81,12 @@ It will then call the given handler for every update and increase the
 update offset accordingly, so the handler will never be called with
 the same update twice.
 The <code>timeout</code> parameter influences how long (in seconds) each poll may
-last. Defaults to 30.</p>
+last. Defaults to 30.
+The handler gets a mutable reference to the bot since borrowing it
+from the outer scope won&#39;t work. When the handler returns an <code>Err</code>
+value the bot will stop listening for updates and <code>long_poll</code> will
+return the Error. If you want to stop listening you can just return
+<code>Error::UserInterrupt</code>.</p>
 
 <p><strong>Note:</strong>
 If the bot is restarted, but the last received updates are not yet
