@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `Bot` struct in crate `telegram_bot`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, Bot">
+    <meta name="description" content="API documentation for the Rust `Api` struct in crate `telegram_bot`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Api">
 
-    <title>telegram_bot::Bot - Rust</title>
+    <title>telegram_bot::Api - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../main.css">
 
@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='index.html'>telegram_bot</a></p><script>window.sidebarCurrent = {name: 'Bot', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'><a href='index.html'>telegram_bot</a></p><script>window.sidebarCurrent = {name: 'Api', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -41,19 +41,29 @@
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>telegram_bot</a>::<wbr><a class='struct' href=''>Bot</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>telegram_bot</a>::<wbr><a class='struct' href=''>Api</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-9879' class='srclink' href='../src/telegram_bot/lib.rs.html#22-26' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct Bot {
+        </span><a id='src-10133' class='srclink' href='../src/telegram_bot/lib.rs.html#88-91' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Api {
     // some fields omitted
-}</pre><div class='docblock'><p>The Bot. Main type for doing nearly everything.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../telegram_bot/struct.Bot.html' title='telegram_bot::Bot'>Bot</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(token: <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>) -&gt; <a class='struct' href='../telegram_bot/struct.Bot.html' title='telegram_bot::Bot'>Bot</a></code></h4>
+}</pre><div class='docblock'><p>Main type for sending requests to the Telegram bot API.</p>
+
+<p>You can create an <code>API</code> object via <code>from_token</code> or <code>from_env</code>. A <code>Listener</code>
+object is obtained via <code>listener</code>. All remaining methods correspond
+directly to a telegram API call and are named like the API method, but in
+<code>camel_case</code>.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../telegram_bot/struct.Api.html' title='telegram_bot::Api'>Api</a></code></h3><div class='impl-items'><h4 id='method.from_token' class='method'><code>fn <a href='#method.from_token' class='fnname'>from_token</a>(token: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a class='struct' href='../telegram_bot/struct.Api.html' title='telegram_bot::Api'>Api</a>&gt;</code></h4>
 <div class='docblock'><p>Creates a new bot with the given token. If the token is completely
-invalid (resulting in an invalid API-URL), the function will panic.
-However, the function will not check if the given token is a valid
-Telegram token. You can call <code>get_me</code> to execute a test request.</p>
+invalid (resulting in an invalid API-URL), the function will return
+an <code>Err</code> value. However, the function will not check if the given token
+is a valid Telegram token. You can call <code>get_me</code> to execute a test
+request.</p>
+</div><h4 id='method.from_env' class='method'><code>fn <a href='#method.from_env' class='fnname'>from_env</a>(var: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a class='struct' href='../telegram_bot/struct.Api.html' title='telegram_bot::Api'>Api</a>&gt;</code></h4>
+<div class='docblock'><p>Will receive the bot token from the environment variable <code>var</code> and call
+<code>from_token</code> with it. Will return an <code>Err</code> value, if the environment
+var could not be read or the token has an invalid format.</p>
 </div><h4 id='method.get_me' class='method'><code>fn <a href='#method.get_me' class='fnname'>get_me</a>(&amp;mut self) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a class='struct' href='../telegram_bot/types/struct.User.html' title='telegram_bot::types::User'>User</a>&gt;</code></h4>
 <div class='docblock'><p>Corresponds to the &quot;getMe&quot; method of the API.</p>
 </div><h4 id='method.send_message' class='method'><code>fn <a href='#method.send_message' class='fnname'>send_message</a>(&amp;mut self, chat_id: <a class='type' href='../telegram_bot/types/type.Integer.html' title='telegram_bot::types::Integer'>Integer</a>, text: <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>, disable_web_page_preview: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>&gt;, reply_to_message_id: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../telegram_bot/types/type.Integer.html' title='telegram_bot::types::Integer'>Integer</a>&gt;, reply_markup: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../telegram_bot/types/enum.ReplyMarkup.html' title='telegram_bot::types::ReplyMarkup'>ReplyMarkup</a>&gt;) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a class='struct' href='../telegram_bot/types/struct.Message.html' title='telegram_bot::types::Message'>Message</a>&gt;</code></h4>
@@ -71,9 +81,15 @@ Telegram token. You can call <code>get_me</code> to execute a test request.</p>
 
 <p><strong>Note:</strong>
 The method will not set the offset parameter on its own. To receive
-updates in a more high level way, see <code>long_poll</code>.</p>
+updates in a more high level way, see <code>listener</code>.</p>
 </div><h4 id='method.set_webhook' class='method'><code>fn <a href='#method.set_webhook' class='fnname'>set_webhook</a>&lt;U: <a class='trait' href='../hyper/client/trait.IntoUrl.html' title='hyper::client::IntoUrl'>IntoUrl</a>&gt;(&amp;mut self, url: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;U&gt;) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>&gt;</code></h4>
-<h4 id='method.long_poll' class='method'><code>fn <a href='#method.long_poll' class='fnname'>long_poll</a>&lt;H&gt;(&amp;mut self, timeout: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../telegram_bot/types/type.Integer.html' title='telegram_bot::types::Integer'>Integer</a>&gt;, handler: H) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt; <span class='where'>where H: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;mut <a class='struct' href='../telegram_bot/struct.Bot.html' title='telegram_bot::Bot'>Bot</a>, <a class='struct' href='../telegram_bot/types/struct.Update.html' title='telegram_bot::types::Update'>Update</a>) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</span></code></h4>
+<div class='docblock'><p>Corresponds to the <code>setWebhook</code> method of the API.</p>
+
+<p><strong>Note:</strong>
+This library does not yet offer the feature to listen via webhook. This
+is just the raw telegram API request and will do nothing more. Use only
+if you know what you&#39;re doing.</p>
+</div><h4 id='method.listener' class='method'><code>fn <a href='#method.listener' class='fnname'>listener</a>(&amp;self, method: <a class='enum' href='../telegram_bot/enum.ListeningMethod.html' title='telegram_bot::ListeningMethod'>ListeningMethod</a>) -&gt; <a class='struct' href='../telegram_bot/struct.Listener.html' title='telegram_bot::Listener'>Listener</a></code></h4>
 <div class='docblock'><p>Receive and handle updates via &quot;getUpdates&quot;.</p>
 
 <p>This method will repeatedly call <code>get_updates</code> to receive new updates.
