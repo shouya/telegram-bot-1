@@ -549,6 +549,30 @@
 <span id="507">507</span>
 <span id="508">508</span>
 <span id="509">509</span>
+<span id="510">510</span>
+<span id="511">511</span>
+<span id="512">512</span>
+<span id="513">513</span>
+<span id="514">514</span>
+<span id="515">515</span>
+<span id="516">516</span>
+<span id="517">517</span>
+<span id="518">518</span>
+<span id="519">519</span>
+<span id="520">520</span>
+<span id="521">521</span>
+<span id="522">522</span>
+<span id="523">523</span>
+<span id="524">524</span>
+<span id="525">525</span>
+<span id="526">526</span>
+<span id="527">527</span>
+<span id="528">528</span>
+<span id="529">529</span>
+<span id="530">530</span>
+<span id="531">531</span>
+<span id="532">532</span>
+<span id="533">533</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Types of the Telegram API.</span>
 <span class='doccomment'>//!</span>
@@ -603,7 +627,7 @@
 <span class='comment'>// value. If not: Exit function with error value.</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>try_field</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>d</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>d</span>.<span class='ident'>read_struct_field</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>, <span class='number'>0</span>, <span class='op'>|</span><span class='ident'>d</span><span class='op'>|</span> <span class='ident'>Decodable</span>::<span class='ident'>decode</span>(<span class='ident'>d</span>)))
+        <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>d</span>.<span class='ident'>read_struct_field</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>, <span class='number'>0</span>, <span class='ident'>Decodable</span>::<span class='ident'>decode</span>))
     }
 }
 
@@ -624,6 +648,7 @@
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Response</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Decodable</span><span class='op'>&gt;</span> {
     <span class='kw'>pub</span> <span class='ident'>ok</span>: <span class='ident'>bool</span>,
+    <span class='kw'>pub</span> <span class='ident'>error_code</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Integer</span><span class='op'>&gt;</span>,
     <span class='kw'>pub</span> <span class='ident'>description</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
     <span class='kw'>pub</span> <span class='ident'>result</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>,
 }
@@ -803,6 +828,8 @@
     <span class='kw'>pub</span> <span class='ident'>reply</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Message</span><span class='op'>&gt;&gt;</span>,
 
     <span class='kw'>pub</span> <span class='ident'>msg</span>: <span class='ident'>MessageType</span>,
+
+    <span class='kw'>pub</span> <span class='ident'>caption</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
 }
 
 <span class='comment'>// We need to implement this on our own, because the field &quot;msg&quot; is not a real</span>
@@ -818,6 +845,7 @@
                 <span class='ident'>forward</span>: <span class='macro'>try_field</span><span class='macro'>!</span>(<span class='ident'>d</span>, <span class='string'>&quot;forward&quot;</span>),
                 <span class='ident'>reply</span>: <span class='macro'>try_field</span><span class='macro'>!</span>(<span class='ident'>d</span>, <span class='string'>&quot;reply&quot;</span>),
                 <span class='ident'>msg</span>: <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>MessageType</span>::<span class='ident'>decode</span>(<span class='ident'>d</span>)),
+                <span class='ident'>caption</span>: <span class='macro'>try_field</span><span class='macro'>!</span>(<span class='ident'>d</span>, <span class='string'>&quot;caption&quot;</span>),
             })
         })
     }
@@ -827,8 +855,9 @@
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>MessageType</span> {
     <span class='ident'>Text</span>(<span class='ident'>String</span>),
     <span class='ident'>Audio</span>(<span class='ident'>Audio</span>),
+    <span class='ident'>Voice</span>(<span class='ident'>Voice</span>),
     <span class='ident'>File</span>(<span class='ident'>Document</span>),
-    <span class='ident'>Photo</span>(<span class='ident'>PhotoSize</span>),
+    <span class='ident'>Photo</span>(<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>PhotoSize</span><span class='op'>&gt;</span>),
     <span class='ident'>Sticker</span>(<span class='ident'>Sticker</span>),
     <span class='ident'>Video</span>(<span class='ident'>Video</span>),
     <span class='ident'>Contact</span>(<span class='ident'>Contact</span>),
@@ -849,7 +878,7 @@
         <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>maybe_field</span> {
             (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>d</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>variant</span>:<span class='ident'>ident</span>) <span class='op'>=&gt;</span> {{
                 <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>val</span>) <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>d</span>.<span class='ident'>read_struct_field</span>(
-                    <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>, <span class='number'>0</span>, <span class='op'>|</span><span class='ident'>d</span><span class='op'>|</span> <span class='ident'>Decodable</span>::<span class='ident'>decode</span>(<span class='ident'>d</span>))) {
+                    <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>, <span class='number'>0</span>, <span class='ident'>Decodable</span>::<span class='ident'>decode</span>)) {
                     <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(<span class='ident'>MessageType</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>variant</span>(<span class='ident'>val</span>));
                 };
             }}
@@ -860,8 +889,10 @@
         <span class='comment'>// These are the message types that carry additional data</span>
         <span class='macro'>maybe_field</span><span class='macro'>!</span>(<span class='ident'>d</span>, <span class='string'>&quot;text&quot;</span>, <span class='ident'>Text</span>);
         <span class='macro'>maybe_field</span><span class='macro'>!</span>(<span class='ident'>d</span>, <span class='string'>&quot;audio&quot;</span>, <span class='ident'>Audio</span>);
+        <span class='macro'>maybe_field</span><span class='macro'>!</span>(<span class='ident'>d</span>, <span class='string'>&quot;voice&quot;</span>, <span class='ident'>Voice</span>);
         <span class='macro'>maybe_field</span><span class='macro'>!</span>(<span class='ident'>d</span>, <span class='string'>&quot;file&quot;</span>, <span class='ident'>File</span>);
         <span class='macro'>maybe_field</span><span class='macro'>!</span>(<span class='ident'>d</span>, <span class='string'>&quot;photo&quot;</span>, <span class='ident'>Photo</span>);
+        <span class='macro'>maybe_field</span><span class='macro'>!</span>(<span class='ident'>d</span>, <span class='string'>&quot;document&quot;</span>, <span class='ident'>File</span>);
         <span class='macro'>maybe_field</span><span class='macro'>!</span>(<span class='ident'>d</span>, <span class='string'>&quot;sticker&quot;</span>, <span class='ident'>Sticker</span>);
         <span class='macro'>maybe_field</span><span class='macro'>!</span>(<span class='ident'>d</span>, <span class='string'>&quot;video&quot;</span>, <span class='ident'>Video</span>);
         <span class='macro'>maybe_field</span><span class='macro'>!</span>(<span class='ident'>d</span>, <span class='string'>&quot;contact&quot;</span>, <span class='ident'>Contact</span>);
@@ -873,11 +904,11 @@
 
         <span class='comment'>// Message types without additional data</span>
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='boolval'>true</span>) <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>d</span>.<span class='ident'>read_struct_field</span>(
-            <span class='string'>&quot;delete_chat_photo&quot;</span>, <span class='number'>0</span>, <span class='op'>|</span><span class='ident'>d</span><span class='op'>|</span> <span class='ident'>Decodable</span>::<span class='ident'>decode</span>(<span class='ident'>d</span>))) {
+            <span class='string'>&quot;delete_chat_photo&quot;</span>, <span class='number'>0</span>, <span class='ident'>Decodable</span>::<span class='ident'>decode</span>)) {
             <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(<span class='ident'>MessageType</span>::<span class='ident'>DeleteChatPhoto</span>);
         };
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='boolval'>true</span>) <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>d</span>.<span class='ident'>read_struct_field</span>(
-            <span class='string'>&quot;group_chat_created&quot;</span>, <span class='number'>0</span>, <span class='op'>|</span><span class='ident'>d</span><span class='op'>|</span> <span class='ident'>Decodable</span>::<span class='ident'>decode</span>(<span class='ident'>d</span>))) {
+            <span class='string'>&quot;group_chat_created&quot;</span>, <span class='number'>0</span>, <span class='ident'>Decodable</span>::<span class='ident'>decode</span>)) {
             <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(<span class='ident'>MessageType</span>::<span class='ident'>GroupChatCreated</span>);
         };
 
@@ -931,20 +962,38 @@
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Audio</span> {
     <span class='kw'>pub</span> <span class='ident'>file_id</span>: <span class='ident'>String</span>,
     <span class='kw'>pub</span> <span class='ident'>duration</span>: <span class='ident'>Integer</span>,
+    <span class='kw'>pub</span> <span class='ident'>performer</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
+    <span class='kw'>pub</span> <span class='ident'>title</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
     <span class='kw'>pub</span> <span class='ident'>mime_type</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
     <span class='kw'>pub</span> <span class='ident'>file_size</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Integer</span><span class='op'>&gt;</span>,
 }
 
-<span class='macro'>impl_encode</span><span class='macro'>!</span>(<span class='ident'>Audio</span>, <span class='number'>4</span>,
-    [<span class='number'>0</span> <span class='op'>=&gt;</span> <span class='ident'>file_id</span>, <span class='number'>1</span> <span class='op'>=&gt;</span> <span class='ident'>duration</span>],
-    [<span class='number'>2</span> <span class='op'>=&gt;</span> <span class='ident'>mime_type</span>, <span class='number'>3</span> <span class='op'>=&gt;</span> <span class='ident'>file_size</span>]);
+<span class='macro'>impl_encode</span><span class='macro'>!</span>(<span class='ident'>Audio</span>, <span class='number'>6</span>,
+             [<span class='number'>0</span> <span class='op'>=&gt;</span> <span class='ident'>file_id</span>, <span class='number'>1</span> <span class='op'>=&gt;</span> <span class='ident'>duration</span>],
+             [<span class='number'>2</span> <span class='op'>=&gt;</span> <span class='ident'>performer</span>, <span class='number'>3</span> <span class='op'>=&gt;</span> <span class='ident'>title</span>,
+              <span class='number'>4</span> <span class='op'>=&gt;</span> <span class='ident'>mime_type</span>, <span class='number'>5</span> <span class='op'>=&gt;</span> <span class='ident'>file_size</span>]);
+
+<span class='comment'>// ---------------------------------------------------------------------------</span>
+<span class='doccomment'>/// Telegram type &quot;Voice&quot; (directly mapped)</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Voice</span> {
+    <span class='kw'>pub</span> <span class='ident'>file_id</span>: <span class='ident'>String</span>,
+    <span class='kw'>pub</span> <span class='ident'>duration</span>: <span class='ident'>Integer</span>,
+    <span class='kw'>pub</span> <span class='ident'>mime_type</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
+    <span class='kw'>pub</span> <span class='ident'>file_size</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Integer</span><span class='op'>&gt;</span>,
+}
+
+<span class='macro'>impl_encode</span><span class='macro'>!</span>(<span class='ident'>Voice</span>, <span class='number'>4</span>,
+             [<span class='number'>0</span> <span class='op'>=&gt;</span> <span class='ident'>file_id</span>, <span class='number'>1</span> <span class='op'>=&gt;</span> <span class='ident'>duration</span>],
+             [<span class='number'>2</span> <span class='op'>=&gt;</span> <span class='ident'>mime_type</span>, <span class='number'>3</span> <span class='op'>=&gt;</span> <span class='ident'>file_size</span>]);
+
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
 <span class='doccomment'>/// Telegram type &quot;Document&quot; (directly mapped)</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Document</span> {
     <span class='kw'>pub</span> <span class='ident'>file_id</span>: <span class='ident'>String</span>,
-    <span class='kw'>pub</span> <span class='ident'>thumb</span>: <span class='ident'>PhotoSize</span>,
+    <span class='kw'>pub</span> <span class='ident'>thumb</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>PhotoSize</span><span class='op'>&gt;</span>,
     <span class='kw'>pub</span> <span class='ident'>file_name</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
     <span class='kw'>pub</span> <span class='ident'>mime_type</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
     <span class='kw'>pub</span> <span class='ident'>file_size</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Integer</span><span class='op'>&gt;</span>,
@@ -961,7 +1010,7 @@
     <span class='kw'>pub</span> <span class='ident'>file_id</span>: <span class='ident'>String</span>,
     <span class='kw'>pub</span> <span class='ident'>width</span>: <span class='ident'>Integer</span>,
     <span class='kw'>pub</span> <span class='ident'>height</span>: <span class='ident'>Integer</span>,
-    <span class='kw'>pub</span> <span class='ident'>thumb</span>: <span class='ident'>PhotoSize</span>,
+    <span class='kw'>pub</span> <span class='ident'>thumb</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>PhotoSize</span><span class='op'>&gt;</span>,
     <span class='kw'>pub</span> <span class='ident'>file_size</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Integer</span><span class='op'>&gt;</span>,
 }
 
@@ -977,15 +1026,14 @@
     <span class='kw'>pub</span> <span class='ident'>width</span>: <span class='ident'>Integer</span>,
     <span class='kw'>pub</span> <span class='ident'>height</span>: <span class='ident'>Integer</span>,
     <span class='kw'>pub</span> <span class='ident'>duration</span>: <span class='ident'>Integer</span>,
-    <span class='kw'>pub</span> <span class='ident'>thumb</span>: <span class='ident'>PhotoSize</span>,
+    <span class='kw'>pub</span> <span class='ident'>thumb</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>PhotoSize</span><span class='op'>&gt;</span>,
     <span class='kw'>pub</span> <span class='ident'>mime_type</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
     <span class='kw'>pub</span> <span class='ident'>file_size</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Integer</span><span class='op'>&gt;</span>,
-    <span class='kw'>pub</span> <span class='ident'>caption</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
 }
 
-<span class='macro'>impl_encode</span><span class='macro'>!</span>(<span class='ident'>Video</span>, <span class='number'>8</span>,
+<span class='macro'>impl_encode</span><span class='macro'>!</span>(<span class='ident'>Video</span>, <span class='number'>7</span>,
     [<span class='number'>0</span> <span class='op'>=&gt;</span> <span class='ident'>file_id</span>, <span class='number'>1</span> <span class='op'>=&gt;</span> <span class='ident'>width</span>, <span class='number'>2</span> <span class='op'>=&gt;</span> <span class='ident'>height</span>, <span class='number'>3</span> <span class='op'>=&gt;</span> <span class='ident'>duration</span>, <span class='number'>4</span> <span class='op'>=&gt;</span> <span class='ident'>thumb</span>],
-    [<span class='number'>5</span> <span class='op'>=&gt;</span> <span class='ident'>mime_type</span>, <span class='number'>6</span> <span class='op'>=&gt;</span> <span class='ident'>file_size</span>, <span class='number'>7</span> <span class='op'>=&gt;</span> <span class='ident'>caption</span>]);
+    [<span class='number'>5</span> <span class='op'>=&gt;</span> <span class='ident'>mime_type</span>, <span class='number'>6</span> <span class='op'>=&gt;</span> <span class='ident'>file_size</span>]);
 
 <span class='comment'>// ---------------------------------------------------------------------------</span>
 <span class='doccomment'>/// Telegram type &quot;Contact&quot; (directly mapped)</span>

@@ -115,6 +115,10 @@
 <span id="73">73</span>
 <span id="74">74</span>
 <span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>;
@@ -143,6 +147,8 @@
     <span class='ident'>InvalidTokenFormat</span>(::<span class='ident'>url</span>::<span class='ident'>ParseError</span>),
     <span class='doccomment'>/// The given environment variable could not be fetched.</span>
     <span class='ident'>InvalidEnvironmentVar</span>(<span class='ident'>env</span>::<span class='ident'>VarError</span>),
+    <span class='doccomment'>/// The given path is not valid.</span>
+    <span class='ident'>InvalidPath</span>(<span class='ident'>String</span>),
 }
 
 <span class='kw'>impl</span> ::<span class='ident'>std</span>::<span class='ident'>error</span>::<span class='ident'>Error</span> <span class='kw'>for</span> <span class='ident'>Error</span> {
@@ -156,6 +162,7 @@
             <span class='ident'>Error</span>::<span class='ident'>InvalidState</span>(<span class='kw-2'>ref</span> <span class='ident'>s</span>) <span class='op'>=&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>s</span>,
             <span class='ident'>Error</span>::<span class='ident'>InvalidTokenFormat</span>(<span class='kw-2'>ref</span> <span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='ident'>e</span>.<span class='ident'>description</span>(),
             <span class='ident'>Error</span>::<span class='ident'>InvalidEnvironmentVar</span>(<span class='kw-2'>ref</span> <span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='ident'>e</span>.<span class='ident'>description</span>(),
+            <span class='ident'>Error</span>::<span class='ident'>InvalidPath</span>(<span class='kw-2'>ref</span> <span class='ident'>s</span>) <span class='op'>=&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>s</span>,
         }
     }
 }
@@ -171,6 +178,7 @@
             <span class='ident'>Error</span>::<span class='ident'>InvalidState</span>(<span class='kw-2'>ref</span> <span class='ident'>s</span>) <span class='op'>=&gt;</span> <span class='ident'>s</span>.<span class='ident'>fmt</span>(<span class='ident'>f</span>),
             <span class='ident'>Error</span>::<span class='ident'>InvalidTokenFormat</span>(<span class='kw-2'>ref</span> <span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='ident'>e</span>.<span class='ident'>fmt</span>(<span class='ident'>f</span>),
             <span class='ident'>Error</span>::<span class='ident'>InvalidEnvironmentVar</span>(<span class='kw-2'>ref</span> <span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='ident'>e</span>.<span class='ident'>fmt</span>(<span class='ident'>f</span>),
+            <span class='ident'>Error</span>::<span class='ident'>InvalidPath</span>(<span class='kw-2'>ref</span> <span class='ident'>s</span>) <span class='op'>=&gt;</span> <span class='ident'>s</span>.<span class='ident'>fmt</span>(<span class='ident'>f</span>),
         }
     }
 }

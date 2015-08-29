@@ -45,15 +45,17 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-541' class='srclink' href='../../src/telegram_bot/types/mod.rs.html#73-77' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-568' class='srclink' href='../../src/telegram_bot/types/mod.rs.html#73-78' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Response&lt;T: <a class='trait' href='../../rustc_serialize/serialize/trait.Decodable.html' title='rustc_serialize::serialize::Decodable'>Decodable</a>&gt; {
     pub ok: <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>,
+    pub error_code: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../telegram_bot/types/type.Integer.html' title='telegram_bot::types::Integer'>Integer</a>&gt;,
     pub description: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
     pub result: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;T&gt;,
 }</pre><div class='docblock'><p>All API responses are from this type. Mostly used internal.</p>
 </div><h2 class='fields'>Fields</h2>
 <table><tr class='stab '>
                                   <td id='structfield.ok'><code>ok</code></td><td></td></tr><tr class='stab '>
+                                  <td id='structfield.error_code'><code>error_code</code></td><td></td></tr><tr class='stab '>
                                   <td id='structfield.description'><code>description</code></td><td></td></tr><tr class='stab '>
                                   <td id='structfield.result'><code>result</code></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> + <a class='trait' href='../../rustc_serialize/serialize/trait.Decodable.html' title='rustc_serialize::serialize::Decodable'>Decodable</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../../telegram_bot/types/struct.Response.html' title='telegram_bot::types::Response'>Response</a>&lt;T&gt; <span class='where'>where T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a></span></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../../telegram_bot/types/struct.Response.html' title='telegram_bot::types::Response'>Response</a>&lt;T&gt;</code></h4>
 <h4 id='method.clone_from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>

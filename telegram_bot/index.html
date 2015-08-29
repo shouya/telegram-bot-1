@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-0' class='srclink' href='../src/telegram_bot/lib.rs.html#1-513' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-0' class='srclink' href='../src/telegram_bot/lib.rs.html#1-728' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>This crate helps writing bots for the messenger Telegram. Here is a
 minimalistic example:</p>
 <pre class='rust rust-example-rendered'>
@@ -53,7 +53,7 @@ minimalistic example:</p>
 
 <span class='comment'>// Create the Api from a bot token saved in a environment variable and</span>
 <span class='comment'>// test an Api-call</span>
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>api</span> <span class='op'>=</span> <span class='ident'>Api</span>::<span class='ident'>from_env</span>(<span class='string'>&quot;TELEGRAM_BOT_TOKEN&quot;</span>).<span class='ident'>unwrap</span>();
+<span class='kw'>let</span> <span class='ident'>api</span> <span class='op'>=</span> <span class='ident'>Api</span>::<span class='ident'>from_env</span>(<span class='string'>&quot;TELEGRAM_BOT_TOKEN&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;getMe: {:?}&quot;</span>, <span class='ident'>api</span>.<span class='ident'>get_me</span>());
 <span class='comment'>// We want to listen for new updates via LongPoll</span>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>listener</span> <span class='op'>=</span> <span class='ident'>api</span>.<span class='ident'>listener</span>(<span class='ident'>ListeningMethod</span>::<span class='ident'>LongPoll</span>(<span class='prelude-val'>None</span>));
@@ -62,7 +62,7 @@ minimalistic example:</p>
 <span class='ident'>listener</span>.<span class='ident'>listen</span>(<span class='op'>|</span><span class='ident'>u</span><span class='op'>|</span> {
     <span class='comment'>// If the received update contains a message...</span>
     <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>m</span>) <span class='op'>=</span> <span class='ident'>u</span>.<span class='ident'>message</span> {
-        <span class='comment'>// ... and it was a text message:</span>
+        <span class='comment'>// if the message was a text message:</span>
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='ident'>MessageType</span>::<span class='ident'>Text</span>(_) <span class='op'>=</span> <span class='ident'>m</span>.<span class='ident'>msg</span> {
             <span class='comment'>// Answer message with &quot;Hi&quot;</span>
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>api</span>.<span class='ident'>send_message</span>(

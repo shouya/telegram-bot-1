@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/solicit-0.4.1/src/http/frame/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/solicit-0.4.2/src/http/frame/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -750,7 +750,7 @@
 }
 
 <span class='doccomment'>/// A trait that all HTTP/2 frame structs need to implement.</span>
-<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>Frame</span> {
+<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>Frame</span>: <span class='ident'>Sized</span> {
     <span class='doccomment'>/// The type that represents the flags that the particular `Frame` can take.</span>
     <span class='doccomment'>/// This makes sure that only valid `Flag`s are used with each `Frame`.</span>
     <span class='kw'>type</span> <span class='ident'>FlagType</span>: <span class='ident'>Flag</span>;
