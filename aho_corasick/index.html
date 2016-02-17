@@ -9,6 +9,7 @@
 
     <title>aho_corasick - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -24,17 +25,17 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'></p><script>window.sidebarCurrent = {name: 'aho_corasick', ty: 'mod', relpath: '../'};</script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
@@ -45,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-0' class='srclink' href='../src/aho_corasick/lib.rs.html#1-885' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-0' class='srclink' href='../src/aho_corasick/lib.rs.html#1-919' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>An implementation of the
 <a href="https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_string_matching_algorithm">Aho-Corasick string search algorithm</a>.</p>
 
@@ -56,8 +57,7 @@ finite state machine. The search phase is then a quick linear scan through the
 text. Each character in the search text causes a state transition in the
 automaton. Matches are reported when the automaton enters a match state.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1>
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>The main type exposed by this crate is <code>AcAutomaton</code>, which can be constructed
 from an iterator of pattern strings:</p>
 <pre class='rust rust-example-rendered'>
@@ -66,8 +66,7 @@ from an iterator of pattern strings:</p>
 <span class='kw'>let</span> <span class='ident'>aut</span> <span class='op'>=</span> <span class='ident'>AcAutomaton</span>::<span class='ident'>new</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>&quot;apple&quot;</span>, <span class='string'>&quot;maple&quot;</span>]);
 
 <span class='comment'>// AcAutomaton also implements `FromIterator`:</span>
-<span class='kw'>let</span> <span class='ident'>aut</span>: <span class='ident'>AcAutomaton</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> <span class='op'>=</span> [<span class='string'>&quot;apple&quot;</span>, <span class='string'>&quot;maple&quot;</span>].<span class='ident'>iter</span>().<span class='ident'>cloned</span>().<span class='ident'>collect</span>();
-</pre>
+<span class='kw'>let</span> <span class='ident'>aut</span>: <span class='ident'>AcAutomaton</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> <span class='op'>=</span> [<span class='string'>&quot;apple&quot;</span>, <span class='string'>&quot;maple&quot;</span>].<span class='ident'>iter</span>().<span class='ident'>cloned</span>().<span class='ident'>collect</span>();</pre>
 
 <p>Finding matches can be done with <code>find</code>:</p>
 <pre class='rust rust-example-rendered'>
@@ -85,8 +84,7 @@ from an iterator of pattern strings:</p>
     <span class='ident'>start</span>: <span class='number'>13</span>,
     <span class='ident'>end</span>: <span class='number'>18</span>,
 }));
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>it</span>.<span class='ident'>next</span>(), <span class='prelude-val'>None</span>);
-</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>it</span>.<span class='ident'>next</span>(), <span class='prelude-val'>None</span>);</pre>
 
 <p>Use <code>find_overlapping</code> if you want to report all matches, even if they
 overlap with each other.</p>
@@ -101,8 +99,7 @@ overlap with each other.</p>
 
 <span class='comment'>// Regular `find` will report only one match:</span>
 <span class='kw'>let</span> <span class='ident'>matches</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>aut</span>.<span class='ident'>find</span>(<span class='string'>&quot;abc&quot;</span>).<span class='ident'>collect</span>();
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>matches</span>, <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Match</span> { <span class='ident'>pati</span>: <span class='number'>1</span>, <span class='ident'>start</span>: <span class='number'>0</span>, <span class='ident'>end</span>: <span class='number'>1</span>}]);
-</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>matches</span>, <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Match</span> { <span class='ident'>pati</span>: <span class='number'>1</span>, <span class='ident'>start</span>: <span class='number'>0</span>, <span class='ident'>end</span>: <span class='number'>1</span>}]);</pre>
 
 <p>Finally, there are also methods for finding matches on <em>streams</em>. Namely, the
 search text does not have to live in memory. It&#39;s useful to run this on files
@@ -118,8 +115,7 @@ that can&#39;t fit into memory:</p>
     <span class='kw'>let</span> <span class='ident'>m</span> <span class='op'>=</span> <span class='ident'>m</span>.<span class='ident'>unwrap</span>(); <span class='comment'>// could be an IO error</span>
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Pattern &#39;{}&#39; matched at: ({}, {})&quot;</span>,
              <span class='ident'>aut</span>.<span class='ident'>pattern</span>(<span class='ident'>m</span>.<span class='ident'>pati</span>), <span class='ident'>m</span>.<span class='ident'>start</span>, <span class='ident'>m</span>.<span class='ident'>end</span>);
-}
-</pre>
+}</pre>
 
 <p>There is also <code>stream_find_overlapping</code>, which is just like <code>find_overlapping</code>,
 but it operates on streams.</p>
@@ -128,8 +124,7 @@ but it operates on streams.</p>
 complete example. It creates a large automaton from a dictionary and can do a
 streaming match over arbitrarily large data.</p>
 
-<h1 id="memory-usage" class='section-header'><a
-                           href="#memory-usage">Memory usage</a></h1>
+<h1 id='memory-usage' class='section-header'><a href='#memory-usage'>Memory usage</a></h1>
 <p>A key aspect of an Aho-Corasick implementation is how the state transitions
 are represented. The easiest way to make the automaton fast is to store a
 sparse 256-slot map in each state. It maps an input byte to a state index.
@@ -156,8 +151,7 @@ you can construct an <code>AcAutomaton</code> with a <code>Sparse</code> transit
 
 <span class='kw'>let</span> <span class='ident'>aut</span> <span class='op'>=</span> <span class='ident'>AcAutomaton</span>::<span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>Sparse</span><span class='op'>&gt;</span>::<span class='ident'>with_transitions</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>&quot;abc&quot;</span>, <span class='string'>&quot;a&quot;</span>]);
 <span class='kw'>let</span> <span class='ident'>matches</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>aut</span>.<span class='ident'>find</span>(<span class='string'>&quot;abc&quot;</span>).<span class='ident'>collect</span>();
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>matches</span>, <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Match</span> { <span class='ident'>pati</span>: <span class='number'>1</span>, <span class='ident'>start</span>: <span class='number'>0</span>, <span class='ident'>end</span>: <span class='number'>1</span>}]);
-</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>matches</span>, <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Match</span> { <span class='ident'>pati</span>: <span class='number'>1</span>, <span class='ident'>start</span>: <span class='number'>0</span>, <span class='ident'>end</span>: <span class='number'>1</span>}]);</pre>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                     <tr class=' module-item'>
@@ -276,40 +270,49 @@ construct this Automaton.</p>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 
@@ -321,6 +324,6 @@ construct this Automaton.</p>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>
