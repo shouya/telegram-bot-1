@@ -46,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-220' class='srclink' href='../../src/multipart/server/mod.rs.html#1-480' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-575' class='srclink' href='../../src/multipart/server/mod.rs.html#7-768' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>The server-side abstraction for multipart requests. Enabled with the <code>server</code> feature (on by
 default).</p>
 
@@ -67,15 +67,6 @@ Enabled with the <code>hyper</code> feature (on by default).</p>
                     </tr>
                 </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.BoundaryReader.html'
-                               title='multipart::server::BoundaryReader'>BoundaryReader</a></td>
-                        <td class='docblock short'>
-                             <p>A struct implementing <code>Read</code> and <code>BufRead</code> that will yield bytes until it sees a given sequence.</p>
-
-                        </td>
-                    </tr>
-                
                     <tr class=' module-item'>
                         <td><a class='struct' href='struct.Entries.html'
                                title='multipart::server::Entries'>Entries</a></td>
@@ -111,6 +102,15 @@ Enabled with the <code>hyper</code> feature (on by default).</p>
 
                         </td>
                     </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.SavedFile.html'
+                               title='multipart::server::SavedFile'>SavedFile</a></td>
+                        <td class='docblock short'>
+                             <p>A file saved to the local filesystem from a multipart request.</p>
+
+                        </td>
+                    </tr>
                 </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
                     <tr class=' module-item'>
@@ -118,6 +118,24 @@ Enabled with the <code>hyper</code> feature (on by default).</p>
                                title='multipart::server::MultipartData'>MultipartData</a></td>
                         <td class='docblock short'>
                              <p>The data of a field in a <code>multipart/form-data</code> request.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.SaveDir.html'
+                               title='multipart::server::SaveDir'>SaveDir</a></td>
+                        <td class='docblock short'>
+                             <p>The save directory for <code>Entries</code>. May be temporary (delete-on-drop) or permanent.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.SaveResult.html'
+                               title='multipart::server::SaveResult'>SaveResult</a></td>
+                        <td class='docblock short'>
+                             <p>The result of <a href="struct.multipart.html#method.save_all"><code>Multipart::save_all()</code></a>.</p>
 
                         </td>
                     </tr>

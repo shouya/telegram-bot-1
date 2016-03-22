@@ -46,22 +46,33 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-588' class='srclink' href='../../src/multipart/server/mod.rs.html#245-252' title='goto source code'>[src]</a></span></h1>
-<pre class='rust trait'>pub trait HttpRequest: <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a> {
+        </span><a id='src-1006' class='srclink' href='../../src/multipart/server/mod.rs.html#359-371' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait HttpRequest {
+    type Body: <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a>;
     fn <a href='#tymethod.multipart_boundary' class='fnname'>multipart_boundary</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;;
+    fn <a href='#tymethod.body' class='fnname'>body</a>(self) -&gt; Self::<a class='trait' href='../../multipart/server/trait.HttpRequest.html' title='multipart::server::HttpRequest'>Body</a>;
 }</pre><div class='docblock'><p>A server-side HTTP request that may or may not be multipart.</p>
+
+<p>May be implemented by mutable references if providing the request or body by-value is
+undesirable.</p>
 </div>
+            <h2 id='associated-types'>Associated Types</h2>
+            <div class='methods'>
+        <h3 id='associatedtype.Body' class='method stab '><code>type Body: <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a></code></h3><div class='docblock'><p>The body of this request.</p>
+</div></div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
         <h3 id='tymethod.multipart_boundary' class='method stab '><code>fn <a href='#tymethod.multipart_boundary' class='fnname'>multipart_boundary</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;</code></h3><div class='docblock'><p>Get the boundary string of this request if it is a POST request
 with the <code>Content-Type</code> header set to <code>multipart/form-data</code>.</p>
 
 <p>The boundary string should be supplied as an extra value of the <code>Content-Type</code> header, e.g.
-<code>Content-Type: multipart/form-data; boundary=myboundary</code>.</p>
+<code>Content-Type: multipart/form-data; boundary={boundary}</code>.</p>
+</div><h3 id='tymethod.body' class='method stab '><code>fn <a href='#tymethod.body' class='fnname'>body</a>(self) -&gt; Self::<a class='trait' href='../../multipart/server/trait.HttpRequest.html' title='multipart::server::HttpRequest'>Body</a></code></h3><div class='docblock'><p>Return the request body for reading.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;'a, 'b&gt; <a class='trait' href='../../multipart/server/trait.HttpRequest.html' title='multipart::server::HttpRequest'>HttpRequest</a> for <a class='struct' href='../../hyper/server/request/struct.Request.html' title='hyper::server::request::Request'>Request</a>&lt;'a, 'b&gt;</code></li>
+    <li><code>impl&lt;'a, 'b&gt; <a class='trait' href='../../multipart/server/trait.HttpRequest.html' title='multipart::server::HttpRequest'>HttpRequest</a> for <a class='struct' href='../../multipart/server/hyper/struct.HyperRequest.html' title='multipart::server::hyper::HyperRequest'>HyperRequest</a>&lt;'a, 'b&gt;</code></li>
+<li><code>impl&lt;'r, 'a, 'b&gt; <a class='trait' href='../../multipart/server/trait.HttpRequest.html' title='multipart::server::HttpRequest'>HttpRequest</a> for &amp;'r mut <a class='struct' href='../../multipart/server/hyper/struct.HyperRequest.html' title='multipart::server::hyper::HyperRequest'>HyperRequest</a>&lt;'a, 'b&gt;</code></li>
 </ul><script type="text/javascript" async
                               src="../../implementors/multipart/server/trait.HttpRequest.js">
                       </script></section>
