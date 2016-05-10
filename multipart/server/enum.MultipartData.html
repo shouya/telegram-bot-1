@@ -52,9 +52,9 @@
     File(<a class='struct' href='../../multipart/server/struct.MultipartFile.html' title='multipart::server::MultipartFile'>MultipartFile</a>&lt;'a, B&gt;),
 }</pre><div class='docblock'><p>The data of a field in a <code>multipart/form-data</code> request.</p>
 </div><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.Text'><code>Text</code></td><td><div class='docblock'><p>The field&#39;s payload is a text string.</p>
-</div></td></tr><tr><td id='variant.File'><code>File</code></td><td><div class='docblock'><p>The field&#39;s payload is a binary stream (file).</p>
-</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a, B&gt; <a class='enum' href='../../multipart/server/enum.MultipartData.html' title='multipart::server::MultipartData'>MultipartData</a>&lt;'a, B&gt;</code></h3><div class='impl-items'><h4 id='method.as_text' class='method'><code>fn <a href='#method.as_text' class='fnname'>as_text</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;</code></h4>
+<table class='variants_table'><tr><td id='variant.Text'><code>Text</code></td><td><div class='docblock'><p>The field&#39;s payload is a text string.</p>
+</div></td><td></td></tr><tr><td id='variant.File'><code>File</code></td><td><div class='docblock'><p>The field&#39;s payload is a binary stream (file).</p>
+</div></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a, B&gt; <a class='enum' href='../../multipart/server/enum.MultipartData.html' title='multipart::server::MultipartData'>MultipartData</a>&lt;'a, B&gt;</code></h3><div class='impl-items'><h4 id='method.as_text' class='method'><code>fn <a href='#method.as_text' class='fnname'>as_text</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;</code></h4>
 <div class='docblock'><p>Borrow this payload as a text field, if possible.</p>
 </div><h4 id='method.as_file' class='method'><code>fn <a href='#method.as_file' class='fnname'>as_file</a>(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut <a class='struct' href='../../multipart/server/struct.MultipartFile.html' title='multipart::server::MultipartFile'>MultipartFile</a>&lt;'a, B&gt;&gt;</code></h4>
 <div class='docblock'><p>Borrow this payload as a file field, if possible.
@@ -103,7 +103,7 @@ Mutably borrows so the contents can be read.</p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

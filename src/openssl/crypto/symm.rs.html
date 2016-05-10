@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/openssl-0.7.8/src/crypto/symm.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/openssl-0.7.11/src/crypto/symm.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>symm.rs.html -- source</title>
@@ -406,6 +406,31 @@
 <span id="363">363</span>
 <span id="364">364</span>
 <span id="365">365</span>
+<span id="366">366</span>
+<span id="367">367</span>
+<span id="368">368</span>
+<span id="369">369</span>
+<span id="370">370</span>
+<span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
+<span id="386">386</span>
+<span id="387">387</span>
+<span id="388">388</span>
+<span id="389">389</span>
+<span id="390">390</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>iter</span>::<span class='ident'>repeat</span>;
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_int</span>;
@@ -445,6 +470,9 @@
     <span class='ident'>AES_256_CFB1</span>,
     <span class='ident'>AES_256_CFB128</span>,
     <span class='ident'>AES_256_CFB8</span>,
+
+    <span class='ident'>DES_CBC</span>,
+    <span class='ident'>DES_ECB</span>,
 
     <span class='ident'>RC4_128</span>,
 }
@@ -771,6 +799,28 @@
 
         <span class='ident'>cipher_test</span>(<span class='ident'>super</span>::<span class='ident'>Type</span>::<span class='ident'>AES_256_CFB8</span>, <span class='ident'>pt</span>, <span class='ident'>ct</span>, <span class='ident'>key</span>, <span class='ident'>iv</span>);
     }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_des_cbc</span>() {
+
+        <span class='kw'>let</span> <span class='ident'>pt</span> <span class='op'>=</span> <span class='string'>&quot;54686973206973206120746573742e&quot;</span>;
+        <span class='kw'>let</span> <span class='ident'>ct</span> <span class='op'>=</span> <span class='string'>&quot;6f2867cfefda048a4046ef7e556c7132&quot;</span>;
+        <span class='kw'>let</span> <span class='ident'>key</span> <span class='op'>=</span> <span class='string'>&quot;7cb66337f3d3c0fe&quot;</span>;
+        <span class='kw'>let</span> <span class='ident'>iv</span> <span class='op'>=</span> <span class='string'>&quot;0001020304050607&quot;</span>;
+
+        <span class='ident'>cipher_test</span>(<span class='ident'>super</span>::<span class='ident'>Type</span>::<span class='ident'>DES_CBC</span>, <span class='ident'>pt</span>, <span class='ident'>ct</span>, <span class='ident'>key</span>, <span class='ident'>iv</span>);
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_des_ecb</span>() {
+
+        <span class='kw'>let</span> <span class='ident'>pt</span> <span class='op'>=</span> <span class='string'>&quot;54686973206973206120746573742e&quot;</span>;
+        <span class='kw'>let</span> <span class='ident'>ct</span> <span class='op'>=</span> <span class='string'>&quot;0050ab8aecec758843fe157b4dde938c&quot;</span>;
+        <span class='kw'>let</span> <span class='ident'>key</span> <span class='op'>=</span> <span class='string'>&quot;7cb66337f3d3c0fe&quot;</span>;
+        <span class='kw'>let</span> <span class='ident'>iv</span> <span class='op'>=</span> <span class='string'>&quot;0001020304050607&quot;</span>;
+
+        <span class='ident'>cipher_test</span>(<span class='ident'>super</span>::<span class='ident'>Type</span>::<span class='ident'>DES_ECB</span>, <span class='ident'>pt</span>, <span class='ident'>ct</span>, <span class='ident'>key</span>, <span class='ident'>iv</span>);
+    }
 }
 </pre>
 </section>
@@ -816,7 +866,7 @@
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

@@ -59,7 +59,6 @@ default).</p>
                         <td class='docblock short'>
                              <p>Client-side integration with <a href="https://github.com/hyperium/hyper">Hyper</a>.
 Enabled with the <code>hyper</code> feature (on by default).</p>
-
                         </td>
                     </tr>
                 
@@ -68,7 +67,6 @@ Enabled with the <code>hyper</code> feature (on by default).</p>
                                title='multipart::client::lazy'>lazy</a></td>
                         <td class='docblock short'>
                              <p>Multipart requests which write out their data in one fell swoop.</p>
-
                         </td>
                     </tr>
                 </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
@@ -78,7 +76,6 @@ Enabled with the <code>hyper</code> feature (on by default).</p>
                                title='multipart::client::Multipart'>Multipart</a></td>
                         <td class='docblock short'>
                              <p>The entry point of the client-side multipart API.</p>
-
                         </td>
                     </tr>
                 
@@ -88,7 +85,6 @@ Enabled with the <code>hyper</code> feature (on by default).</p>
                         <td class='docblock short'>
                              <p>A wrapper around a request object that measures the request body and sets the <code>Content-Length</code>
 header to its size in bytes.</p>
-
                         </td>
                     </tr>
                 </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
@@ -98,7 +94,6 @@ header to its size in bytes.</p>
                                title='multipart::client::HttpRequest'>HttpRequest</a></td>
                         <td class='docblock short'>
                              <p>A trait describing an HTTP request that can be used to send multipart data.</p>
-
                         </td>
                     </tr>
                 
@@ -107,7 +102,6 @@ header to its size in bytes.</p>
                                title='multipart::client::HttpStream'>HttpStream</a></td>
                         <td class='docblock short'>
                              <p>A trait describing an open HTTP stream that can be written to.</p>
-
                         </td>
                     </tr>
                 </table></section>
@@ -153,7 +147,7 @@ header to its size in bytes.</p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

@@ -53,15 +53,15 @@
     Error(<a class='struct' href='https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html' title='std::io::error::Error'>Error</a>),
 }</pre><div class='docblock'><p>The result of <a href="struct.multipart.html#method.save_all"><code>Multipart::save_all()</code></a>.</p>
 </div><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.Full'><code>Full</code></td><td><div class='docblock'><p>The operation was a total success. Contained are all entries of the request.</p>
-</div></td></tr><tr><td id='variant.Partial'><code>Partial</code></td><td><div class='docblock'><p>The operation errored partway through. Contained are the entries gathered thus far,
+<table class='variants_table'><tr><td id='variant.Full'><code>Full</code></td><td><div class='docblock'><p>The operation was a total success. Contained are all entries of the request.</p>
+</div></td><td></td></tr><tr><td id='variant.Partial'><code>Partial</code></td><td><div class='docblock'><p>The operation errored partway through. Contained are the entries gathered thus far,
 as well as the error that ended the process.</p>
-</div></td></tr><tr><td id='variant.Error'><code>Error</code></td><td><div class='docblock'><p>The <code>TempDir</code> for <code>Entries</code> could not be constructed. Contained is the error detailing the
+</div></td><td></td></tr><tr><td id='variant.Error'><code>Error</code></td><td><div class='docblock'><p>The <code>TempDir</code> for <code>Entries</code> could not be constructed. Contained is the error detailing the
 problem.</p>
-</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='enum' href='../../multipart/server/enum.SaveResult.html' title='multipart::server::SaveResult'>SaveResult</a></code></h3><div class='impl-items'><h4 id='method.to_entries' class='method'><code>fn <a href='#method.to_entries' class='fnname'>to_entries</a>(self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../multipart/server/struct.Entries.html' title='multipart::server::Entries'>Entries</a>&gt;</code></h4>
+</div></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='enum' href='../../multipart/server/enum.SaveResult.html' title='multipart::server::SaveResult'>SaveResult</a></code></h3><div class='impl-items'><h4 id='method.to_entries' class='method'><code>fn <a href='#method.to_entries' class='fnname'>to_entries</a>(self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../multipart/server/struct.Entries.html' title='multipart::server::Entries'>Entries</a>&gt;</code></h4>
 <div class='docblock'><p>Take the <code>Entries</code> from <code>self</code>, if applicable, and discarding
 the error, if any.</p>
-</div><h4 id='method.to_opt' class='method'><code>fn <a href='#method.to_opt' class='fnname'>to_opt</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../multipart/server/struct.Entries.html' title='multipart::server::Entries'>Entries</a>&gt;, <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html' title='std::io::error::Error'>Error</a>&gt;)</a></code></h4>
+</div><h4 id='method.to_opt' class='method'><code>fn <a href='#method.to_opt' class='fnname'>to_opt</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a><a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../multipart/server/struct.Entries.html' title='multipart::server::Entries'>Entries</a>&gt;, <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html' title='std::io::error::Error'>Error</a>&gt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a></code></h4>
 <div class='docblock'><p>Decompose <code>self</code> to <code>(Option&lt;Entries&gt;, Option&lt;io::Error&gt;)</code></p>
 </div><h4 id='method.to_result' class='method'><code>fn <a href='#method.to_result' class='fnname'>to_result</a>(self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='struct' href='../../multipart/server/struct.Entries.html' title='multipart::server::Entries'>Entries</a>&gt;</code></h4>
 <div class='docblock'><p>Map <code>self</code> to an <code>io::Result</code>, discarding the error in the <code>Partial</code> case.</p>
@@ -109,7 +109,7 @@ the error, if any.</p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
