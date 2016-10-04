@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/multipart-0.5.1/src/client/lazy.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/multipart-0.8.1/src/client/lazy.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lazy.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
+    
 
     
     
@@ -494,6 +495,43 @@
 <span id="451">451</span>
 <span id="452">452</span>
 <span id="453">453</span>
+<span id="454">454</span>
+<span id="455">455</span>
+<span id="456">456</span>
+<span id="457">457</span>
+<span id="458">458</span>
+<span id="459">459</span>
+<span id="460">460</span>
+<span id="461">461</span>
+<span id="462">462</span>
+<span id="463">463</span>
+<span id="464">464</span>
+<span id="465">465</span>
+<span id="466">466</span>
+<span id="467">467</span>
+<span id="468">468</span>
+<span id="469">469</span>
+<span id="470">470</span>
+<span id="471">471</span>
+<span id="472">472</span>
+<span id="473">473</span>
+<span id="474">474</span>
+<span id="475">475</span>
+<span id="476">476</span>
+<span id="477">477</span>
+<span id="478">478</span>
+<span id="479">479</span>
+<span id="480">480</span>
+<span id="481">481</span>
+<span id="482">482</span>
+<span id="483">483</span>
+<span id="484">484</span>
+<span id="485">485</span>
+<span id="486">486</span>
+<span id="487">487</span>
+<span id="488">488</span>
+<span id="489">489</span>
+<span id="490">490</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Multipart requests which write out their data in one fell swoop.</span>
 
@@ -502,12 +540,12 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>borrow</span>::<span class='ident'>Cow</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>error</span>::<span class='ident'>Error</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fs</span>::<span class='ident'>File</span>;
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>Path</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::{<span class='ident'>Path</span>, <span class='ident'>PathBuf</span>};
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::{<span class='ident'>fmt</span>, <span class='ident'>io</span>, <span class='ident'>mem</span>};
 
-<span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>HttpRequest</span>, <span class='ident'>HttpStream</span>, <span class='ident'>MultipartWriter</span>};
+<span class='kw'>use</span> <span class='kw'>super</span>::{<span class='ident'>HttpRequest</span>, <span class='ident'>HttpStream</span>, <span class='ident'>MultipartWriter</span>};
 
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>try_lazy</span> (
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>field</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>try</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (
@@ -540,7 +578,7 @@
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>E</span><span class='op'>&gt;</span> <span class='ident'>LazyError</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>E</span><span class='op'>&gt;</span> {
-    <span class='kw'>fn</span> <span class='ident'>without_field</span><span class='op'>&lt;</span><span class='ident'>E_</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;&gt;</span>(<span class='ident'>error</span>: <span class='ident'>E_</span>) <span class='op'>-&gt;</span> <span class='kw'>Self</span> {
+    <span class='kw'>fn</span> <span class='ident'>without_field</span><span class='op'>&lt;</span><span class='ident'>E_</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;&gt;</span>(<span class='ident'>error</span>: <span class='ident'>E_</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
         <span class='ident'>LazyError</span> {
             <span class='ident'>field_name</span>: <span class='prelude-val'>None</span>,
             <span class='ident'>error</span>: <span class='ident'>error</span>.<span class='ident'>into</span>(),
@@ -548,7 +586,7 @@
         }
     }
 
-    <span class='kw'>fn</span> <span class='ident'>with_field</span><span class='op'>&lt;</span><span class='ident'>E_</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;&gt;</span>(<span class='ident'>field_name</span>: <span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>str</span><span class='op'>&gt;</span>, <span class='ident'>error</span>: <span class='ident'>E_</span>) <span class='op'>-&gt;</span> <span class='kw'>Self</span> {
+    <span class='kw'>fn</span> <span class='ident'>with_field</span><span class='op'>&lt;</span><span class='ident'>E_</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;&gt;</span>(<span class='ident'>field_name</span>: <span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>str</span><span class='op'>&gt;</span>, <span class='ident'>error</span>: <span class='ident'>E_</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
         <span class='ident'>LazyError</span> {
             <span class='ident'>field_name</span>: <span class='prelude-val'>Some</span>(<span class='ident'>field_name</span>),
             <span class='ident'>error</span>: <span class='ident'>error</span>.<span class='ident'>into</span>(),
@@ -608,12 +646,12 @@
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span>, <span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> <span class='ident'>Multipart</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span>, <span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// Initialize a new lazy dynamic request. </span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='kw'>Self</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='self'>Self</span> {
         <span class='ident'>Default</span>::<span class='ident'>default</span>()
     }
 
     <span class='doccomment'>/// Add a text field to this request. </span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_text</span><span class='op'>&lt;</span><span class='ident'>N</span>, <span class='ident'>T</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>name</span>: <span class='ident'>N</span>, <span class='ident'>text</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>Self</span> <span class='kw'>where</span> <span class='ident'>N</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span>, <span class='ident'>str</span><span class='op'>&gt;&gt;</span>, <span class='ident'>T</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;d</span>, <span class='ident'>str</span><span class='op'>&gt;&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_text</span><span class='op'>&lt;</span><span class='ident'>N</span>, <span class='ident'>T</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>name</span>: <span class='ident'>N</span>, <span class='ident'>text</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>Self</span> <span class='kw'>where</span> <span class='ident'>N</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span>, <span class='ident'>str</span><span class='op'>&gt;&gt;</span>, <span class='ident'>T</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;d</span>, <span class='ident'>str</span><span class='op'>&gt;&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>fields</span>.<span class='ident'>push</span>(
             <span class='ident'>Field</span> {
                 <span class='ident'>name</span>: <span class='ident'>name</span>.<span class='ident'>into</span>(),
@@ -628,11 +666,11 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ### Note</span>
     <span class='doccomment'>/// Does not check if `path` exists.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_file</span><span class='op'>&lt;</span><span class='ident'>N</span>, <span class='ident'>P</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>name</span>: <span class='ident'>N</span>, <span class='ident'>path</span>: <span class='ident'>P</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>Self</span> <span class='kw'>where</span> <span class='ident'>N</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span>, <span class='ident'>str</span><span class='op'>&gt;&gt;</span>, <span class='ident'>P</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;d</span>, <span class='ident'>Path</span><span class='op'>&gt;&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_file</span><span class='op'>&lt;</span><span class='ident'>N</span>, <span class='ident'>P</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>name</span>: <span class='ident'>N</span>, <span class='ident'>path</span>: <span class='ident'>P</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>Self</span> <span class='kw'>where</span> <span class='ident'>N</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span>, <span class='ident'>str</span><span class='op'>&gt;&gt;</span>, <span class='ident'>P</span>: <span class='ident'>IntoCowPath</span><span class='op'>&lt;</span><span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>fields</span>.<span class='ident'>push</span>(
             <span class='ident'>Field</span> {
                 <span class='ident'>name</span>: <span class='ident'>name</span>.<span class='ident'>into</span>(),
-                <span class='ident'>data</span>: <span class='ident'>Data</span>::<span class='ident'>File</span>(<span class='ident'>path</span>.<span class='ident'>into</span>()),
+                <span class='ident'>data</span>: <span class='ident'>Data</span>::<span class='ident'>File</span>(<span class='ident'>path</span>.<span class='ident'>into_cow_path</span>()),
             }
         );
 
@@ -640,7 +678,7 @@
     }
 
     <span class='doccomment'>/// Add a generic stream field to this request,</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_stream</span><span class='op'>&lt;</span><span class='ident'>N</span>, <span class='ident'>R</span>, <span class='ident'>F</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>name</span>: <span class='ident'>N</span>, <span class='ident'>stream</span>: <span class='ident'>R</span>, <span class='ident'>filename</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>F</span><span class='op'>&gt;</span>, <span class='ident'>mime</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Mime</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>Self</span> <span class='kw'>where</span> <span class='ident'>N</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span>, <span class='ident'>str</span><span class='op'>&gt;&gt;</span>, <span class='ident'>R</span>: <span class='ident'>Read</span> <span class='op'>+</span> <span class='lifetime'>&#39;d</span>, <span class='ident'>F</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span>, <span class='ident'>str</span><span class='op'>&gt;&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_stream</span><span class='op'>&lt;</span><span class='ident'>N</span>, <span class='ident'>R</span>, <span class='ident'>F</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>name</span>: <span class='ident'>N</span>, <span class='ident'>stream</span>: <span class='ident'>R</span>, <span class='ident'>filename</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>F</span><span class='op'>&gt;</span>, <span class='ident'>mime</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Mime</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>Self</span> <span class='kw'>where</span> <span class='ident'>N</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span>, <span class='ident'>str</span><span class='op'>&gt;&gt;</span>, <span class='ident'>R</span>: <span class='ident'>Read</span> <span class='op'>+</span> <span class='lifetime'>&#39;d</span>, <span class='ident'>F</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span>, <span class='ident'>str</span><span class='op'>&gt;&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>fields</span>.<span class='ident'>push</span>(
             <span class='ident'>Field</span> {
                 <span class='ident'>name</span>: <span class='ident'>name</span>.<span class='ident'>into</span>(),
@@ -658,7 +696,7 @@
     <span class='doccomment'>/// Convert `req` to `HttpStream`, write out the fields in this request, and finish the</span>
     <span class='doccomment'>/// request, returning the response if successful, or the first error encountered.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>send</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>HttpRequest</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>req</span>: <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;&lt;</span><span class='ident'>R</span>::<span class='ident'>Stream</span> <span class='kw'>as</span> <span class='ident'>HttpStream</span><span class='op'>&gt;</span>::<span class='ident'>Response</span>, <span class='ident'>LazyError</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span>, <span class='op'>&lt;</span><span class='ident'>R</span>::<span class='ident'>Stream</span> <span class='kw'>as</span> <span class='ident'>HttpStream</span><span class='op'>&gt;</span>::<span class='ident'>Error</span><span class='op'>&gt;&gt;</span> {
-        <span class='kw'>let</span> (<span class='ident'>boundary</span>, <span class='ident'>stream</span>) <span class='op'>=</span> <span class='macro'>try_lazy</span><span class='macro'>!</span>(<span class='ident'>super</span>::<span class='ident'>open_stream</span>(<span class='ident'>req</span>, <span class='prelude-val'>None</span>));
+        <span class='kw'>let</span> (<span class='ident'>boundary</span>, <span class='ident'>stream</span>) <span class='op'>=</span> <span class='macro'>try_lazy</span><span class='macro'>!</span>(<span class='kw'>super</span>::<span class='ident'>open_stream</span>(<span class='ident'>req</span>, <span class='prelude-val'>None</span>));
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>writer</span> <span class='op'>=</span> <span class='ident'>MultipartWriter</span>::<span class='ident'>new</span>(<span class='ident'>stream</span>, <span class='ident'>boundary</span>);
 
         <span class='kw'>for</span> <span class='kw-2'>mut</span> <span class='ident'>field</span> <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>fields</span>.<span class='ident'>drain</span>(..) {
@@ -684,7 +722,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>///</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>prepare_threshold</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>buffer_threshold</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>PreparedFields</span><span class='op'>&lt;</span><span class='lifetime'>&#39;d</span><span class='op'>&gt;</span>, <span class='ident'>LazyIoError</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span><span class='op'>&gt;&gt;</span> {
-        <span class='kw'>let</span> <span class='ident'>boundary</span> <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>gen_boundary</span>();
+        <span class='kw'>let</span> <span class='ident'>boundary</span> <span class='op'>=</span> <span class='kw'>super</span>::<span class='ident'>gen_boundary</span>();
         <span class='ident'>PreparedFields</span>::<span class='ident'>from_fields</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>fields</span>, <span class='ident'>boundary</span>.<span class='ident'>into</span>(), <span class='ident'>buffer_threshold</span>)
     }
 }
@@ -747,8 +785,8 @@
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> <span class='ident'>PreparedFields</span><span class='op'>&lt;</span><span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> {
-    <span class='kw'>fn</span> <span class='ident'>from_fields</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span><span class='op'>&gt;</span>(<span class='ident'>fields</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Field</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span>, <span class='lifetime'>&#39;d</span><span class='op'>&gt;&gt;</span>, <span class='ident'>boundary</span>: <span class='ident'>String</span>, <span class='ident'>buffer_threshold</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='kw'>Self</span>, <span class='ident'>LazyIoError</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span><span class='op'>&gt;&gt;</span> {
-        <span class='kw'>let</span> <span class='ident'>buffer_threshold</span> <span class='op'>=</span> <span class='ident'>buffer_threshold</span>.<span class='ident'>unwrap_or</span>(<span class='ident'>u64</span>::<span class='ident'>max_value</span>());
+    <span class='kw'>fn</span> <span class='ident'>from_fields</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span><span class='op'>&gt;</span>(<span class='ident'>fields</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Field</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span>, <span class='lifetime'>&#39;d</span><span class='op'>&gt;&gt;</span>, <span class='ident'>boundary</span>: <span class='ident'>String</span>, <span class='ident'>buffer_threshold</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='self'>Self</span>, <span class='ident'>LazyIoError</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span><span class='op'>&gt;&gt;</span> {
+        <span class='kw'>let</span> <span class='ident'>buffer_threshold</span> <span class='op'>=</span> <span class='ident'>buffer_threshold</span>.<span class='ident'>unwrap_or</span>(::<span class='ident'>std</span>::<span class='ident'>u64</span>::<span class='ident'>MAX</span>);
 
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>prep_fields</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>with_capacity</span>(<span class='ident'>fields</span>.<span class='ident'>len</span>());
 
@@ -757,7 +795,7 @@
 
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>contiguous</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>remainder</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Read</span><span class='op'>&gt;&gt;</span> <span class='op'>=</span> <span class='prelude-val'>None</span>;
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>use_content_len</span> <span class='op'>=</span> <span class='boolval'>true</span>;
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>use_content_len</span> <span class='op'>=</span> <span class='bool-val'>true</span>;
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>content_len</span> <span class='op'>=</span> <span class='number'>0</span>;
 
         <span class='kw'>while</span> <span class='ident'>fields</span>.<span class='ident'>peek</span>().<span class='ident'>is_some</span>() {
@@ -774,7 +812,7 @@
                             <span class='ident'>remainder</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='ident'>io</span>::<span class='ident'>Cursor</span>::<span class='ident'>new</span>(<span class='ident'>CowStrAsRef</span>(<span class='ident'>text</span>))));
                         },
                         <span class='ident'>Data</span>::<span class='ident'>File</span>(<span class='ident'>path</span>) <span class='op'>=&gt;</span> {
-                            <span class='kw'>let</span> (<span class='ident'>content_type</span>, <span class='ident'>filename</span>) <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>mime_filename</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>path</span>);
+                            <span class='kw'>let</span> (<span class='ident'>content_type</span>, <span class='ident'>filename</span>) <span class='op'>=</span> <span class='kw'>super</span>::<span class='ident'>mime_filename</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>path</span>);
                             <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='macro'>try_lazy</span><span class='macro'>!</span>(<span class='ident'>field</span>.<span class='ident'>name</span>, <span class='ident'>File</span>::<span class='ident'>open</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>path</span>));
                             <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try_lazy</span><span class='macro'>!</span>(<span class='ident'>field</span>.<span class='ident'>name</span>, <span class='ident'>file</span>.<span class='ident'>metadata</span>()).<span class='ident'>len</span>();
 
@@ -790,7 +828,7 @@
                             <span class='kw'>let</span> <span class='ident'>filename</span> <span class='op'>=</span> <span class='ident'>stream</span>.<span class='ident'>filename</span>.<span class='ident'>as_ref</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>f</span><span class='op'>|</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>f</span>);
                             <span class='macro'>try_lazy</span><span class='macro'>!</span>(<span class='ident'>field</span>.<span class='ident'>name</span>, <span class='ident'>writer</span>.<span class='ident'>write_field_headers</span>(<span class='kw-2'>&amp;</span><span class='ident'>field</span>.<span class='ident'>name</span>, <span class='ident'>filename</span>, <span class='ident'>stream</span>.<span class='ident'>content_type</span>));
                             <span class='ident'>remainder</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>stream</span>.<span class='ident'>stream</span>);
-                            <span class='ident'>use_content_len</span> <span class='op'>=</span> <span class='boolval'>false</span>;
+                            <span class='ident'>use_content_len</span> <span class='op'>=</span> <span class='bool-val'>false</span>;
                         },
                     }
 
@@ -810,13 +848,13 @@
         }
 
         <span class='comment'>// FIXME: when non-lexical borrow scopes land, convert this to a single if-let/else</span>
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>end_written</span> <span class='op'>=</span> <span class='boolval'>false</span>;
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>end_written</span> <span class='op'>=</span> <span class='bool-val'>false</span>;
         
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>PreparedField</span>::<span class='ident'>Contiguous</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>vec</span>)) <span class='op'>=</span> <span class='ident'>prep_fields</span>.<span class='ident'>last_mut</span>() {
             <span class='kw'>let</span> <span class='ident'>start_len</span> <span class='op'>=</span> <span class='ident'>vec</span>.<span class='ident'>get_ref</span>().<span class='ident'>len</span>();
             <span class='macro'>try_lazy</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>vec</span>, <span class='string'>&quot;\r\n--{}--&quot;</span>, <span class='ident'>boundary</span>));
             <span class='ident'>content_len</span> <span class='op'>+=</span> (<span class='ident'>vec</span>.<span class='ident'>get_ref</span>().<span class='ident'>len</span>() <span class='op'>-</span> <span class='ident'>start_len</span>) <span class='kw'>as</span> <span class='ident'>u64</span>;
-            <span class='ident'>end_written</span> <span class='op'>=</span> <span class='boolval'>true</span>;
+            <span class='ident'>end_written</span> <span class='op'>=</span> <span class='bool-val'>true</span>;
         } 
         
         <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>end_written</span> {
@@ -886,12 +924,49 @@
     }
 }
 
+<span class='doccomment'>/// Conversion trait necessary for `Multipart::add_file()` to accept borrowed or owned strings</span>
+<span class='doccomment'>/// and borrowed or owned paths</span>
+<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>IntoCowPath</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+    <span class='doccomment'>/// Self-explanatory, hopefully</span>
+    <span class='kw'>fn</span> <span class='ident'>into_cow_path</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>Path</span><span class='op'>&gt;</span>;
+}
+
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>IntoCowPath</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>Path</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>into_cow_path</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>Path</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>IntoCowPath</span><span class='op'>&lt;</span><span class='lifetime'>&#39;static</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>PathBuf</span> {
+    <span class='kw'>fn</span> <span class='ident'>into_cow_path</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;static</span>, <span class='ident'>Path</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>into</span>()
+    }
+}
+
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>IntoCowPath</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>Path</span> {
+    <span class='kw'>fn</span> <span class='ident'>into_cow_path</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>Path</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>into</span>()
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>IntoCowPath</span><span class='op'>&lt;</span><span class='lifetime'>&#39;static</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>String</span> {
+    <span class='kw'>fn</span> <span class='ident'>into_cow_path</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;static</span>, <span class='ident'>Path</span><span class='op'>&gt;</span> {
+        <span class='ident'>PathBuf</span>::<span class='ident'>from</span>(<span class='self'>self</span>).<span class='ident'>into</span>()
+    }
+}
+
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>IntoCowPath</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span> {
+    <span class='kw'>fn</span> <span class='ident'>into_cow_path</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>Path</span><span class='op'>&gt;</span> {
+        <span class='ident'>Path</span>::<span class='ident'>new</span>(<span class='self'>self</span>).<span class='ident'>into</span>()
+    }
+}
+
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;hyper&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>hyper</span> {
     <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>client</span>::{<span class='ident'>Body</span>, <span class='ident'>Client</span>, <span class='ident'>IntoUrl</span>, <span class='ident'>RequestBuilder</span>, <span class='ident'>Response</span>};
     <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='prelude-ty'>Result</span> <span class='kw'>as</span> <span class='ident'>HyperResult</span>;
 
-    <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span>, <span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> <span class='ident'>super</span>::<span class='ident'>Multipart</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span>, <span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> {
+    <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span>, <span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> <span class='kw'>super</span>::<span class='ident'>Multipart</span><span class='op'>&lt;</span><span class='lifetime'>&#39;n</span>, <span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> {
         <span class='doccomment'>/// #### Feature: `hyper`</span>
         <span class='doccomment'>/// Complete a POST request with the given `hyper::client::Client` and URL.</span>
         <span class='doccomment'>/// </span>
@@ -926,11 +1001,11 @@
         }
     }
 
-    <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> <span class='ident'>super</span>::<span class='ident'>PreparedFields</span><span class='op'>&lt;</span><span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> {
+    <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> <span class='kw'>super</span>::<span class='ident'>PreparedFields</span><span class='op'>&lt;</span><span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> {
         <span class='doccomment'>/// #### Feature: `hyper`</span>
         <span class='doccomment'>/// Convert `self` to `hyper::client::Body`.</span>
         <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>to_body</span><span class='op'>&lt;</span><span class='lifetime'>&#39;b</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> <span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Body</span><span class='op'>&lt;</span><span class='lifetime'>&#39;b</span><span class='op'>&gt;</span> {
-            <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>PreparedField</span>;
+            <span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>PreparedField</span>;
             <span class='comment'>// We have a single contiguous body, provide it directly</span>
             <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>fields</span>.<span class='ident'>len</span>() <span class='op'>==</span> <span class='number'>1</span> {
                 <span class='kw'>if</span> <span class='kw'>let</span> <span class='ident'>PreparedField</span>::<span class='ident'>Contiguous</span>(<span class='kw-2'>ref</span> <span class='ident'>body</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>fields</span>[<span class='number'>0</span>] {
@@ -972,6 +1047,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

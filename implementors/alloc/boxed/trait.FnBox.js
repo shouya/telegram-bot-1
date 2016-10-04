@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors['regex_syntax'] = [];implementors['openssl'] = [];implementors['hyper'] = [];implementors['multipart'] = [];
+implementors["openssl"] = [];implementors["multipart"] = [];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);

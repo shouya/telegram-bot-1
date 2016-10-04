@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -43,63 +44,79 @@
 
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>mime_guess</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-0' class='srclink' href='../src/mime_guess/lib.rs.html#1-178' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-0' class='srclink' href='../src/mime_guess/lib.rs.html#1-266' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Guessing of MIME types by file extension.</p>
 
 <p>Uses a static list of file-extension : MIME type mappings.</p>
 </div><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.get_mime_type.html'
-                               title='mime_guess::get_mime_type'>get_mime_type</a></td>
-                        <td class='docblock short'>
-                             <p>Get the MIME type associated with a file extension.</p>
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.get_mime_type_opt.html'
-                               title='mime_guess::get_mime_type_opt'>get_mime_type_opt</a></td>
-                        <td class='docblock short'>
-                             <p>Get the MIME type associated with a file extension.</p>
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.get_mime_type_str.html'
-                               title='mime_guess::get_mime_type_str'>get_mime_type_str</a></td>
-                        <td class='docblock short'>
-                             <p>Get the MIME type string associated with a file extension. Case-insensitive.</p>
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.guess_mime_type.html'
-                               title='mime_guess::guess_mime_type'>guess_mime_type</a></td>
-                        <td class='docblock short'>
-                             <p>Guess the MIME type of <code>path</code> by its extension (as defined by <code>Path::extension()</code>).</p>
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.guess_mime_type_opt.html'
-                               title='mime_guess::guess_mime_type_opt'>guess_mime_type_opt</a></td>
-                        <td class='docblock short'>
-                             <p>Guess the MIME type of <code>path</code> by its extension (as defined by <code>Path::extension()</code>).</p>
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.octet_stream.html'
-                               title='mime_guess::octet_stream'>octet_stream</a></td>
-                        <td class='docblock short'>
-                             <p>Get the MIME type for <code>application/octet-stream</code> (generic binary stream)</p>
-                        </td>
-                    </tr>
-                </table></section>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.get_extensions.html'
+                                  title='mime_guess::get_extensions'>get_extensions</a></td>
+                           <td class='docblock short'>
+                                <p>Get the extensions for a given top-level and sub-level of a MIME type
+(<code>{toplevel}/{sublevel}</code>).</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.get_mime_extensions.html'
+                                  title='mime_guess::get_mime_extensions'>get_mime_extensions</a></td>
+                           <td class='docblock short'>
+                                <p>Get a list of known extensions for a given <code>Mime</code>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.get_mime_extensions_str.html'
+                                  title='mime_guess::get_mime_extensions_str'>get_mime_extensions_str</a></td>
+                           <td class='docblock short'>
+                                <p>Get a list of known extensions for a MIME type string.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.get_mime_type.html'
+                                  title='mime_guess::get_mime_type'>get_mime_type</a></td>
+                           <td class='docblock short'>
+                                <p>Get the MIME type associated with a file extension.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.get_mime_type_opt.html'
+                                  title='mime_guess::get_mime_type_opt'>get_mime_type_opt</a></td>
+                           <td class='docblock short'>
+                                <p>Get the MIME type associated with a file extension.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.get_mime_type_str.html'
+                                  title='mime_guess::get_mime_type_str'>get_mime_type_str</a></td>
+                           <td class='docblock short'>
+                                <p>Get the MIME type string associated with a file extension. Case-insensitive.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.guess_mime_type.html'
+                                  title='mime_guess::guess_mime_type'>guess_mime_type</a></td>
+                           <td class='docblock short'>
+                                <p>Guess the MIME type of <code>path</code> by its extension (as defined by <code>Path::extension()</code>).</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.guess_mime_type_opt.html'
+                                  title='mime_guess::guess_mime_type_opt'>guess_mime_type_opt</a></td>
+                           <td class='docblock short'>
+                                <p>Guess the MIME type of <code>path</code> by its extension (as defined by <code>Path::extension()</code>).</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.octet_stream.html'
+                                  title='mime_guess::octet_stream'>octet_stream</a></td>
+                           <td class='docblock short'>
+                                <p>Get the MIME type for <code>application/octet-stream</code> (generic binary stream)</p>
+                           </td>
+                       </tr></table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -122,6 +139,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

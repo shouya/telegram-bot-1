@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -43,10 +44,10 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>telegram_bot</a>::<wbr><a class='struct' href=''>Api</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-1932' class='srclink' href='../src/telegram_bot/src/lib.rs.html#106-109' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-1918' class='srclink' href='../src/telegram_bot/src/lib.rs.html#106-109' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Api {
     // some fields omitted
 }</pre><div class='docblock'><p>Main type for sending requests to the Telegram bot API.</p>
@@ -55,7 +56,8 @@
 object is obtained via <code>listener</code>. All remaining methods correspond
 directly to a telegram API call and are named like the API method, but in
 <code>camel_case</code>.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../telegram_bot/struct.Api.html' title='telegram_bot::Api'>Api</a></code></h3><div class='impl-items'><h4 id='method.from_token' class='method'><code>fn <a href='#method.from_token' class='fnname'>from_token</a>(token: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a class='struct' href='../telegram_bot/struct.Api.html' title='telegram_bot::Api'>Api</a>&gt;</code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../telegram_bot/struct.Api.html' title='telegram_bot::Api'>Api</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1924' class='srclink' href='../src/telegram_bot/src/lib.rs.html#120-568' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.from_token' class='method'><code>fn <a href='#method.from_token' class='fnname'>from_token</a>(token: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a class='struct' href='../telegram_bot/struct.Api.html' title='telegram_bot::Api'>Api</a>&gt;</code></h4>
 <div class='docblock'><p>Creates a new bot with the given token. If the token is completely
 invalid (resulting in an invalid API-URL), the function will return
 an <code>Err</code> value. However, the function will not check if the given token
@@ -95,7 +97,7 @@ updates in a more high level way, see <code>listener</code>.</p>
 <div class='docblock'><p>Corresponds to the <code>sendSticker</code> method of the API.</p>
 </div><h4 id='method.send_video' class='method'><code>fn <a href='#method.send_video' class='fnname'>send_video</a>(&amp;self, chat_id: <a class='type' href='../telegram_bot/types/type.Integer.html' title='telegram_bot::types::Integer'>Integer</a>, path: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>, caption: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;, duration: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../telegram_bot/types/type.Integer.html' title='telegram_bot::types::Integer'>Integer</a>&gt;, reply_to_message_id: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../telegram_bot/types/type.Integer.html' title='telegram_bot::types::Integer'>Integer</a>&gt;, reply_markup: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../telegram_bot/types/enum.ReplyMarkup.html' title='telegram_bot::types::ReplyMarkup'>ReplyMarkup</a>&gt;) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a class='struct' href='../telegram_bot/types/struct.Message.html' title='telegram_bot::types::Message'>Message</a>&gt;</code></h4>
 <div class='docblock'><p>Corresponds to the <code>sendVideo</code> method of the API.</p>
-</div><h4 id='method.set_webhook' class='method'><code>fn <a href='#method.set_webhook' class='fnname'>set_webhook</a>&lt;U: <a class='trait' href='../hyper/client/trait.IntoUrl.html' title='hyper::client::IntoUrl'>IntoUrl</a>&gt;(&amp;self, url: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;U&gt;) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>&gt;</code></h4>
+</div><h4 id='method.set_webhook' class='method'><code>fn <a href='#method.set_webhook' class='fnname'>set_webhook</a>&lt;U:&nbsp;<a class='trait' href='../hyper/client/trait.IntoUrl.html' title='hyper::client::IntoUrl'>IntoUrl</a>&gt;(&amp;self, url: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;U&gt;) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>&gt;</code></h4>
 <div class='docblock'><p>Corresponds to the <code>setWebhook</code> method of the API.</p>
 
 <p><strong>Note:</strong>
@@ -121,9 +123,12 @@ return the Error. If you want to stop listening you can just return
 If the bot is restarted, but the last received updates are not yet
 confirmed (the last poll was not empty), there will be some duplicate
 updates.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../telegram_bot/struct.Api.html' title='telegram_bot::Api'>Api</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../telegram_bot/struct.Api.html' title='telegram_bot::Api'>Api</a></code></h4>
-<h4 id='method.clone_from' class='method'><span class="since">1.0.0</span><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
-</div></section>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../telegram_bot/struct.Api.html' title='telegram_bot::Api'>Api</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1921' class='srclink' href='../src/telegram_bot/src/lib.rs.html#111-118' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../telegram_bot/struct.Api.html' title='telegram_bot::Api'>Api</a></code></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -146,6 +151,8 @@ updates.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

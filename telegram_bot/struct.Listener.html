@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -43,10 +44,10 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>telegram_bot</a>::<wbr><a class='struct' href=''>Listener</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-2170' class='srclink' href='../src/telegram_bot/src/lib.rs.html#595-600' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-2148' class='srclink' href='../src/telegram_bot/src/lib.rs.html#593-598' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Listener {
     // some fields omitted
 }</pre><div class='docblock'><p>Offers methods to easily receive new updates via the specified method. This
@@ -57,7 +58,8 @@ should be used instead of calling methods like <code>get_updates</code> yourself
 environment, the <code>Listener</code> object and the <code>Api</code> object don&#39;t share any
 internal state. This makes creating a <code>Listener</code> a bit more expensive, but
 it&#39;s usually sufficient for any purpose to create a <code>Listener</code> only once.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../telegram_bot/struct.Listener.html' title='telegram_bot::Listener'>Listener</a></code></h3><div class='impl-items'><h4 id='method.listen' class='method'><code>fn <a href='#method.listen' class='fnname'>listen</a>&lt;H&gt;(&amp;mut self, handler: H) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt; <span class='where'>where H: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(<a class='struct' href='../telegram_bot/types/struct.Update.html' title='telegram_bot::types::Update'>Update</a>) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a class='enum' href='../telegram_bot/enum.ListeningAction.html' title='telegram_bot::ListeningAction'>ListeningAction</a>&gt;</span></code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../telegram_bot/struct.Listener.html' title='telegram_bot::Listener'>Listener</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-2153' class='srclink' href='../src/telegram_bot/src/lib.rs.html#601-728' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.listen' class='method'><code>fn <a href='#method.listen' class='fnname'>listen</a>&lt;H&gt;(&amp;mut self, handler: H) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt; <span class='where'>where H: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(<a class='struct' href='../telegram_bot/types/struct.Update.html' title='telegram_bot::types::Update'>Update</a>) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a class='enum' href='../telegram_bot/enum.ListeningAction.html' title='telegram_bot::ListeningAction'>ListeningAction</a>&gt;</span></code></h4>
 <div class='docblock'><p>Receive and handle updates with the given closure.</p>
 
 <p>This method will use the specified listening method to receive new
@@ -113,6 +115,8 @@ update!</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

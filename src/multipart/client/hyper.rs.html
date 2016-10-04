@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/multipart-0.5.1/src/client/hyper.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/multipart-0.8.1/src/client/hyper.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>hyper.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
+    
 
     
     
@@ -149,7 +150,7 @@
 
 <span class='kw'>use</span> <span class='ident'>mime</span>::{<span class='ident'>Mime</span>, <span class='ident'>TopLevel</span>, <span class='ident'>SubLevel</span>, <span class='ident'>Attr</span>, <span class='ident'>Value</span>};
 
-<span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>HttpRequest</span>, <span class='ident'>HttpStream</span>};
+<span class='kw'>use</span> <span class='kw'>super</span>::{<span class='ident'>HttpRequest</span>, <span class='ident'>HttpStream</span>};
 
 <span class='doccomment'>/// ####Feature: `hyper`</span>
 <span class='kw'>impl</span> <span class='ident'>HttpRequest</span> <span class='kw'>for</span> <span class='ident'>Request</span><span class='op'>&lt;</span><span class='ident'>Fresh</span><span class='op'>&gt;</span> {
@@ -165,7 +166,7 @@
                 <span class='self'>self</span>.<span class='ident'>method</span>()
             );
 
-            <span class='kw'>return</span> <span class='boolval'>false</span>;
+            <span class='kw'>return</span> <span class='bool-val'>false</span>;
         }
 
         <span class='kw'>let</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>headers_mut</span>();
@@ -178,10 +179,10 @@
 
         <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;Hyper headers: {}&quot;</span>, <span class='ident'>headers</span>); 
 
-        <span class='boolval'>true</span>
+        <span class='bool-val'>true</span>
     }
 
-    <span class='kw'>fn</span> <span class='ident'>open_stream</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Self</span>::<span class='ident'>Stream</span>, <span class='ident'>Self</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>open_stream</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='self'>Self</span>::<span class='ident'>Stream</span>, <span class='self'>Self</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>start</span>()
     }
 } 
@@ -192,7 +193,7 @@
     <span class='kw'>type</span> <span class='ident'>Response</span> <span class='op'>=</span> <span class='ident'>Response</span>;
     <span class='kw'>type</span> <span class='ident'>Error</span> <span class='op'>=</span> <span class='ident'>HyperError</span>;
 
-    <span class='kw'>fn</span> <span class='ident'>finish</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Self</span>::<span class='ident'>Response</span>, <span class='ident'>Self</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>finish</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='self'>Self</span>::<span class='ident'>Response</span>, <span class='self'>Self</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>send</span>()
     }
 }
@@ -232,6 +233,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
