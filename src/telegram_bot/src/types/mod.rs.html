@@ -716,6 +716,7 @@
 <span id="672">672</span>
 <span id="673">673</span>
 <span id="674">674</span>
+<span id="675">675</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Types of the Telegram API.</span>
 <span class='doccomment'>//!</span>
@@ -1123,6 +1124,7 @@
     <span class='ident'>GroupChatCreated</span>,
     <span class='ident'>SuperGroupChatCreated</span>(<span class='ident'>GroupToSuperGroupMigration</span>),
     <span class='ident'>ChannelChatCreated</span>,
+    <span class='ident'>Unknown</span>,
 }
 
 <span class='kw'>impl</span> <span class='ident'>Decodable</span> <span class='kw'>for</span> <span class='ident'>MessageType</span> {
@@ -1180,8 +1182,8 @@
             <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(<span class='ident'>MessageType</span>::<span class='ident'>ChannelChatCreated</span>);
         };
 
-        <span class='comment'>// None of the tested fields is present: This is an error</span>
-        <span class='prelude-val'>Err</span>(<span class='ident'>d</span>.<span class='ident'>error</span>(<span class='string'>&quot;No field for inferring message type is set&quot;</span>))
+        <span class='comment'>// None of the tested fields is present.</span>
+        <span class='prelude-val'>Ok</span>(<span class='ident'>MessageType</span>::<span class='ident'>Unknown</span>)
     }
 }
 
