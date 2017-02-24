@@ -47,29 +47,36 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-12' class='srclink' href='../../../src/solicit/http/frame/mod.rs.html#1-592' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../../src/solicit/http/frame/mod.rs.html#1-592' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>The module contains the implementation of HTTP/2 frames.</p>
 </div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
-<table><tr><td><code>pub use self::data::{<a class='enum' href='../../../solicit/http/frame/data/enum.DataFlag.html' title='solicit::http::frame::data::DataFlag'>DataFlag</a>, <a class='struct' href='../../../solicit/http/frame/data/struct.DataFrame.html' title='solicit::http::frame::data::DataFrame'>DataFrame</a>};</code></td></tr><tr><td><code>pub use self::headers::{<a class='enum' href='../../../solicit/http/frame/headers/enum.HeadersFlag.html' title='solicit::http::frame::headers::HeadersFlag'>HeadersFlag</a>, <a class='struct' href='../../../solicit/http/frame/headers/struct.HeadersFrame.html' title='solicit::http::frame::headers::HeadersFrame'>HeadersFrame</a>};</code></td></tr><tr><td><code>pub use self::settings::{<a class='enum' href='../../../solicit/http/frame/settings/enum.SettingsFlag.html' title='solicit::http::frame::settings::SettingsFlag'>SettingsFlag</a>, <a class='struct' href='../../../solicit/http/frame/settings/struct.SettingsFrame.html' title='solicit::http::frame::settings::SettingsFrame'>SettingsFrame</a>, <a class='enum' href='../../../solicit/http/frame/settings/enum.HttpSetting.html' title='solicit::http::frame::settings::HttpSetting'>HttpSetting</a>};</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table><tr><td><code>pub use self::<a class='mod'
+                                       href='./data/index.html'>data</a>::<a class='enum' href='../../../solicit/http/frame/data/enum.DataFlag.html' title='solicit::http::frame::data::DataFlag'>DataFlag</a>;</code></td></tr><tr><td><code>pub use self::<a class='mod'
+                                       href='./data/index.html'>data</a>::<a class='struct' href='../../../solicit/http/frame/data/struct.DataFrame.html' title='solicit::http::frame::data::DataFrame'>DataFrame</a>;</code></td></tr><tr><td><code>pub use self::<a class='mod'
+                                       href='./headers/index.html'>headers</a>::<a class='enum' href='../../../solicit/http/frame/headers/enum.HeadersFlag.html' title='solicit::http::frame::headers::HeadersFlag'>HeadersFlag</a>;</code></td></tr><tr><td><code>pub use self::<a class='mod'
+                                       href='./headers/index.html'>headers</a>::<a class='struct' href='../../../solicit/http/frame/headers/struct.HeadersFrame.html' title='solicit::http::frame::headers::HeadersFrame'>HeadersFrame</a>;</code></td></tr><tr><td><code>pub use self::<a class='mod'
+                                       href='./settings/index.html'>settings</a>::<a class='enum' href='../../../solicit/http/frame/settings/enum.SettingsFlag.html' title='solicit::http::frame::settings::SettingsFlag'>SettingsFlag</a>;</code></td></tr><tr><td><code>pub use self::<a class='mod'
+                                       href='./settings/index.html'>settings</a>::<a class='struct' href='../../../solicit/http/frame/settings/struct.SettingsFrame.html' title='solicit::http::frame::settings::SettingsFrame'>SettingsFrame</a>;</code></td></tr><tr><td><code>pub use self::<a class='mod'
+                                       href='./settings/index.html'>settings</a>::<a class='enum' href='../../../solicit/http/frame/settings/enum.HttpSetting.html' title='solicit::http::frame::settings::HttpSetting'>HttpSetting</a>;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
                        <tr class=' module-item'>
                            <td><a class='mod' href='data/index.html'
                                   title='solicit::http::frame::data'>data</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>The module contains the implementation of the <code>DATA</code> frame and associated flags.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='mod' href='headers/index.html'
                                   title='solicit::http::frame::headers'>headers</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>The module contains the implementation of the <code>HEADERS</code> frame and associated flags.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='mod' href='settings/index.html'
                                   title='solicit::http::frame::settings'>settings</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>The module contains the implementation of the <code>SETTINGS</code> frame and associated flags.</p>
                            </td>
                        </tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
@@ -77,7 +84,7 @@
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.RawFrame.html'
                                   title='solicit::http::frame::RawFrame'>RawFrame</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>A struct that defines the format of the raw HTTP/2 frame, i.e. the frame
 as it is read from the wire.</p>
                            </td>
@@ -86,14 +93,14 @@ as it is read from the wire.</p>
                        <tr class=' module-item'>
                            <td><a class='trait' href='trait.Flag.html'
                                   title='solicit::http::frame::Flag'>Flag</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>A trait that all HTTP/2 frame header flags need to implement.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='trait' href='trait.Frame.html'
                                   title='solicit::http::frame::Frame'>Frame</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>A trait that all HTTP/2 frame structs need to implement.</p>
                            </td>
                        </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
@@ -101,14 +108,14 @@ as it is read from the wire.</p>
                        <tr class=' module-item'>
                            <td><a class='fn' href='fn.pack_header.html'
                                   title='solicit::http::frame::pack_header'>pack_header</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Constructs a buffer of 9 bytes that represents the given <code>FrameHeader</code>.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='fn' href='fn.unpack_header.html'
                                   title='solicit::http::frame::unpack_header'>unpack_header</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Deconstructs a <code>FrameHeader</code> into its corresponding 4 components,
 represented as a 4-tuple: <code>(length, frame_type, flags, stream_id)</code>.</p>
                            </td>
@@ -117,7 +124,7 @@ represented as a 4-tuple: <code>(length, frame_type, flags, stream_id)</code>.</
                        <tr class=' module-item'>
                            <td><a class='type' href='type.FrameHeader.html'
                                   title='solicit::http::frame::FrameHeader'>FrameHeader</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>An alias for the 4-tuple representing the components of each HTTP/2 frame
 header.</p>
                            </td>
@@ -125,7 +132,7 @@ header.</p>
                        <tr class=' module-item'>
                            <td><a class='type' href='type.FrameHeaderBuffer.html'
                                   title='solicit::http::frame::FrameHeaderBuffer'>FrameHeaderBuffer</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>An alias for the 9-byte buffer that each HTTP/2 frame header must be stored
 in.</p>
                            </td>
@@ -185,11 +192,9 @@ in.</p>
     <script>
         window.rootPath = "../../../";
         window.currentCrate = "solicit";
-        window.playgroundUrl = "";
     </script>
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
-    
     <script defer src="../../../search-index.js"></script>
 </body>
 </html>

@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-0' class='srclink' href='../src/telegram_bot/src/lib.rs.html#1-728' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/telegram_bot/lib.rs.html#1-728' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>This crate helps writing bots for the messenger Telegram. Here is a
 minimalistic example:</p>
 
@@ -106,7 +106,7 @@ repository.</p>
                        <tr class=' module-item'>
                            <td><a class='mod' href='types/index.html'
                                   title='telegram_bot::types'>types</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Types of the Telegram API.</p>
                            </td>
                        </tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
@@ -114,14 +114,14 @@ repository.</p>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.Api.html'
                                   title='telegram_bot::Api'>Api</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Main type for sending requests to the Telegram bot API.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.Listener.html'
                                   title='telegram_bot::Listener'>Listener</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Offers methods to easily receive new updates via the specified method. This
 should be used instead of calling methods like <code>get_updates</code> yourself.</p>
                            </td>
@@ -130,14 +130,14 @@ should be used instead of calling methods like <code>get_updates</code> yourself
                        <tr class=' module-item'>
                            <td><a class='enum' href='enum.Error.html'
                                   title='telegram_bot::Error'>Error</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Telegram-Bot Error: Anything that may fail (HTTP, JSON, ...)</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='enum' href='enum.ListeningAction.html'
                                   title='telegram_bot::ListeningAction'>ListeningAction</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>A listening handler returns this type to signal the listening-method either
 to stop or to continue. If a handler returns <code>Stop</code>, the update it was
 passed counts as &quot;handled&quot; and won&#39;t be handled again.</p>
@@ -146,7 +146,7 @@ passed counts as &quot;handled&quot; and won&#39;t be handled again.</p>
                        <tr class=' module-item'>
                            <td><a class='enum' href='enum.ListeningMethod.html'
                                   title='telegram_bot::ListeningMethod'>ListeningMethod</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Different method how to listen for new updates. Currently <code>LongPoll</code> is
 the only method supported by this library. The Telegram API offers a
 webhook method which is not yet implemented here.</p>
@@ -156,7 +156,7 @@ webhook method which is not yet implemented here.</p>
                        <tr class=' module-item'>
                            <td><a class='constant' href='constant.API_URL.html'
                                   title='telegram_bot::API_URL'>API_URL</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>API-URL prefix</p>
                            </td>
                        </tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
@@ -164,7 +164,7 @@ webhook method which is not yet implemented here.</p>
                        <tr class=' module-item'>
                            <td><a class='type' href='type.Result.html'
                                   title='telegram_bot::Result'>Result</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Telegram-Bot Result</p>
                            </td>
                        </tr></table></section>
@@ -223,11 +223,9 @@ webhook method which is not yet implemented here.</p>
     <script>
         window.rootPath = "../";
         window.currentCrate = "telegram_bot";
-        window.playgroundUrl = "";
     </script>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    
     <script defer src="../search-index.js"></script>
 </body>
 </html>

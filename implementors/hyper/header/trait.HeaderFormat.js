@@ -1,4 +1,5 @@
 (function() {var implementors = {};
+implementors["hyper"] = [];
 implementors["multipart"] = [];
 
             if (window.register_implementors) {

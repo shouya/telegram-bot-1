@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-30' class='srclink' href='../phf_shared/trait.PhfHash.html?gotosrc=30' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/phf_shared/lib.rs.html#55-67' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait PhfHash {
     fn <a href='#tymethod.phf_hash' class='fnname'>phf_hash</a>&lt;H&gt;(&amp;self, state: &amp;mut H) <span class='where'>where H: <a class='trait' href='https://doc.rust-lang.org/nightly/core/hash/trait.Hasher.html' title='core::hash::Hasher'>Hasher</a></span>;
 
@@ -60,11 +60,11 @@ between the host and target when cross compiling.</p>
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.phf_hash' class='method stab '><code>fn <a href='#tymethod.phf_hash' class='fnname'>phf_hash</a>&lt;H&gt;(&amp;self, state: &amp;mut H) <span class='where'>where H: <a class='trait' href='https://doc.rust-lang.org/nightly/core/hash/trait.Hasher.html' title='core::hash::Hasher'>Hasher</a></span></code></h3><div class='docblock'><p>Feeds the value into the state given, updating the hasher as necessary.</p>
+        <h3 id='tymethod.phf_hash' class='method stab '><span id='phf_hash.v' class='invisible'><code>fn <a href='#tymethod.phf_hash' class='fnname'>phf_hash</a>&lt;H&gt;(&amp;self, state: &amp;mut H) <span class='where'>where H: <a class='trait' href='https://doc.rust-lang.org/nightly/core/hash/trait.Hasher.html' title='core::hash::Hasher'>Hasher</a></span></code></span></h3><div class='docblock'><p>Feeds the value into the state given, updating the hasher as necessary.</p>
 </div></div>
             <h2 id='provided-methods'>Provided Methods</h2>
             <div class='methods'>
-        <h3 id='method.phf_hash_slice' class='method stab '><code>fn <a href='#method.phf_hash_slice' class='fnname'>phf_hash_slice</a>&lt;H&gt;(data: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[Self]</a>, state: &amp;mut H) <span class='where'>where H: <a class='trait' href='https://doc.rust-lang.org/nightly/core/hash/trait.Hasher.html' title='core::hash::Hasher'>Hasher</a></span></code></h3><div class='docblock'><p>Feeds a slice of this type into the state provided.</p>
+        <h3 id='method.phf_hash_slice' class='method stab '><span id='phf_hash_slice.v' class='invisible'><code>fn <a href='#method.phf_hash_slice' class='fnname'>phf_hash_slice</a>&lt;H&gt;(data: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[Self]</a>, state: &amp;mut H) <span class='where'>where H: <a class='trait' href='https://doc.rust-lang.org/nightly/core/hash/trait.Hasher.html' title='core::hash::Hasher'>Hasher</a></span></code></span></h3><div class='docblock'><p>Feeds a slice of this type into the state provided.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
@@ -75,6 +75,7 @@ between the host and target when cross compiling.</p>
 <li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></li>
 <li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a></code></li>
 <li><code>impl&lt;S&gt; PhfHash for <a class='struct' href='../unicase/struct.UniCase.html' title='unicase::UniCase'>UniCase</a>&lt;S&gt; <span class='where'>where <a class='struct' href='../unicase/struct.UniCase.html' title='unicase::UniCase'>UniCase</a>&lt;S&gt;: <a class='trait' href='https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html' title='core::hash::Hash'>Hash</a></span></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a></code></li>
 <li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></li>
 <li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i8.html'>i8</a></code></li>
 <li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code></li>
@@ -84,7 +85,6 @@ between the host and target when cross compiling.</p>
 <li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></li>
 <li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a></code></li>
 <li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></li>
-<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a></code></li>
 <li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 1]</a></code></li>
 <li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 2]</a></code></li>
 <li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 3]</a></code></li>
@@ -175,11 +175,9 @@ between the host and target when cross compiling.</p>
     <script>
         window.rootPath = "../";
         window.currentCrate = "phf";
-        window.playgroundUrl = "";
     </script>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    
     <script defer src="../search-index.js"></script>
 </body>
 </html>

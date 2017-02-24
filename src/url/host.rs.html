@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/url-1.2.2/src/host.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/url-1.4.0/src/host.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>host.rs.html -- source</title>
@@ -460,6 +460,81 @@
 <span id="416">416</span>
 <span id="417">417</span>
 <span id="418">418</span>
+<span id="419">419</span>
+<span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
+<span id="447">447</span>
+<span id="448">448</span>
+<span id="449">449</span>
+<span id="450">450</span>
+<span id="451">451</span>
+<span id="452">452</span>
+<span id="453">453</span>
+<span id="454">454</span>
+<span id="455">455</span>
+<span id="456">456</span>
+<span id="457">457</span>
+<span id="458">458</span>
+<span id="459">459</span>
+<span id="460">460</span>
+<span id="461">461</span>
+<span id="462">462</span>
+<span id="463">463</span>
+<span id="464">464</span>
+<span id="465">465</span>
+<span id="466">466</span>
+<span id="467">467</span>
+<span id="468">468</span>
+<span id="469">469</span>
+<span id="470">470</span>
+<span id="471">471</span>
+<span id="472">472</span>
+<span id="473">473</span>
+<span id="474">474</span>
+<span id="475">475</span>
+<span id="476">476</span>
+<span id="477">477</span>
+<span id="478">478</span>
+<span id="479">479</span>
+<span id="480">480</span>
+<span id="481">481</span>
+<span id="482">482</span>
+<span id="483">483</span>
+<span id="484">484</span>
+<span id="485">485</span>
+<span id="486">486</span>
+<span id="487">487</span>
+<span id="488">488</span>
+<span id="489">489</span>
+<span id="490">490</span>
+<span id="491">491</span>
+<span id="492">492</span>
+<span id="493">493</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2013-2016 The rust-url developers.</span>
 <span class='comment'>//</span>
@@ -490,6 +565,38 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;heapsize&quot;</span>)]</span>
 <span class='macro'>known_heap_size</span><span class='macro'>!</span>(<span class='number'>0</span>, <span class='ident'>HostInternal</span>);
 
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span><span class='op'>=</span><span class='string'>&quot;serde&quot;</span>)]</span>
+<span class='kw'>impl</span> ::<span class='ident'>serde</span>::<span class='ident'>Serialize</span> <span class='kw'>for</span> <span class='ident'>HostInternal</span> {
+    <span class='kw'>fn</span> <span class='ident'>serialize</span><span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>serializer</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>S</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>S</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>S</span>: ::<span class='ident'>serde</span>::<span class='ident'>Serializer</span> {
+        <span class='comment'>// This doesn’t use `derive` because that involves</span>
+        <span class='comment'>// large dependencies (that take a long time to build), and</span>
+        <span class='comment'>// either Macros 1.1 which are not stable yet or a cumbersome build script.</span>
+        <span class='comment'>//</span>
+        <span class='comment'>// Implementing `Serializer` correctly for an enum is tricky,</span>
+        <span class='comment'>// so let’s use existing enums that already do.</span>
+        <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>net</span>::<span class='ident'>IpAddr</span>;
+        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+            <span class='ident'>HostInternal</span>::<span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
+            <span class='ident'>HostInternal</span>::<span class='ident'>Domain</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='prelude-val'>None</span>),
+            <span class='ident'>HostInternal</span>::<span class='ident'>Ipv4</span>(<span class='ident'>addr</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='prelude-val'>Some</span>(<span class='ident'>IpAddr</span>::<span class='ident'>V4</span>(<span class='ident'>addr</span>))),
+            <span class='ident'>HostInternal</span>::<span class='ident'>Ipv6</span>(<span class='ident'>addr</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='prelude-val'>Some</span>(<span class='ident'>IpAddr</span>::<span class='ident'>V6</span>(<span class='ident'>addr</span>))),
+        }.<span class='ident'>serialize</span>(<span class='ident'>serializer</span>)
+    }
+}
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span><span class='op'>=</span><span class='string'>&quot;serde&quot;</span>)]</span>
+<span class='kw'>impl</span> ::<span class='ident'>serde</span>::<span class='ident'>Deserialize</span> <span class='kw'>for</span> <span class='ident'>HostInternal</span> {
+    <span class='kw'>fn</span> <span class='ident'>deserialize</span><span class='op'>&lt;</span><span class='ident'>D</span><span class='op'>&gt;</span>(<span class='ident'>deserializer</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>D</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='self'>Self</span>, <span class='ident'>D</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>D</span>: ::<span class='ident'>serde</span>::<span class='ident'>Deserializer</span> {
+        <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>net</span>::<span class='ident'>IpAddr</span>;
+        <span class='prelude-val'>Ok</span>(<span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(::<span class='ident'>serde</span>::<span class='ident'>Deserialize</span>::<span class='ident'>deserialize</span>(<span class='ident'>deserializer</span>)) {
+            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='ident'>HostInternal</span>::<span class='prelude-val'>None</span>,
+            <span class='prelude-val'>Some</span>(<span class='prelude-val'>None</span>) <span class='op'>=&gt;</span> <span class='ident'>HostInternal</span>::<span class='ident'>Domain</span>,
+            <span class='prelude-val'>Some</span>(<span class='prelude-val'>Some</span>(<span class='ident'>IpAddr</span>::<span class='ident'>V4</span>(<span class='ident'>addr</span>))) <span class='op'>=&gt;</span> <span class='ident'>HostInternal</span>::<span class='ident'>Ipv4</span>(<span class='ident'>addr</span>),
+            <span class='prelude-val'>Some</span>(<span class='prelude-val'>Some</span>(<span class='ident'>IpAddr</span>::<span class='ident'>V6</span>(<span class='ident'>addr</span>))) <span class='op'>=&gt;</span> <span class='ident'>HostInternal</span>::<span class='ident'>Ipv6</span>(<span class='ident'>addr</span>),
+        })
+    }
+}
+
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>&gt;</span> <span class='ident'>From</span><span class='op'>&lt;</span><span class='ident'>Host</span><span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>&gt;&gt;</span> <span class='kw'>for</span> <span class='ident'>HostInternal</span> {
     <span class='kw'>fn</span> <span class='ident'>from</span>(<span class='ident'>host</span>: <span class='ident'>Host</span><span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>HostInternal</span> {
         <span class='kw'>match</span> <span class='ident'>host</span> {
@@ -518,6 +625,30 @@
     <span class='doccomment'>/// for IPv6 Address Text Representation*](https://tools.ietf.org/html/rfc5952):</span>
     <span class='doccomment'>/// lowercase hexadecimal with maximal `::` compression.</span>
     <span class='ident'>Ipv6</span>(<span class='ident'>Ipv6Addr</span>),
+}
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span><span class='op'>=</span><span class='string'>&quot;serde&quot;</span>)]</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>S</span>: ::<span class='ident'>serde</span>::<span class='ident'>Serialize</span><span class='op'>&gt;</span>  ::<span class='ident'>serde</span>::<span class='ident'>Serialize</span> <span class='kw'>for</span> <span class='ident'>Host</span><span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>serialize</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>serializer</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>R</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>R</span>: ::<span class='ident'>serde</span>::<span class='ident'>Serializer</span> {
+        <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>net</span>::<span class='ident'>IpAddr</span>;
+        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+            <span class='ident'>Host</span>::<span class='ident'>Domain</span>(<span class='kw-2'>ref</span> <span class='ident'>s</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>s</span>),
+            <span class='ident'>Host</span>::<span class='ident'>Ipv4</span>(<span class='ident'>addr</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>IpAddr</span>::<span class='ident'>V4</span>(<span class='ident'>addr</span>)),
+            <span class='ident'>Host</span>::<span class='ident'>Ipv6</span>(<span class='ident'>addr</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>IpAddr</span>::<span class='ident'>V6</span>(<span class='ident'>addr</span>)),
+        }.<span class='ident'>serialize</span>(<span class='ident'>serializer</span>)
+    }
+}
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span><span class='op'>=</span><span class='string'>&quot;serde&quot;</span>)]</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>S</span>: ::<span class='ident'>serde</span>::<span class='ident'>Deserialize</span><span class='op'>&gt;</span> ::<span class='ident'>serde</span>::<span class='ident'>Deserialize</span> <span class='kw'>for</span> <span class='ident'>Host</span><span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>deserialize</span><span class='op'>&lt;</span><span class='ident'>D</span><span class='op'>&gt;</span>(<span class='ident'>deserializer</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>D</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='self'>Self</span>, <span class='ident'>D</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>D</span>: ::<span class='ident'>serde</span>::<span class='ident'>Deserializer</span> {
+        <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>net</span>::<span class='ident'>IpAddr</span>;
+        <span class='prelude-val'>Ok</span>(<span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(::<span class='ident'>serde</span>::<span class='ident'>Deserialize</span>::<span class='ident'>deserialize</span>(<span class='ident'>deserializer</span>)) {
+            <span class='prelude-val'>Ok</span>(<span class='ident'>s</span>) <span class='op'>=&gt;</span> <span class='ident'>Host</span>::<span class='ident'>Domain</span>(<span class='ident'>s</span>),
+            <span class='prelude-val'>Err</span>(<span class='ident'>IpAddr</span>::<span class='ident'>V4</span>(<span class='ident'>addr</span>)) <span class='op'>=&gt;</span> <span class='ident'>Host</span>::<span class='ident'>Ipv4</span>(<span class='ident'>addr</span>),
+            <span class='prelude-val'>Err</span>(<span class='ident'>IpAddr</span>::<span class='ident'>V6</span>(<span class='ident'>addr</span>)) <span class='op'>=&gt;</span> <span class='ident'>Host</span>::<span class='ident'>Ipv6</span>(<span class='ident'>addr</span>),
+        })
+    }
 }
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;heapsize&quot;</span>)]</span>
@@ -583,6 +714,7 @@
 
 <span class='doccomment'>/// This mostly exists because coherence rules don’t allow us to implement</span>
 <span class='doccomment'>/// `ToSocketAddrs for (Host&lt;S&gt;, u16)`.</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>HostAndPort</span><span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>=</span><span class='ident'>String</span><span class='op'>&gt;</span> {
     <span class='kw'>pub</span> <span class='ident'>host</span>: <span class='ident'>Host</span><span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>&gt;</span>,
     <span class='kw'>pub</span> <span class='ident'>port</span>: <span class='ident'>u16</span>,
@@ -668,6 +800,7 @@
     <span class='prelude-val'>Ok</span>(())
 }
 
+<span class='comment'>// https://url.spec.whatwg.org/#concept-ipv6-serializer step 2 and 3</span>
 <span class='kw'>fn</span> <span class='ident'>longest_zero_sequence</span>(<span class='ident'>pieces</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u16</span>; <span class='number'>8</span>]) <span class='op'>-&gt;</span> (<span class='ident'>isize</span>, <span class='ident'>isize</span>) {
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>longest</span> <span class='op'>=</span> <span class='op'>-</span><span class='number'>1</span>;
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>longest_length</span> <span class='op'>=</span> <span class='op'>-</span><span class='number'>1</span>;
@@ -694,10 +827,16 @@
         }
     }
     <span class='macro'>finish_sequence</span><span class='macro'>!</span>(<span class='number'>8</span>);
-    (<span class='ident'>longest</span>, <span class='ident'>longest</span> <span class='op'>+</span> <span class='ident'>longest_length</span>)
+    <span class='comment'>// https://url.spec.whatwg.org/#concept-ipv6-serializer</span>
+    <span class='comment'>// step 3: ignore lone zeroes</span>
+    <span class='kw'>if</span> <span class='ident'>longest_length</span> <span class='op'>&lt;</span> <span class='number'>2</span> {
+        (<span class='op'>-</span><span class='number'>1</span>, <span class='op'>-</span><span class='number'>2</span>)
+    } <span class='kw'>else</span> {
+        (<span class='ident'>longest</span>, <span class='ident'>longest</span> <span class='op'>+</span> <span class='ident'>longest_length</span>)
+    }
 }
 
-
+<span class='doccomment'>/// https://url.spec.whatwg.org/#ipv4-number-parser</span>
 <span class='kw'>fn</span> <span class='ident'>parse_ipv4number</span>(<span class='kw-2'>mut</span> <span class='ident'>input</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u32</span>, ()<span class='op'>&gt;</span> {
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='number'>10</span>;
     <span class='kw'>if</span> <span class='ident'>input</span>.<span class='ident'>starts_with</span>(<span class='string'>&quot;0x&quot;</span>) <span class='op'>||</span> <span class='ident'>input</span>.<span class='ident'>starts_with</span>(<span class='string'>&quot;0X&quot;</span>) {
@@ -719,6 +858,7 @@
     }
 }
 
+<span class='doccomment'>/// https://url.spec.whatwg.org/#concept-ipv4-parser</span>
 <span class='kw'>fn</span> <span class='ident'>parse_ipv4addr</span>(<span class='ident'>input</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>ParseResult</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Ipv4Addr</span><span class='op'>&gt;&gt;</span> {
     <span class='kw'>if</span> <span class='ident'>input</span>.<span class='ident'>is_empty</span>() {
         <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(<span class='prelude-val'>None</span>)
@@ -755,7 +895,7 @@
     <span class='prelude-val'>Ok</span>(<span class='prelude-val'>Some</span>(<span class='ident'>Ipv4Addr</span>::<span class='ident'>from</span>(<span class='ident'>ipv4</span>)))
 }
 
-
+<span class='doccomment'>/// https://url.spec.whatwg.org/#concept-ipv6-parser</span>
 <span class='kw'>fn</span> <span class='ident'>parse_ipv6addr</span>(<span class='ident'>input</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>ParseResult</span><span class='op'>&lt;</span><span class='ident'>Ipv6Addr</span><span class='op'>&gt;</span> {
     <span class='kw'>let</span> <span class='ident'>input</span> <span class='op'>=</span> <span class='ident'>input</span>.<span class='ident'>as_bytes</span>();
     <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='ident'>input</span>.<span class='ident'>len</span>();
@@ -834,23 +974,33 @@
         }
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>dots_seen</span> <span class='op'>=</span> <span class='number'>0</span>;
         <span class='kw'>while</span> <span class='ident'>i</span> <span class='op'>&lt;</span> <span class='ident'>len</span> {
-            <span class='comment'>// FIXME: https://github.com/whatwg/url/commit/1c22aa119c354e0020117e02571cec53f7c01064</span>
-            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>value</span> <span class='op'>=</span> <span class='number'>0u16</span>;
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>value</span> <span class='op'>=</span> <span class='prelude-val'>None</span>;
             <span class='kw'>while</span> <span class='ident'>i</span> <span class='op'>&lt;</span> <span class='ident'>len</span> {
                 <span class='kw'>let</span> <span class='ident'>digit</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>input</span>[<span class='ident'>i</span>] {
                     <span class='ident'>c</span> @ <span class='string'>b&#39;0&#39;</span> ... <span class='string'>b&#39;9&#39;</span> <span class='op'>=&gt;</span> <span class='ident'>c</span> <span class='op'>-</span> <span class='string'>b&#39;0&#39;</span>,
                     _ <span class='op'>=&gt;</span> <span class='kw'>break</span>
                 };
-                <span class='ident'>value</span> <span class='op'>=</span> <span class='ident'>value</span> <span class='op'>*</span> <span class='number'>10</span> <span class='op'>+</span> <span class='ident'>digit</span> <span class='kw'>as</span> <span class='ident'>u16</span>;
-                <span class='kw'>if</span> <span class='ident'>value</span> <span class='op'>==</span> <span class='number'>0</span> <span class='op'>||</span> <span class='ident'>value</span> <span class='op'>&gt;</span> <span class='number'>255</span> {
-                    <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>ParseError</span>::<span class='ident'>InvalidIpv6Address</span>)
+                <span class='kw'>match</span> <span class='ident'>value</span> {
+                    <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='ident'>value</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>digit</span> <span class='kw'>as</span> <span class='ident'>u16</span>),
+                    <span class='prelude-val'>Some</span>(<span class='number'>0</span>) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>ParseError</span>::<span class='ident'>InvalidIpv6Address</span>),  <span class='comment'>// No leading zero</span>
+                    <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>v</span>) <span class='op'>=&gt;</span> {
+                        <span class='op'>*</span><span class='ident'>v</span> <span class='op'>=</span> <span class='op'>*</span><span class='ident'>v</span> <span class='op'>*</span> <span class='number'>10</span> <span class='op'>+</span> <span class='ident'>digit</span> <span class='kw'>as</span> <span class='ident'>u16</span>;
+                        <span class='kw'>if</span> <span class='op'>*</span><span class='ident'>v</span> <span class='op'>&gt;</span> <span class='number'>255</span> {
+                            <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>ParseError</span>::<span class='ident'>InvalidIpv6Address</span>)
+                        }
+                    }
                 }
+                <span class='ident'>i</span> <span class='op'>+=</span> <span class='number'>1</span>;
             }
             <span class='kw'>if</span> <span class='ident'>dots_seen</span> <span class='op'>&lt;</span> <span class='number'>3</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span>(<span class='ident'>i</span> <span class='op'>&lt;</span> <span class='ident'>len</span> <span class='op'>&amp;&amp;</span> <span class='ident'>input</span>[<span class='ident'>i</span>] <span class='op'>==</span> <span class='string'>b&#39;.&#39;</span>) {
                 <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>ParseError</span>::<span class='ident'>InvalidIpv6Address</span>)
             }
-            <span class='ident'>pieces</span>[<span class='ident'>piece_pointer</span>] <span class='op'>=</span> <span class='ident'>pieces</span>[<span class='ident'>piece_pointer</span>] <span class='op'>*</span> <span class='number'>0x100</span> <span class='op'>+</span> <span class='ident'>value</span>;
-            <span class='kw'>if</span> <span class='ident'>dots_seen</span> <span class='op'>==</span> <span class='number'>0</span> <span class='op'>||</span> <span class='ident'>dots_seen</span> <span class='op'>==</span> <span class='number'>2</span> {
+            <span class='ident'>pieces</span>[<span class='ident'>piece_pointer</span>] <span class='op'>=</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>v</span>) <span class='op'>=</span> <span class='ident'>value</span> {
+                <span class='ident'>pieces</span>[<span class='ident'>piece_pointer</span>] <span class='op'>*</span> <span class='number'>0x100</span> <span class='op'>+</span> <span class='ident'>v</span>
+            } <span class='kw'>else</span> {
+                <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>ParseError</span>::<span class='ident'>InvalidIpv6Address</span>)
+            };
+            <span class='kw'>if</span> <span class='ident'>dots_seen</span> <span class='op'>==</span> <span class='number'>1</span> <span class='op'>||</span> <span class='ident'>dots_seen</span> <span class='op'>==</span> <span class='number'>3</span> {
                 <span class='ident'>piece_pointer</span> <span class='op'>+=</span> <span class='number'>1</span>;
             }
             <span class='ident'>i</span> <span class='op'>+=</span> <span class='number'>1</span>;
@@ -860,14 +1010,14 @@
             <span class='ident'>dots_seen</span> <span class='op'>+=</span> <span class='number'>1</span>;
         }
     }
-
     <span class='kw'>match</span> <span class='ident'>compress_pointer</span> {
         <span class='prelude-val'>Some</span>(<span class='ident'>compress_pointer</span>) <span class='op'>=&gt;</span> {
             <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>swaps</span> <span class='op'>=</span> <span class='ident'>piece_pointer</span> <span class='op'>-</span> <span class='ident'>compress_pointer</span>;
             <span class='ident'>piece_pointer</span> <span class='op'>=</span> <span class='number'>7</span>;
             <span class='kw'>while</span> <span class='ident'>swaps</span> <span class='op'>&gt;</span> <span class='number'>0</span> {
+                <span class='kw'>let</span> <span class='ident'>tmp</span> <span class='op'>=</span> <span class='ident'>pieces</span>[<span class='ident'>piece_pointer</span>];
                 <span class='ident'>pieces</span>[<span class='ident'>piece_pointer</span>] <span class='op'>=</span> <span class='ident'>pieces</span>[<span class='ident'>compress_pointer</span> <span class='op'>+</span> <span class='ident'>swaps</span> <span class='op'>-</span> <span class='number'>1</span>];
-                <span class='ident'>pieces</span>[<span class='ident'>compress_pointer</span> <span class='op'>+</span> <span class='ident'>swaps</span> <span class='op'>-</span> <span class='number'>1</span>] <span class='op'>=</span> <span class='number'>0</span>;
+                <span class='ident'>pieces</span>[<span class='ident'>compress_pointer</span> <span class='op'>+</span> <span class='ident'>swaps</span> <span class='op'>-</span> <span class='number'>1</span>] <span class='op'>=</span> <span class='ident'>tmp</span>;
                 <span class='ident'>swaps</span> <span class='op'>-=</span> <span class='number'>1</span>;
                 <span class='ident'>piece_pointer</span> <span class='op'>-=</span> <span class='number'>1</span>;
             }
@@ -936,11 +1086,9 @@
     <script>
         window.rootPath = "../../";
         window.currentCrate = "url";
-        window.playgroundUrl = "";
     </script>
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
-    
     <script defer src="../../search-index.js"></script>
 </body>
 </html>

@@ -1,4 +1,6 @@
 (function() {var implementors = {};
+implementors["hyper"] = [];
+implementors["multipart"] = [];
 implementors["typeable"] = [];
 
             if (window.register_implementors) {

@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-7' class='srclink' href='../../src/buf_redux/strategy.rs.html#1-92' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/buf_redux/strategy.rs.html#1-92' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Types which can be used to tune the behavior of <code>BufReader</code>.</p>
 
 <p>Some simple strategies are provided for your convenience. You may prefer to create your own
@@ -57,7 +57,7 @@ types and implement the traits for them instead.</p>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.AtEndLessThan.html'
                                   title='buf_redux::strategy::AtEndLessThan'>AtEndLessThan</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>A <code>MoveStrategy</code> which triggers if there is no more room at the tail at the end of the buffer,
 <em>and</em> there are fewer valid bytes in the buffer than the provided value.</p>
                            </td>
@@ -65,7 +65,7 @@ types and implement the traits for them instead.</p>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.AtEndLessThan1k.html'
                                   title='buf_redux::strategy::AtEndLessThan1k'>AtEndLessThan1k</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>A <code>MoveStrategy</code> which tells the buffer to move data if there is no more room at the tail
 of the buffer, <em>and</em> if there is less than <strong>1 KiB</strong> of valid data in the buffer.</p>
                            </td>
@@ -73,14 +73,14 @@ of the buffer, <em>and</em> if there is less than <strong>1 KiB</strong> of vali
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.IfEmpty.html'
                                   title='buf_redux::strategy::IfEmpty'>IfEmpty</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>A <code>ReadStrategy</code> which tells the buffer to read more data only when empty.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.LessThan.html'
                                   title='buf_redux::strategy::LessThan'>LessThan</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>A <code>ReadStrategy</code> which returns <code>true</code> if there is fewer bytes in the buffer
 than the provided value.</p>
                            </td>
@@ -88,7 +88,7 @@ than the provided value.</p>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.NeverMove.html'
                                   title='buf_redux::strategy::NeverMove'>NeverMove</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>A <code>MoveStrategy</code> which always returns <code>false</code>. Use this to restore original
 <code>std::io::BufReader</code> behavior.</p>
                            </td>
@@ -97,7 +97,7 @@ than the provided value.</p>
                        <tr class=' module-item'>
                            <td><a class='trait' href='trait.MoveStrategy.html'
                                   title='buf_redux::strategy::MoveStrategy'>MoveStrategy</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Trait for types which <code>BufReader</code> can consult to determine when it should move data
 to the beginning of the buffer.</p>
                            </td>
@@ -105,7 +105,7 @@ to the beginning of the buffer.</p>
                        <tr class=' module-item'>
                            <td><a class='trait' href='trait.ReadStrategy.html'
                                   title='buf_redux::strategy::ReadStrategy'>ReadStrategy</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Trait for types which <code>BufReader</code> can consult to determine when it should read more data into the
 buffer.</p>
                            </td>
@@ -165,11 +165,9 @@ buffer.</p>
     <script>
         window.rootPath = "../../";
         window.currentCrate = "buf_redux";
-        window.playgroundUrl = "";
     </script>
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
-    
     <script defer src="../../search-index.js"></script>
 </body>
 </html>
