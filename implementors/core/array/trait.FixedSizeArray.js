@@ -1,6 +1,5 @@
 (function() {var implementors = {};
 implementors["hyper"] = [];
-implementors["lazy_static"] = [];
 implementors["libc"] = [];
 implementors["mime_guess"] = [];
 implementors["multipart"] = [];

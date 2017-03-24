@@ -9,6 +9,7 @@
 
     <title>symm.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -481,8 +482,8 @@
 
 <span class='doccomment'>/// Represents a symmetric cipher context.</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Crypter</span> {
-    <span class='ident'>evp</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_CIPHER</span>,
-    <span class='ident'>ctx</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_CIPHER_CTX</span>,
+    <span class='ident'>evp</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_CIPHER</span>,
+    <span class='ident'>ctx</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_CIPHER_CTX</span>,
     <span class='ident'>keylen</span>: <span class='ident'>u32</span>,
     <span class='ident'>blocksize</span>: <span class='ident'>u32</span>,
 }

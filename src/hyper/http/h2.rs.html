@@ -9,6 +9,7 @@
 
     <title>h2.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -1043,7 +1044,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>MessageState</span> {
     <span class='kw'>fn</span> <span class='ident'>take_request</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Http2Request</span><span class='op'>&gt;</span> {
-        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+        <span class='kw'>match</span> <span class='kw-2'>*</span><span class='self'>self</span> {
             <span class='ident'>MessageState</span>::<span class='ident'>Idle</span> <span class='op'>|</span> <span class='ident'>MessageState</span>::<span class='ident'>Reading</span>(_) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>None</span>,
             <span class='ident'>MessageState</span>::<span class='ident'>Writing</span>(_) <span class='op'>=&gt;</span> {},
         }
@@ -1554,7 +1555,7 @@
 
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>headers</span>.<span class='ident'>has</span>::<span class='op'>&lt;</span><span class='ident'>header</span>::<span class='ident'>SetCookie</span><span class='op'>&gt;</span>());
         <span class='kw'>let</span> <span class='ident'>set_cookie</span> <span class='op'>=</span> <span class='ident'>headers</span>.<span class='ident'>get</span>::<span class='op'>&lt;</span><span class='ident'>header</span>::<span class='ident'>SetCookie</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>();
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>expected</span>, <span class='op'>*</span><span class='ident'>set_cookie</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>expected</span>, <span class='kw-2'>*</span><span class='ident'>set_cookie</span>);
     }
 
     <span class='doccomment'>/// Tests that parsing HTTP/2 headers with `Cookie` headers works correctly.</span>
@@ -1574,7 +1575,7 @@
         <span class='kw'>let</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>parse_headers</span>(<span class='ident'>h2headers</span>).<span class='ident'>unwrap</span>();
 
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>headers</span>.<span class='ident'>has</span>::<span class='op'>&lt;</span><span class='ident'>header</span>::<span class='ident'>Cookie</span><span class='op'>&gt;</span>());
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>*</span><span class='ident'>headers</span>.<span class='ident'>get</span>::<span class='op'>&lt;</span><span class='ident'>header</span>::<span class='ident'>Cookie</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>expected</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='kw-2'>*</span><span class='ident'>headers</span>.<span class='ident'>get</span>::<span class='op'>&lt;</span><span class='ident'>header</span>::<span class='ident'>Cookie</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>expected</span>);
     }
 
     <span class='doccomment'>/// Tests that the headers of a response are correctly parsed.</span>

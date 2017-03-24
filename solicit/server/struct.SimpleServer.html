@@ -9,6 +9,7 @@
 
     <title>solicit::server::SimpleServer - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -48,7 +49,7 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../src/solicit/server/mod.rs.html#72-75' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct SimpleServer&lt;TS, H&gt; <span class='where'>where TS: <a class='trait' href='../../solicit/http/transport/trait.TransportStream.html' title='solicit::http::transport::TransportStream'>TransportStream</a>, H: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(<a class='struct' href='../../solicit/server/struct.ServerRequest.html' title='solicit::server::ServerRequest'>ServerRequest</a>) -&gt; <a class='struct' href='../../solicit/http/struct.Response.html' title='solicit::http::Response'>Response</a></span> { /* fields omitted */ }</pre><div class='docblock'><p>The struct implements a simple HTTP/2 server that allows users to register a request handler (a
+<pre class='rust struct'>pub struct SimpleServer&lt;TS, H&gt; <span class='where fmt-newline'>where TS: <a class='trait' href='../../solicit/http/transport/trait.TransportStream.html' title='solicit::http::transport::TransportStream'>TransportStream</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;H: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(<a class='struct' href='../../solicit/server/struct.ServerRequest.html' title='solicit::server::ServerRequest'>ServerRequest</a>) -&gt; <a class='struct' href='../../solicit/http/struct.Response.html' title='solicit::http::Response'>Response</a></span> { /* fields omitted */ }</pre><div class='docblock'><p>The struct implements a simple HTTP/2 server that allows users to register a request handler (a
 callback taking a <code>ServerRequest</code> and returning a <code>Response</code>) which is run on all received
 requests.</p>
 
@@ -102,7 +103,7 @@ how the <code>solicit::http</code> API can be used to make one.</p>
         });
     }
 }</pre>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;TS, H&gt; <a class='struct' href='../../solicit/server/struct.SimpleServer.html' title='solicit::server::SimpleServer'>SimpleServer</a>&lt;TS, H&gt; <span class='where'>where TS: <a class='trait' href='../../solicit/http/transport/trait.TransportStream.html' title='solicit::http::transport::TransportStream'>TransportStream</a>, H: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(<a class='struct' href='../../solicit/server/struct.ServerRequest.html' title='solicit::server::ServerRequest'>ServerRequest</a>) -&gt; <a class='struct' href='../../solicit/http/struct.Response.html' title='solicit::http::Response'>Response</a></span></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/solicit/server/mod.rs.html#77-161' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;TS, H&gt; <a class='struct' href='../../solicit/server/struct.SimpleServer.html' title='solicit::server::SimpleServer'>SimpleServer</a>&lt;TS, H&gt; <span class='where fmt-newline'>where TS: <a class='trait' href='../../solicit/http/transport/trait.TransportStream.html' title='solicit::http::transport::TransportStream'>TransportStream</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;H: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(<a class='struct' href='../../solicit/server/struct.ServerRequest.html' title='solicit::server::ServerRequest'>ServerRequest</a>) -&gt; <a class='struct' href='../../solicit/http/struct.Response.html' title='solicit::http::Response'>Response</a></span></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/solicit/server/mod.rs.html#77-161' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class='method'><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(stream: TS, handler: H) -&gt; <a class='type' href='../../solicit/http/type.HttpResult.html' title='solicit::http::HttpResult'>HttpResult</a>&lt;<a class='struct' href='../../solicit/server/struct.SimpleServer.html' title='solicit::server::SimpleServer'>SimpleServer</a>&lt;TS, H&gt;&gt;</code></span></h4>
 <div class='docblock'><p>Creates a new <code>SimpleServer</code> that will use the given <code>TransportStream</code> to communicate to
 the client. Assumes that the stream is fully uninitialized -- no preface sent or read yet.</p>

@@ -9,6 +9,7 @@
 
     <title>hyper::header::UserAgent - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -308,9 +309,8 @@ lie on a <a href="../../std/primitive.char.html"><code>char</code></a> boundary.
 <span class='ident'>s</span>.<span class='ident'>insert</span>(<span class='number'>2</span>, <span class='string'>&#39;o&#39;</span>);
 
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;foo&quot;</span>, <span class='ident'>s</span>);</pre>
-</div><h4 id='method.insert_str' class='method'><span id='insert_str.v' class='invisible'><code>fn <a href='#method.insert_str' class='fnname'>insert_str</a>(&amp;mut self, idx: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, string: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></span></h4>
-<div class='stability'><em class='stab unstable'>Unstable (<code>insert_str</code>)<p>: recent addition</p>
-</em></div><div class='docblock'><p>Inserts a string slice into this <code>String</code> at a byte position.</p>
+</div><h4 id='method.insert_str' class='method'><span id='insert_str.v' class='invisible'><code>fn <a href='#method.insert_str' class='fnname'>insert_str</a>(&amp;mut self, idx: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, string: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code><div class='since' title='Stable since Rust version 1.16.0'>1.16.0</div></span></h4>
+<div class='docblock'><p>Inserts a string slice into this <code>String</code> at a byte position.</p>
 
 <p>This is an <code>O(n)</code> operation as it requires copying every element in the
 buffer.</p>
@@ -323,8 +323,6 @@ lie on a <a href="../../std/primitive.char.html"><code>char</code></a> boundary.
 <p>Basic usage:</p>
 
 <pre class='rust rust-example-rendered'>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>insert_str</span>)]</span>
-
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='ident'>String</span>::<span class='ident'>from</span>(<span class='string'>&quot;bar&quot;</span>);
 
 <span class='ident'>s</span>.<span class='ident'>insert_str</span>(<span class='number'>0</span>, <span class='string'>&quot;foo&quot;</span>);
@@ -376,8 +374,8 @@ the standard library assumes that <code>String</code>s are valid UTF-8.</p>
 
 <span class='ident'>v</span>.<span class='ident'>push</span>(<span class='string'>&#39;a&#39;</span>);
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>v</span>.<span class='ident'>is_empty</span>());</pre>
-</div><h4 id='method.split_off' class='method'><span id='split_off.v' class='invisible'><code>fn <a href='#method.split_off' class='fnname'>split_off</a>(&amp;mut self, mid: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></span></h4>
-<div class='stability'><em class='stab unstable'>Unstable (<code>string_split_off</code>)</em></div><div class='docblock'><p>Divide one string into two at an index.</p>
+</div><h4 id='method.split_off' class='method'><span id='split_off.v' class='invisible'><code>fn <a href='#method.split_off' class='fnname'>split_off</a>(&amp;mut self, mid: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code><div class='since' title='Stable since Rust version 1.16.0'>1.16.0</div></span></h4>
+<div class='docblock'><p>Divide one string into two at an index.</p>
 
 <p>The argument, <code>mid</code>, should be a byte offset from the start of the string. It must also
 be on the boundary of a UTF-8 code point.</p>
@@ -412,7 +410,7 @@ touch its capacity.</p>
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>s</span>.<span class='ident'>is_empty</span>());
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0</span>, <span class='ident'>s</span>.<span class='ident'>len</span>());
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>, <span class='ident'>s</span>.<span class='ident'>capacity</span>());</pre>
-</div><h4 id='method.drain' class='method'><span id='drain.v' class='invisible'><code>fn <a href='#method.drain' class='fnname'>drain</a>&lt;R&gt;(&amp;mut self, range: R) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.Drain.html' title='collections::string::Drain'>Drain</a> <span class='where'>where R: <a class='trait' href='https://doc.rust-lang.org/nightly/collections/range/trait.RangeArgument.html' title='collections::range::RangeArgument'>RangeArgument</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</span></code><div class='since' title='Stable since Rust version 1.6.0'>1.6.0</div></span></h4>
+</div><h4 id='method.drain' class='method'><span id='drain.v' class='invisible'><code>fn <a href='#method.drain' class='fnname'>drain</a>&lt;R&gt;(&amp;mut self, range: R) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.Drain.html' title='collections::string::Drain'>Drain</a> <span class='where fmt-newline'>where R: <a class='trait' href='https://doc.rust-lang.org/nightly/collections/range/trait.RangeArgument.html' title='collections::range::RangeArgument'>RangeArgument</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</span></code><div class='since' title='Stable since Rust version 1.6.0'>1.6.0</div></span></h4>
 <div class='docblock'><p>Create a draining iterator that removes the specified range in the string
 and yields the removed chars.</p>
 

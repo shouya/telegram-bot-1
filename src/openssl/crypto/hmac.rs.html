@@ -9,6 +9,7 @@
 
     <title>hmac.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -578,7 +579,7 @@
 <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_int</span>, <span class='ident'>c_uint</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>iter</span>::<span class='ident'>repeat</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='kw-2'>*</span>;
 
 <span class='kw'>use</span> <span class='ident'>crypto</span>::<span class='ident'>hash</span>::<span class='ident'>Type</span>;
 <span class='kw'>use</span> <span class='ident'>ffi</span>;
@@ -591,7 +592,7 @@
     <span class='ident'>Finalized</span>,
 }
 
-<span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>State</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>State</span>::<span class='kw-2'>*</span>;
 
 <span class='doccomment'>/// Provides HMAC computation.</span>
 <span class='doccomment'>///</span>
@@ -652,13 +653,13 @@
     }
 
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-    <span class='kw'>fn</span> <span class='ident'>init_once</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>md</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_MD</span>, <span class='ident'>key</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) {
+    <span class='kw'>fn</span> <span class='ident'>init_once</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>md</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_MD</span>, <span class='ident'>key</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) {
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>ffi_extras</span>::<span class='ident'>HMAC_Init_ex</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>ctx</span>,
                                              <span class='ident'>key</span>.<span class='ident'>as_ptr</span>(),
                                              <span class='ident'>key</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_int</span>,
                                              <span class='ident'>md</span>,
-                                             <span class='number'>0</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _);
+                                             <span class='number'>0</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> _);
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='number'>1</span>);
         }
         <span class='self'>self</span>.<span class='ident'>state</span> <span class='op'>=</span> <span class='ident'>Reset</span>;
@@ -677,10 +678,10 @@
         <span class='comment'>// avoiding redundant initializations</span>
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>ffi_extras</span>::<span class='ident'>HMAC_Init_ex</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>ctx</span>,
-                                             <span class='number'>0</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _,
+                                             <span class='number'>0</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> _,
                                              <span class='number'>0</span>,
-                                             <span class='number'>0</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _,
-                                             <span class='number'>0</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _);
+                                             <span class='number'>0</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> _,
+                                             <span class='number'>0</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> _);
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='number'>1</span>);
         }
         <span class='self'>self</span>.<span class='ident'>state</span> <span class='op'>=</span> <span class='ident'>Reset</span>;
@@ -776,20 +777,20 @@
     <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>iter</span>::<span class='ident'>repeat</span>;
     <span class='kw'>use</span> <span class='ident'>serialize</span>::<span class='ident'>hex</span>::<span class='ident'>FromHex</span>;
     <span class='kw'>use</span> <span class='ident'>crypto</span>::<span class='ident'>hash</span>::<span class='ident'>Type</span>;
-    <span class='kw'>use</span> <span class='ident'>crypto</span>::<span class='ident'>hash</span>::<span class='ident'>Type</span>::<span class='op'>*</span>;
+    <span class='kw'>use</span> <span class='ident'>crypto</span>::<span class='ident'>hash</span>::<span class='ident'>Type</span>::<span class='kw-2'>*</span>;
     <span class='kw'>use</span> <span class='kw'>super</span>::{<span class='ident'>hmac</span>, <span class='ident'>HMAC</span>};
-    <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
+    <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='kw-2'>*</span>;
 
     <span class='kw'>fn</span> <span class='ident'>test_hmac</span>(<span class='ident'>ty</span>: <span class='ident'>Type</span>, <span class='ident'>tests</span>: <span class='kw-2'>&amp;</span>[(<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>)]) {
         <span class='kw'>for</span> <span class='kw-2'>&amp;</span>(<span class='kw-2'>ref</span> <span class='ident'>key</span>, <span class='kw-2'>ref</span> <span class='ident'>data</span>, <span class='kw-2'>ref</span> <span class='ident'>res</span>) <span class='kw'>in</span> <span class='ident'>tests</span>.<span class='ident'>iter</span>() {
-            <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>hmac</span>(<span class='ident'>ty</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>key</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>data</span>), <span class='op'>*</span><span class='ident'>res</span>);
+            <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>hmac</span>(<span class='ident'>ty</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>*</span><span class='ident'>key</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>*</span><span class='ident'>data</span>), <span class='kw-2'>*</span><span class='ident'>res</span>);
         }
     }
 
     <span class='kw'>fn</span> <span class='ident'>test_hmac_recycle</span>(<span class='ident'>h</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>HMAC</span>, <span class='ident'>test</span>: <span class='kw-2'>&amp;</span>(<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>)) {
         <span class='kw'>let</span> <span class='kw-2'>&amp;</span>(_, <span class='kw-2'>ref</span> <span class='ident'>data</span>, <span class='kw-2'>ref</span> <span class='ident'>res</span>) <span class='op'>=</span> <span class='ident'>test</span>;
-        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>h</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>data</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>h</span>.<span class='ident'>finish</span>(), <span class='op'>*</span><span class='ident'>res</span>);
+        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>h</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>*</span><span class='ident'>data</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>h</span>.<span class='ident'>finish</span>(), <span class='kw-2'>*</span><span class='ident'>res</span>);
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -835,7 +836,7 @@
                   .<span class='ident'>to_vec</span>(),
               <span class='string'>&quot;6f630fad67cda0ee1fb1f562db3aa53e&quot;</span>.<span class='ident'>from_hex</span>().<span class='ident'>unwrap</span>())];
 
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>h</span> <span class='op'>=</span> <span class='ident'>HMAC</span>::<span class='ident'>new</span>(<span class='ident'>MD5</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>tests</span>[<span class='number'>0</span>].<span class='number'>0</span>);
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>h</span> <span class='op'>=</span> <span class='ident'>HMAC</span>::<span class='ident'>new</span>(<span class='ident'>MD5</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='ident'>tests</span>[<span class='number'>0</span>].<span class='number'>0</span>);
         <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='number'>100usize</span> {
             <span class='kw'>let</span> <span class='ident'>test</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='ident'>tests</span>[<span class='ident'>i</span> <span class='op'>%</span> <span class='number'>2</span>];
             <span class='ident'>test_hmac_recycle</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>h</span>, <span class='ident'>test</span>);
@@ -849,11 +850,11 @@
              <span class='string'>b&quot;Test Using Larger Than Block-Size Key - Hash Key First&quot;</span>.<span class='ident'>to_vec</span>(),
              <span class='string'>&quot;6b1ab7fe4bd7bf8f0b62e6ce61b9d0cd&quot;</span>.<span class='ident'>from_hex</span>().<span class='ident'>unwrap</span>());
 
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>h</span> <span class='op'>=</span> <span class='ident'>HMAC</span>::<span class='ident'>new</span>(<span class='ident'>Type</span>::<span class='ident'>MD5</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>test</span>.<span class='number'>0</span>);
-        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>h</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>test</span>.<span class='number'>1</span>);
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>h</span> <span class='op'>=</span> <span class='ident'>HMAC</span>::<span class='ident'>new</span>(<span class='ident'>Type</span>::<span class='ident'>MD5</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='ident'>test</span>.<span class='number'>0</span>);
+        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>h</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='ident'>test</span>.<span class='number'>1</span>);
         <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>h</span>.<span class='ident'>finish</span>();
         <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>h</span>.<span class='ident'>finish</span>();
-        <span class='kw'>let</span> <span class='ident'>null</span> <span class='op'>=</span> <span class='ident'>hmac</span>(<span class='ident'>Type</span>::<span class='ident'>MD5</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>test</span>.<span class='number'>0</span>, <span class='kw-2'>&amp;</span>[]);
+        <span class='kw'>let</span> <span class='ident'>null</span> <span class='op'>=</span> <span class='ident'>hmac</span>(<span class='ident'>Type</span>::<span class='ident'>MD5</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='ident'>test</span>.<span class='number'>0</span>, <span class='kw-2'>&amp;</span>[]);
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>res</span>, <span class='ident'>null</span>);
     }
 
@@ -869,7 +870,7 @@
                   .<span class='ident'>to_vec</span>(),
               <span class='string'>&quot;6f630fad67cda0ee1fb1f562db3aa53e&quot;</span>.<span class='ident'>from_hex</span>().<span class='ident'>unwrap</span>())];
         <span class='kw'>let</span> <span class='ident'>p</span> <span class='op'>=</span> <span class='ident'>tests</span>[<span class='number'>0</span>].<span class='number'>0</span>.<span class='ident'>len</span>() <span class='op'>/</span> <span class='number'>2</span>;
-        <span class='kw'>let</span> <span class='ident'>h0</span> <span class='op'>=</span> <span class='ident'>HMAC</span>::<span class='ident'>new</span>(<span class='ident'>Type</span>::<span class='ident'>MD5</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>tests</span>[<span class='number'>0</span>].<span class='number'>0</span>);
+        <span class='kw'>let</span> <span class='ident'>h0</span> <span class='op'>=</span> <span class='ident'>HMAC</span>::<span class='ident'>new</span>(<span class='ident'>Type</span>::<span class='ident'>MD5</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='ident'>tests</span>[<span class='number'>0</span>].<span class='number'>0</span>);
 
         <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Clone a new hmac&quot;</span>);
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>h1</span> <span class='op'>=</span> <span class='ident'>h0</span>.<span class='ident'>clone</span>();
@@ -887,7 +888,7 @@
 
         <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Clone a finished hmac&quot;</span>);
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>h3</span> <span class='op'>=</span> <span class='ident'>h1</span>.<span class='ident'>clone</span>();
-        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>h3</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>tests</span>[<span class='number'>1</span>].<span class='number'>1</span>);
+        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>h3</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='ident'>tests</span>[<span class='number'>1</span>].<span class='number'>1</span>);
         <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>h3</span>.<span class='ident'>finish</span>();
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>res</span>, <span class='ident'>tests</span>[<span class='number'>1</span>].<span class='number'>2</span>);
     }
@@ -935,7 +936,7 @@
                   .<span class='ident'>to_vec</span>(),
               <span class='string'>&quot;e8e99d0f45237d786d6bbaa7965c7808bbff1a91&quot;</span>.<span class='ident'>from_hex</span>().<span class='ident'>unwrap</span>())];
 
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>h</span> <span class='op'>=</span> <span class='ident'>HMAC</span>::<span class='ident'>new</span>(<span class='ident'>SHA1</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>tests</span>[<span class='number'>0</span>].<span class='number'>0</span>);
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>h</span> <span class='op'>=</span> <span class='ident'>HMAC</span>::<span class='ident'>new</span>(<span class='ident'>SHA1</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='ident'>tests</span>[<span class='number'>0</span>].<span class='number'>0</span>);
         <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='number'>100usize</span> {
             <span class='kw'>let</span> <span class='ident'>test</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='ident'>tests</span>[<span class='ident'>i</span> <span class='op'>%</span> <span class='number'>2</span>];
             <span class='ident'>test_hmac_recycle</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>h</span>, <span class='ident'>test</span>);
@@ -961,11 +962,11 @@
                   .<span class='ident'>to_vec</span>())];
 
         <span class='kw'>for</span> (<span class='kw-2'>&amp;</span>(<span class='kw-2'>ref</span> <span class='ident'>key</span>, <span class='kw-2'>ref</span> <span class='ident'>data</span>), <span class='ident'>res</span>) <span class='kw'>in</span> <span class='ident'>tests</span>.<span class='ident'>iter</span>().<span class='ident'>zip</span>(<span class='ident'>results</span>.<span class='ident'>iter</span>()) {
-            <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>hmac</span>(<span class='ident'>ty</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>key</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>data</span>), <span class='op'>*</span><span class='ident'>res</span>);
+            <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>hmac</span>(<span class='ident'>ty</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>*</span><span class='ident'>key</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>*</span><span class='ident'>data</span>), <span class='kw-2'>*</span><span class='ident'>res</span>);
         }
 
         <span class='comment'>// recycle test</span>
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>h</span> <span class='op'>=</span> <span class='ident'>HMAC</span>::<span class='ident'>new</span>(<span class='ident'>ty</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>tests</span>[<span class='number'>5</span>].<span class='number'>0</span>);
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>h</span> <span class='op'>=</span> <span class='ident'>HMAC</span>::<span class='ident'>new</span>(<span class='ident'>ty</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='ident'>tests</span>[<span class='number'>5</span>].<span class='number'>0</span>);
         <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='number'>100usize</span> {
             <span class='kw'>let</span> <span class='ident'>test</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='ident'>tests</span>[<span class='number'>4</span> <span class='op'>+</span> <span class='ident'>i</span> <span class='op'>%</span> <span class='number'>2</span>];
             <span class='kw'>let</span> <span class='ident'>tup</span> <span class='op'>=</span> (<span class='ident'>test</span>.<span class='number'>0</span>.<span class='ident'>clone</span>(), <span class='ident'>test</span>.<span class='number'>1</span>.<span class='ident'>clone</span>(), <span class='ident'>results</span>[<span class='number'>4</span> <span class='op'>+</span> <span class='ident'>i</span> <span class='op'>%</span> <span class='number'>2</span>].<span class='ident'>clone</span>());

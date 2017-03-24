@@ -9,6 +9,7 @@
 
     <title>symm_internal.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -81,7 +82,7 @@
 <span class='kw'>use</span> <span class='ident'>crypto</span>::<span class='ident'>symm</span>;
 <span class='kw'>use</span> <span class='ident'>ffi</span>;
 
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>evpc</span>(<span class='ident'>t</span>: <span class='ident'>symm</span>::<span class='ident'>Type</span>) <span class='op'>-&gt;</span> (<span class='op'>*</span><span class='kw'>const</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_CIPHER</span>, <span class='ident'>u32</span>, <span class='ident'>u32</span>) {
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>evpc</span>(<span class='ident'>t</span>: <span class='ident'>symm</span>::<span class='ident'>Type</span>) <span class='op'>-&gt;</span> (<span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_CIPHER</span>, <span class='ident'>u32</span>, <span class='ident'>u32</span>) {
     <span class='kw'>unsafe</span> {
         <span class='kw'>match</span> <span class='ident'>t</span> {
             <span class='ident'>symm</span>::<span class='ident'>Type</span>::<span class='ident'>AES_128_ECB</span> <span class='op'>=&gt;</span> (<span class='ident'>ffi</span>::<span class='ident'>EVP_aes_128_ecb</span>(), <span class='number'>16</span>, <span class='number'>16</span>),

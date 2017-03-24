@@ -9,6 +9,7 @@
 
     <title>mod.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -827,7 +828,7 @@
 
         <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>on_connection_start</span>();
 
-        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>set_timeouts</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>stream</span>) {
+        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>set_timeouts</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='ident'>stream</span>) {
             <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;set_timeouts error: {:?}&quot;</span>, <span class='ident'>e</span>);
             <span class='kw'>return</span>;
         }
@@ -846,7 +847,7 @@
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>wrt</span> <span class='op'>=</span> <span class='ident'>BufWriter</span>::<span class='ident'>new</span>(<span class='ident'>stream</span>);
 
         <span class='kw'>while</span> <span class='self'>self</span>.<span class='ident'>keep_alive_loop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>rdr</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>wrt</span>, <span class='ident'>addr</span>) {
-            <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>set_read_timeout</span>(<span class='op'>*</span><span class='ident'>rdr</span>.<span class='ident'>get_ref</span>(), <span class='self'>self</span>.<span class='ident'>timeouts</span>.<span class='ident'>keep_alive</span>) {
+            <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>set_read_timeout</span>(<span class='kw-2'>*</span><span class='ident'>rdr</span>.<span class='ident'>get_ref</span>(), <span class='self'>self</span>.<span class='ident'>timeouts</span>.<span class='ident'>keep_alive</span>) {
                 <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;set_read_timeout keep_alive {:?}&quot;</span>, <span class='ident'>e</span>);
                 <span class='kw'>break</span>;
             }

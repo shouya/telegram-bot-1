@@ -9,6 +9,7 @@
 
     <title>lib.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -1050,7 +1051,7 @@
 <span class='doccomment'>/// closure cannot be passed, since it cannot be named.</span>
 <span class='kw'>fn</span> <span class='ident'>static_table_mapper</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='ident'>h</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> (<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> [<span class='ident'>u8</span>], <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> [<span class='ident'>u8</span>]))
         <span class='op'>-&gt;</span> (<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> [<span class='ident'>u8</span>], <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> [<span class='ident'>u8</span>]) {
-    <span class='op'>*</span><span class='ident'>h</span>
+    <span class='kw-2'>*</span><span class='ident'>h</span>
 }
 
 <span class='doccomment'>/// The struct represents the header table obtained by merging the static and</span>
@@ -1396,7 +1397,7 @@
         <span class='kw'>let</span> <span class='ident'>table</span> <span class='op'>=</span> <span class='ident'>HeaderTable</span>::<span class='ident'>with_static_table</span>(<span class='ident'>STATIC_TABLE</span>);
 
         <span class='kw'>for</span> (<span class='ident'>index</span>, <span class='ident'>entry</span>) <span class='kw'>in</span> <span class='ident'>STATIC_TABLE</span>.<span class='ident'>iter</span>().<span class='ident'>enumerate</span>() {
-            <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>table</span>.<span class='ident'>get_from_table</span>(<span class='ident'>index</span> <span class='op'>+</span> <span class='number'>1</span>).<span class='ident'>unwrap</span>(), <span class='op'>*</span><span class='ident'>entry</span>);
+            <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>table</span>.<span class='ident'>get_from_table</span>(<span class='ident'>index</span> <span class='op'>+</span> <span class='number'>1</span>).<span class='ident'>unwrap</span>(), <span class='kw-2'>*</span><span class='ident'>entry</span>);
         }
     }
 
@@ -1471,7 +1472,7 @@
         <span class='kw'>let</span> <span class='ident'>table</span> <span class='op'>=</span> <span class='ident'>HeaderTable</span>::<span class='ident'>with_static_table</span>(<span class='ident'>STATIC_TABLE</span>);
 
         <span class='kw'>for</span> (<span class='ident'>i</span>, <span class='ident'>h</span>) <span class='kw'>in</span> <span class='ident'>STATIC_TABLE</span>.<span class='ident'>iter</span>().<span class='ident'>enumerate</span>() {
-            <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>table</span>.<span class='ident'>find_header</span>(<span class='op'>*</span><span class='ident'>h</span>).<span class='ident'>unwrap</span>(),
+            <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>table</span>.<span class='ident'>find_header</span>(<span class='kw-2'>*</span><span class='ident'>h</span>).<span class='ident'>unwrap</span>(),
                        (<span class='ident'>i</span> <span class='op'>+</span> <span class='number'>1</span>, <span class='bool-val'>true</span>));
         }
     }

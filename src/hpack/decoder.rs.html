@@ -9,6 +9,7 @@
 
     <title>decoder.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -1584,7 +1585,7 @@
     } <span class='kw'>else</span> {
         <span class='ident'>Wrapping</span>(<span class='number'>1u8</span> <span class='op'>&lt;&lt;</span> <span class='ident'>prefix_size</span>) <span class='op'>-</span> <span class='ident'>Wrapping</span>(<span class='number'>1</span>)
     };
-    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>value</span> <span class='op'>=</span> (<span class='ident'>buf</span>[<span class='number'>0</span>] <span class='kw-2'>&amp;</span> <span class='ident'>mask</span>) <span class='kw'>as</span> <span class='ident'>usize</span>;
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>value</span> <span class='op'>=</span> (<span class='ident'>buf</span>[<span class='number'>0</span>] <span class='op'>&amp;</span> <span class='ident'>mask</span>) <span class='kw'>as</span> <span class='ident'>usize</span>;
     <span class='kw'>if</span> <span class='ident'>value</span> <span class='op'>&lt;</span> (<span class='ident'>mask</span> <span class='kw'>as</span> <span class='ident'>usize</span>) {
         <span class='comment'>// Value fits in the prefix bits.</span>
         <span class='kw'>return</span> <span class='prelude-val'>Ok</span>((<span class='ident'>value</span>, <span class='number'>1</span>));
@@ -1602,10 +1603,10 @@
 
     <span class='kw'>for</span> <span class='kw-2'>&amp;</span><span class='ident'>b</span> <span class='kw'>in</span> <span class='ident'>buf</span>[<span class='number'>1</span>..].<span class='ident'>iter</span>() {
         <span class='ident'>total</span> <span class='op'>+=</span> <span class='number'>1</span>;
-        <span class='ident'>value</span> <span class='op'>+=</span> ((<span class='ident'>b</span> <span class='kw-2'>&amp;</span> <span class='number'>127</span>) <span class='kw'>as</span> <span class='ident'>usize</span>) <span class='op'>*</span> (<span class='number'>1</span> <span class='op'>&lt;&lt;</span> <span class='ident'>m</span>);
+        <span class='ident'>value</span> <span class='op'>+=</span> ((<span class='ident'>b</span> <span class='op'>&amp;</span> <span class='number'>127</span>) <span class='kw'>as</span> <span class='ident'>usize</span>) <span class='op'>*</span> (<span class='number'>1</span> <span class='op'>&lt;&lt;</span> <span class='ident'>m</span>);
         <span class='ident'>m</span> <span class='op'>+=</span> <span class='number'>7</span>;
 
-        <span class='kw'>if</span> <span class='ident'>b</span> <span class='kw-2'>&amp;</span> <span class='number'>128</span> <span class='op'>!=</span> <span class='number'>128</span> {
+        <span class='kw'>if</span> <span class='ident'>b</span> <span class='op'>&amp;</span> <span class='number'>128</span> <span class='op'>!=</span> <span class='number'>128</span> {
             <span class='comment'>// Most significant bit is not set =&gt; no more continuation bytes</span>
             <span class='kw'>return</span> <span class='prelude-val'>Ok</span>((<span class='ident'>value</span>, <span class='ident'>total</span>));
         }
@@ -1642,7 +1643,7 @@
                 <span class='ident'>StringDecodingError</span>::<span class='ident'>NotEnoughOctets</span>));
     }
     <span class='kw'>let</span> <span class='ident'>raw_string</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='ident'>buf</span>[<span class='ident'>consumed</span>..<span class='ident'>consumed</span> <span class='op'>+</span> <span class='ident'>len</span>];
-    <span class='kw'>if</span> <span class='ident'>buf</span>[<span class='number'>0</span>] <span class='kw-2'>&amp;</span> <span class='number'>128</span> <span class='op'>==</span> <span class='number'>128</span> {
+    <span class='kw'>if</span> <span class='ident'>buf</span>[<span class='number'>0</span>] <span class='op'>&amp;</span> <span class='number'>128</span> <span class='op'>==</span> <span class='number'>128</span> {
         <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;decode_string: Using the Huffman code&quot;</span>);
         <span class='comment'>// Huffman coding used: pass the raw octets to the Huffman decoder</span>
         <span class='comment'>// and return its result.</span>
@@ -1678,16 +1679,16 @@
     <span class='doccomment'>/// The given octet should be the top-order byte of the header field that</span>
     <span class='doccomment'>/// is about to be decoded.</span>
     <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>octet</span>: <span class='ident'>u8</span>) <span class='op'>-&gt;</span> <span class='ident'>FieldRepresentation</span> {
-        <span class='kw'>if</span> <span class='ident'>octet</span> <span class='kw-2'>&amp;</span> <span class='number'>128</span> <span class='op'>==</span> <span class='number'>128</span> {
+        <span class='kw'>if</span> <span class='ident'>octet</span> <span class='op'>&amp;</span> <span class='number'>128</span> <span class='op'>==</span> <span class='number'>128</span> {
             <span class='comment'>// High-order bit set</span>
             <span class='ident'>FieldRepresentation</span>::<span class='ident'>Indexed</span>
-        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>octet</span> <span class='kw-2'>&amp;</span> <span class='number'>64</span> <span class='op'>==</span> <span class='number'>64</span> {
+        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>octet</span> <span class='op'>&amp;</span> <span class='number'>64</span> <span class='op'>==</span> <span class='number'>64</span> {
             <span class='comment'>// Bit pattern `01`</span>
             <span class='ident'>FieldRepresentation</span>::<span class='ident'>LiteralWithIncrementalIndexing</span>
-        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>octet</span> <span class='kw-2'>&amp;</span> <span class='number'>32</span> <span class='op'>==</span> <span class='number'>32</span> {
+        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>octet</span> <span class='op'>&amp;</span> <span class='number'>32</span> <span class='op'>==</span> <span class='number'>32</span> {
             <span class='comment'>// Bit pattern `001`</span>
             <span class='ident'>FieldRepresentation</span>::<span class='ident'>SizeUpdate</span>
-        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>octet</span> <span class='kw-2'>&amp;</span> <span class='number'>16</span> <span class='op'>==</span> <span class='number'>16</span> {
+        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>octet</span> <span class='op'>&amp;</span> <span class='number'>16</span> <span class='op'>==</span> <span class='number'>16</span> {
             <span class='comment'>// Bit pattern `0001`</span>
             <span class='ident'>FieldRepresentation</span>::<span class='ident'>LiteralNeverIndexed</span>
         } <span class='kw'>else</span> {
@@ -2702,7 +2703,7 @@
     <span class='doccomment'>/// Helper function that verifies whether the given `DecoderResult`</span>
     <span class='doccomment'>/// indicates the given `DecoderError`</span>
     <span class='kw'>fn</span> <span class='ident'>is_decoder_error</span>(<span class='ident'>err</span>: <span class='kw-2'>&amp;</span><span class='ident'>DecoderError</span>, <span class='ident'>result</span>: <span class='kw-2'>&amp;</span><span class='ident'>DecoderResult</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='kw'>match</span> <span class='op'>*</span><span class='ident'>result</span> {
+        <span class='kw'>match</span> <span class='kw-2'>*</span><span class='ident'>result</span> {
             <span class='prelude-val'>Err</span>(<span class='kw-2'>ref</span> <span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='ident'>e</span> <span class='op'>==</span> <span class='ident'>err</span>,
             _ <span class='op'>=&gt;</span> <span class='bool-val'>false</span>
         }

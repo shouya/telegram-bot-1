@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `lazy` mod in crate `lazy_static`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, lazy">
+    <meta name="description" content="API documentation for the Rust `LazyStatic` trait in crate `lazy_static`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, LazyStatic">
 
-    <title>lazy_static::lazy - Rust</title>
+    <title>lazy_static::LazyStatic - Rust</title>
 
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
     
 
     
@@ -28,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>lazy_static</a></p><script>window.sidebarCurrent = {name: 'lazy', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'><a href='index.html'>lazy_static</a></p><script>window.sidebarCurrent = {name: 'LazyStatic', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -42,21 +43,22 @@
         </form>
     </nav>
 
-    <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>lazy_static</a>::<wbr><a class='mod' href=''>lazy</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content trait">
+<h1 class='fqn'><span class='in-band'>Trait <a href='index.html'>lazy_static</a>::<wbr><a class='trait' href=''>LazyStatic</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/lazy_static/lazy.rs.html#1-32' title='goto source code'>[src]</a></span></h1>
-<h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
-<table>
-                       <tr class=' module-item'>
-                           <td><a class='struct' href='struct.Lazy.html'
-                                  title='lazy_static::lazy::Lazy'>Lazy</a></td>
-                           <td class='docblock-short'>
-                                
-                           </td>
-                       </tr></table></section>
+               </span><a class='srclink' href='../src/lazy_static/lib.rs.html#177-180' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait LazyStatic { }</pre><div class='docblock'><p>Support trait for enabling a few common operation on lazy static values.</p>
+
+<p>This is implemented by each defined lazy static, and
+used by the free functions in this crate.</p>
+</div>
+        <h2 id='implementors'>Implementors</h2>
+        <ul class='item-list' id='implementors-list'>
+    </ul><script type="text/javascript" async
+                         src="../implementors/lazy_static/trait.LazyStatic.js">
+                 </script></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -110,11 +112,11 @@
     
 
     <script>
-        window.rootPath = "../../";
+        window.rootPath = "../";
         window.currentCrate = "lazy_static";
     </script>
-    <script src="../../jquery.js"></script>
-    <script src="../../main.js"></script>
-    <script defer src="../../search-index.js"></script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

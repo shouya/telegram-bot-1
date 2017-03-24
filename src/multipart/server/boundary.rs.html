@@ -9,6 +9,7 @@
 
     <title>boundary.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -354,7 +355,7 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>borrow</span>::<span class='ident'>Borrow</span>;
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='kw-2'>*</span>;
 
 <span class='doccomment'>/// A struct implementing `Read` and `BufRead` that will yield bytes until it sees a given sequence.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
@@ -429,7 +430,7 @@
 
             <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;Two bytes before: {:?} (\&quot;\\r\\n\&quot;: {:?})&quot;</span>, <span class='ident'>two_bytes_before</span>, <span class='string'>b&quot;\r\n&quot;</span>);
 
-            <span class='kw'>if</span> <span class='ident'>two_bytes_before</span> <span class='op'>==</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='string'>b&quot;\r\n&quot;</span> {
+            <span class='kw'>if</span> <span class='ident'>two_bytes_before</span> <span class='op'>==</span> <span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='string'>b&quot;\r\n&quot;</span> {
                 <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;Subtract two!&quot;</span>);
                 <span class='ident'>buf_end</span> <span class='op'>-=</span> <span class='number'>2</span>;
             } 
@@ -533,7 +534,7 @@
     <span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>BoundaryReader</span>;
 
     <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
-    <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
+    <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='kw-2'>*</span>;
 
     <span class='kw'>const</span> <span class='ident'>BOUNDARY</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span> <span class='op'>=</span> <span class='string'>&quot;\r\n--boundary&quot;</span>;
     <span class='kw'>const</span> <span class='ident'>TEST_VAL</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span> <span class='op'>=</span> <span class='string'>&quot;\r\n--boundary\r

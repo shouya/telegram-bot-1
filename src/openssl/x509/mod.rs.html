@@ -9,6 +9,7 @@
 
     <title>mod.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -959,7 +960,7 @@
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_char</span>, <span class='ident'>c_int</span>, <span class='ident'>c_long</span>, <span class='ident'>c_ulong</span>, <span class='ident'>c_uint</span>, <span class='ident'>c_void</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='kw-2'>*</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cmp</span>::<span class='ident'>Ordering</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ffi</span>::<span class='ident'>CString</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>iter</span>::<span class='ident'>repeat</span>;
@@ -995,7 +996,7 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;s</span><span class='op'>&gt;</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>SslString</span> {
     <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
         <span class='kw'>unsafe</span> {
-            <span class='ident'>ffi</span>::<span class='ident'>CRYPTO_free</span>(<span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>);
+            <span class='ident'>ffi</span>::<span class='ident'>CRYPTO_free</span>(<span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>);
         }
     }
 }
@@ -1009,8 +1010,8 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>SslString</span> {
-    <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>buf</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>, <span class='ident'>len</span>: <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='ident'>SslString</span> {
-        <span class='kw'>let</span> <span class='ident'>slice</span> <span class='op'>=</span> <span class='ident'>slice</span>::<span class='ident'>from_raw_parts</span>(<span class='ident'>buf</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _, <span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>usize</span>);
+    <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>buf</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>, <span class='ident'>len</span>: <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='ident'>SslString</span> {
+        <span class='kw'>let</span> <span class='ident'>slice</span> <span class='op'>=</span> <span class='ident'>slice</span>::<span class='ident'>from_raw_parts</span>(<span class='ident'>buf</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> _, <span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>usize</span>);
         <span class='ident'>SslString</span>(<span class='ident'>str</span>::<span class='ident'>from_utf8_unchecked</span>(<span class='ident'>slice</span>))
     }
 }
@@ -1037,11 +1038,11 @@
 
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>X509StoreContext</span> {
-    <span class='ident'>ctx</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509_STORE_CTX</span>,
+    <span class='ident'>ctx</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509_STORE_CTX</span>,
 }
 
 <span class='kw'>impl</span> <span class='ident'>X509StoreContext</span> {
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>ctx</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509_STORE_CTX</span>) <span class='op'>-&gt;</span> <span class='ident'>X509StoreContext</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>ctx</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509_STORE_CTX</span>) <span class='op'>-&gt;</span> <span class='ident'>X509StoreContext</span> {
         <span class='ident'>X509StoreContext</span> { <span class='ident'>ctx</span>: <span class='ident'>ctx</span> }
     }
 
@@ -1212,7 +1213,7 @@
         <span class='self'>self</span>
     }
 
-    <span class='kw'>fn</span> <span class='ident'>add_extension_internal</span>(<span class='ident'>x509</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509</span>,
+    <span class='kw'>fn</span> <span class='ident'>add_extension_internal</span>(<span class='ident'>x509</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509</span>,
                               <span class='ident'>exttype</span>: <span class='kw-2'>&amp;</span><span class='ident'>extension</span>::<span class='ident'>ExtensionType</span>,
                               <span class='ident'>value</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>)
                               <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>SslError</span><span class='op'>&gt;</span> {
@@ -1225,14 +1226,14 @@
                     <span class='ident'>ffi</span>::<span class='ident'>X509V3_EXT_conf_nid</span>(<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(),
                                              <span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='kw-2'>&amp;</span><span class='ident'>ctx</span>),
                                              <span class='ident'>nid</span> <span class='kw'>as</span> <span class='ident'>c_int</span>,
-                                             <span class='ident'>value</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>)
+                                             <span class='ident'>value</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>)
                 }
                 <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> {
                     <span class='kw'>let</span> <span class='ident'>name</span> <span class='op'>=</span> <span class='ident'>CString</span>::<span class='ident'>new</span>(<span class='ident'>exttype</span>.<span class='ident'>get_name</span>().<span class='ident'>unwrap</span>().<span class='ident'>as_bytes</span>()).<span class='ident'>unwrap</span>();
                     <span class='ident'>ffi</span>::<span class='ident'>X509V3_EXT_conf</span>(<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(),
                                          <span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='kw-2'>&amp;</span><span class='ident'>ctx</span>),
-                                         <span class='ident'>name</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>,
-                                         <span class='ident'>value</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>)
+                                         <span class='ident'>name</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>,
+                                         <span class='ident'>value</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>)
                 }
             };
             <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>success</span> <span class='op'>=</span> <span class='bool-val'>false</span>;
@@ -1244,7 +1245,7 @@
         }
     }
 
-    <span class='kw'>fn</span> <span class='ident'>add_name_internal</span>(<span class='ident'>name</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509_NAME</span>,
+    <span class='kw'>fn</span> <span class='ident'>add_name_internal</span>(<span class='ident'>name</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509_NAME</span>,
                          <span class='ident'>key</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>,
                          <span class='ident'>value</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>)
                          <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>SslError</span><span class='op'>&gt;</span> {
@@ -1253,9 +1254,9 @@
             <span class='kw'>let</span> <span class='ident'>key</span> <span class='op'>=</span> <span class='ident'>CString</span>::<span class='ident'>new</span>(<span class='ident'>key</span>.<span class='ident'>as_bytes</span>()).<span class='ident'>unwrap</span>();
             <span class='kw'>let</span> <span class='ident'>value</span> <span class='op'>=</span> <span class='ident'>CString</span>::<span class='ident'>new</span>(<span class='ident'>value</span>.<span class='ident'>as_bytes</span>()).<span class='ident'>unwrap</span>();
             <span class='ident'>ffi</span>::<span class='ident'>X509_NAME_add_entry_by_txt</span>(<span class='ident'>name</span>,
-                                            <span class='ident'>key</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _,
+                                            <span class='ident'>key</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> _,
                                             <span class='ident'>ffi</span>::<span class='ident'>MBSTRING_UTF8</span>,
-                                            <span class='ident'>value</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _,
+                                            <span class='ident'>value</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> _,
                                             <span class='ident'>value_len</span>,
                                             <span class='op'>-</span><span class='number'>1</span>,
                                             <span class='number'>0</span>)
@@ -1268,7 +1269,7 @@
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='number'>0</span>;
         <span class='kw'>for</span> <span class='ident'>b</span> <span class='kw'>in</span> <span class='ident'>bytes</span>.<span class='ident'>iter</span>() {
             <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>res</span> <span class='op'>&lt;&lt;</span> <span class='number'>8</span>;
-            <span class='ident'>res</span> <span class='op'>|=</span> (<span class='op'>*</span><span class='ident'>b</span> <span class='kw'>as</span> <span class='ident'>c_long</span>) <span class='kw-2'>&amp;</span> <span class='number'>0xff</span>;
+            <span class='ident'>res</span> <span class='op'>|=</span> (<span class='kw-2'>*</span><span class='ident'>b</span> <span class='kw'>as</span> <span class='ident'>c_long</span>) <span class='op'>&amp;</span> <span class='number'>0xff</span>;
         }
 
         <span class='comment'>// While OpenSSL is actually OK to have negative serials</span>
@@ -1378,13 +1379,13 @@
 <span class='doccomment'>/// A public key certificate</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>X509</span><span class='op'>&lt;</span><span class='lifetime'>&#39;ctx</span><span class='op'>&gt;</span> {
     <span class='ident'>ctx</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;ctx</span> <span class='ident'>X509StoreContext</span><span class='op'>&gt;</span>,
-    <span class='ident'>handle</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509</span>,
+    <span class='ident'>handle</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509</span>,
     <span class='ident'>owned</span>: <span class='ident'>bool</span>,
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;ctx</span><span class='op'>&gt;</span> <span class='ident'>X509</span><span class='op'>&lt;</span><span class='lifetime'>&#39;ctx</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// Creates new from handle with desired ownership.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>handle</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509</span>, <span class='ident'>owned</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='ident'>X509</span><span class='op'>&lt;</span><span class='lifetime'>&#39;ctx</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>handle</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509</span>, <span class='ident'>owned</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='ident'>X509</span><span class='op'>&lt;</span><span class='lifetime'>&#39;ctx</span><span class='op'>&gt;</span> {
         <span class='ident'>X509</span> {
             <span class='ident'>ctx</span>: <span class='prelude-val'>None</span>,
             <span class='ident'>handle</span>: <span class='ident'>handle</span>,
@@ -1394,7 +1395,7 @@
 
     <span class='doccomment'>/// Creates a new certificate from context. Doesn&#39;t take ownership</span>
     <span class='doccomment'>/// of handle.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new_in_ctx</span>(<span class='ident'>handle</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509</span>, <span class='ident'>ctx</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;ctx</span> <span class='ident'>X509StoreContext</span>) <span class='op'>-&gt;</span> <span class='ident'>X509</span><span class='op'>&lt;</span><span class='lifetime'>&#39;ctx</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new_in_ctx</span>(<span class='ident'>handle</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509</span>, <span class='ident'>ctx</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;ctx</span> <span class='ident'>X509StoreContext</span>) <span class='op'>-&gt;</span> <span class='ident'>X509</span><span class='op'>&lt;</span><span class='lifetime'>&#39;ctx</span><span class='op'>&gt;</span> {
         <span class='ident'>X509</span> {
             <span class='ident'>ctx</span>: <span class='prelude-val'>Some</span>(<span class='ident'>ctx</span>),
             <span class='ident'>handle</span>: <span class='ident'>handle</span>,
@@ -1418,7 +1419,7 @@
         }
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_handle</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_handle</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509</span> {
         <span class='self'>self</span>.<span class='ident'>handle</span>
     }
 
@@ -1442,7 +1443,7 @@
             }
 
             <span class='prelude-val'>Some</span>(<span class='ident'>GeneralNames</span> {
-                <span class='ident'>stack</span>: <span class='ident'>stack</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _,
+                <span class='ident'>stack</span>: <span class='ident'>stack</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> _,
                 <span class='ident'>m</span>: <span class='ident'>PhantomData</span>,
             })
         }
@@ -1494,7 +1495,7 @@
 }
 
 <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> {
-    <span class='kw'>fn</span> <span class='ident'>rust_X509_clone</span>(<span class='ident'>x509</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509</span>);
+    <span class='kw'>fn</span> <span class='ident'>rust_X509_clone</span>(<span class='ident'>x509</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509</span>);
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;ctx</span><span class='op'>&gt;</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>X509</span><span class='op'>&lt;</span><span class='lifetime'>&#39;ctx</span><span class='op'>&gt;</span> {
@@ -1518,13 +1519,13 @@
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>dead_code</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>X509Name</span><span class='op'>&lt;</span><span class='lifetime'>&#39;x</span><span class='op'>&gt;</span> {
     <span class='ident'>x509</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;x</span> <span class='ident'>X509</span><span class='op'>&lt;</span><span class='lifetime'>&#39;x</span><span class='op'>&gt;</span>,
-    <span class='ident'>name</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509_NAME</span>,
+    <span class='ident'>name</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509_NAME</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>dead_code</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>X509NameEntry</span><span class='op'>&lt;</span><span class='lifetime'>&#39;x</span><span class='op'>&gt;</span> {
     <span class='ident'>x509_name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;x</span> <span class='ident'>X509Name</span><span class='op'>&lt;</span><span class='lifetime'>&#39;x</span><span class='op'>&gt;</span>,
-    <span class='ident'>ne</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509_NAME_ENTRY</span>,
+    <span class='ident'>ne</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509_NAME_ENTRY</span>,
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;x</span><span class='op'>&gt;</span> <span class='ident'>X509Name</span><span class='op'>&lt;</span><span class='lifetime'>&#39;x</span><span class='op'>&gt;</span> {
@@ -1545,7 +1546,7 @@
                 <span class='kw'>return</span> <span class='prelude-val'>None</span>;
             }
 
-            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>str_from_asn1</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span> <span class='op'>=</span> <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>();
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>str_from_asn1</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span> <span class='op'>=</span> <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>();
             <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>ASN1_STRING_to_UTF8</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>str_from_asn1</span>, <span class='ident'>asn1_str</span>);
 
             <span class='kw'>if</span> <span class='ident'>len</span> <span class='op'>&lt;</span> <span class='number'>0</span> {
@@ -1561,12 +1562,12 @@
 
 <span class='doccomment'>/// A certificate signing request</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>X509Req</span> {
-    <span class='ident'>handle</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509_REQ</span>,
+    <span class='ident'>handle</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509_REQ</span>,
 }
 
 <span class='kw'>impl</span> <span class='ident'>X509Req</span> {
     <span class='doccomment'>/// Creates new from handle</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>handle</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509_REQ</span>) <span class='op'>-&gt;</span> <span class='ident'>X509Req</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>handle</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509_REQ</span>) <span class='op'>-&gt;</span> <span class='ident'>X509Req</span> {
         <span class='ident'>X509Req</span> { <span class='ident'>handle</span>: <span class='ident'>handle</span> }
     }
 
@@ -1633,7 +1634,7 @@
         <span class='kw'>let</span> <span class='ident'>ext_type</span> <span class='op'>=</span> <span class='ident'>ext</span>.<span class='ident'>get_type</span>();
 
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>index</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>indexes</span>.<span class='ident'>get</span>(<span class='kw-2'>&amp;</span><span class='ident'>ext_type</span>) {
-            <span class='self'>self</span>.<span class='ident'>extensions</span>[<span class='op'>*</span><span class='ident'>index</span>] <span class='op'>=</span> <span class='ident'>ext</span>;
+            <span class='self'>self</span>.<span class='ident'>extensions</span>[<span class='kw-2'>*</span><span class='ident'>index</span>] <span class='op'>=</span> <span class='ident'>ext</span>;
             <span class='kw'>return</span>;
         }
 
@@ -1752,14 +1753,14 @@
 
 <span class='doccomment'>/// A collection of OpenSSL `GENERAL_NAME`s.</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>GeneralNames</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
-    <span class='ident'>stack</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>ffi</span>::<span class='ident'>stack_st_GENERAL_NAME</span>,
+    <span class='ident'>stack</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>ffi</span>::<span class='ident'>stack_st_GENERAL_NAME</span>,
     <span class='ident'>m</span>: <span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> ()<span class='op'>&gt;</span>,
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>GeneralNames</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// Returns the number of `GeneralName`s in this structure.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>len</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>usize</span> {
-        <span class='kw'>unsafe</span> { (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>stack</span>).<span class='ident'>stack</span>.<span class='ident'>num</span> <span class='kw'>as</span> <span class='ident'>usize</span> }
+        <span class='kw'>unsafe</span> { (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>stack</span>).<span class='ident'>stack</span>.<span class='ident'>num</span> <span class='kw'>as</span> <span class='ident'>usize</span> }
     }
 
     <span class='doccomment'>/// Returns the specified `GeneralName`.</span>
@@ -1772,7 +1773,7 @@
             <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>idx</span> <span class='op'>&lt;</span> <span class='self'>self</span>.<span class='ident'>len</span>());
 
             <span class='ident'>GeneralName</span> {
-                <span class='ident'>name</span>: <span class='op'>*</span>(<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>stack</span>).<span class='ident'>stack</span>.<span class='ident'>data</span>.<span class='ident'>offset</span>(<span class='ident'>idx</span> <span class='kw'>as</span> <span class='ident'>isize</span>) <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>ffi</span>::<span class='ident'>GENERAL_NAME</span>,
+                <span class='ident'>name</span>: <span class='kw-2'>*</span>(<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>stack</span>).<span class='ident'>stack</span>.<span class='ident'>data</span>.<span class='ident'>offset</span>(<span class='ident'>idx</span> <span class='kw'>as</span> <span class='ident'>isize</span>) <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>ffi</span>::<span class='ident'>GENERAL_NAME</span>,
                 <span class='ident'>m</span>: <span class='ident'>PhantomData</span>,
             }
         }
@@ -1825,7 +1826,7 @@
 
 <span class='doccomment'>/// An OpenSSL `GENERAL_NAME`.</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>GeneralName</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
-    <span class='ident'>name</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>ffi</span>::<span class='ident'>GENERAL_NAME</span>,
+    <span class='ident'>name</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>ffi</span>::<span class='ident'>GENERAL_NAME</span>,
     <span class='ident'>m</span>: <span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> ()<span class='op'>&gt;</span>,
 }
 
@@ -1833,14 +1834,14 @@
     <span class='doccomment'>/// Returns the contents of this `GeneralName` if it is a `dNSName`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>dnsname</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='kw'>if</span> (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>name</span>).<span class='ident'>type_</span> <span class='op'>!=</span> <span class='ident'>ffi</span>::<span class='ident'>GEN_DNS</span> {
+            <span class='kw'>if</span> (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>name</span>).<span class='ident'>type_</span> <span class='op'>!=</span> <span class='ident'>ffi</span>::<span class='ident'>GEN_DNS</span> {
                 <span class='kw'>return</span> <span class='prelude-val'>None</span>;
             }
 
-            <span class='kw'>let</span> <span class='ident'>ptr</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>ASN1_STRING_data</span>((<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>name</span>).<span class='ident'>d</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> _);
-            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>ASN1_STRING_length</span>((<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>name</span>).<span class='ident'>d</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> _);
+            <span class='kw'>let</span> <span class='ident'>ptr</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>ASN1_STRING_data</span>((<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>name</span>).<span class='ident'>d</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> _);
+            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>ASN1_STRING_length</span>((<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>name</span>).<span class='ident'>d</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> _);
 
-            <span class='kw'>let</span> <span class='ident'>slice</span> <span class='op'>=</span> <span class='ident'>slice</span>::<span class='ident'>from_raw_parts</span>(<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>, <span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>usize</span>);
+            <span class='kw'>let</span> <span class='ident'>slice</span> <span class='op'>=</span> <span class='ident'>slice</span>::<span class='ident'>from_raw_parts</span>(<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>, <span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>usize</span>);
             <span class='comment'>// dNSNames are stated to be ASCII (specifically IA5). Hopefully</span>
             <span class='comment'>// OpenSSL checks that when loading a certificate but if not we&#39;ll</span>
             <span class='comment'>// use this instead of from_utf8_unchecked just in case.</span>
@@ -1851,14 +1852,14 @@
     <span class='doccomment'>/// Returns the contents of this `GeneralName` if it is an `iPAddress`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>ipaddress</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]<span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='kw'>if</span> (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>name</span>).<span class='ident'>type_</span> <span class='op'>!=</span> <span class='ident'>ffi</span>::<span class='ident'>GEN_IPADD</span> {
+            <span class='kw'>if</span> (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>name</span>).<span class='ident'>type_</span> <span class='op'>!=</span> <span class='ident'>ffi</span>::<span class='ident'>GEN_IPADD</span> {
                 <span class='kw'>return</span> <span class='prelude-val'>None</span>;
             }
 
-            <span class='kw'>let</span> <span class='ident'>ptr</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>ASN1_STRING_data</span>((<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>name</span>).<span class='ident'>d</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> _);
-            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>ASN1_STRING_length</span>((<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>name</span>).<span class='ident'>d</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> _);
+            <span class='kw'>let</span> <span class='ident'>ptr</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>ASN1_STRING_data</span>((<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>name</span>).<span class='ident'>d</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> _);
+            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>ASN1_STRING_length</span>((<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>name</span>).<span class='ident'>d</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> _);
 
-            <span class='prelude-val'>Some</span>(<span class='ident'>slice</span>::<span class='ident'>from_raw_parts</span>(<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>, <span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>usize</span>))
+            <span class='prelude-val'>Some</span>(<span class='ident'>slice</span>::<span class='ident'>from_raw_parts</span>(<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>, <span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>usize</span>))
         }
     }
 }

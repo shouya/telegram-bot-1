@@ -9,6 +9,7 @@
 
     <title>priority.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -382,7 +383,7 @@
                 }
                 <span class='comment'>// Zero out the buffer to make sure we don&#39;t get false results due to the previous</span>
                 <span class='comment'>// data being the same</span>
-                <span class='kw'>for</span> <span class='ident'>b</span> <span class='kw'>in</span> <span class='ident'>buf</span>.<span class='ident'>iter_mut</span>() { <span class='op'>*</span><span class='ident'>b</span> <span class='op'>=</span> <span class='number'>0</span>; }
+                <span class='kw'>for</span> <span class='ident'>b</span> <span class='kw'>in</span> <span class='ident'>buf</span>.<span class='ident'>iter_mut</span>() { <span class='kw-2'>*</span><span class='ident'>b</span> <span class='op'>=</span> <span class='number'>0</span>; }
             }
 
             <span class='comment'>// Now we have no more data?</span>

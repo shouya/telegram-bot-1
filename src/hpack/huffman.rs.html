@@ -9,6 +9,7 @@
 
     <title>huffman.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -904,7 +905,7 @@
             ((<span class='number'>1</span> <span class='op'>&lt;&lt;</span> <span class='ident'>current_len</span>) <span class='op'>-</span> <span class='number'>1</span>) <span class='op'>&lt;&lt;</span> (<span class='number'>32</span> <span class='op'>-</span> <span class='ident'>current_len</span>)
         };
         <span class='comment'>// The mask is now used to strip the unwanted bits of the EOS</span>
-        <span class='kw'>let</span> <span class='ident'>eos_mask</span> <span class='op'>=</span> <span class='ident'>right_align_eos</span> <span class='kw-2'>&amp;</span> <span class='ident'>mask</span>;
+        <span class='kw'>let</span> <span class='ident'>eos_mask</span> <span class='op'>=</span> <span class='ident'>right_align_eos</span> <span class='op'>&amp;</span> <span class='ident'>mask</span>;
 
         <span class='kw'>if</span> <span class='ident'>eos_mask</span> <span class='op'>!=</span> <span class='ident'>right_align_current</span> {
             <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>HuffmanDecoderError</span>::<span class='ident'>InvalidPadding</span>);
@@ -954,9 +955,9 @@
             <span class='kw'>return</span> <span class='prelude-val'>None</span>;
         }
 
-        <span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>current_byte</span>.<span class='ident'>unwrap</span>();
+        <span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>current_byte</span>.<span class='ident'>unwrap</span>();
 
-        <span class='kw'>let</span> <span class='ident'>is_set</span> <span class='op'>=</span> (<span class='ident'>b</span> <span class='kw-2'>&amp;</span> (<span class='number'>1</span> <span class='op'>&lt;&lt;</span> <span class='self'>self</span>.<span class='ident'>pos</span>)) <span class='op'>==</span> (<span class='number'>1</span> <span class='op'>&lt;&lt;</span> <span class='self'>self</span>.<span class='ident'>pos</span>);
+        <span class='kw'>let</span> <span class='ident'>is_set</span> <span class='op'>=</span> (<span class='ident'>b</span> <span class='op'>&amp;</span> (<span class='number'>1</span> <span class='op'>&lt;&lt;</span> <span class='self'>self</span>.<span class='ident'>pos</span>)) <span class='op'>==</span> (<span class='number'>1</span> <span class='op'>&lt;&lt;</span> <span class='self'>self</span>.<span class='ident'>pos</span>);
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>pos</span> <span class='op'>==</span> <span class='number'>0</span> {
             <span class='comment'>// We have exhausted all bits from the current byte -- try to get</span>
             <span class='comment'>// a new one on the next pass.</span>
@@ -1240,7 +1241,7 @@
     <span class='doccomment'>/// and `0` to a `Vec` of `bool`s, according to the number.</span>
     <span class='kw'>fn</span> <span class='ident'>to_expected_bit_result</span>(<span class='ident'>numbers</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>bool</span><span class='op'>&gt;</span> {
         <span class='ident'>numbers</span>.<span class='ident'>iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>b</span><span class='op'>|</span> <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-            <span class='op'>*</span><span class='ident'>b</span> <span class='op'>==</span> <span class='number'>1</span>
+            <span class='kw-2'>*</span><span class='ident'>b</span> <span class='op'>==</span> <span class='number'>1</span>
         }).<span class='ident'>collect</span>()
     }
 

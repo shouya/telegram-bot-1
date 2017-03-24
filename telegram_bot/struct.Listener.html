@@ -9,6 +9,7 @@
 
     <title>telegram_bot::Listener - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
     
@@ -57,7 +58,7 @@ environment, the <code>Listener</code> object and the <code>Api</code> object do
 internal state. This makes creating a <code>Listener</code> a bit more expensive, but
 it&#39;s usually sufficient for any purpose to create a <code>Listener</code> only once.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../telegram_bot/struct.Listener.html' title='telegram_bot::Listener'>Listener</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/telegram_bot/lib.rs.html#601-728' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.listen' class='method'><span id='listen.v' class='invisible'><code>fn <a href='#method.listen' class='fnname'>listen</a>&lt;H&gt;(&amp;mut self, handler: H) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt; <span class='where'>where H: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(<a class='struct' href='../telegram_bot/types/struct.Update.html' title='telegram_bot::types::Update'>Update</a>) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a class='enum' href='../telegram_bot/enum.ListeningAction.html' title='telegram_bot::ListeningAction'>ListeningAction</a>&gt;</span></code></span></h4>
+<div class='impl-items'><h4 id='method.listen' class='method'><span id='listen.v' class='invisible'><code>fn <a href='#method.listen' class='fnname'>listen</a>&lt;H&gt;(&amp;mut self, handler: H) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt; <span class='where fmt-newline'>where H: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(<a class='struct' href='../telegram_bot/types/struct.Update.html' title='telegram_bot::types::Update'>Update</a>) -&gt; <a class='type' href='../telegram_bot/type.Result.html' title='telegram_bot::Result'>Result</a>&lt;<a class='enum' href='../telegram_bot/enum.ListeningAction.html' title='telegram_bot::ListeningAction'>ListeningAction</a>&gt;</span></code></span></h4>
 <div class='docblock'><p>Receive and handle updates with the given closure.</p>
 
 <p>This method will use the specified listening method to receive new

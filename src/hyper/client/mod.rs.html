@@ -9,6 +9,7 @@
 
     <title>mod.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -1073,7 +1074,7 @@
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Body</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>size</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span> {
-        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+        <span class='kw'>match</span> <span class='kw-2'>*</span><span class='self'>self</span> {
             <span class='ident'>Body</span>::<span class='ident'>SizedBody</span>(_, <span class='ident'>len</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>len</span>),
             <span class='ident'>Body</span>::<span class='ident'>BufBody</span>(_, <span class='ident'>len</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>u64</span>),
             _ <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>
@@ -1084,7 +1085,7 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Read</span> <span class='kw'>for</span> <span class='ident'>Body</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>read</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
-        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+        <span class='kw'>match</span> <span class='kw-2'>*</span><span class='self'>self</span> {
             <span class='ident'>Body</span>::<span class='ident'>ChunkedBody</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>r</span>) <span class='op'>=&gt;</span> <span class='ident'>r</span>.<span class='ident'>read</span>(<span class='ident'>buf</span>),
             <span class='ident'>Body</span>::<span class='ident'>SizedBody</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>r</span>, _) <span class='op'>=&gt;</span> <span class='ident'>r</span>.<span class='ident'>read</span>(<span class='ident'>buf</span>),
             <span class='ident'>Body</span>::<span class='ident'>BufBody</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>r</span>, _) <span class='op'>=&gt;</span> <span class='ident'>Read</span>::<span class='ident'>read</span>(<span class='ident'>r</span>, <span class='ident'>buf</span>),
@@ -1157,7 +1158,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>fmt</span>::<span class='ident'>Debug</span> <span class='kw'>for</span> <span class='ident'>RedirectPolicy</span> {
     <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>fmt</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
-        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+        <span class='kw'>match</span> <span class='kw-2'>*</span><span class='self'>self</span> {
             <span class='ident'>RedirectPolicy</span>::<span class='ident'>FollowNone</span> <span class='op'>=&gt;</span> <span class='ident'>fmt</span>.<span class='ident'>write_str</span>(<span class='string'>&quot;FollowNone&quot;</span>),
             <span class='ident'>RedirectPolicy</span>::<span class='ident'>FollowAll</span> <span class='op'>=&gt;</span> <span class='ident'>fmt</span>.<span class='ident'>write_str</span>(<span class='string'>&quot;FollowAll&quot;</span>),
             <span class='ident'>RedirectPolicy</span>::<span class='ident'>FollowIf</span>(_) <span class='op'>=&gt;</span> <span class='ident'>fmt</span>.<span class='ident'>write_str</span>(<span class='string'>&quot;FollowIf&quot;</span>),
@@ -1168,7 +1169,7 @@
 <span class='comment'>// This is a hack because of upstream typesystem issues.</span>
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>RedirectPolicy</span> {
     <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>RedirectPolicy</span> {
-        <span class='op'>*</span><span class='self'>self</span>
+        <span class='kw-2'>*</span><span class='self'>self</span>
     }
 }
 
