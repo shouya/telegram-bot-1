@@ -1,10 +1,12 @@
 (function() {var implementors = {};
-implementors["hyper"] = [];
+implementors["bytes"] = [];
+implementors["error_chain"] = [];
 implementors["libc"] = [];
-implementors["mime_guess"] = [];
-implementors["multipart"] = [];
-implementors["openssl"] = [];
-implementors["phf"] = [];
+implementors["mio"] = [];
+implementors["serde"] = [];
+implementors["syn"] = [];
+implementors["telegram_bot"] = [];
+implementors["tokio_core"] = [];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);

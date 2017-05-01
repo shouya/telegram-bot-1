@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `MessageKind` enum in crate `telegram_bot_raw`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, MessageKind">
+
+    <title>telegram_bot_raw::types::message::MessageKind - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc enum">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>types</a>::<wbr><a href='index.html'>message</a></p><script>window.sidebarCurrent = {name: 'MessageKind', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Enum <a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>types</a>::<wbr><a href='index.html'>message</a>::<wbr><a class="enum" href=''>MessageKind</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../../../src/telegram_bot_raw/types/message.rs.html#54-165' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum MessageKind {
+    Text {
+        data: <a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>,
+        entities: <a class="struct" href="https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.MessageEntity.html" title="struct telegram_bot_raw::types::message::MessageEntity">MessageEntity</a>&gt;,
+    },
+    Audio {
+        data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.Audio.html" title="struct telegram_bot_raw::types::message::Audio">Audio</a>,
+    },
+    Document {
+        data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.Document.html" title="struct telegram_bot_raw::types::message::Document">Document</a>,
+        caption: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>&gt;,
+    },
+    Photo {
+        data: <a class="struct" href="https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.PhotoSize.html" title="struct telegram_bot_raw::types::message::PhotoSize">PhotoSize</a>&gt;,
+        caption: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>&gt;,
+    },
+    Sticker {
+        data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.Sticker.html" title="struct telegram_bot_raw::types::message::Sticker">Sticker</a>,
+    },
+    Video {
+        data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.Video.html" title="struct telegram_bot_raw::types::message::Video">Video</a>,
+        caption: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>&gt;,
+    },
+    Voice {
+        data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.Voice.html" title="struct telegram_bot_raw::types::message::Voice">Voice</a>,
+    },
+    Contact {
+        data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.Contact.html" title="struct telegram_bot_raw::types::message::Contact">Contact</a>,
+    },
+    Location {
+        data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.Location.html" title="struct telegram_bot_raw::types::message::Location">Location</a>,
+    },
+    Venue {
+        data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.Venue.html" title="struct telegram_bot_raw::types::message::Venue">Venue</a>,
+    },
+    NewChatMember {
+        data: <a class="struct" href="../../../telegram_bot_raw/types/chat/struct.User.html" title="struct telegram_bot_raw::types::chat::User">User</a>,
+    },
+    LeftChatMember {
+        data: <a class="struct" href="../../../telegram_bot_raw/types/chat/struct.User.html" title="struct telegram_bot_raw::types::chat::User">User</a>,
+    },
+    NewChatTitle {
+        data: <a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>,
+    },
+    NewChatPhoto {
+        data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.PhotoSize.html" title="struct telegram_bot_raw::types::message::PhotoSize">PhotoSize</a>,
+    },
+    DeleteChatPhoto,
+    GroupChatCreated,
+    SupergroupChatCreated,
+    ChannelChatCreated,
+    MigrateToChatId {
+        data: <a class="type" href="../../../telegram_bot_raw/types/primitive/type.Integer.html" title="type telegram_bot_raw::types::primitive::Integer">Integer</a>,
+    },
+    MigrateFromChatId {
+        data: <a class="type" href="../../../telegram_bot_raw/types/primitive/type.Integer.html" title="type telegram_bot_raw::types::primitive::Integer">Integer</a>,
+    },
+    PinnedMessage {
+        data: <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html" title="struct alloc::boxed::Box">Box</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Message.html" title="struct telegram_bot_raw::types::message::Message">Message</a>&gt;,
+    },
+    // some variants omitted
+}</pre><div class='docblock'><p>Kind of the message.</p>
+</div><h2 class='variants'>Variants</h2>
+<span id='variant.Text' class='variant'><span id='Text.v' class='invisible'><code>Text</code></span></span><div class='docblock'><p>Text message.</p>
+</div><span class='docblock autohide sub-variant' id='variant.Text.fields'><h3 class='fields'>Fields of <code>Text</code></h3>
+
+                           <table><tr><td id='variant.Text.field.data'><span id='Text.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a></code></span></td><td><div class='docblock'><p>Actual UTF-8 text of the message, 0-4096 characters.</p>
+</div></td></tr><tr><td id='variant.Text.field.entities'><span id='Text.v.entities.v' class='invisible'><code>entities:&nbsp;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.MessageEntity.html" title="struct telegram_bot_raw::types::message::MessageEntity">MessageEntity</a>&gt;</code></span></td><td><div class='docblock'><p>Special entities like usernames, URLs, bot commands, etc. that appear in the text</p>
+</div></td></tr></table></span><span id='variant.Audio' class='variant'><span id='Audio.v' class='invisible'><code>Audio</code></span></span><div class='docblock'><p>Message is an audio file.</p>
+</div><span class='docblock autohide sub-variant' id='variant.Audio.fields'><h3 class='fields'>Fields of <code>Audio</code></h3>
+
+                           <table><tr><td id='variant.Audio.field.data'><span id='Audio.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Audio.html" title="struct telegram_bot_raw::types::message::Audio">Audio</a></code></span></td><td><div class='docblock'><p>Information about the file.</p>
+</div></td></tr></table></span><span id='variant.Document' class='variant'><span id='Document.v' class='invisible'><code>Document</code></span></span><div class='docblock'><p>Message is a general file.</p>
+</div><span class='docblock autohide sub-variant' id='variant.Document.fields'><h3 class='fields'>Fields of <code>Document</code></h3>
+
+                           <table><tr><td id='variant.Document.field.data'><span id='Document.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Document.html" title="struct telegram_bot_raw::types::message::Document">Document</a></code></span></td><td><div class='docblock'><p>Information about the file.</p>
+</div></td></tr><tr><td id='variant.Document.field.caption'><span id='Document.v.caption.v' class='invisible'><code>caption:&nbsp;<a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>&gt;</code></span></td><td><div class='docblock'><p>Caption for the document, 0-200 characters.</p>
+</div></td></tr></table></span><span id='variant.Photo' class='variant'><span id='Photo.v' class='invisible'><code>Photo</code></span></span><div class='docblock'><p>Message is a photo.</p>
+</div><span class='docblock autohide sub-variant' id='variant.Photo.fields'><h3 class='fields'>Fields of <code>Photo</code></h3>
+
+                           <table><tr><td id='variant.Photo.field.data'><span id='Photo.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.PhotoSize.html" title="struct telegram_bot_raw::types::message::PhotoSize">PhotoSize</a>&gt;</code></span></td><td><div class='docblock'><p>Available sizes of the photo.</p>
+</div></td></tr><tr><td id='variant.Photo.field.caption'><span id='Photo.v.caption.v' class='invisible'><code>caption:&nbsp;<a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>&gt;</code></span></td><td><div class='docblock'><p>Caption for the photo, 0-200 characters.</p>
+</div></td></tr></table></span><span id='variant.Sticker' class='variant'><span id='Sticker.v' class='invisible'><code>Sticker</code></span></span><div class='docblock'><p>Message is a sticker.</p>
+</div><span class='docblock autohide sub-variant' id='variant.Sticker.fields'><h3 class='fields'>Fields of <code>Sticker</code></h3>
+
+                           <table><tr><td id='variant.Sticker.field.data'><span id='Sticker.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Sticker.html" title="struct telegram_bot_raw::types::message::Sticker">Sticker</a></code></span></td><td><div class='docblock'><p>Information about the sticker.</p>
+</div></td></tr></table></span><span id='variant.Video' class='variant'><span id='Video.v' class='invisible'><code>Video</code></span></span><div class='docblock'><p>Message is a video.</p>
+</div><span class='docblock autohide sub-variant' id='variant.Video.fields'><h3 class='fields'>Fields of <code>Video</code></h3>
+
+                           <table><tr><td id='variant.Video.field.data'><span id='Video.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Video.html" title="struct telegram_bot_raw::types::message::Video">Video</a></code></span></td><td><div class='docblock'><p>Information about the video.</p>
+</div></td></tr><tr><td id='variant.Video.field.caption'><span id='Video.v.caption.v' class='invisible'><code>caption:&nbsp;<a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>&gt;</code></span></td><td><div class='docblock'><p>Caption for the video, 0-200 characters.</p>
+</div></td></tr></table></span><span id='variant.Voice' class='variant'><span id='Voice.v' class='invisible'><code>Voice</code></span></span><div class='docblock'><p>Message is a voice message.</p>
+</div><span class='docblock autohide sub-variant' id='variant.Voice.fields'><h3 class='fields'>Fields of <code>Voice</code></h3>
+
+                           <table><tr><td id='variant.Voice.field.data'><span id='Voice.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Voice.html" title="struct telegram_bot_raw::types::message::Voice">Voice</a></code></span></td><td><div class='docblock'><p>Information about the file.</p>
+</div></td></tr></table></span><span id='variant.Contact' class='variant'><span id='Contact.v' class='invisible'><code>Contact</code></span></span><div class='docblock'><p>Message is a shared contact.</p>
+</div><span class='docblock autohide sub-variant' id='variant.Contact.fields'><h3 class='fields'>Fields of <code>Contact</code></h3>
+
+                           <table><tr><td id='variant.Contact.field.data'><span id='Contact.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Contact.html" title="struct telegram_bot_raw::types::message::Contact">Contact</a></code></span></td><td><div class='docblock'><p>Information about the contact.</p>
+</div></td></tr></table></span><span id='variant.Location' class='variant'><span id='Location.v' class='invisible'><code>Location</code></span></span><div class='docblock'><p>Message is a shared location.</p>
+</div><span class='docblock autohide sub-variant' id='variant.Location.fields'><h3 class='fields'>Fields of <code>Location</code></h3>
+
+                           <table><tr><td id='variant.Location.field.data'><span id='Location.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Location.html" title="struct telegram_bot_raw::types::message::Location">Location</a></code></span></td><td><div class='docblock'><p>Information about the location.</p>
+</div></td></tr></table></span><span id='variant.Venue' class='variant'><span id='Venue.v' class='invisible'><code>Venue</code></span></span><div class='docblock'><p>Message is a venue.</p>
+</div><span class='docblock autohide sub-variant' id='variant.Venue.fields'><h3 class='fields'>Fields of <code>Venue</code></h3>
+
+                           <table><tr><td id='variant.Venue.field.data'><span id='Venue.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Venue.html" title="struct telegram_bot_raw::types::message::Venue">Venue</a></code></span></td><td><div class='docblock'><p>Information about the venue.</p>
+</div></td></tr></table></span><span id='variant.NewChatMember' class='variant'><span id='NewChatMember.v' class='invisible'><code>NewChatMember</code></span></span><div class='docblock'><p>A new member was added to the group.</p>
+</div><span class='docblock autohide sub-variant' id='variant.NewChatMember.fields'><h3 class='fields'>Fields of <code>NewChatMember</code></h3>
+
+                           <table><tr><td id='variant.NewChatMember.field.data'><span id='NewChatMember.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="../../../telegram_bot_raw/types/chat/struct.User.html" title="struct telegram_bot_raw::types::chat::User">User</a></code></span></td><td><div class='docblock'><p>Information about user (this member may be the bot itself).</p>
+</div></td></tr></table></span><span id='variant.LeftChatMember' class='variant'><span id='LeftChatMember.v' class='invisible'><code>LeftChatMember</code></span></span><div class='docblock'><p>A member was removed from the group.</p>
+</div><span class='docblock autohide sub-variant' id='variant.LeftChatMember.fields'><h3 class='fields'>Fields of <code>LeftChatMember</code></h3>
+
+                           <table><tr><td id='variant.LeftChatMember.field.data'><span id='LeftChatMember.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="../../../telegram_bot_raw/types/chat/struct.User.html" title="struct telegram_bot_raw::types::chat::User">User</a></code></span></td><td><div class='docblock'><p>Information about user (this member may be the bot itself).</p>
+</div></td></tr></table></span><span id='variant.NewChatTitle' class='variant'><span id='NewChatTitle.v' class='invisible'><code>NewChatTitle</code></span></span><div class='docblock'><p>New chat title.</p>
+</div><span class='docblock autohide sub-variant' id='variant.NewChatTitle.fields'><h3 class='fields'>Fields of <code>NewChatTitle</code></h3>
+
+                           <table><tr><td id='variant.NewChatTitle.field.data'><span id='NewChatTitle.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a></code></span></td><td><div class='docblock'><p>A chat title was changed to this value.</p>
+</div></td></tr></table></span><span id='variant.NewChatPhoto' class='variant'><span id='NewChatPhoto.v' class='invisible'><code>NewChatPhoto</code></span></span><div class='docblock'><p>New chat photo.</p>
+</div><span class='docblock autohide sub-variant' id='variant.NewChatPhoto.fields'><h3 class='fields'>Fields of <code>NewChatPhoto</code></h3>
+
+                           <table><tr><td id='variant.NewChatPhoto.field.data'><span id='NewChatPhoto.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.PhotoSize.html" title="struct telegram_bot_raw::types::message::PhotoSize">PhotoSize</a></code></span></td><td><div class='docblock'><p>A chat photo was change to this value.</p>
+</div></td></tr></table></span><span id='variant.DeleteChatPhoto' class='variant'><span id='DeleteChatPhoto.v' class='invisible'><code>DeleteChatPhoto</code></span></span><div class='docblock'><p>Service message: the chat photo was deleted.</p>
+</div><span id='variant.GroupChatCreated' class='variant'><span id='GroupChatCreated.v' class='invisible'><code>GroupChatCreated</code></span></span><div class='docblock'><p>Service message: the group has been created.</p>
+</div><span id='variant.SupergroupChatCreated' class='variant'><span id='SupergroupChatCreated.v' class='invisible'><code>SupergroupChatCreated</code></span></span><div class='docblock'><p>Service message: the supergroup has been created. This field can‘t be received in a
+message coming through updates, because bot can’t be a member of a supergroup when
+it is created. It can only be found in reply_to_message if someone replies to a very
+first message in a directly created supergroup.</p>
+</div><span id='variant.ChannelChatCreated' class='variant'><span id='ChannelChatCreated.v' class='invisible'><code>ChannelChatCreated</code></span></span><div class='docblock'><p>Service message: the channel has been created. This field can‘t be received in a message
+coming through updates, because bot can’t be a member of a channel when it is created.
+It can only be found in reply_to_message if someone replies
+to a very first message in a channel.</p>
+</div><span id='variant.MigrateToChatId' class='variant'><span id='MigrateToChatId.v' class='invisible'><code>MigrateToChatId</code></span></span><div class='docblock'><p>The group has been migrated to a supergroup.</p>
+</div><span class='docblock autohide sub-variant' id='variant.MigrateToChatId.fields'><h3 class='fields'>Fields of <code>MigrateToChatId</code></h3>
+
+                           <table><tr><td id='variant.MigrateToChatId.field.data'><span id='MigrateToChatId.v.data.v' class='invisible'><code>data:&nbsp;<a class="type" href="../../../telegram_bot_raw/types/primitive/type.Integer.html" title="type telegram_bot_raw::types::primitive::Integer">Integer</a></code></span></td><td><div class='docblock'><p>Supergroup chat identifier.</p>
+</div></td></tr></table></span><span id='variant.MigrateFromChatId' class='variant'><span id='MigrateFromChatId.v' class='invisible'><code>MigrateFromChatId</code></span></span><div class='docblock'><p>The supergroup has been migrated from a group.</p>
+</div><span class='docblock autohide sub-variant' id='variant.MigrateFromChatId.fields'><h3 class='fields'>Fields of <code>MigrateFromChatId</code></h3>
+
+                           <table><tr><td id='variant.MigrateFromChatId.field.data'><span id='MigrateFromChatId.v.data.v' class='invisible'><code>data:&nbsp;<a class="type" href="../../../telegram_bot_raw/types/primitive/type.Integer.html" title="type telegram_bot_raw::types::primitive::Integer">Integer</a></code></span></td><td><div class='docblock'><p>Group chat identifier.</p>
+</div></td></tr></table></span><span id='variant.PinnedMessage' class='variant'><span id='PinnedMessage.v' class='invisible'><code>PinnedMessage</code></span></span><div class='docblock'><p>Specified message was pinned.</p>
+</div><span class='docblock autohide sub-variant' id='variant.PinnedMessage.fields'><h3 class='fields'>Fields of <code>PinnedMessage</code></h3>
+
+                           <table><tr><td id='variant.PinnedMessage.field.data'><span id='PinnedMessage.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html" title="struct alloc::boxed::Box">Box</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Message.html" title="struct telegram_bot_raw::types::message::Message">Message</a>&gt;</code></span></td><td></td></tr></table></span><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="enum" href="../../../telegram_bot_raw/types/message/enum.MessageKind.html" title="enum telegram_bot_raw::types::message::MessageKind">MessageKind</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/telegram_bot_raw/types/message.rs.html#53' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="enum" href="../../../telegram_bot_raw/types/message/enum.MessageKind.html" title="enum telegram_bot_raw::types::message::MessageKind">MessageKind</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/telegram_bot_raw/types/message.rs.html#53' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class="enum" href="../../../telegram_bot_raw/types/message/enum.MessageKind.html" title="enum telegram_bot_raw::types::message::MessageKind">MessageKind</a></code></span></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a> for <a class="enum" href="../../../telegram_bot_raw/types/message/enum.MessageKind.html" title="enum telegram_bot_raw::types::message::MessageKind">MessageKind</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/telegram_bot_raw/types/message.rs.html#53' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.eq' class="method"><span id='eq.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class="enum" href="../../../telegram_bot_raw/types/message/enum.MessageKind.html" title="enum telegram_bot_raw::types::message::MessageKind">MessageKind</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h4>
+<div class='docblock'><p>This method tests for <code>self</code> and <code>other</code> values to be equal, and is used by <code>==</code>. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq">Read more</a></p>
+</div><h4 id='method.ne' class="method"><span id='ne.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class="enum" href="../../../telegram_bot_raw/types/message/enum.MessageKind.html" title="enum telegram_bot_raw::types::message::MessageKind">MessageKind</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h4>
+<div class='docblock'><p>This method tests for <code>!=</code>.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html" title="trait core::cmp::PartialOrd">PartialOrd</a> for <a class="enum" href="../../../telegram_bot_raw/types/message/enum.MessageKind.html" title="enum telegram_bot_raw::types::message::MessageKind">MessageKind</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/telegram_bot_raw/types/message.rs.html#53' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.partial_cmp' class="method"><span id='partial_cmp.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html#tymethod.partial_cmp' class='fnname'>partial_cmp</a>(&amp;self, __arg_0: &amp;<a class="enum" href="../../../telegram_bot_raw/types/message/enum.MessageKind.html" title="enum telegram_bot_raw::types::message::MessageKind">MessageKind</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/cmp/enum.Ordering.html" title="enum core::cmp::Ordering">Ordering</a>&gt;</code></span></h4>
+<div class='docblock'><p>This method returns an ordering between <code>self</code> and <code>other</code> values if one exists. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html#tymethod.partial_cmp">Read more</a></p>
+</div><h4 id='method.lt' class="method"><span id='lt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html#method.lt' class='fnname'>lt</a>(&amp;self, __arg_0: &amp;<a class="enum" href="../../../telegram_bot_raw/types/message/enum.MessageKind.html" title="enum telegram_bot_raw::types::message::MessageKind">MessageKind</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h4>
+<div class='docblock'><p>This method tests less than (for <code>self</code> and <code>other</code>) and is used by the <code>&lt;</code> operator. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html#method.lt">Read more</a></p>
+</div><h4 id='method.le' class="method"><span id='le.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html#method.le' class='fnname'>le</a>(&amp;self, __arg_0: &amp;<a class="enum" href="../../../telegram_bot_raw/types/message/enum.MessageKind.html" title="enum telegram_bot_raw::types::message::MessageKind">MessageKind</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h4>
+<div class='docblock'><p>This method tests less than or equal to (for <code>self</code> and <code>other</code>) and is used by the <code>&lt;=</code> operator. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html#method.le">Read more</a></p>
+</div><h4 id='method.gt' class="method"><span id='gt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html#method.gt' class='fnname'>gt</a>(&amp;self, __arg_0: &amp;<a class="enum" href="../../../telegram_bot_raw/types/message/enum.MessageKind.html" title="enum telegram_bot_raw::types::message::MessageKind">MessageKind</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h4>
+<div class='docblock'><p>This method tests greater than (for <code>self</code> and <code>other</code>) and is used by the <code>&gt;</code> operator. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html#method.gt">Read more</a></p>
+</div><h4 id='method.ge' class="method"><span id='ge.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html#method.ge' class='fnname'>ge</a>(&amp;self, __arg_0: &amp;<a class="enum" href="../../../telegram_bot_raw/types/message/enum.MessageKind.html" title="enum telegram_bot_raw::types::message::MessageKind">MessageKind</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h4>
+<div class='docblock'><p>This method tests greater than or equal to (for <code>self</code> and <code>other</code>) and is used by the <code>&gt;=</code> operator. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html#method.ge">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../../";
+        window.currentCrate = "telegram_bot_raw";
+    </script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
+    <script defer src="../../../search-index.js"></script>
+</body>
+</html>

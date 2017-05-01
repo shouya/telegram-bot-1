@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["SendLocation","Use this method to send point on the map."]],"trait":[["CanReplySendLocation",""],["CanSendLocation",""]]});

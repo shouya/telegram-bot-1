@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Chat","This object represents a chat."]],"struct":[["Channel","This object represents a channel."],["Group","This object represents a group."],["RawChat","This object represents a chat, directly mapped."],["Supergroup","This object represents a supergroup."],["User","This object represents a Telegram user or bot."]]});

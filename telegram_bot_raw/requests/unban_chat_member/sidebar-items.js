@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["UnbanChatMember","Use this method to unban a previously kicked user in a supergroup. The user will not return to the group automatically, but will be able to join via link, etc. The bot must be an administrator in the group for this to work."]],"trait":[["CanUnbanChatMemberForChat",""],["CanUnbanChatMemberForUser",""]]});
