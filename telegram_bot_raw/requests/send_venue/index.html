@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `lib/src/types/requests.rs`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang">
+    <meta name="description" content="API documentation for the Rust `send_venue` mod in crate `telegram_bot_raw`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, send_venue">
 
-    <title>requests.rs.html -- source</title>
+    <title>telegram_bot_raw::requests::send_venue - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc source">
+<body class="rustdoc mod">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        
+        <p class='location'><a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>requests</a></p><script>window.sidebarCurrent = {name: 'send_venue', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -43,23 +43,36 @@
         </form>
     </nav>
 
-    <section id='main' class="content"><pre class="line-numbers"><span id="1">1</span>
-<span id="2">2</span>
-<span id="3">3</span>
-<span id="4">4</span>
-<span id="5">5</span>
-<span id="6">6</span>
-<span id="7">7</span>
-</pre><pre class="rust ">
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">GetFile</span>, <span class="ident">GetMe</span>, <span class="ident">GetUpdates</span>,  <span class="ident">GetUserProfilePhotos</span>, <span class="ident">ForwardMessage</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">SendLocation</span>, <span class="ident">SendMessage</span>, <span class="ident">SendContact</span>, <span class="ident">SendVenue</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">GetChat</span>, <span class="ident">LeaveChat</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::<span class="ident">SendChatAction</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">GetChatAdministrators</span>, <span class="ident">GetChatMember</span>, <span class="ident">GetChatMembersCount</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">KickChatMember</span>, <span class="ident">UnbanChatMember</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">EditMessageText</span>, <span class="ident">EditMessageCaption</span>, <span class="ident">EditMessageReplyMarkup</span>};
-</pre>
-</section>
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Module <a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>requests</a>::<wbr><a class="mod" href=''>send_venue</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../../../src/telegram_bot_raw/requests/send_venue.rs.html#1-133' title='goto source code'>[src]</a></span></h1>
+<h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SendVenue.html"
+                                  title='struct telegram_bot_raw::requests::send_venue::SendVenue'>SendVenue</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.CanReplySendVenue.html"
+                                  title='trait telegram_bot_raw::requests::send_venue::CanReplySendVenue'>CanReplySendVenue</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.CanSendVenue.html"
+                                  title='trait telegram_bot_raw::requests::send_venue::CanSendVenue'>CanSendVenue</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr></table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -114,7 +127,7 @@
 
     <script>
         window.rootPath = "../../../";
-        window.currentCrate = "telegram_bot";
+        window.currentCrate = "telegram_bot_raw";
     </script>
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
