@@ -1,5 +1,4 @@
 (function() {var implementors = {};
-implementors["telegram_bot"] = [];
 implementors["telegram_bot_raw"] = [];
 
             if (window.register_implementors) {

@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/telegram_bot/types/mod.rs.html#1-15' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/telegram_bot/types/mod.rs.html#1-17' title='goto source code'>[src]</a></span></h1>
 <h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
 <table><tr><td><code>pub use <a class="mod" href="../../telegram_bot/types/requests/index.html" title="mod telegram_bot::types::requests">requests</a>::*;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
@@ -72,6 +72,13 @@
                                   title='struct telegram_bot::types::Channel'>Channel</a></td>
                            <td class='docblock-short'>
                                 <p>This object represents a channel.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.ChannelId.html"
+                                  title='struct telegram_bot::types::ChannelId'>ChannelId</a></td>
+                           <td class='docblock-short'>
+                                
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -123,6 +130,13 @@ It is guaranteed that the link will be valid for at least 1 hour.</p>
                                   title='struct telegram_bot::types::Group'>Group</a></td>
                            <td class='docblock-short'>
                                 <p>This object represents a group.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.GroupId.html"
+                                  title='struct telegram_bot::types::GroupId'>GroupId</a></td>
+                           <td class='docblock-short'>
+                                
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -204,6 +218,13 @@ For example, hashtags, usernames, URLs, etc.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SupergroupId.html"
+                                  title='struct telegram_bot::types::SupergroupId'>SupergroupId</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class="struct" href="struct.Update.html"
                                   title='struct telegram_bot::types::Update'>Update</a></td>
                            <td class='docblock-short'>
@@ -262,6 +283,14 @@ For example, hashtags, usernames, URLs, etc.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class="enum" href="enum.ChatRef.html"
+                                  title='enum telegram_bot::types::ChatRef'>ChatRef</a></td>
+                           <td class='docblock-short'>
+                                <p>Unique identifier for the target chat or username of the
+target channel (in the format @channelusername)</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class="enum" href="enum.ForwardFrom.html"
                                   title='enum telegram_bot::types::ForwardFrom'>ForwardFrom</a></td>
                            <td class='docblock-short'>
@@ -310,6 +339,27 @@ See <a href="https://core.telegram.org/bots/api#formatting-options">documentatio
                                   title='trait telegram_bot::types::Request'>Request</a></td>
                            <td class='docblock-short'>
                                 <p>Request corresponds to the specific Telegram API method.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.ToChatRef.html"
+                                  title='trait telegram_bot::types::ToChatRef'>ToChatRef</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.ToMessageId.html"
+                                  title='trait telegram_bot::types::ToMessageId'>ToMessageId</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.ToUserId.html"
+                                  title='trait telegram_bot::types::ToUserId'>ToUserId</a></td>
+                           <td class='docblock-short'>
+                                
                            </td>
                        </tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
 <table>
