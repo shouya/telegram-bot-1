@@ -159,8 +159,6 @@
 <span id="114">114</span>
 <span id="115">115</span>
 <span id="116">116</span>
-<span id="117">117</span>
-<span id="118">118</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">Not</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
@@ -171,7 +169,7 @@
 <span class="doccomment">/// Use this method to send phone contacts.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Serialize</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SendContact</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;f</span>, <span class="lifetime">&#39;l</span><span class="op">&gt;</span> {
-    <span class="ident">chat_id</span>: <span class="ident">ChatId</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>,
+    <span class="ident">chat_id</span>: <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>,
     <span class="ident">phone_number</span>: <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span>, <span class="ident">str</span><span class="op">&gt;</span>,
     <span class="ident">first_name</span>: <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;f</span>, <span class="ident">str</span><span class="op">&gt;</span>,
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
@@ -179,7 +177,7 @@
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Not::not&quot;</span>)]</span>
     <span class="ident">disable_notification</span>: <span class="ident">bool</span>,
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
-    <span class="ident">reply_to_message_id</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Integer</span><span class="op">&gt;</span>,
+    <span class="ident">reply_to_message_id</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">MessageId</span><span class="op">&gt;</span>,
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
     <span class="ident">reply_markup</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ReplyMarkup</span><span class="op">&gt;</span>,
 }
@@ -199,12 +197,12 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;f</span>, <span class="lifetime">&#39;l</span><span class="op">&gt;</span> <span class="ident">SendContact</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;f</span>, <span class="lifetime">&#39;l</span><span class="op">&gt;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">C</span>, <span class="ident">P</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">chat</span>: <span class="ident">C</span>, <span class="ident">phone_number</span>: <span class="ident">P</span>, <span class="ident">first_name</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="self">Self</span>
-        <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ChatId</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;&gt;</span>,
+        <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>,
               <span class="ident">P</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>,
               <span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;f</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>
     {
         <span class="ident">SendContact</span> {
-            <span class="ident">chat_id</span>: <span class="ident">chat</span>.<span class="ident">into</span>(),
+            <span class="ident">chat_id</span>: <span class="ident">chat</span>.<span class="ident">to_chat_ref</span>(),
             <span class="ident">phone_number</span>: <span class="ident">phone_number</span>.<span class="ident">into</span>(),
             <span class="ident">first_name</span>: <span class="ident">first_name</span>.<span class="ident">into</span>(),
             <span class="ident">last_name</span>: <span class="prelude-val">None</span>,
@@ -227,9 +225,9 @@
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reply_to</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="self">Self</span>
-        <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">MessageId</span><span class="op">&gt;</span>
+        <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">ToMessageId</span>
     {
-        <span class="self">self</span>.<span class="ident">reply_to_message_id</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">to</span>.<span class="ident">into</span>().<span class="number">0</span>);
+        <span class="self">self</span>.<span class="ident">reply_to_message_id</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">to</span>.<span class="ident">to_message_id</span>());
         <span class="self">self</span>
     }
 
@@ -241,16 +239,16 @@
     }
 }
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanSendContact</span><span class="op">&lt;</span><span class="lifetime">&#39;bc</span>, <span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;f</span>, <span class="lifetime">&#39;l</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">contact</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;bc</span> <span class="self">self</span>, <span class="ident">phone_number</span>: <span class="ident">P</span>, <span class="ident">first_name</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">SendContact</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;f</span>, <span class="lifetime">&#39;l</span><span class="op">&gt;</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanSendContact</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;f</span>, <span class="lifetime">&#39;l</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">contact</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">phone_number</span>: <span class="ident">P</span>, <span class="ident">first_name</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">SendContact</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;f</span>, <span class="lifetime">&#39;l</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="ident">P</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>,
               <span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;f</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>;
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;bc</span>, <span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;f</span>, <span class="lifetime">&#39;l</span>, <span class="ident">C</span>: <span class="lifetime">&#39;bc</span><span class="op">&gt;</span> <span class="ident">CanSendContact</span><span class="op">&lt;</span><span class="lifetime">&#39;bc</span>, <span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;f</span>, <span class="lifetime">&#39;l</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">C</span>
-    <span class="kw">where</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;bc</span> <span class="ident">C</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ChatId</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;&gt;</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;f</span>, <span class="lifetime">&#39;l</span>, <span class="ident">C</span><span class="op">&gt;</span> <span class="ident">CanSendContact</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;f</span>, <span class="lifetime">&#39;l</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">C</span>
+    <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>
 {
-    <span class="kw">fn</span> <span class="ident">contact</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;bc</span> <span class="self">self</span>, <span class="ident">phone_number</span>: <span class="ident">P</span>, <span class="ident">first_name</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">SendContact</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;f</span>, <span class="lifetime">&#39;l</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">contact</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">phone_number</span>: <span class="ident">P</span>, <span class="ident">first_name</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">SendContact</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;f</span>, <span class="lifetime">&#39;l</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="ident">P</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>,
               <span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;f</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>
     {
@@ -275,9 +273,7 @@
         <span class="kw">where</span> <span class="ident">P</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>,
               <span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;f</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>
     {
-        <span class="self">self</span>.<span class="ident">chat</span>
-            .<span class="ident">contact</span>(<span class="ident">phone_number</span>, <span class="ident">first_name</span>)
-            .<span class="ident">reply_to</span>(<span class="self">self</span>)
+        <span class="self">self</span>.<span class="ident">chat</span>.<span class="ident">contact</span>(<span class="ident">phone_number</span>, <span class="ident">first_name</span>).<span class="ident">reply_to</span>(<span class="self">self</span>)
     }
 }
 </pre>

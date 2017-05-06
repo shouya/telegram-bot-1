@@ -89,7 +89,6 @@
 <span id="44">44</span>
 <span id="45">45</span>
 <span id="46">46</span>
-<span id="47">47</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">types</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">requests</span>::<span class="kw-2">*</span>;
@@ -97,7 +96,7 @@
 <span class="doccomment">/// Use this method to edit only the reply markup of messages sent by the bot.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Serialize</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EditMessageReplyMarkup</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
-    <span class="ident">chat_id</span>: <span class="ident">ChatId</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>,
+    <span class="ident">chat_id</span>: <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>,
     <span class="ident">message_id</span>: <span class="ident">MessageId</span>,
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
     <span class="ident">reply_markup</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ReplyMarkup</span><span class="op">&gt;</span>,
@@ -118,15 +117,14 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="ident">EditMessageReplyMarkup</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">C</span>, <span class="ident">M</span>, <span class="ident">R</span><span class="op">&gt;</span>(<span class="ident">chat</span>: <span class="ident">C</span>, <span class="ident">message_id</span>: <span class="ident">M</span>, <span class="ident">reply_markup</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="self">Self</span>
-        <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ChatId</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;&gt;</span>, <span class="ident">M</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">MessageId</span><span class="op">&gt;</span>, <span class="ident">R</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ReplyMarkup</span><span class="op">&gt;</span> {
+        <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>, <span class="ident">M</span>: <span class="ident">ToMessageId</span>, <span class="ident">R</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ReplyMarkup</span><span class="op">&gt;</span> {
 
         <span class="ident">EditMessageReplyMarkup</span> {
-            <span class="ident">chat_id</span>: <span class="ident">chat</span>.<span class="ident">into</span>(),
-            <span class="ident">message_id</span>: <span class="ident">message_id</span>.<span class="ident">into</span>(),
+            <span class="ident">chat_id</span>: <span class="ident">chat</span>.<span class="ident">to_chat_ref</span>(),
+            <span class="ident">message_id</span>: <span class="ident">message_id</span>.<span class="ident">to_message_id</span>(),
             <span class="ident">reply_markup</span>: <span class="ident">reply_markup</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="ident">r</span>.<span class="ident">into</span>()),
         }
     }
-
 }
 
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanEditMessageReplyMarkup</span> {

@@ -107,11 +107,11 @@
 <span class="doccomment">/// Use this method to forward messages of any kind.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Serialize</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ForwardMessage</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> {
-    <span class="ident">chat_id</span>: <span class="ident">ChatId</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>,
-    <span class="ident">from_chat_id</span>: <span class="ident">ChatId</span><span class="op">&lt;</span><span class="lifetime">&#39;f</span><span class="op">&gt;</span>,
+    <span class="ident">chat_id</span>: <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>,
+    <span class="ident">from_chat_id</span>: <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;f</span><span class="op">&gt;</span>,
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Not::not&quot;</span>)]</span>
     <span class="ident">disable_notification</span>: <span class="ident">bool</span>,
-    <span class="ident">message_id</span>: <span class="ident">Integer</span>,
+    <span class="ident">message_id</span>: <span class="ident">MessageId</span>,
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> <span class="ident">Request</span> <span class="kw">for</span> <span class="ident">ForwardMessage</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> {
@@ -129,13 +129,13 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> <span class="ident">ForwardMessage</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">M</span>, <span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">message</span>: <span class="ident">M</span>, <span class="ident">from</span>: <span class="ident">F</span>, <span class="ident">to</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="self">Self</span>
-        <span class="kw">where</span> <span class="ident">M</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">MessageId</span><span class="op">&gt;</span>, <span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ChatId</span><span class="op">&lt;</span><span class="lifetime">&#39;f</span><span class="op">&gt;&gt;</span>, <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ChatId</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;&gt;</span> {
+        <span class="kw">where</span> <span class="ident">M</span>: <span class="ident">ToMessageId</span>, <span class="ident">F</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;f</span><span class="op">&gt;</span>, <span class="ident">T</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
 
         <span class="ident">ForwardMessage</span> {
-            <span class="ident">chat_id</span>: <span class="ident">to</span>.<span class="ident">into</span>(),
-            <span class="ident">from_chat_id</span>: <span class="ident">from</span>.<span class="ident">into</span>(),
+            <span class="ident">chat_id</span>: <span class="ident">to</span>.<span class="ident">to_chat_ref</span>(),
+            <span class="ident">from_chat_id</span>: <span class="ident">from</span>.<span class="ident">to_chat_ref</span>(),
             <span class="ident">disable_notification</span>: <span class="bool-val">false</span>,
-            <span class="ident">message_id</span>: <span class="ident">message</span>.<span class="ident">into</span>().<span class="number">0</span>,
+            <span class="ident">message_id</span>: <span class="ident">message</span>.<span class="ident">to_message_id</span>(),
         }
     }
 
@@ -146,11 +146,11 @@
 }
 
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanForwardMessage</span> {
-    <span class="kw">fn</span> <span class="ident">forward</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;f</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">to</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">ForwardMessage</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ChatId</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">forward</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;f</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">to</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">ForwardMessage</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>;
 }
 
 <span class="kw">impl</span> <span class="ident">CanForwardMessage</span> <span class="kw">for</span> <span class="ident">Message</span> {
-    <span class="kw">fn</span> <span class="ident">forward</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;f</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">to</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">ForwardMessage</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ChatId</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">forward</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;f</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">to</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">ForwardMessage</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
         <span class="ident">ForwardMessage</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">chat</span>, <span class="ident">to</span>)
     }
 }

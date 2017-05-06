@@ -49,15 +49,15 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../src/telegram_bot_raw/requests/get_user_profile_photos.rs.html#45-47' title='goto source code'>[src]</a></span></h1>
-<pre class='rust trait'>pub trait CanGetUserProfilePhotos&lt;'b&gt; {
-    fn <a href='#tymethod.get_user_profile_photos' class='fnname'>get_user_profile_photos</a>(&amp;'b self) -&gt; <a class="struct" href="../../telegram_bot/types/requests/struct.GetUserProfilePhotos.html" title="struct telegram_bot::types::requests::GetUserProfilePhotos">GetUserProfilePhotos</a>;
+<pre class='rust trait'>pub trait CanGetUserProfilePhotos {
+    fn <a href='#tymethod.get_user_profile_photos' class='fnname'>get_user_profile_photos</a>(&amp;self) -&gt; <a class="struct" href="../../telegram_bot/types/requests/struct.GetUserProfilePhotos.html" title="struct telegram_bot::types::requests::GetUserProfilePhotos">GetUserProfilePhotos</a>;
 }</pre>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.get_user_profile_photos' class='method'><span id='get_user_profile_photos.v' class='invisible'><code>fn <a href='#tymethod.get_user_profile_photos' class='fnname'>get_user_profile_photos</a>(&amp;'b self) -&gt; <a class="struct" href="../../telegram_bot/types/requests/struct.GetUserProfilePhotos.html" title="struct telegram_bot::types::requests::GetUserProfilePhotos">GetUserProfilePhotos</a></code></span></h3></div>
+        <h3 id='tymethod.get_user_profile_photos' class='method'><span id='get_user_profile_photos.v' class='invisible'><code>fn <a href='#tymethod.get_user_profile_photos' class='fnname'>get_user_profile_photos</a>(&amp;self) -&gt; <a class="struct" href="../../telegram_bot/types/requests/struct.GetUserProfilePhotos.html" title="struct telegram_bot::types::requests::GetUserProfilePhotos">GetUserProfilePhotos</a></code></span></h3></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;'b, U&gt; CanGetUserProfilePhotos&lt;'b&gt; for U <span class="where fmt-newline">where U: 'b, &amp;'b U: <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="struct" href="../../telegram_bot/types/struct.UserId.html" title="struct telegram_bot::types::UserId">UserId</a>&gt;</span></code></li>
+    <li><code>impl&lt;'b, U&gt; CanGetUserProfilePhotos for U <span class="where fmt-newline">where U: <a class="trait" href="../../telegram_bot_raw/types/chat/trait.ToUserId.html" title="trait telegram_bot_raw::types::chat::ToUserId">ToUserId</a></span></code></li>
 </ul><script type="text/javascript" async
                          src="../../implementors/telegram_bot_raw/requests/get_user_profile_photos/trait.CanGetUserProfilePhotos.js">
                  </script></section>

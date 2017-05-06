@@ -125,7 +125,7 @@
 <span class="doccomment">/// Use this method to edit text and game messages sent by the bot.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Serialize</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EditMessageText</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;s</span><span class="op">&gt;</span> {
-    <span class="ident">chat_id</span>: <span class="ident">ChatId</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>,
+    <span class="ident">chat_id</span>: <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>,
     <span class="ident">message_id</span>: <span class="ident">MessageId</span>,
     <span class="ident">text</span>: <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span>, <span class="ident">str</span><span class="op">&gt;</span>,
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
@@ -151,11 +151,11 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;s</span><span class="op">&gt;</span> <span class="ident">EditMessageText</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;s</span><span class="op">&gt;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">C</span>, <span class="ident">M</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">chat</span>: <span class="ident">C</span>, <span class="ident">message_id</span>: <span class="ident">M</span>, <span class="ident">text</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="self">Self</span>
-        <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ChatId</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;&gt;</span>, <span class="ident">M</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">MessageId</span><span class="op">&gt;</span>, <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span> {
+        <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>, <span class="ident">M</span>: <span class="ident">ToMessageId</span>, <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span> {
 
         <span class="ident">EditMessageText</span> {
-            <span class="ident">chat_id</span>: <span class="ident">chat</span>.<span class="ident">into</span>(),
-            <span class="ident">message_id</span>: <span class="ident">message_id</span>.<span class="ident">into</span>(),
+            <span class="ident">chat_id</span>: <span class="ident">chat</span>.<span class="ident">to_chat_ref</span>(),
+            <span class="ident">message_id</span>: <span class="ident">message_id</span>.<span class="ident">to_message_id</span>(),
             <span class="ident">text</span>: <span class="ident">text</span>.<span class="ident">into</span>(),
             <span class="ident">parse_mode</span>: <span class="prelude-val">None</span>,
             <span class="ident">disable_web_page_preview</span>: <span class="bool-val">false</span>,

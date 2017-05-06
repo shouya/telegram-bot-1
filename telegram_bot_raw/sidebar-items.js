@@ -1,1 +1,1 @@
-initSidebarItems({"macro":[["reply_keyboard",""]],"mod":[["requests",""],["types",""]]});
+initSidebarItems({"mod":[["requests",""],["types",""]]});
