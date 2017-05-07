@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["ErrorKind","The kind of an error."]],"mod":[["connector",""],["prelude",""],["types",""]],"struct":[["Api",""],["Error","The Error type."],["TelegramFuture",""],["UpdatesStream",""]],"type":[["Result","Convenient wrapper around `std::Result`."]]});
+initSidebarItems({"enum":[["ErrorKind","The kind of an error."]],"mod":[["connector",""],["prelude",""],["types",""]],"struct":[["Api",""],["Error","The Error type."],["TelegramFuture",""],["UpdatesStream",""]]});
