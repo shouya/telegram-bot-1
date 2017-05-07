@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `ToUserId` trait in crate `telegram_bot`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, ToUserId">
+    <meta name="description" content="API documentation for the Rust `ToReplyRequest` trait in crate `telegram_bot`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, ToReplyRequest">
 
-    <title>telegram_bot::types::ToUserId - Rust</title>
+    <title>telegram_bot::prelude::ToReplyRequest - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>telegram_bot</a>::<wbr><a href='index.html'>types</a></p><script>window.sidebarCurrent = {name: 'ToUserId', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'><a href='../index.html'>telegram_bot</a>::<wbr><a href='index.html'>prelude</a></p><script>window.sidebarCurrent = {name: 'ToReplyRequest', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -44,25 +44,28 @@
     </nav>
 
     <section id='main' class="content">
-<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>telegram_bot</a>::<wbr><a href='index.html'>types</a>::<wbr><a class="trait" href=''>ToUserId</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>telegram_bot</a>::<wbr><a href='index.html'>prelude</a>::<wbr><a class="trait" href=''>ToReplyRequest</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/telegram_bot_raw/types/chat.rs.html#87-89' title='goto source code'>[src]</a></span></h1>
-<pre class='rust trait'>pub trait ToUserId {
-    fn <a href='#tymethod.to_user_id' class='fnname'>to_user_id</a>(&amp;self) -&gt; <a class="struct" href="../../telegram_bot/types/struct.UserId.html" title="struct telegram_bot::types::UserId">UserId</a>;
+               </span><a class='srclink' href='../../src/telegram_bot_raw/requests/_base/mod.rs.html#42-45' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait ToReplyRequest&lt;'b, 'c&gt; {
+    type <a href='#associatedtype.Request' class="type">Request</a>: <a class="trait" href="../../telegram_bot/types/trait.Request.html" title="trait telegram_bot::types::Request">Request</a>;
+    fn <a href='#tymethod.to_reply_request' class='fnname'>to_reply_request</a>(&amp;'b self, message: &amp;<a class="struct" href="../../telegram_bot/types/struct.Message.html" title="struct telegram_bot::types::Message">Message</a>) -&gt; Self::<a class="trait" href="../../telegram_bot/prelude/trait.ToReplyRequest.html" title="trait telegram_bot::prelude::ToReplyRequest">Request</a>;
 }</pre>
+            <h2 id='associated-types'>Associated Types</h2>
+            <div class='methods'>
+        <h3 id='associatedtype.Request' class='method'><span id='Request.t' class='invisible'><code>type <a href='#associatedtype.Request' class="type">Request</a>: <a class="trait" href="../../telegram_bot/types/trait.Request.html" title="trait telegram_bot::types::Request">Request</a></code></span></h3></div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.to_user_id' class='method'><span id='to_user_id.v' class='invisible'><code>fn <a href='#tymethod.to_user_id' class='fnname'>to_user_id</a>(&amp;self) -&gt; <a class="struct" href="../../telegram_bot/types/struct.UserId.html" title="struct telegram_bot::types::UserId">UserId</a></code></span></h3></div>
+        <h3 id='tymethod.to_reply_request' class='method'><span id='to_reply_request.v' class='invisible'><code>fn <a href='#tymethod.to_reply_request' class='fnname'>to_reply_request</a>(&amp;'b self, message: &amp;<a class="struct" href="../../telegram_bot/types/struct.Message.html" title="struct telegram_bot::types::Message">Message</a>) -&gt; Self::<a class="trait" href="../../telegram_bot/prelude/trait.ToReplyRequest.html" title="trait telegram_bot::prelude::ToReplyRequest">Request</a></code></span></h3></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;S&gt; ToUserId for S <span class="where fmt-newline">where S: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html" title="trait core::ops::Deref">Deref</a>, S::<a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html" title="trait core::ops::Deref">Target</a>: <a class="trait" href="../../telegram_bot/types/trait.ToUserId.html" title="trait telegram_bot::types::ToUserId">ToUserId</a></span></code></li>
-<li><code>impl ToUserId for <a class="struct" href="../../telegram_bot/types/struct.UserId.html" title="struct telegram_bot::types::UserId">UserId</a></code></li>
-<li><code>impl ToUserId for <a class="struct" href="../../telegram_bot_raw/types/chat_member/struct.ChatMember.html" title="struct telegram_bot_raw::types::chat_member::ChatMember">ChatMember</a></code></li>
-<li><code>impl ToUserId for <a class="struct" href="../../telegram_bot/types/struct.User.html" title="struct telegram_bot::types::User">User</a></code></li>
+    <li><code>impl&lt;'b, 'c&gt; ToReplyRequest&lt;'b, 'c&gt; for <a class="struct" href="../../telegram_bot/types/struct.Contact.html" title="struct telegram_bot::types::Contact">Contact</a></code></li>
+<li><code>impl&lt;'b, 'c&gt; ToReplyRequest&lt;'b, 'c&gt; for <a class="struct" href="../../telegram_bot/types/struct.Location.html" title="struct telegram_bot::types::Location">Location</a></code></li>
+<li><code>impl&lt;'b, 'c&gt; ToReplyRequest&lt;'b, 'c&gt; for <a class="struct" href="../../telegram_bot/types/struct.Venue.html" title="struct telegram_bot::types::Venue">Venue</a></code></li>
 </ul><script type="text/javascript" async
-                         src="../../implementors/telegram_bot_raw/types/chat/trait.ToUserId.js">
+                         src="../../implementors/telegram_bot_raw/requests/_base/trait.ToReplyRequest.js">
                  </script></section>
     <section id='search' class="content hidden"></section>
 
