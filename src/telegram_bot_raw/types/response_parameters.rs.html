@@ -110,7 +110,7 @@
 <span class="kw">use</span> <span class="ident">types</span>::<span class="kw-2">*</span>;
 
 <span class="doccomment">/// All API responses are from this type. Mostly used internal.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Eq</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Response</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Request was successful.</span>
     <span class="ident">Success</span> {
@@ -145,7 +145,7 @@
 }
 
 <span class="doccomment">/// Directly mapped telegram API response.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Deserialize</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Eq</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>, <span class="ident">Deserialize</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RawResponse</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="doccomment">/// If ‘ok’ equals true, the request was successful.</span>
     <span class="ident">ok</span>: <span class="ident">bool</span>,
@@ -158,7 +158,7 @@
 }
 
 <span class="doccomment">/// Contains information about why a request was unsuccessful.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Deserialize</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Eq</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>, <span class="ident">Deserialize</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ResponseParameters</span> {
     <span class="doccomment">/// The group has been migrated to a supergroup with the specified identifier.</span>
     <span class="kw">pub</span> <span class="ident">migrate_to_chat_id</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Integer</span><span class="op">&gt;</span>,

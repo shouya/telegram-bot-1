@@ -7,7 +7,7 @@
     <meta name="description" content="API documentation for the Rust `ToChatRef` trait in crate `telegram_bot_raw`.">
     <meta name="keywords" content="rust, rustlang, rust-lang, ToChatRef">
 
-    <title>telegram_bot_raw::types::chat::ToChatRef - Rust</title>
+    <title>telegram_bot_raw::types::refs::ToChatRef - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>types</a>::<wbr><a href='index.html'>chat</a></p><script>window.sidebarCurrent = {name: 'ToChatRef', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'><a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>types</a>::<wbr><a href='index.html'>refs</a></p><script>window.sidebarCurrent = {name: 'ToChatRef', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -44,34 +44,36 @@
     </nav>
 
     <section id='main' class="content">
-<h1 class='fqn'><span class='in-band'>Trait <a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>types</a>::<wbr><a href='index.html'>chat</a>::<wbr><a class="trait" href=''>ToChatRef</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Trait <a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>types</a>::<wbr><a href='index.html'>refs</a>::<wbr><a class="trait" href=''>ToChatRef</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../src/telegram_bot_raw/types/chat.rs.html#24-26' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../../src/telegram_bot_raw/types/refs.rs.html#84-86' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait ToChatRef&lt;'a&gt; {
-    fn <a href='#tymethod.to_chat_ref' class='fnname'>to_chat_ref</a>(&amp;self) -&gt; <a class="enum" href="../../../telegram_bot_raw/types/chat/enum.ChatRef.html" title="enum telegram_bot_raw::types::chat::ChatRef">ChatRef</a>&lt;'a&gt;;
+    fn <a href='#tymethod.to_chat_ref' class='fnname'>to_chat_ref</a>(&amp;self) -&gt; <a class="enum" href="../../../telegram_bot_raw/types/refs/enum.ChatRef.html" title="enum telegram_bot_raw::types::refs::ChatRef">ChatRef</a>&lt;'a&gt;;
 }</pre>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.to_chat_ref' class='method'><span id='to_chat_ref.v' class='invisible'><code>fn <a href='#tymethod.to_chat_ref' class='fnname'>to_chat_ref</a>(&amp;self) -&gt; <a class="enum" href="../../../telegram_bot_raw/types/chat/enum.ChatRef.html" title="enum telegram_bot_raw::types::chat::ChatRef">ChatRef</a>&lt;'a&gt;</code></span></h3></div>
+        <h3 id='tymethod.to_chat_ref' class='method'><span id='to_chat_ref.v' class='invisible'><code>fn <a href='#tymethod.to_chat_ref' class='fnname'>to_chat_ref</a>(&amp;self) -&gt; <a class="enum" href="../../../telegram_bot_raw/types/refs/enum.ChatRef.html" title="enum telegram_bot_raw::types::refs::ChatRef">ChatRef</a>&lt;'a&gt;</code></span></h3></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;'a, S&gt; ToChatRef&lt;'a&gt; for S <span class="where fmt-newline">where S: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html" title="trait core::ops::Deref">Deref</a>, S::<a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html" title="trait core::ops::Deref">Target</a>: <a class="trait" href="../../../telegram_bot_raw/types/chat/trait.ToChatRef.html" title="trait telegram_bot_raw::types::chat::ToChatRef">ToChatRef</a>&lt;'a&gt;</span></code></li>
-<li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="enum" href="../../../telegram_bot_raw/types/chat/enum.ChatRef.html" title="enum telegram_bot_raw::types::chat::ChatRef">ChatRef</a>&lt;'a&gt;</code></li>
+    <li><code>impl&lt;'a, S&gt; ToChatRef&lt;'a&gt; for S <span class="where fmt-newline">where S: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html" title="trait core::ops::Deref">Deref</a>, S::<a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html" title="trait core::ops::Deref">Target</a>: <a class="trait" href="../../../telegram_bot_raw/types/refs/trait.ToChatRef.html" title="trait telegram_bot_raw::types::refs::ToChatRef">ToChatRef</a>&lt;'a&gt;</span></code></li>
+<li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="enum" href="../../../telegram_bot_raw/types/refs/enum.ChatRef.html" title="enum telegram_bot_raw::types::refs::ChatRef">ChatRef</a>&lt;'a&gt;</code></li>
 <li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="enum" href="../../../telegram_bot_raw/types/chat/enum.Chat.html" title="enum telegram_bot_raw::types::chat::Chat">Chat</a></code></li>
 <li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="struct" href="../../../telegram_bot_raw/types/chat_member/struct.ChatMember.html" title="struct telegram_bot_raw::types::chat_member::ChatMember">ChatMember</a></code></li>
-<li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="struct" href="../../../telegram_bot_raw/types/chat/struct.UserId.html" title="struct telegram_bot_raw::types::chat::UserId">UserId</a></code></li>
+<li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="enum" href="../../../telegram_bot_raw/types/message/enum.ForwardFrom.html" title="enum telegram_bot_raw::types::message::ForwardFrom">ForwardFrom</a></code></li>
+<li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="struct" href="../../../telegram_bot_raw/types/message/struct.Forward.html" title="struct telegram_bot_raw::types::message::Forward">Forward</a></code></li>
+<li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="struct" href="../../../telegram_bot_raw/types/refs/struct.UserId.html" title="struct telegram_bot_raw::types::refs::UserId">UserId</a></code></li>
 <li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="struct" href="../../../telegram_bot_raw/types/chat/struct.User.html" title="struct telegram_bot_raw::types::chat::User">User</a></code></li>
-<li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="struct" href="../../../telegram_bot_raw/types/chat/struct.GroupId.html" title="struct telegram_bot_raw::types::chat::GroupId">GroupId</a></code></li>
+<li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="struct" href="../../../telegram_bot_raw/types/refs/struct.GroupId.html" title="struct telegram_bot_raw::types::refs::GroupId">GroupId</a></code></li>
 <li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="struct" href="../../../telegram_bot_raw/types/chat/struct.Group.html" title="struct telegram_bot_raw::types::chat::Group">Group</a></code></li>
-<li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="struct" href="../../../telegram_bot_raw/types/chat/struct.SupergroupId.html" title="struct telegram_bot_raw::types::chat::SupergroupId">SupergroupId</a></code></li>
+<li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="struct" href="../../../telegram_bot_raw/types/refs/struct.SupergroupId.html" title="struct telegram_bot_raw::types::refs::SupergroupId">SupergroupId</a></code></li>
 <li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="struct" href="../../../telegram_bot_raw/types/chat/struct.Supergroup.html" title="struct telegram_bot_raw::types::chat::Supergroup">Supergroup</a></code></li>
-<li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="struct" href="../../../telegram_bot_raw/types/chat/struct.ChannelId.html" title="struct telegram_bot_raw::types::chat::ChannelId">ChannelId</a></code></li>
+<li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="struct" href="../../../telegram_bot_raw/types/refs/struct.ChannelId.html" title="struct telegram_bot_raw::types::refs::ChannelId">ChannelId</a></code></li>
 <li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="struct" href="../../../telegram_bot_raw/types/chat/struct.Channel.html" title="struct telegram_bot_raw::types::chat::Channel">Channel</a></code></li>
-<li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="struct" href="../../../telegram_bot_raw/types/chat/struct.ChatId.html" title="struct telegram_bot_raw::types::chat::ChatId">ChatId</a></code></li>
+<li><code>impl&lt;'a&gt; ToChatRef&lt;'a&gt; for <a class="struct" href="../../../telegram_bot_raw/types/refs/struct.ChatId.html" title="struct telegram_bot_raw::types::refs::ChatId">ChatId</a></code></li>
 </ul><script type="text/javascript" async
-                         src="../../../implementors/telegram_bot_raw/types/chat/trait.ToChatRef.js">
+                         src="../../../implementors/telegram_bot_raw/types/refs/trait.ToChatRef.js">
                  </script></section>
     <section id='search' class="content hidden"></section>
 

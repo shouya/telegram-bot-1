@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `ToUserId` trait in crate `telegram_bot_raw`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, ToUserId">
+    <meta name="description" content="API documentation for the Rust `ToMessageId` trait in crate `telegram_bot_raw`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, ToMessageId">
 
-    <title>telegram_bot_raw::types::chat::ToUserId - Rust</title>
+    <title>telegram_bot_raw::types::refs::ToMessageId - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>types</a>::<wbr><a href='index.html'>chat</a></p><script>window.sidebarCurrent = {name: 'ToUserId', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'><a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>types</a>::<wbr><a href='index.html'>refs</a></p><script>window.sidebarCurrent = {name: 'ToMessageId', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -44,25 +44,24 @@
     </nav>
 
     <section id='main' class="content">
-<h1 class='fqn'><span class='in-band'>Trait <a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>types</a>::<wbr><a href='index.html'>chat</a>::<wbr><a class="trait" href=''>ToUserId</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Trait <a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>types</a>::<wbr><a href='index.html'>refs</a>::<wbr><a class="trait" href=''>ToMessageId</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../src/telegram_bot_raw/types/chat.rs.html#93-95' title='goto source code'>[src]</a></span></h1>
-<pre class='rust trait'>pub trait ToUserId {
-    fn <a href='#tymethod.to_user_id' class='fnname'>to_user_id</a>(&amp;self) -&gt; <a class="struct" href="../../../telegram_bot_raw/types/chat/struct.UserId.html" title="struct telegram_bot_raw::types::chat::UserId">UserId</a>;
+               </span><a class='srclink' href='../../../src/telegram_bot_raw/types/refs.rs.html#216-218' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait ToMessageId {
+    fn <a href='#tymethod.to_message_id' class='fnname'>to_message_id</a>(&amp;self) -&gt; <a class="struct" href="../../../telegram_bot_raw/types/refs/struct.MessageId.html" title="struct telegram_bot_raw::types::refs::MessageId">MessageId</a>;
 }</pre>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.to_user_id' class='method'><span id='to_user_id.v' class='invisible'><code>fn <a href='#tymethod.to_user_id' class='fnname'>to_user_id</a>(&amp;self) -&gt; <a class="struct" href="../../../telegram_bot_raw/types/chat/struct.UserId.html" title="struct telegram_bot_raw::types::chat::UserId">UserId</a></code></span></h3></div>
+        <h3 id='tymethod.to_message_id' class='method'><span id='to_message_id.v' class='invisible'><code>fn <a href='#tymethod.to_message_id' class='fnname'>to_message_id</a>(&amp;self) -&gt; <a class="struct" href="../../../telegram_bot_raw/types/refs/struct.MessageId.html" title="struct telegram_bot_raw::types::refs::MessageId">MessageId</a></code></span></h3></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;S&gt; ToUserId for S <span class="where fmt-newline">where S: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html" title="trait core::ops::Deref">Deref</a>, S::<a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html" title="trait core::ops::Deref">Target</a>: <a class="trait" href="../../../telegram_bot_raw/types/chat/trait.ToUserId.html" title="trait telegram_bot_raw::types::chat::ToUserId">ToUserId</a></span></code></li>
-<li><code>impl ToUserId for <a class="struct" href="../../../telegram_bot_raw/types/chat/struct.UserId.html" title="struct telegram_bot_raw::types::chat::UserId">UserId</a></code></li>
-<li><code>impl ToUserId for <a class="struct" href="../../../telegram_bot_raw/types/chat_member/struct.ChatMember.html" title="struct telegram_bot_raw::types::chat_member::ChatMember">ChatMember</a></code></li>
-<li><code>impl ToUserId for <a class="struct" href="../../../telegram_bot_raw/types/chat/struct.User.html" title="struct telegram_bot_raw::types::chat::User">User</a></code></li>
+    <li><code>impl&lt;S&gt; ToMessageId for S <span class="where fmt-newline">where S: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html" title="trait core::ops::Deref">Deref</a>, S::<a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html" title="trait core::ops::Deref">Target</a>: <a class="trait" href="../../../telegram_bot_raw/types/refs/trait.ToMessageId.html" title="trait telegram_bot_raw::types::refs::ToMessageId">ToMessageId</a></span></code></li>
+<li><code>impl ToMessageId for <a class="struct" href="../../../telegram_bot_raw/types/refs/struct.MessageId.html" title="struct telegram_bot_raw::types::refs::MessageId">MessageId</a></code></li>
+<li><code>impl ToMessageId for <a class="struct" href="../../../telegram_bot_raw/types/message/struct.Message.html" title="struct telegram_bot_raw::types::message::Message">Message</a></code></li>
 </ul><script type="text/javascript" async
-                         src="../../../implementors/telegram_bot_raw/types/chat/trait.ToUserId.js">
+                         src="../../../implementors/telegram_bot_raw/types/refs/trait.ToMessageId.js">
                  </script></section>
     <section id='search' class="content hidden"></section>
 

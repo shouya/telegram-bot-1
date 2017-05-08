@@ -213,9 +213,9 @@
     <span class="kw">fn</span> <span class="ident">location_reply</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">latitude</span>: <span class="ident">Float</span>, <span class="ident">longitude</span>: <span class="ident">Float</span>) <span class="op">-&gt;</span> <span class="ident">SendLocation</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>;
 }
 
-<span class="kw">impl</span> <span class="ident">CanReplySendLocation</span> <span class="kw">for</span> <span class="ident">Message</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span> <span class="ident">CanReplySendLocation</span> <span class="kw">for</span> <span class="ident">M</span> <span class="kw">where</span> <span class="ident">M</span>: <span class="ident">ToMessageId</span> <span class="op">+</span> <span class="ident">ToSourceChat</span> {
     <span class="kw">fn</span> <span class="ident">location_reply</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">latitude</span>: <span class="ident">Float</span>, <span class="ident">longitude</span>: <span class="ident">Float</span>) <span class="op">-&gt;</span> <span class="ident">SendLocation</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">chat</span>.<span class="ident">location</span>(<span class="ident">latitude</span>, <span class="ident">longitude</span>).<span class="ident">reply_to</span>(<span class="self">self</span>)
+        <span class="self">self</span>.<span class="ident">to_source_chat</span>().<span class="ident">location</span>(<span class="ident">latitude</span>, <span class="ident">longitude</span>).<span class="ident">reply_to</span>(<span class="self">self</span>.<span class="ident">to_message_id</span>())
     }
 }
 

@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["ChatRef","Unique identifier for the target chat or username of the target channel (in the format @channelusername)"]],"struct":[["ChannelId",""],["ChatId",""],["GroupId",""],["MessageId",""],["SupergroupId",""],["UserId",""]],"trait":[["ToChatRef",""],["ToMessageId",""],["ToSourceChat",""],["ToUserId",""]]});
