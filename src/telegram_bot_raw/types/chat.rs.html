@@ -315,6 +315,12 @@
 <span id="270">270</span>
 <span id="271">271</span>
 <span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">Deref</span>;
@@ -349,15 +355,15 @@
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Chat</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">id</span>().<span class="ident">to_chat_ref</span>()
+        <span class="self">self</span>.<span class="ident">clone</span>()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">User</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Chat</span> {
     <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">id</span>.<span class="ident">to_chat_ref</span>()
+        <span class="self">self</span>.<span class="ident">id</span>().<span class="ident">to_chat_ref</span>()
     }
 }
 
@@ -379,10 +385,10 @@
 }
 
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">chat_id_impls</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>: <span class="ident">ident</span>) <span class="op">=&gt;</span> {
-        <span class="macro">integer_id_impls</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>);
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">id</span>: <span class="ident">ident</span>) <span class="op">=&gt;</span> {
+        <span class="macro">integer_id_impls</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">id</span>);
 
-        <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span> {
+        <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">id</span> {
             <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
                 <span class="ident">ChatRef</span>::<span class="ident">from_chat_id</span>((<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">into</span>())
             }
@@ -390,13 +396,19 @@
     };
 }
 
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">concrete_chat_id_impls</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>: <span class="ident">ident</span>) <span class="op">=&gt;</span> {
-        <span class="macro">chat_id_impls</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>);
+<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">specific_chat_id_impls</span> {
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">id</span>: <span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">typ</span>: <span class="ident">ident</span>) <span class="op">=&gt;</span> {
+        <span class="macro">chat_id_impls</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">id</span>);
 
-        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ChatId</span> {
-            <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">c</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">id</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ChatId</span> {
+            <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">c</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">id</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
                 <span class="ident">ChatId</span>::<span class="ident">new</span>(<span class="ident">c</span>.<span class="ident">into</span>())
+            }
+        }
+
+        <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">typ</span> {
+            <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+                <span class="self">self</span>.<span class="ident">id</span>.<span class="ident">to_chat_ref</span>()
             }
         }
     };
@@ -432,19 +444,19 @@
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">UserId</span>(<span class="ident">Integer</span>);
-<span class="macro">concrete_chat_id_impls</span><span class="macro">!</span>(<span class="ident">UserId</span>);
+<span class="macro">specific_chat_id_impls</span><span class="macro">!</span>(<span class="ident">UserId</span>, <span class="ident">User</span>);
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GroupId</span>(<span class="ident">Integer</span>);
-<span class="macro">concrete_chat_id_impls</span><span class="macro">!</span>(<span class="ident">GroupId</span>);
+<span class="macro">specific_chat_id_impls</span><span class="macro">!</span>(<span class="ident">GroupId</span>, <span class="ident">Group</span>);
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SupergroupId</span>(<span class="ident">Integer</span>);
-<span class="macro">concrete_chat_id_impls</span><span class="macro">!</span>(<span class="ident">SupergroupId</span>);
+<span class="macro">specific_chat_id_impls</span><span class="macro">!</span>(<span class="ident">SupergroupId</span>, <span class="ident">Supergroup</span>);
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ChannelId</span>(<span class="ident">Integer</span>);
-<span class="macro">concrete_chat_id_impls</span><span class="macro">!</span>(<span class="ident">ChannelId</span>);
+<span class="macro">specific_chat_id_impls</span><span class="macro">!</span>(<span class="ident">ChannelId</span>, <span class="ident">Channel</span>);
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ChatId</span>(<span class="ident">Integer</span>);

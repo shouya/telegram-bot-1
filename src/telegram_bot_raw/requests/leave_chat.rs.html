@@ -114,11 +114,11 @@
 }
 
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanLeaveChat</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">leave_chat</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">LeaveChat</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">leave</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">LeaveChat</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="ident">C</span><span class="op">&gt;</span> <span class="ident">CanLeaveChat</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">C</span> <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">leave_chat</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">LeaveChat</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">leave</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">LeaveChat</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
         <span class="ident">LeaveChat</span>::<span class="ident">new</span>(<span class="self">self</span>)
     }
 }
