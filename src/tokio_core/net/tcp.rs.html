@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-core-0.1.6/src/net/tcp.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-core-0.1.7/src/net/tcp.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>tcp.rs.html -- source</title>
@@ -707,8 +707,6 @@
 <span id="662">662</span>
 <span id="663">663</span>
 <span id="664">664</span>
-<span id="665">665</span>
-<span id="666">666</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>::{<span class="self">self</span>, <span class="ident">Read</span>, <span class="ident">Write</span>};
@@ -1223,7 +1221,7 @@
 
     <span class="kw">fn</span> <span class="ident">read_buf</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">BufMut</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">B</span>) <span class="op">-&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="ident">usize</span>, <span class="ident">io</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Async</span>::<span class="ident">NotReady</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">TcpStream</span><span class="op">&gt;</span>::<span class="ident">poll_read</span>(<span class="self">self</span>) {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(::<span class="ident">would_block</span>())
+            <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>)
         }
         <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bufs</span>: [_; <span class="number">16</span>] <span class="op">=</span> <span class="ident">Default</span>::<span class="ident">default</span>();
@@ -1236,12 +1234,11 @@
                 <span class="kw">unsafe</span> { <span class="ident">buf</span>.<span class="ident">advance_mut</span>(<span class="ident">n</span>); }
                 <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="ident">n</span>))
             }
-            <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> {
-                <span class="kw">if</span> <span class="ident">e</span>.<span class="ident">kind</span>() <span class="op">==</span> <span class="ident">io</span>::<span class="ident">ErrorKind</span>::<span class="ident">WouldBlock</span> {
-                    <span class="self">self</span>.<span class="ident">io</span>.<span class="ident">need_write</span>();
-                }
-                <span class="prelude-val">Err</span>(<span class="ident">e</span>)
+            <span class="prelude-val">Err</span>(<span class="kw-2">ref</span> <span class="ident">e</span>) <span class="kw">if</span> <span class="ident">e</span>.<span class="ident">kind</span>() <span class="op">==</span> <span class="ident">io</span>::<span class="ident">ErrorKind</span>::<span class="ident">WouldBlock</span> <span class="op">=&gt;</span> {
+                <span class="self">self</span>.<span class="ident">io</span>.<span class="ident">need_read</span>();
+                <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>)
             }
+            <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>),
         }
     }
 }
@@ -1253,7 +1250,7 @@
 
     <span class="kw">fn</span> <span class="ident">write_buf</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">Buf</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">B</span>) <span class="op">-&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="ident">usize</span>, <span class="ident">io</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Async</span>::<span class="ident">NotReady</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">TcpStream</span><span class="op">&gt;</span>::<span class="ident">poll_write</span>(<span class="self">self</span>) {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(::<span class="ident">would_block</span>())
+            <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>)
         }
         <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bufs</span>: [_; <span class="number">16</span>] <span class="op">=</span> <span class="ident">Default</span>::<span class="ident">default</span>();
@@ -1265,12 +1262,11 @@
                 <span class="ident">buf</span>.<span class="ident">advance</span>(<span class="ident">n</span>);
                 <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="ident">n</span>))
             }
-            <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> {
-                <span class="kw">if</span> <span class="ident">e</span>.<span class="ident">kind</span>() <span class="op">==</span> <span class="ident">io</span>::<span class="ident">ErrorKind</span>::<span class="ident">WouldBlock</span> {
-                    <span class="self">self</span>.<span class="ident">io</span>.<span class="ident">need_write</span>();
-                }
-                <span class="prelude-val">Err</span>(<span class="ident">e</span>)
+            <span class="prelude-val">Err</span>(<span class="kw-2">ref</span> <span class="ident">e</span>) <span class="kw">if</span> <span class="ident">e</span>.<span class="ident">kind</span>() <span class="op">==</span> <span class="ident">io</span>::<span class="ident">ErrorKind</span>::<span class="ident">WouldBlock</span> <span class="op">=&gt;</span> {
+                <span class="self">self</span>.<span class="ident">io</span>.<span class="ident">need_write</span>();
+                <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>)
             }
+            <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>),
         }
     }
 }

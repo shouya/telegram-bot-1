@@ -163,17 +163,17 @@
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse_mode</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">parse_mode</span>: <span class="ident">ParseMode</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse_mode</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">parse_mode</span>: <span class="ident">ParseMode</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">parse_mode</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">parse_mode</span>);
         <span class="self">self</span>
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">disable_web_page_preview</span>(<span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> { <span class="comment">// TODO(knsd): Rename to disable_preview?</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">disable_preview</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">disable_web_page_preview</span> <span class="op">=</span> <span class="bool-val">true</span>;
         <span class="self">self</span>
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reply_markup</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">reply_markup</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="self">Self</span> <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ReplyMarkup</span><span class="op">&gt;</span> { <span class="comment">// TODO(knsd): nice builder?</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reply_markup</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">reply_markup</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ReplyMarkup</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">reply_markup</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">reply_markup</span>.<span class="ident">into</span>());
         <span class="self">self</span>
     }

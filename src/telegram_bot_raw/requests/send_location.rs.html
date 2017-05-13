@@ -138,6 +138,8 @@
 <span id="93">93</span>
 <span id="94">94</span>
 <span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">Not</span>;
 
@@ -183,17 +185,17 @@
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">disable_notification</span>(<span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">disable_notification</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">disable_notification</span> <span class="op">=</span> <span class="bool-val">true</span>;
         <span class="self">self</span>
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reply_to</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="self">Self</span> <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">ToMessageId</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reply_to</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">ToMessageId</span> {
         <span class="self">self</span>.<span class="ident">reply_to_message_id</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">to</span>.<span class="ident">to_message_id</span>());
         <span class="self">self</span>
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reply_markup</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">reply_markup</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="self">Self</span> <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ReplyMarkup</span><span class="op">&gt;</span> { <span class="comment">// TODO(knsd): nice builder?</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reply_markup</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">reply_markup</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ReplyMarkup</span><span class="op">&gt;</span> { <span class="comment">// TODO(knsd): nice builder?</span>
         <span class="self">self</span>.<span class="ident">reply_markup</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">reply_markup</span>.<span class="ident">into</span>());
         <span class="self">self</span>
     }
@@ -215,7 +217,9 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span> <span class="ident">CanReplySendLocation</span> <span class="kw">for</span> <span class="ident">M</span> <span class="kw">where</span> <span class="ident">M</span>: <span class="ident">ToMessageId</span> <span class="op">+</span> <span class="ident">ToSourceChat</span> {
     <span class="kw">fn</span> <span class="ident">location_reply</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">latitude</span>: <span class="ident">Float</span>, <span class="ident">longitude</span>: <span class="ident">Float</span>) <span class="op">-&gt;</span> <span class="ident">SendLocation</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">to_source_chat</span>().<span class="ident">location</span>(<span class="ident">latitude</span>, <span class="ident">longitude</span>).<span class="ident">reply_to</span>(<span class="self">self</span>.<span class="ident">to_message_id</span>())
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rq</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">to_source_chat</span>().<span class="ident">location</span>(<span class="ident">latitude</span>, <span class="ident">longitude</span>);
+        <span class="ident">rq</span>.<span class="ident">reply_to</span>(<span class="self">self</span>.<span class="ident">to_message_id</span>());
+        <span class="ident">rq</span>
     }
 }
 

@@ -203,6 +203,8 @@
 <span id="158">158</span>
 <span id="159">159</span>
 <span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">Not</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
@@ -260,26 +262,26 @@
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">disable_notification</span>(<span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">disable_notification</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">disable_notification</span> <span class="op">=</span> <span class="bool-val">true</span>;
         <span class="self">self</span>
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">foursquare_id</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">id</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">foursquare_id</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">id</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>
         <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;f</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>
     {
         <span class="self">self</span>.<span class="ident">foursquare_id</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">id</span>.<span class="ident">into</span>());
         <span class="self">self</span>
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reply_to</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reply_to</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>
         <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">ToMessageId</span>
     {
         <span class="self">self</span>.<span class="ident">reply_to_message_id</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">to</span>.<span class="ident">to_message_id</span>());
         <span class="self">self</span>
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reply_markup</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">reply_markup</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reply_markup</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">reply_markup</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>
         <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ReplyMarkup</span><span class="op">&gt;</span>
     {
         <span class="self">self</span>.<span class="ident">reply_markup</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">reply_markup</span>.<span class="ident">into</span>());
@@ -335,7 +337,9 @@
         <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>,
               <span class="ident">A</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>
     {
-        <span class="self">self</span>.<span class="ident">to_source_chat</span>().<span class="ident">venue</span>(<span class="ident">latitude</span>, <span class="ident">longitude</span>, <span class="ident">title</span>, <span class="ident">address</span>).<span class="ident">reply_to</span>(<span class="self">self</span>.<span class="ident">to_message_id</span>())
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rq</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">to_source_chat</span>().<span class="ident">venue</span>(<span class="ident">latitude</span>, <span class="ident">longitude</span>, <span class="ident">title</span>, <span class="ident">address</span>);
+        <span class="ident">rq</span>.<span class="ident">reply_to</span>(<span class="self">self</span>.<span class="ident">to_message_id</span>());
+        <span class="ident">rq</span>
     }
 }
 
@@ -346,7 +350,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rq</span> <span class="op">=</span> <span class="ident">chat</span>.<span class="ident">venue</span>(<span class="self">self</span>.<span class="ident">location</span>.<span class="ident">latitude</span>, <span class="self">self</span>.<span class="ident">location</span>.<span class="ident">longitude</span>,
                                 <span class="self">self</span>.<span class="ident">title</span>.<span class="ident">as_str</span>(), <span class="self">self</span>.<span class="ident">address</span>.<span class="ident">as_str</span>());
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">foursquare_id</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">foursquare_id</span> {
-            <span class="ident">rq</span> <span class="op">=</span> <span class="ident">rq</span>.<span class="ident">foursquare_id</span>(<span class="ident">foursquare_id</span>.<span class="ident">as_str</span>())
+            <span class="ident">rq</span>.<span class="ident">foursquare_id</span>(<span class="ident">foursquare_id</span>.<span class="ident">as_str</span>());
         }
         <span class="ident">rq</span>
     }
@@ -359,7 +363,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rq</span> <span class="op">=</span> <span class="ident">message</span>.<span class="ident">venue_reply</span>(<span class="self">self</span>.<span class="ident">location</span>.<span class="ident">latitude</span>, <span class="self">self</span>.<span class="ident">location</span>.<span class="ident">longitude</span>,
                                          <span class="self">self</span>.<span class="ident">title</span>.<span class="ident">as_str</span>(), <span class="self">self</span>.<span class="ident">address</span>.<span class="ident">as_str</span>());
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">foursquare_id</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">foursquare_id</span> {
-            <span class="ident">rq</span> <span class="op">=</span> <span class="ident">rq</span>.<span class="ident">foursquare_id</span>(<span class="ident">foursquare_id</span>.<span class="ident">as_str</span>())
+            <span class="ident">rq</span>.<span class="ident">foursquare_id</span>(<span class="ident">foursquare_id</span>.<span class="ident">as_str</span>());
         }
         <span class="ident">rq</span>
     }
