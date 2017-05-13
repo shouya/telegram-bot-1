@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Response","All API responses are from this type. Mostly used internal."]],"struct":[["RawResponse","Directly mapped telegram API response."],["ResponseParameters","Contains information about why a request was unsuccessful."]]});
+initSidebarItems({"enum":[["ResponseWrapper","All API responses are from this type. Mostly used internal."]],"struct":[["RawResponse","Directly mapped telegram API response."],["ResponseParameters","Contains information about why a request was unsuccessful."]]});

@@ -114,11 +114,6 @@
 <span id="69">69</span>
 <span id="70">70</span>
 <span id="71">71</span>
-<span id="72">72</span>
-<span id="73">73</span>
-<span id="74">74</span>
-<span id="75">75</span>
-<span id="76">76</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">requests</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">types</span>::<span class="kw-2">*</span>;
@@ -136,14 +131,9 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Request</span> <span class="kw">for</span> <span class="ident">GetUpdates</span> {
-    <span class="kw">type</span> <span class="ident">Response</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Update</span><span class="op">&gt;</span>;
-    <span class="kw">type</span> <span class="ident">RawResponse</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Update</span><span class="op">&gt;</span>;
+    <span class="kw">type</span> <span class="ident">Response</span> <span class="op">=</span> <span class="ident">IdResponse</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Update</span><span class="op">&gt;&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">map</span>(<span class="ident">raw</span>: <span class="self">Self</span>::<span class="ident">RawResponse</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Response</span> {
-        <span class="ident">raw</span>
-    }
-
-    <span class="kw">fn</span> <span class="ident">name</span>() <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
+    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
         <span class="string">&quot;getUpdates&quot;</span>
     }
 }

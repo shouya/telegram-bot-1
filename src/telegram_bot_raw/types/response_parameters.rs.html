@@ -111,7 +111,7 @@
 
 <span class="doccomment">/// All API responses are from this type. Mostly used internal.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Eq</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Response</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ResponseWrapper</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Request was successful.</span>
     <span class="ident">Success</span> {
         <span class="doccomment">/// Response result.</span>
@@ -126,19 +126,19 @@
     },
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span>, <span class="ident">T</span>: <span class="ident">Deserialize</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;&gt;</span> <span class="ident">Deserialize</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Response</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">deserialize</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>(<span class="ident">deserializer</span>: <span class="ident">D</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Response</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">D</span>::<span class="ident">Error</span><span class="op">&gt;</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span>, <span class="ident">T</span>: <span class="ident">Deserialize</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;&gt;</span> <span class="ident">Deserialize</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ResponseWrapper</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">deserialize</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>(<span class="ident">deserializer</span>: <span class="ident">D</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ResponseWrapper</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">D</span>::<span class="ident">Error</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="ident">D</span>: <span class="ident">Deserializer</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>
     {
         <span class="kw">let</span> <span class="ident">raw</span>: <span class="ident">RawResponse</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Deserialize</span>::<span class="ident">deserialize</span>(<span class="ident">deserializer</span>)<span class="question-mark">?</span>;
         <span class="kw">match</span> (<span class="ident">raw</span>.<span class="ident">ok</span>, <span class="ident">raw</span>.<span class="ident">description</span>, <span class="ident">raw</span>.<span class="ident">result</span>) {
             (<span class="bool-val">false</span>, <span class="prelude-val">Some</span>(<span class="ident">description</span>), <span class="prelude-val">None</span>) <span class="op">=&gt;</span> {
-                <span class="prelude-val">Ok</span>(<span class="ident">Response</span>::<span class="ident">Error</span> {
+                <span class="prelude-val">Ok</span>(<span class="ident">ResponseWrapper</span>::<span class="ident">Error</span> {
                     <span class="ident">description</span>: <span class="ident">description</span>,
                     <span class="ident">parameters</span>: <span class="ident">raw</span>.<span class="ident">parameters</span>,
                 })
             }
-            (<span class="bool-val">true</span>, <span class="prelude-val">None</span>, <span class="prelude-val">Some</span>(<span class="ident">result</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Response</span>::<span class="ident">Success</span> { <span class="ident">result</span>: <span class="ident">result</span> }),
+            (<span class="bool-val">true</span>, <span class="prelude-val">None</span>, <span class="prelude-val">Some</span>(<span class="ident">result</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">ResponseWrapper</span>::<span class="ident">Success</span> { <span class="ident">result</span>: <span class="ident">result</span> }),
             _ <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">D</span>::<span class="ident">Error</span>::<span class="ident">custom</span>(<span class="string">&quot;ambiguous response&quot;</span>)),
         }
     }

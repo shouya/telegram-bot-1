@@ -89,11 +89,6 @@
 <span id="44">44</span>
 <span id="45">45</span>
 <span id="46">46</span>
-<span id="47">47</span>
-<span id="48">48</span>
-<span id="49">49</span>
-<span id="50">50</span>
-<span id="51">51</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">types</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">requests</span>::<span class="kw-2">*</span>;
@@ -106,14 +101,9 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="ident">Request</span> <span class="kw">for</span> <span class="ident">GetChatMember</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Response</span> <span class="op">=</span> <span class="ident">ChatMember</span>;
-    <span class="kw">type</span> <span class="ident">RawResponse</span> <span class="op">=</span> <span class="ident">ChatMember</span>;
+    <span class="kw">type</span> <span class="ident">Response</span> <span class="op">=</span> <span class="ident">IdResponse</span><span class="op">&lt;</span><span class="ident">ChatMember</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">map</span>(<span class="ident">raw</span>: <span class="self">Self</span>::<span class="ident">RawResponse</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Response</span> {
-        <span class="ident">raw</span>
-    }
-
-    <span class="kw">fn</span> <span class="ident">name</span>() <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
+    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
         <span class="string">&quot;getChatMember&quot;</span>
     }
 }
