@@ -124,7 +124,12 @@
 <span id="79">79</span>
 <span id="80">80</span>
 <span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
 </pre><pre class="rust ">
+<span class="doccomment">//! Connector with tokio-curl backend.</span>
+
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">Arc</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">rc</span>::<span class="ident">Rc</span>;
@@ -141,6 +146,7 @@
 
 <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">_base</span>::<span class="ident">Connector</span>;
 
+<span class="doccomment">/// This connector uses `tokio-curl` backend.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CurlConnector</span> {
     <span class="ident">inner</span>: <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">Session</span><span class="op">&gt;</span>
 }

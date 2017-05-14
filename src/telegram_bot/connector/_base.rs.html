@@ -50,12 +50,16 @@
 <span id="5">5</span>
 <span id="6">6</span>
 <span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span>;
 
 <span class="kw">use</span> <span class="ident">future</span>::<span class="ident">TelegramFuture</span>;
 
+<span class="doccomment">/// Connector provides basic IO with Telegram Bot API server.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Connector</span>: <span class="ident">Debug</span> {
+    <span class="doccomment">/// Make POST request with `application/json` content type.</span>
     <span class="kw">fn</span> <span class="ident">post_json</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">uri</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">data</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">TelegramFuture</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;&gt;</span>;
 }
 </pre>

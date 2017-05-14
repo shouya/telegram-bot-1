@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["default_connector","Returns default connector."]],"mod":[["curl",""]],"trait":[["Connector",""]]});
+initSidebarItems({"fn":[["default_connector","Returns default connector."]],"mod":[["curl","Connector with tokio-curl backend."]],"trait":[["Connector","Connector provides basic IO with Telegram Bot API server."]]});
