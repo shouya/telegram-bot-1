@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["ErrorKind","The kind of an error."]],"mod":[["connector",""],["prelude",""],["types",""]],"struct":[["Api",""],["Error","The Error type."],["TelegramFuture",""],["UpdatesStream",""]]});
+initSidebarItems({"enum":[["ErrorKind","The kind of an error."]],"mod":[["connector",""],["prelude",""],["types",""]],"struct":[["Api",""],["Config",""],["DefaultConnector",""],["Error","The Error type."],["SpecifiedConnector",""],["TelegramFuture",""],["UpdatesStream",""]],"trait":[["ConnectorConfig",""]]});

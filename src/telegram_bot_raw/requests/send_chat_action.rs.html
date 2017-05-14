@@ -103,6 +103,7 @@
 <span id="58">58</span>
 <span id="59">59</span>
 <span id="60">60</span>
+<span id="61">61</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">types</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">requests</span>::<span class="kw-2">*</span>;
@@ -110,6 +111,7 @@
 <span class="doccomment">/// Strongly typed ChatAction. Instead of passing a String to the</span>
 <span class="doccomment">/// `chat_action` method, this is used.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Serialize</span>)]</span>
+<span class="attribute">#[<span class="ident">must_use</span> <span class="op">=</span> <span class="string">&quot;requests do nothing unless sent&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ChatAction</span> {
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;typing&quot;</span>)]</span>
     <span class="ident">Typing</span>,
