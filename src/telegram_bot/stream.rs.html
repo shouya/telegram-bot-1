@@ -160,6 +160,18 @@
 <span id="115">115</span>
 <span id="116">116</span>
 <span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cmp</span>::<span class="ident">max</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">VecDeque</span>;
@@ -177,6 +189,8 @@
 <span class="kw">const</span> <span class="ident">TELEGRAM_LONG_POLL_TIMEOUT_SECONDS</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">5</span>;
 <span class="kw">const</span> <span class="ident">TELEGRAM_LONG_POLL_ERROR_DELAY_MILLISECONDS</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">500</span>;
 
+<span class="doccomment">/// This type represents stream of Telegram API updates and uses</span>
+<span class="doccomment">/// long polling method under the hood.</span>
 <span class="attribute">#[<span class="ident">must_use</span> <span class="op">=</span> <span class="string">&quot;streams do nothing unless polled&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">UpdatesStream</span> {
     <span class="ident">api</span>: <span class="ident">Api</span>,
@@ -268,11 +282,21 @@
 }
 
 <span class="kw">impl</span> <span class="ident">UpdatesStream</span> {
+    <span class="doccomment">/// Set timeout for long polling requests, this corresponds with `timeout` field</span>
+    <span class="doccomment">/// in [getUpdates](https://core.telegram.org/bots/api#getupdates) method,</span>
+    <span class="doccomment">/// also this stream sets an additional request timeout for `timeout + 1 second`</span>
+    <span class="doccomment">/// in case of invalid Telegram API server behaviour.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Default timeout is 5 seconds.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">timeout</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">timeout</span>: <span class="ident">Duration</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">timeout</span> <span class="op">=</span> <span class="ident">timeout</span>;
         <span class="self">self</span>
     }
 
+    <span class="doccomment">/// Set a delay between erroneous request and next request.</span>
+    <span class="doccomment">/// This delay prevents busy looping in some cases.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Default delay is 500 ms.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">error_delay</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">delay</span>: <span class="ident">Duration</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">error_delay</span> <span class="op">=</span> <span class="ident">delay</span>;
         <span class="self">self</span>

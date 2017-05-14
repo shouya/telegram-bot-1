@@ -72,11 +72,13 @@
 <span id="27">27</span>
 <span id="28">28</span>
 <span id="29">29</span>
+<span id="30">30</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">futures</span>::{<span class="ident">Future</span>, <span class="ident">Poll</span>};
 
 <span class="kw">use</span> <span class="ident">errors</span>::<span class="ident">Error</span>;
 
+<span class="doccomment">/// Represent a future that resolves into Telegram API response.</span>
 <span class="attribute">#[<span class="ident">must_use</span> <span class="op">=</span> <span class="string">&quot;futures do nothing unless polled&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TelegramFuture</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="ident">inner</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Future</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span><span class="ident">T</span>, <span class="ident">Error</span><span class="op">=</span><span class="ident">Error</span><span class="op">&gt;&gt;</span>

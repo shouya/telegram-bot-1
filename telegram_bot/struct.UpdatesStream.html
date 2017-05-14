@@ -48,12 +48,24 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../src/telegram_bot/stream.rs.html#18-26' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/telegram_bot/stream.rs.html#20-28' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'><div class="docblock attributes">#[must_use = "streams do nothing unless polled"]
-</div>pub struct UpdatesStream { /* fields omitted */ }</pre><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../telegram_bot/struct.UpdatesStream.html" title="struct telegram_bot::UpdatesStream">UpdatesStream</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/telegram_bot/stream.rs.html#107-117' title='goto source code'>[src]</a></span></h3>
+</div>pub struct UpdatesStream { /* fields omitted */ }</pre><div class='docblock'><p>This type represents stream of Telegram API updates and uses
+long polling method under the hood.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../telegram_bot/struct.UpdatesStream.html" title="struct telegram_bot::UpdatesStream">UpdatesStream</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/telegram_bot/stream.rs.html#109-129' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.timeout' class="method"><span id='timeout.v' class='invisible'><code>fn <a href='#method.timeout' class='fnname'>timeout</a>(&amp;mut self, timeout: <a class="struct" href="https://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html" title="struct std::time::duration::Duration">Duration</a>) -&gt; &amp;mut Self</code></span></h4>
-<h4 id='method.error_delay' class="method"><span id='error_delay.v' class='invisible'><code>fn <a href='#method.error_delay' class='fnname'>error_delay</a>(&amp;mut self, delay: <a class="struct" href="https://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html" title="struct std::time::duration::Duration">Duration</a>) -&gt; &amp;mut Self</code></span></h4>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="../futures/stream/trait.Stream.html" title="trait futures::stream::Stream">Stream</a> for <a class="struct" href="../telegram_bot/struct.UpdatesStream.html" title="struct telegram_bot::UpdatesStream">UpdatesStream</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/telegram_bot/stream.rs.html#28-87' title='goto source code'>[src]</a></span></h3>
+<div class='docblock'><p>Set timeout for long polling requests, this corresponds with <code>timeout</code> field
+in <a href="https://core.telegram.org/bots/api#getupdates">getUpdates</a> method,
+also this stream sets an additional request timeout for <code>timeout + 1 second</code>
+in case of invalid Telegram API server behaviour.</p>
+
+<p>Default timeout is 5 seconds.</p>
+</div><h4 id='method.error_delay' class="method"><span id='error_delay.v' class='invisible'><code>fn <a href='#method.error_delay' class='fnname'>error_delay</a>(&amp;mut self, delay: <a class="struct" href="https://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html" title="struct std::time::duration::Duration">Duration</a>) -&gt; &amp;mut Self</code></span></h4>
+<div class='docblock'><p>Set a delay between erroneous request and next request.
+This delay prevents busy looping in some cases.</p>
+
+<p>Default delay is 500 ms.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="../futures/stream/trait.Stream.html" title="trait futures::stream::Stream">Stream</a> for <a class="struct" href="../telegram_bot/struct.UpdatesStream.html" title="struct telegram_bot::UpdatesStream">UpdatesStream</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/telegram_bot/stream.rs.html#30-89' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='associatedtype.Item' class="type"><span id='Item.t' class='invisible'><code>type <a href='../futures/stream/trait.Stream.html#associatedtype.Item' class="type">Item</a> = <a class="struct" href="../telegram_bot/types/struct.Update.html" title="struct telegram_bot::types::Update">Update</a></code></span></h4>
 <div class='docblock'><p>The type of item this stream will yield on success.</p>
 </div><h4 id='associatedtype.Error' class="type"><span id='Error.t' class='invisible'><code>type <a href='../futures/stream/trait.Stream.html#associatedtype.Error' class="type">Error</a> = <a class="struct" href="../telegram_bot/struct.Error.html" title="struct telegram_bot::Error">Error</a></code></span></h4>
