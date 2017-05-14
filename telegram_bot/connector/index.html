@@ -48,29 +48,18 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/telegram_bot/connector/mod.rs.html#1-55' title='goto source code'>[src]</a></span></h1>
-<h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
+               </span><a class='srclink' href='../../src/telegram_bot/connector/mod.rs.html#1-35' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>IO backend.</p>
+
+<p><code>CurlConnector</code> is default connector unless feature <code>curl_connector</code> is disabled and
+feature <code>hyper_connector</code> is enabled. This behaviour will change after hyper release.</p>
+</div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
 <table><tr><td><code>pub use self::<a class="mod"
                                            href="./curl/index.html">curl</a>::<a class="struct" href="../../telegram_bot/connector/curl/struct.CurlConnector.html" title="struct telegram_bot::connector::curl::CurlConnector">CurlConnector</a>;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
                        <tr class=' module-item'>
                            <td><a class="mod" href="curl/index.html"
                                   title='mod telegram_bot::connector::curl'>curl</a></td>
-                           <td class='docblock-short'>
-                                
-                           </td>
-                       </tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
-<table>
-                       <tr class=' module-item'>
-                           <td><a class="struct" href="struct.DefaultConnector.html"
-                                  title='struct telegram_bot::connector::DefaultConnector'>DefaultConnector</a></td>
-                           <td class='docblock-short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class="struct" href="struct.SpecifiedConnector.html"
-                                  title='struct telegram_bot::connector::SpecifiedConnector'>SpecifiedConnector</a></td>
                            <td class='docblock-short'>
                                 
                            </td>
@@ -82,12 +71,13 @@
                            <td class='docblock-short'>
                                 
                            </td>
-                       </tr>
+                       </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+<table>
                        <tr class=' module-item'>
-                           <td><a class="trait" href="trait.ConnectorConfig.html"
-                                  title='trait telegram_bot::connector::ConnectorConfig'>ConnectorConfig</a></td>
+                           <td><a class="fn" href="fn.default_connector.html"
+                                  title='fn telegram_bot::connector::default_connector'>default_connector</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Returns default connector.</p>
                            </td>
                        </tr></table></section>
     <section id='search' class="content hidden"></section>

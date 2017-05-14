@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["default_connector",""]],"struct":[["CurlConnector",""]]});
+initSidebarItems({"fn":[["default_connector","Returns default curl connector."]],"struct":[["CurlConnector",""]]});

@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `ConnectorConfig` trait in crate `telegram_bot`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, ConnectorConfig">
+    <meta name="description" content="API documentation for the Rust `default_connector` fn in crate `telegram_bot`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, default_connector">
 
-    <title>telegram_bot::connector::ConnectorConfig - Rust</title>
+    <title>telegram_bot::connector::default_connector - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc trait">
+<body class="rustdoc fn">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>telegram_bot</a>::<wbr><a href='index.html'>connector</a></p><script>window.sidebarCurrent = {name: 'ConnectorConfig', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'><a href='../index.html'>telegram_bot</a>::<wbr><a href='index.html'>connector</a></p><script>window.sidebarCurrent = {name: 'default_connector', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -44,24 +44,15 @@
     </nav>
 
     <section id='main' class="content">
-<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>telegram_bot</a>::<wbr><a href='index.html'>connector</a>::<wbr><a class="trait" href=''>ConnectorConfig</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Function <a href='../index.html'>telegram_bot</a>::<wbr><a href='index.html'>connector</a>::<wbr><a class="fn" href=''>default_connector</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/telegram_bot/connector/mod.rs.html#15-17' title='goto source code'>[src]</a></span></h1>
-<pre class='rust trait'>pub trait ConnectorConfig {
-    fn <a href='#tymethod.take' class='fnname'>take</a>(self, _: &amp;<a class="struct" href="../../tokio_core/reactor/struct.Handle.html" title="struct tokio_core::reactor::Handle">Handle</a>) -&gt; <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html" title="struct alloc::boxed::Box">Box</a>&lt;<a class="trait" href="../../telegram_bot/connector/trait.Connector.html" title="trait telegram_bot::connector::Connector">Connector</a>&gt;;
-}</pre>
-            <h2 id='required-methods'>Required Methods</h2>
-            <div class='methods'>
-        <h3 id='tymethod.take' class='method'><span id='take.v' class='invisible'><code>fn <a href='#tymethod.take' class='fnname'>take</a>(self, _: &amp;<a class="struct" href="../../tokio_core/reactor/struct.Handle.html" title="struct tokio_core::reactor::Handle">Handle</a>) -&gt; <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html" title="struct alloc::boxed::Box">Box</a>&lt;<a class="trait" href="../../telegram_bot/connector/trait.Connector.html" title="trait telegram_bot::connector::Connector">Connector</a>&gt;</code></span></h3></div>
-        <h2 id='implementors'>Implementors</h2>
-        <ul class='item-list' id='implementors-list'>
-    <li><code>impl ConnectorConfig for <a class="struct" href="../../telegram_bot/connector/struct.DefaultConnector.html" title="struct telegram_bot::connector::DefaultConnector">DefaultConnector</a></code></li>
-<li><code>impl ConnectorConfig for <a class="struct" href="../../telegram_bot/connector/struct.SpecifiedConnector.html" title="struct telegram_bot::connector::SpecifiedConnector">SpecifiedConnector</a></code></li>
-</ul><script type="text/javascript" async
-                         src="../../implementors/telegram_bot/connector/trait.ConnectorConfig.js">
-                 </script></section>
+               </span><a class='srclink' href='../../src/telegram_bot/connector/mod.rs.html#25-27' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub fn default_connector(handle: &amp;<a class="struct" href="../../tokio_core/reactor/struct.Handle.html" title="struct tokio_core::reactor::Handle">Handle</a>) -&gt; <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html" title="struct alloc::boxed::Box">Box</a>&lt;<a class="trait" href="../../telegram_bot/connector/trait.Connector.html" title="trait telegram_bot::connector::Connector">Connector</a>&gt;</pre><div class='docblock'><p>Returns default connector.</p>
+
+<p>See module level documentation for details.</p>
+</div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
