@@ -1,4 +1,5 @@
 (function() {var implementors = {};
+implementors["antidote"] = [];
 implementors["bytes"] = [];
 implementors["error_chain"] = [];
 implementors["libc"] = [];

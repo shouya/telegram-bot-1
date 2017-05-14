@@ -122,11 +122,13 @@
 <span id="77">77</span>
 <span id="78">78</span>
 <span id="79">79</span>
+<span id="80">80</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>};
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">Arc</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">rc</span>::<span class="ident">Rc</span>;
 
+<span class="kw">use</span> <span class="ident">antidote</span>::<span class="ident">Mutex</span>;
 <span class="kw">use</span> <span class="ident">curl</span>::<span class="ident">easy</span>::{<span class="ident">Easy</span>, <span class="ident">List</span>};
 <span class="kw">use</span> <span class="ident">futures</span>::<span class="ident">Future</span>;
 <span class="kw">use</span> <span class="ident">futures</span>::<span class="ident">future</span>::<span class="ident">result</span>;
@@ -169,7 +171,7 @@
         <span class="kw">let</span> <span class="ident">write_result</span> <span class="op">=</span> <span class="ident">result</span>.<span class="ident">clone</span>();
 
         <span class="ident">handle</span>.<span class="ident">write_function</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">data</span><span class="op">|</span> {
-            <span class="ident">write_result</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>().<span class="ident">extend_from_slice</span>(<span class="ident">data</span>);
+            <span class="ident">write_result</span>.<span class="ident">lock</span>().<span class="ident">extend_from_slice</span>(<span class="ident">data</span>);
             <span class="prelude-val">Ok</span>(<span class="ident">data</span>.<span class="ident">len</span>())
         })<span class="question-mark">?</span>;
 
@@ -188,7 +190,7 @@
 
         <span class="kw">let</span> <span class="ident">future</span> <span class="op">=</span> <span class="ident">request</span>.<span class="ident">and_then</span>(<span class="kw">move</span> <span class="op">|</span>(_, <span class="ident">result</span>)<span class="op">|</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">swap</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">guard</span> <span class="op">=</span> <span class="ident">result</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">guard</span> <span class="op">=</span> <span class="ident">result</span>.<span class="ident">lock</span>();
             <span class="kw">let</span> <span class="ident">prev</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>;
             ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">swap</span>(<span class="ident">prev</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">swap</span>);
             <span class="prelude-val">Ok</span>(<span class="ident">swap</span>)
