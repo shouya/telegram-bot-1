@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["default_connector",""]],"mod":[["curl",""]],"trait":[["Connector",""]]});
+initSidebarItems({"mod":[["curl",""]],"struct":[["DefaultConnector",""],["SpecifiedConnector",""]],"trait":[["Connector",""],["ConnectorConfig",""]]});
