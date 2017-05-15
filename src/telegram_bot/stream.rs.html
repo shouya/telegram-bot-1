@@ -170,12 +170,6 @@
 <span id="125">125</span>
 <span id="126">126</span>
 <span id="127">127</span>
-<span id="128">128</span>
-<span id="129">129</span>
-<span id="130">130</span>
-<span id="131">131</span>
-<span id="132">132</span>
-<span id="133">133</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cmp</span>::<span class="ident">max</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">VecDeque</span>;
@@ -217,21 +211,18 @@
         }
 
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">current_request</span> {
-            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
+            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="bool-val">false</span>),
             <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">current_request</span>) <span class="op">=&gt;</span> {
                 <span class="kw">let</span> <span class="ident">polled_update</span> <span class="op">=</span> <span class="ident">current_request</span>.<span class="ident">poll</span>();
                 <span class="kw">match</span> <span class="ident">polled_update</span> {
                     <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>),
-                    <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">None</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
+                    <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">None</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="bool-val">false</span>),
                     <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">Some</span>(<span class="ident">updates</span>))) <span class="op">=&gt;</span> {
-                        <span class="kw">if</span> <span class="ident">updates</span>.<span class="ident">is_empty</span>() {
-                            <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>)
-                        } <span class="kw">else</span> {
-                            <span class="kw">for</span> <span class="ident">update</span> <span class="kw">in</span> <span class="ident">updates</span>.<span class="ident">iter</span>() {
-                                <span class="self">self</span>.<span class="ident">last_update</span> <span class="op">=</span> <span class="ident">max</span>(<span class="ident">update</span>.<span class="ident">id</span>, <span class="self">self</span>.<span class="ident">last_update</span>);
-                            }
-                            <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">updates</span>))
+                        <span class="kw">for</span> <span class="ident">update</span> <span class="kw">in</span> <span class="ident">updates</span> {
+                            <span class="self">self</span>.<span class="ident">last_update</span> <span class="op">=</span> <span class="ident">max</span>(<span class="ident">update</span>.<span class="ident">id</span>, <span class="self">self</span>.<span class="ident">last_update</span>);
+                            <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">push_back</span>(<span class="ident">update</span>)
                         }
+                        <span class="prelude-val">Ok</span>(<span class="bool-val">true</span>)
                     },
                     <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>)
                 }
@@ -249,7 +240,7 @@
                 <span class="self">self</span>.<span class="ident">current_request</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">TelegramFuture</span>::<span class="ident">new</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">timeout_future</span>)));
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>)
             }
-            <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>) <span class="op">=&gt;</span> {
+            <span class="prelude-val">Ok</span>(<span class="bool-val">false</span>) <span class="op">=&gt;</span> {
                 <span class="kw">let</span> <span class="ident">timeout</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">timeout</span> <span class="op">+</span> <span class="ident">Duration</span>::<span class="ident">from_secs</span>(<span class="number">1</span>);
 
                 <span class="kw">let</span> <span class="ident">request</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">api</span>.<span class="ident">send_timeout</span>(<span class="ident">GetUpdates</span>::<span class="ident">new</span>()
@@ -260,12 +251,9 @@
                 <span class="self">self</span>.<span class="ident">current_request</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">request</span>);
                 <span class="self">self</span>.<span class="ident">poll</span>()
             },
-            <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">updates</span>)) <span class="op">=&gt;</span> {
+            <span class="prelude-val">Ok</span>(<span class="bool-val">true</span>) <span class="op">=&gt;</span> {
                 <span class="self">self</span>.<span class="ident">current_request</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-                <span class="comment">// Updates are guarantied to be not empty</span>
-                <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">extend</span>(<span class="ident">updates</span>.<span class="ident">drain</span>(<span class="number">1</span>..));
-                <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">updates</span>.<span class="ident">pop</span>().<span class="ident">unwrap</span>();
-                <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">Some</span>(<span class="ident">result</span>)))
+                <span class="self">self</span>.<span class="ident">poll</span>()
             }
         }
     }

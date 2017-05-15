@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.4/src/private/de.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.5/src/private/de.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>de.rs.html -- source</title>
@@ -3080,7 +3080,7 @@
                     }
                     (<span class="ident">variant</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>))
                 }
-                <span class="ident">Content</span>::<span class="ident">String</span>(<span class="ident">variant</span>) <span class="op">=&gt;</span> (<span class="ident">Content</span>::<span class="ident">String</span>(<span class="ident">variant</span>), <span class="prelude-val">None</span>),
+                <span class="ident">s</span> @ <span class="ident">Content</span>::<span class="ident">String</span>(_) <span class="op">|</span> <span class="ident">s</span> @ <span class="ident">Content</span>::<span class="ident">Str</span>(_) <span class="op">=&gt;</span> (<span class="ident">s</span>, <span class="prelude-val">None</span>),
                 <span class="ident">other</span> <span class="op">=&gt;</span> {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">de</span>::<span class="ident">Error</span>::<span class="ident">invalid_type</span>(<span class="ident">other</span>.<span class="ident">unexpected</span>(), <span class="kw-2">&amp;</span><span class="string">&quot;string or map&quot;</span>),);
                 }
@@ -3474,7 +3474,7 @@
                     }
                     (<span class="ident">variant</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>))
                 }
-                <span class="kw-2">ref</span> <span class="ident">s</span> @ <span class="ident">Content</span>::<span class="ident">String</span>(_) <span class="op">=&gt;</span> (<span class="ident">s</span>, <span class="prelude-val">None</span>),
+                <span class="kw-2">ref</span> <span class="ident">s</span> @ <span class="ident">Content</span>::<span class="ident">String</span>(_) <span class="op">|</span> <span class="kw-2">ref</span> <span class="ident">s</span> @ <span class="ident">Content</span>::<span class="ident">Str</span>(_) <span class="op">=&gt;</span> (<span class="ident">s</span>, <span class="prelude-val">None</span>),
                 <span class="kw-2">ref</span> <span class="ident">other</span> <span class="op">=&gt;</span> {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">de</span>::<span class="ident">Error</span>::<span class="ident">invalid_type</span>(<span class="ident">other</span>.<span class="ident">unexpected</span>(), <span class="kw-2">&amp;</span><span class="string">&quot;string or map&quot;</span>),);
                 }
