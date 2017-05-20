@@ -183,6 +183,8 @@
 <span id="138">138</span>
 <span id="139">139</span>
 <span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">Not</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
@@ -259,6 +261,7 @@
     }
 }
 
+<span class="doccomment">/// Send phone contact.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanSendContact</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;f</span>, <span class="lifetime">&#39;l</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">contact</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">phone_number</span>: <span class="ident">P</span>, <span class="ident">first_name</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">SendContact</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;f</span>, <span class="lifetime">&#39;l</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="ident">P</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>,
@@ -276,6 +279,7 @@
     }
 }
 
+<span class="doccomment">/// Reply with phone contact.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanReplySendContact</span> {
     <span class="kw">fn</span> <span class="ident">contact_reply</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;f</span>, <span class="lifetime">&#39;l</span>, <span class="ident">P</span>: <span class="lifetime">&#39;p</span>, <span class="ident">F</span>: <span class="lifetime">&#39;f</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>,
                                                    <span class="ident">phone_number</span>: <span class="ident">P</span>,

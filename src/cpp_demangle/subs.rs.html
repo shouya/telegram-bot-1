@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/cpp_demangle-0.2.1/src/subs.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/cpp_demangle-0.2.2/src/subs.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>subs.rs.html -- source</title>
@@ -161,7 +161,7 @@
 <span class="doccomment">/// An enumeration of all of the types that can end up in the substitution</span>
 <span class="doccomment">/// table.</span>
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Substitutable</span> {
     <span class="doccomment">/// An `&lt;unscoped-template-name&gt;` production.</span>
     <span class="ident">UnscopedTemplateName</span>(<span class="ident">ast</span>::<span class="ident">UnscopedTemplateName</span>),
@@ -199,7 +199,7 @@
 <span class="doccomment">/// The table of substitutable components that we have parsed thus far, and for</span>
 <span class="doccomment">/// which there are potential back-references.</span>
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Default</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Default</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SubstitutionTable</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Substitutable</span><span class="op">&gt;</span>);
 
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">SubstitutionTable</span> {

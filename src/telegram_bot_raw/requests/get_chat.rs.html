@@ -78,6 +78,7 @@
 <span id="33">33</span>
 <span id="34">34</span>
 <span id="35">35</span>
+<span id="36">36</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">types</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">requests</span>::<span class="kw-2">*</span>;
@@ -105,6 +106,7 @@
     }
 }
 
+<span class="doccomment">/// Get up to date information about the chat.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanGetChat</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">get_chat</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">GetChat</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>;
 }

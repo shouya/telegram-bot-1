@@ -48,133 +48,38 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/cpp_demangle/ast.rs.html#675-680' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/cpp_demangle/ast.rs.html#1826-1838' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum OperatorName {
-    New,
-    NewArray,
-    Delete,
-    DeleteArray,
-    UnaryPlus,
-    Neg,
-    AddressOf,
-    Deref,
-    BitNot,
-    Add,
-    Sub,
-    Mul,
-    Div,
-    Rem,
-    BitAnd,
-    BitOr,
-    BitXor,
-    Assign,
-    AddAssign,
-    SubAssign,
-    MulAssign,
-    DivAssign,
-    RemAssign,
-    BitAndAssign,
-    BitOrAssign,
-    BitXorAssign,
-    Shl,
-    Shr,
-    ShlAssign,
-    ShrAssign,
-    Eq,
-    Ne,
-    Less,
-    Greater,
-    LessEq,
-    GreaterEq,
-    Not,
-    LogicalAnd,
-    LogicalOr,
-    PostInc,
-    PostDec,
-    Comma,
-    DerefMemberPtr,
-    DerefMember,
-    Call,
-    Index,
-    Question,
+    Simple(<a class="enum" href="../../cpp_demangle/ast/enum.SimpleOperatorName.html" title="enum cpp_demangle::ast::SimpleOperatorName">SimpleOperatorName</a>),
+    Cast(<a class="enum" href="../../cpp_demangle/ast/enum.TypeHandle.html" title="enum cpp_demangle::ast::TypeHandle">TypeHandle</a>),
+    Literal(<a class="struct" href="../../cpp_demangle/ast/struct.SourceName.html" title="struct cpp_demangle::ast::SourceName">SourceName</a>),
+    VendorExtension(<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,&nbsp;<a class="struct" href="../../cpp_demangle/ast/struct.SourceName.html" title="struct cpp_demangle::ast::SourceName">SourceName</a>),
 }</pre><div class='docblock'><p>The <code>&lt;operator-name&gt;</code> production.</p>
+
+<pre><code class="language-text">&lt;operator-name&gt; ::= &lt;simple-operator-name&gt;
+                ::= cv &lt;type&gt;               # (cast)
+                ::= li &lt;source-name&gt;        # operator &quot;&quot;
+                ::= v &lt;digit&gt; &lt;source-name&gt; # vendor extended operator
+</code></pre>
 </div><h2 class='variants'>Variants</h2>
-<span id='variant.New' class='variant'><span id='New.v' class='invisible'><code>New</code></span></span><div class='docblock'><p>new</p>
-</div><span id='variant.NewArray' class='variant'><span id='NewArray.v' class='invisible'><code>NewArray</code></span></span><div class='docblock'><p>new[]</p>
-</div><span id='variant.Delete' class='variant'><span id='Delete.v' class='invisible'><code>Delete</code></span></span><div class='docblock'><p>delete</p>
-</div><span id='variant.DeleteArray' class='variant'><span id='DeleteArray.v' class='invisible'><code>DeleteArray</code></span></span><div class='docblock'><p>delete[]</p>
-</div><span id='variant.UnaryPlus' class='variant'><span id='UnaryPlus.v' class='invisible'><code>UnaryPlus</code></span></span><div class='docblock'><p>+</p>
-</div><span id='variant.Neg' class='variant'><span id='Neg.v' class='invisible'><code>Neg</code></span></span><div class='docblock'>
-<h2 id='' class='section-header'><a href='#'></a></h2></div><span id='variant.AddressOf' class='variant'><span id='AddressOf.v' class='invisible'><code>AddressOf</code></span></span><div class='docblock'><p>&amp;</p>
-</div><span id='variant.Deref' class='variant'><span id='Deref.v' class='invisible'><code>Deref</code></span></span><div class='docblock'><p>*</p>
-</div><span id='variant.BitNot' class='variant'><span id='BitNot.v' class='invisible'><code>BitNot</code></span></span><div class='docblock'><p>~</p>
-</div><span id='variant.Add' class='variant'><span id='Add.v' class='invisible'><code>Add</code></span></span><div class='docblock'><p>+</p>
-</div><span id='variant.Sub' class='variant'><span id='Sub.v' class='invisible'><code>Sub</code></span></span><div class='docblock'>
-<h2 id='-1' class='section-header'><a href='#-1'></a></h2></div><span id='variant.Mul' class='variant'><span id='Mul.v' class='invisible'><code>Mul</code></span></span><div class='docblock'><p>*</p>
-</div><span id='variant.Div' class='variant'><span id='Div.v' class='invisible'><code>Div</code></span></span><div class='docblock'><p>/</p>
-</div><span id='variant.Rem' class='variant'><span id='Rem.v' class='invisible'><code>Rem</code></span></span><div class='docblock'><p>%</p>
-</div><span id='variant.BitAnd' class='variant'><span id='BitAnd.v' class='invisible'><code>BitAnd</code></span></span><div class='docblock'><p>&amp;</p>
-</div><span id='variant.BitOr' class='variant'><span id='BitOr.v' class='invisible'><code>BitOr</code></span></span><div class='docblock'><p>|</p>
-</div><span id='variant.BitXor' class='variant'><span id='BitXor.v' class='invisible'><code>BitXor</code></span></span><div class='docblock'><p>^</p>
-</div><span id='variant.Assign' class='variant'><span id='Assign.v' class='invisible'><code>Assign</code></span></span><div class='docblock'>
-<h1 id='-2' class='section-header'><a href='#-2'></a></h1></div><span id='variant.AddAssign' class='variant'><span id='AddAssign.v' class='invisible'><code>AddAssign</code></span></span><div class='docblock'><p>+=</p>
-</div><span id='variant.SubAssign' class='variant'><span id='SubAssign.v' class='invisible'><code>SubAssign</code></span></span><div class='docblock'><p>-=</p>
-</div><span id='variant.MulAssign' class='variant'><span id='MulAssign.v' class='invisible'><code>MulAssign</code></span></span><div class='docblock'><p>*=</p>
-</div><span id='variant.DivAssign' class='variant'><span id='DivAssign.v' class='invisible'><code>DivAssign</code></span></span><div class='docblock'><p>/=</p>
-</div><span id='variant.RemAssign' class='variant'><span id='RemAssign.v' class='invisible'><code>RemAssign</code></span></span><div class='docblock'><p>%=</p>
-</div><span id='variant.BitAndAssign' class='variant'><span id='BitAndAssign.v' class='invisible'><code>BitAndAssign</code></span></span><div class='docblock'><p>&amp;=</p>
-</div><span id='variant.BitOrAssign' class='variant'><span id='BitOrAssign.v' class='invisible'><code>BitOrAssign</code></span></span><div class='docblock'><p>|=</p>
-</div><span id='variant.BitXorAssign' class='variant'><span id='BitXorAssign.v' class='invisible'><code>BitXorAssign</code></span></span><div class='docblock'><p><sup>=</sup></p>
-</div><span id='variant.Shl' class='variant'><span id='Shl.v' class='invisible'><code>Shl</code></span></span><div class='docblock'><p>&lt;&lt;</p>
-</div><span id='variant.Shr' class='variant'><span id='Shr.v' class='invisible'><code>Shr</code></span></span><div class='docblock'><blockquote>
-<blockquote>
-</blockquote>
-</blockquote>
-</div><span id='variant.ShlAssign' class='variant'><span id='ShlAssign.v' class='invisible'><code>ShlAssign</code></span></span><div class='docblock'><p>&lt;&lt;=</p>
-</div><span id='variant.ShrAssign' class='variant'><span id='ShrAssign.v' class='invisible'><code>ShrAssign</code></span></span><div class='docblock'><blockquote>
-<blockquote>
-
-<h1 id='-3' class='section-header'><a href='#-3'></a></h1></blockquote>
-</blockquote>
-</div><span id='variant.Eq' class='variant'><span id='Eq.v' class='invisible'><code>Eq</code></span></span><div class='docblock'>
-<h1 id='-4' class='section-header'><a href='#-4'></a></h1></div><span id='variant.Ne' class='variant'><span id='Ne.v' class='invisible'><code>Ne</code></span></span><div class='docblock'><p>!=</p>
-</div><span id='variant.Less' class='variant'><span id='Less.v' class='invisible'><code>Less</code></span></span><div class='docblock'><p>&lt;</p>
-</div><span id='variant.Greater' class='variant'><span id='Greater.v' class='invisible'><code>Greater</code></span></span><div class='docblock'><blockquote>
-</blockquote>
-</div><span id='variant.LessEq' class='variant'><span id='LessEq.v' class='invisible'><code>LessEq</code></span></span><div class='docblock'><p>&lt;=</p>
-</div><span id='variant.GreaterEq' class='variant'><span id='GreaterEq.v' class='invisible'><code>GreaterEq</code></span></span><div class='docblock'><blockquote>
-
-<h1 id='-5' class='section-header'><a href='#-5'></a></h1></blockquote>
-</div><span id='variant.Not' class='variant'><span id='Not.v' class='invisible'><code>Not</code></span></span><div class='docblock'><p>!</p>
-</div><span id='variant.LogicalAnd' class='variant'><span id='LogicalAnd.v' class='invisible'><code>LogicalAnd</code></span></span><div class='docblock'><p>&amp;&amp;</p>
-</div><span id='variant.LogicalOr' class='variant'><span id='LogicalOr.v' class='invisible'><code>LogicalOr</code></span></span><div class='docblock'><p>||</p>
-</div><span id='variant.PostInc' class='variant'><span id='PostInc.v' class='invisible'><code>PostInc</code></span></span><div class='docblock'><p>++</p>
-</div><span id='variant.PostDec' class='variant'><span id='PostDec.v' class='invisible'><code>PostDec</code></span></span><div class='docblock'>
-<h2 id='-6' class='section-header'><a href='#-6'></a></h2></div><span id='variant.Comma' class='variant'><span id='Comma.v' class='invisible'><code>Comma</code></span></span><div class='docblock'><p>,</p>
-</div><span id='variant.DerefMemberPtr' class='variant'><span id='DerefMemberPtr.v' class='invisible'><code>DerefMemberPtr</code></span></span><div class='docblock'><p>-&gt;*</p>
-</div><span id='variant.DerefMember' class='variant'><span id='DerefMember.v' class='invisible'><code>DerefMember</code></span></span><div class='docblock'><p>-&gt;</p>
-</div><span id='variant.Call' class='variant'><span id='Call.v' class='invisible'><code>Call</code></span></span><div class='docblock'><p>()</p>
-</div><span id='variant.Index' class='variant'><span id='Index.v' class='invisible'><code>Index</code></span></span><div class='docblock'><p>[]</p>
-</div><span id='variant.Question' class='variant'><span id='Question.v' class='invisible'><code>Question</code></span></span><div class='docblock'><p>?:</p>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="enum" href="../../cpp_demangle/ast/enum.OperatorName.html" title="enum cpp_demangle::ast::OperatorName">OperatorName</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/cpp_demangle/ast.rs.html#1720' title='goto source code'>[src]</a></span></h3>
+<span id='variant.Simple' class='variant'><span id='Simple.v' class='invisible'><code>Simple(<a class="enum" href="../../cpp_demangle/ast/enum.SimpleOperatorName.html" title="enum cpp_demangle::ast::SimpleOperatorName">SimpleOperatorName</a>)</code></span></span><div class='docblock'><p>A simple operator name.</p>
+</div><span id='variant.Cast' class='variant'><span id='Cast.v' class='invisible'><code>Cast(<a class="enum" href="../../cpp_demangle/ast/enum.TypeHandle.html" title="enum cpp_demangle::ast::TypeHandle">TypeHandle</a>)</code></span></span><div class='docblock'><p>A type cast.</p>
+</div><span id='variant.Literal' class='variant'><span id='Literal.v' class='invisible'><code>Literal(<a class="struct" href="../../cpp_demangle/ast/struct.SourceName.html" title="struct cpp_demangle::ast::SourceName">SourceName</a>)</code></span></span><div class='docblock'><p>Operator literal, ie <code>operator &quot;&quot;</code>.</p>
+</div><span id='variant.VendorExtension' class='variant'><span id='VendorExtension.v' class='invisible'><code>VendorExtension(<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,&nbsp;<a class="struct" href="../../cpp_demangle/ast/struct.SourceName.html" title="struct cpp_demangle::ast::SourceName">SourceName</a>)</code></span></span><div class='docblock'><p>A non-standard, vendor extension operator.</p>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="enum" href="../../cpp_demangle/ast/enum.OperatorName.html" title="enum cpp_demangle::ast::OperatorName">OperatorName</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/cpp_demangle/ast.rs.html#1825' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class="enum" href="../../cpp_demangle/ast/enum.OperatorName.html" title="enum cpp_demangle::ast::OperatorName">OperatorName</a></code></span></h4>
 <div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
 </div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
 <div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="enum" href="../../cpp_demangle/ast/enum.OperatorName.html" title="enum cpp_demangle::ast::OperatorName">OperatorName</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/cpp_demangle/ast.rs.html#1720' title='goto source code'>[src]</a></span></h3>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="enum" href="../../cpp_demangle/ast/enum.OperatorName.html" title="enum cpp_demangle::ast::OperatorName">OperatorName</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/cpp_demangle/ast.rs.html#1825' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html" title="trait core::hash::Hash">Hash</a> for <a class="enum" href="../../cpp_demangle/ast/enum.OperatorName.html" title="enum cpp_demangle::ast::OperatorName">OperatorName</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/cpp_demangle/ast.rs.html#1720' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.hash' class="method"><span id='hash.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html#tymethod.hash' class='fnname'>hash</a>&lt;__H:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/hash/trait.Hasher.html" title="trait core::hash::Hasher">Hasher</a>&gt;(&amp;self, __arg_0: &amp;mut __H)</code></span></h4>
-<div class='docblock'><p>Feeds this value into the state given, updating the hasher as necessary.</p>
-</div><h4 id='method.hash_slice' class="method"><span id='hash_slice.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html#method.hash_slice' class='fnname'>hash_slice</a>&lt;H&gt;(data: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[Self]</a>, state: &amp;mut H) <span class="where fmt-newline">where H: <a class="trait" href="https://doc.rust-lang.org/nightly/core/hash/trait.Hasher.html" title="trait core::hash::Hasher">Hasher</a></span></code><div class='since' title='Stable since Rust version 1.3.0'>1.3.0</div></span></h4>
-<div class='docblock'><p>Feeds a slice of this type into the state provided.</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a> for <a class="enum" href="../../cpp_demangle/ast/enum.OperatorName.html" title="enum cpp_demangle::ast::OperatorName">OperatorName</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/cpp_demangle/ast.rs.html#1720' title='goto source code'>[src]</a></span></h3>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a> for <a class="enum" href="../../cpp_demangle/ast/enum.OperatorName.html" title="enum cpp_demangle::ast::OperatorName">OperatorName</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/cpp_demangle/ast.rs.html#1825' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.eq' class="method"><span id='eq.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class="enum" href="../../cpp_demangle/ast/enum.OperatorName.html" title="enum cpp_demangle::ast::OperatorName">OperatorName</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h4>
 <div class='docblock'><p>This method tests for <code>self</code> and <code>other</code> values to be equal, and is used by <code>==</code>. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq">Read more</a></p>
-</div><h4 id='method.ne' class="method"><span id='ne.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, other: &amp;Rhs) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+</div><h4 id='method.ne' class="method"><span id='ne.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class="enum" href="../../cpp_demangle/ast/enum.OperatorName.html" title="enum cpp_demangle::ast::OperatorName">OperatorName</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h4>
 <div class='docblock'><p>This method tests for <code>!=</code>.</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html" title="trait core::cmp::Eq">Eq</a> for <a class="enum" href="../../cpp_demangle/ast/enum.OperatorName.html" title="enum cpp_demangle::ast::OperatorName">OperatorName</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/cpp_demangle/ast.rs.html#1720' title='goto source code'>[src]</a></span></h3>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html" title="trait core::cmp::Eq">Eq</a> for <a class="enum" href="../../cpp_demangle/ast/enum.OperatorName.html" title="enum cpp_demangle::ast::OperatorName">OperatorName</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/cpp_demangle/ast.rs.html#1825' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'></div></section>
     <section id='search' class="content hidden"></section>
 

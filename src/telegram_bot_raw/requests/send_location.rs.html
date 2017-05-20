@@ -138,6 +138,8 @@
 <span id="93">93</span>
 <span id="94">94</span>
 <span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">Not</span>;
 
@@ -195,6 +197,7 @@
     }
 }
 
+<span class="doccomment">/// Send point on the map.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanSendLocation</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">location</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">latitude</span>: <span class="ident">Float</span>, <span class="ident">longitude</span>: <span class="ident">Float</span>) <span class="op">-&gt;</span> <span class="ident">SendLocation</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>;
 }
@@ -205,6 +208,7 @@
     }
 }
 
+<span class="doccomment">/// Reply with point on the map.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanReplySendLocation</span> {
     <span class="kw">fn</span> <span class="ident">location_reply</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">latitude</span>: <span class="ident">Float</span>, <span class="ident">longitude</span>: <span class="ident">Float</span>) <span class="op">-&gt;</span> <span class="ident">SendLocation</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>;
 }

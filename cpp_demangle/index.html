@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../src/cpp_demangle/lib.rs.html#1-194' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/cpp_demangle/lib.rs.html#1-203' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>This crate can parse a C++ “mangled” linker symbol name into a Rust value
 describing what the name refers to: a variable, a function, a virtual table,
 etc. The description type implements <code>Display</code>, producing human-readable
@@ -59,7 +59,7 @@ to provide more meaningful output.</p>
 across compilation units, so that two compilation units that have seen the
 same declarations can pair up definitions in one unit with references in
 another.  Almost all platforms other than Microsoft Windows follow the
-<a href="http://mentorembedded.github.io/cxx-abi/abi.html#mangling">Itanium C++ ABI</a>&#39;s rules for this.</p>
+<a href="http://itanium-cxx-abi.github.io/cxx-abi/abi.html#mangle">Itanium C++ ABI</a>&#39;s rules for this.</p>
 
 <p>For example, suppose a C++ compilation unit has the definition:</p>
 
@@ -70,9 +70,10 @@ another.  Almost all platforms other than Microsoft Windows follow the
 
 <p>The Itanium C++ ABI specifies that the linker symbol for that function must
 be named <code>_ZN5space3fooEii</code>. This crate can parse that name into a Rust
-value representing its structure. Formatting the value with <code>format!</code> or
-<code>to_string</code> would yield the string <code>&quot;space::foo(int, int)&quot;</code>, which is more
-meaningful to the C++ developer.</p>
+value representing its structure. Formatting the value with the <code>format!</code>
+macro or the <code>std::string::ToString::to_string</code> trait method yields the
+string <code>space::foo(int, int)</code>, which is more meaningful to the C++
+developer.</p>
 </div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
                        <tr class=' module-item'>

@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["EditMessageText","Use this method to edit text and game messages sent by the bot."]],"trait":[["CanEditMessageText",""]]});
+initSidebarItems({"struct":[["EditMessageText","Use this method to edit text messages sent by the bot."]],"trait":[["CanEditMessageText","Edit text of messages sent by the bot."]]});

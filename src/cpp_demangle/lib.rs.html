@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/cpp_demangle-0.2.1/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/cpp_demangle-0.2.2/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -237,6 +237,15 @@
 <span id="192">192</span>
 <span id="193">193</span>
 <span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! This crate can parse a C++ “mangled” linker symbol name into a Rust value</span>
 <span class="doccomment">//! describing what the name refers to: a variable, a function, a virtual table,</span>
@@ -250,7 +259,7 @@
 <span class="doccomment">//! another.  Almost all platforms other than Microsoft Windows follow the</span>
 <span class="doccomment">//! [Itanium C++ ABI][itanium]&#39;s rules for this.</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! [itanium]: http://mentorembedded.github.io/cxx-abi/abi.html#mangling</span>
+<span class="doccomment">//! [itanium]: http://itanium-cxx-abi.github.io/cxx-abi/abi.html#mangle</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! For example, suppose a C++ compilation unit has the definition:</span>
 <span class="doccomment">//!</span>
@@ -262,9 +271,10 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! The Itanium C++ ABI specifies that the linker symbol for that function must</span>
 <span class="doccomment">//! be named `_ZN5space3fooEii`. This crate can parse that name into a Rust</span>
-<span class="doccomment">//! value representing its structure. Formatting the value with `format!` or</span>
-<span class="doccomment">//! `to_string` would yield the string `&quot;space::foo(int, int)&quot;`, which is more</span>
-<span class="doccomment">//! meaningful to the C++ developer.</span>
+<span class="doccomment">//! value representing its structure. Formatting the value with the `format!`</span>
+<span class="doccomment">//! macro or the `std::string::ToString::to_string` trait method yields the</span>
+<span class="doccomment">//! string `space::foo(int, int)`, which is more meaningful to the C++</span>
+<span class="doccomment">//! developer.</span>
 
 <span class="attribute">#<span class="op">!</span>[<span class="ident">deny</span>(<span class="ident">missing_docs</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">deny</span>(<span class="ident">missing_debug_implementations</span>)]</span>
@@ -282,7 +292,7 @@
 <span class="kw">mod</span> <span class="ident">index_str</span>;
 <span class="kw">mod</span> <span class="ident">subs</span>;
 
-<span class="kw">use</span> <span class="ident">ast</span>::{<span class="ident">Demangle</span>, <span class="ident">Parse</span>};
+<span class="kw">use</span> <span class="ident">ast</span>::{<span class="ident">Demangle</span>, <span class="ident">Parse</span>, <span class="ident">ParseContext</span>};
 <span class="kw">use</span> <span class="ident">error</span>::{<span class="ident">Error</span>, <span class="prelude-ty">Result</span>};
 <span class="kw">use</span> <span class="ident">index_str</span>::<span class="ident">IndexStr</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
@@ -311,6 +321,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// use cpp_demangle::Symbol;</span>
+    <span class="doccomment">/// use std::string::ToString;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// // First, something easy :)</span>
     <span class="doccomment">///</span>
@@ -319,7 +330,7 @@
     <span class="doccomment">/// let sym = Symbol::new(&amp;mangled[..])</span>
     <span class="doccomment">///     .expect(&quot;Could not parse mangled symbol!&quot;);</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let demangled = format!(&quot;{}&quot;, sym);</span>
+    <span class="doccomment">/// let demangled = sym.to_string();</span>
     <span class="doccomment">/// assert_eq!(demangled, &quot;space::foo(int, bool, char)&quot;);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// // Now let&#39;s try something a little more complicated!</span>
@@ -330,7 +341,7 @@
     <span class="doccomment">/// let sym = Symbol::new(&amp;mangled[..])</span>
     <span class="doccomment">///     .expect(&quot;Could not parse mangled symbol!&quot;);</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let demangled = format!(&quot;{}&quot;, sym);</span>
+    <span class="doccomment">/// let demangled = sym.to_string();</span>
     <span class="doccomment">/// assert_eq!(</span>
     <span class="doccomment">///     demangled,</span>
     <span class="doccomment">///     &quot;JS_GetPropertyDescriptorById(JSContext*, JS::Handle&lt;JSObject*&gt;, JS::Handle&lt;jsid&gt;, JS::MutableHandle&lt;JS::PropertyDescriptor&gt;)&quot;</span>
@@ -340,8 +351,12 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">substitutions</span> <span class="op">=</span> <span class="ident">subs</span>::<span class="ident">SubstitutionTable</span>::<span class="ident">new</span>();
 
         <span class="kw">let</span> <span class="ident">parsed</span> <span class="op">=</span> {
+            <span class="kw">let</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="ident">ParseContext</span>::<span class="ident">default</span>();
             <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="ident">IndexStr</span>::<span class="ident">new</span>(<span class="ident">raw</span>.<span class="ident">as_ref</span>());
-            <span class="kw">let</span> (<span class="ident">parsed</span>, <span class="ident">tail</span>) <span class="op">=</span> <span class="macro">try</span><span class="macro">!</span>(<span class="ident">ast</span>::<span class="ident">MangledName</span>::<span class="ident">parse</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">substitutions</span>, <span class="ident">input</span>));
+
+            <span class="kw">let</span> (<span class="ident">parsed</span>, <span class="ident">tail</span>) <span class="op">=</span> <span class="macro">try</span><span class="macro">!</span>(<span class="ident">ast</span>::<span class="ident">MangledName</span>::<span class="ident">parse</span>(<span class="kw-2">&amp;</span><span class="ident">ctx</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">substitutions</span>, <span class="ident">input</span>));
+            <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">ctx</span>.<span class="ident">recursion_level</span>() <span class="op">==</span> <span class="number">0</span>);
+
             <span class="kw">if</span> <span class="ident">tail</span>.<span class="ident">is_empty</span>() {
                 <span class="ident">parsed</span>
             } <span class="kw">else</span> {
@@ -380,6 +395,7 @@ substitutions = {:#?}&quot;</span>,
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// use cpp_demangle::BorrowedSymbol;</span>
+    <span class="doccomment">/// use std::string::ToString;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// let mangled = b&quot;_ZN5space3fooEibc and some trailing junk&quot;;</span>
     <span class="doccomment">///</span>
@@ -388,14 +404,16 @@ substitutions = {:#?}&quot;</span>,
     <span class="doccomment">///</span>
     <span class="doccomment">/// assert_eq!(tail, b&quot; and some trailing junk&quot;);</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let demangled = format!(&quot;{}&quot;, sym);</span>
+    <span class="doccomment">/// let demangled = sym.to_string();</span>
     <span class="doccomment">/// assert_eq!(demangled, &quot;space::foo(int, bool, char)&quot;);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_tail</span>(<span class="ident">input</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">BorrowedSymbol</span>, <span class="kw-2">&amp;</span>[<span class="ident">u8</span>])<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">substitutions</span> <span class="op">=</span> <span class="ident">subs</span>::<span class="ident">SubstitutionTable</span>::<span class="ident">new</span>();
 
+        <span class="kw">let</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="ident">ParseContext</span>::<span class="ident">default</span>();
         <span class="kw">let</span> <span class="ident">idx_str</span> <span class="op">=</span> <span class="ident">IndexStr</span>::<span class="ident">new</span>(<span class="ident">input</span>);
-        <span class="kw">let</span> (<span class="ident">parsed</span>, <span class="ident">tail</span>) <span class="op">=</span> <span class="macro">try</span><span class="macro">!</span>(<span class="ident">ast</span>::<span class="ident">MangledName</span>::<span class="ident">parse</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">substitutions</span>, <span class="ident">idx_str</span>));
+        <span class="kw">let</span> (<span class="ident">parsed</span>, <span class="ident">tail</span>) <span class="op">=</span> <span class="macro">try</span><span class="macro">!</span>(<span class="ident">ast</span>::<span class="ident">MangledName</span>::<span class="ident">parse</span>(<span class="kw-2">&amp;</span><span class="ident">ctx</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">substitutions</span>, <span class="ident">idx_str</span>));
+        <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">ctx</span>.<span class="ident">recursion_level</span>() <span class="op">==</span> <span class="number">0</span>);
 
         <span class="kw">let</span> <span class="ident">symbol</span> <span class="op">=</span> <span class="ident">Symbol</span> {
             <span class="ident">raw</span>: <span class="ident">input</span>,

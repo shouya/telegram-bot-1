@@ -203,6 +203,8 @@
 <span id="158">158</span>
 <span id="159">159</span>
 <span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">Not</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
@@ -283,6 +285,7 @@
     }
 }
 
+<span class="doccomment">/// Send information about a venue.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanSendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">venue</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">A</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>,
                    <span class="ident">latitude</span>: <span class="ident">Float</span>,
@@ -310,6 +313,7 @@
     }
 }
 
+<span class="doccomment">/// Reply with information about a venue.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanReplySendVenue</span> {
     <span class="kw">fn</span> <span class="ident">venue_reply</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span>, <span class="ident">T</span>, <span class="ident">A</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>,
                                          <span class="ident">latitude</span>: <span class="ident">Float</span>,

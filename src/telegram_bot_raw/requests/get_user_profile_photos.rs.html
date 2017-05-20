@@ -92,6 +92,7 @@
 <span id="47">47</span>
 <span id="48">48</span>
 <span id="49">49</span>
+<span id="50">50</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">types</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">requests</span>::<span class="kw-2">*</span>;
@@ -133,6 +134,7 @@
     }
 }
 
+<span class="doccomment">/// Get a list of profile pictures for a user.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanGetUserProfilePhotos</span> {
     <span class="kw">fn</span> <span class="ident">get_user_profile_photos</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">GetUserProfilePhotos</span>;
 }

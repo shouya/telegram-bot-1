@@ -647,6 +647,7 @@
 <span id="602">602</span>
 <span id="603">603</span>
 <span id="604">604</span>
+<span id="605">605</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">serde</span>::<span class="ident">de</span>::{<span class="ident">Deserialize</span>, <span class="ident">Deserializer</span>, <span class="ident">Error</span>};
 
@@ -674,6 +675,7 @@
     <span class="kw">pub</span> <span class="ident">kind</span>: <span class="ident">MessageKind</span>,
 }
 
+<span class="doccomment">/// Information about the original message.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Forward</span> {
     <span class="doccomment">/// Date the original message was sent in Unix time</span>
@@ -682,7 +684,7 @@
     <span class="kw">pub</span> <span class="ident">from</span>: <span class="ident">ForwardFrom</span>,
 }
 
-<span class="doccomment">/// Information about the original message.</span>
+<span class="doccomment">/// Information about the source of the original message.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ForwardFrom</span> {
     <span class="doccomment">/// Sender of the original message.</span>

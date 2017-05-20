@@ -80,6 +80,7 @@
 <span id="35">35</span>
 <span id="36">36</span>
 <span id="37">37</span>
+<span id="38">38</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">types</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">requests</span>::<span class="kw-2">*</span>;
@@ -109,6 +110,7 @@
     }
 }
 
+<span class="doccomment">/// Get a list of administrators in a chat.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanGetChatAdministrators</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">get_administrators</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">GetChatAdministrators</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>;
 }

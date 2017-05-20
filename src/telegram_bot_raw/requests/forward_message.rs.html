@@ -94,6 +94,7 @@
 <span id="49">49</span>
 <span id="50">50</span>
 <span id="51">51</span>
+<span id="52">52</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">Not</span>;
 
@@ -137,6 +138,7 @@
     }
 }
 
+<span class="doccomment">/// Forward message.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanForwardMessage</span> {
     <span class="kw">fn</span> <span class="ident">forward</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;f</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">to</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">ForwardMessage</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>;
 }

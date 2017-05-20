@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/cpp_demangle/ast.rs.html#1-8323' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/cpp_demangle/ast.rs.html#1-8708' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Abstract syntax tree types for mangled symbols.</p>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
@@ -148,10 +148,24 @@ go out of scope and we use the previous <code>ArgScopeStack</code>s again.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class="struct" href="struct.ParseContext.html"
+                                  title='struct cpp_demangle::ast::ParseContext'>ParseContext</a></td>
+                           <td class='docblock-short'>
+                                <p>Common context needed when parsing.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class="struct" href="struct.PointerToMemberType.html"
                                   title='struct cpp_demangle::ast::PointerToMemberType'>PointerToMemberType</a></td>
                            <td class='docblock-short'>
                                 <p>The <code>&lt;pointer-to-member-type&gt;</code> production.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.QualifiedBuiltin.html"
+                                  title='struct cpp_demangle::ast::QualifiedBuiltin'>QualifiedBuiltin</a></td>
+                           <td class='docblock-short'>
+                                <p>A built-in type with CV-qualifiers.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -349,6 +363,13 @@ go out of scope and we use the previous <code>ArgScopeStack</code>s again.</p>
                                   title='enum cpp_demangle::ast::RefQualifier'>RefQualifier</a></td>
                            <td class='docblock-short'>
                                 <p>A <ref-qualifier> production.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.SimpleOperatorName.html"
+                                  title='enum cpp_demangle::ast::SimpleOperatorName'>SimpleOperatorName</a></td>
+                           <td class='docblock-short'>
+                                <p>The <code>&lt;simple-operator-name&gt;</code> production.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>

@@ -90,6 +90,8 @@
 <span id="45">45</span>
 <span id="46">46</span>
 <span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">types</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">requests</span>::<span class="kw-2">*</span>;
@@ -119,6 +121,7 @@
     }
 }
 
+<span class="doccomment">/// Get information about a member of a chat.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanGetChatMemberForChat</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">get_member</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">O</span>) <span class="op">-&gt;</span> <span class="ident">GetChatMember</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">O</span>: <span class="ident">ToUserId</span>;
 }
@@ -129,6 +132,7 @@
     }
 }
 
+<span class="doccomment">/// Get information about a member of a chat.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanGetChatMemberForUser</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">get_member_from</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">O</span>) <span class="op">-&gt;</span> <span class="ident">GetChatMember</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">O</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>;
 }

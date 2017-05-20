@@ -85,6 +85,7 @@
 <span id="40">40</span>
 <span id="41">41</span>
 <span id="42">42</span>
+<span id="43">43</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">types</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">requests</span>::<span class="kw-2">*</span>;
@@ -119,6 +120,7 @@
     }
 }
 
+<span class="doccomment">/// Edit reply markup of messages sent by the bot.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanEditMessageReplyMarkup</span> {
     <span class="kw">fn</span> <span class="ident">edit_reply_markup</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">reply_markup</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">EditMessageReplyMarkup</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ReplyMarkup</span><span class="op">&gt;</span>;
 }

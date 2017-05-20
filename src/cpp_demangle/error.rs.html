@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/cpp_demangle-0.2.1/src/error.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/cpp_demangle-0.2.2/src/error.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>error.rs.html -- source</title>
@@ -120,6 +120,13 @@
 <span id="75">75</span>
 <span id="76">76</span>
 <span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! Custom `Error` and `Result` types for the `cpp_demangle` crate.</span>
 
@@ -154,6 +161,9 @@
     <span class="doccomment">/// The act of demangling some part of the AST attempted to demangle itself</span>
     <span class="doccomment">/// again.</span>
     <span class="ident">RecursiveDemangling</span>,
+
+    <span class="doccomment">/// Encountered too much recursion when demangling symbol.</span>
+    <span class="ident">TooMuchRecursion</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">Error</span> {
@@ -178,6 +188,9 @@
             <span class="ident">Error</span>::<span class="ident">RecursiveDemangling</span> <span class="op">=&gt;</span> {
                 <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;demangling some part of the AST attempted to demangle itself again&quot;</span>)
             }
+            <span class="ident">Error</span>::<span class="ident">TooMuchRecursion</span> <span class="op">=&gt;</span> {
+                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;encountered too much recursion when demangling symbol&quot;</span>)
+            }
         }
     }
 }
@@ -192,6 +205,7 @@
             <span class="ident">Error</span>::<span class="ident">BadFunctionArgReference</span> <span class="op">=&gt;</span> <span class="string">&quot;reference to a function arg that is either out-of-bounds, or in a context without function args&quot;</span>,
             <span class="ident">Error</span>::<span class="ident">Overflow</span> <span class="op">=&gt;</span> <span class="string">&quot;an overflow or underflow would occur when parsing an integer in a mangled symbol&quot;</span>,
             <span class="ident">Error</span>::<span class="ident">RecursiveDemangling</span> <span class="op">=&gt;</span> <span class="string">&quot;demangling some part of the AST attempted to demangle itself again&quot;</span>,
+            <span class="ident">Error</span>::<span class="ident">TooMuchRecursion</span> <span class="op">=&gt;</span> <span class="string">&quot;encountered too much recursion when demangling symbol&quot;</span>
         }
     }
 }
