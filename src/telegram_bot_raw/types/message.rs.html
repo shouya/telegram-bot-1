@@ -648,6 +648,7 @@
 <span id="603">603</span>
 <span id="604">604</span>
 <span id="605">605</span>
+<span id="606">606</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">serde</span>::<span class="ident">de</span>::{<span class="ident">Deserialize</span>, <span class="ident">Deserializer</span>, <span class="ident">Error</span>};
 
@@ -762,10 +763,11 @@
         <span class="doccomment">/// Information about the venue.</span>
         <span class="ident">data</span>: <span class="ident">Venue</span>,
     },
-    <span class="doccomment">/// A new member was added to the group.</span>
-    <span class="ident">NewChatMember</span> {
+    <span class="doccomment">/// New members that were added to the group or supergroup and</span>
+    <span class="doccomment">/// information about them (the bot itself may be one of these members)</span>
+    <span class="ident">NewChatMembers</span> {
         <span class="doccomment">/// Information about user (this member may be the bot itself).</span>
-        <span class="ident">data</span>: <span class="ident">User</span>,
+        <span class="ident">data</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">User</span><span class="op">&gt;</span>,
     },
     <span class="doccomment">/// A member was removed from the group.</span>
     <span class="ident">LeftChatMember</span> {
@@ -912,7 +914,7 @@
         <span class="macro">maybe_field</span><span class="macro">!</span>(<span class="ident">contact</span>, <span class="ident">Contact</span>);
         <span class="macro">maybe_field</span><span class="macro">!</span>(<span class="ident">location</span>, <span class="ident">Location</span>);
         <span class="macro">maybe_field</span><span class="macro">!</span>(<span class="ident">venue</span>, <span class="ident">Venue</span>);
-        <span class="macro">maybe_field</span><span class="macro">!</span>(<span class="ident">new_chat_member</span>, <span class="ident">NewChatMember</span>);
+        <span class="macro">maybe_field</span><span class="macro">!</span>(<span class="ident">new_chat_members</span>, <span class="ident">NewChatMembers</span>);
         <span class="macro">maybe_field</span><span class="macro">!</span>(<span class="ident">left_chat_member</span>, <span class="ident">LeftChatMember</span>);
         <span class="macro">maybe_field</span><span class="macro">!</span>(<span class="ident">new_chat_title</span>, <span class="ident">NewChatTitle</span>);
         <span class="macro">maybe_field</span><span class="macro">!</span>(<span class="ident">new_chat_photo</span>, <span class="ident">NewChatPhoto</span>);
@@ -979,9 +981,9 @@
     <span class="kw">pub</span> <span class="ident">location</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Location</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Message is a venue, information about the venue.</span>
     <span class="kw">pub</span> <span class="ident">venue</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Venue</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// A new member was added to the group, information about</span>
-    <span class="doccomment">/// them (this member may be the bot itself).</span>
-    <span class="kw">pub</span> <span class="ident">new_chat_member</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">User</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// New members that were added to the group or supergroup and information</span>
+    <span class="doccomment">/// about them (the bot itself may be one of these members)</span>
+    <span class="kw">pub</span> <span class="ident">new_chat_members</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">User</span><span class="op">&gt;&gt;</span>,
     <span class="doccomment">/// A member was removed from the group, information about</span>
     <span class="doccomment">/// them (this member may be the bot itself)</span>
     <span class="kw">pub</span> <span class="ident">left_chat_member</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">User</span><span class="op">&gt;</span>,

@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/telegram_bot_raw/types/message.rs.html#55-166' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/telegram_bot_raw/types/message.rs.html#55-167' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum MessageKind {
     Text {
         data: <a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>,
@@ -84,8 +84,8 @@
     Venue {
         data: <a class="struct" href="../../telegram_bot/types/struct.Venue.html" title="struct telegram_bot::types::Venue">Venue</a>,
     },
-    NewChatMember {
-        data: <a class="struct" href="../../telegram_bot/types/struct.User.html" title="struct telegram_bot::types::User">User</a>,
+    NewChatMembers {
+        data: <a class="struct" href="https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>&lt;<a class="struct" href="../../telegram_bot/types/struct.User.html" title="struct telegram_bot::types::User">User</a>&gt;,
     },
     LeftChatMember {
         data: <a class="struct" href="../../telegram_bot/types/struct.User.html" title="struct telegram_bot::types::User">User</a>,
@@ -156,10 +156,11 @@
 </div><span class='docblock autohide sub-variant' id='variant.Venue.fields'><h3 class='fields'>Fields of <code>Venue</code></h3>
 
                            <table><tr><td id='variant.Venue.field.data'><span id='Venue.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="../../telegram_bot/types/struct.Venue.html" title="struct telegram_bot::types::Venue">Venue</a></code></span></td><td><div class='docblock'><p>Information about the venue.</p>
-</div></td></tr></table></span><span id='variant.NewChatMember' class='variant'><span id='NewChatMember.v' class='invisible'><code>NewChatMember</code></span></span><div class='docblock'><p>A new member was added to the group.</p>
-</div><span class='docblock autohide sub-variant' id='variant.NewChatMember.fields'><h3 class='fields'>Fields of <code>NewChatMember</code></h3>
+</div></td></tr></table></span><span id='variant.NewChatMembers' class='variant'><span id='NewChatMembers.v' class='invisible'><code>NewChatMembers</code></span></span><div class='docblock'><p>New members that were added to the group or supergroup and
+information about them (the bot itself may be one of these members)</p>
+</div><span class='docblock autohide sub-variant' id='variant.NewChatMembers.fields'><h3 class='fields'>Fields of <code>NewChatMembers</code></h3>
 
-                           <table><tr><td id='variant.NewChatMember.field.data'><span id='NewChatMember.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="../../telegram_bot/types/struct.User.html" title="struct telegram_bot::types::User">User</a></code></span></td><td><div class='docblock'><p>Information about user (this member may be the bot itself).</p>
+                           <table><tr><td id='variant.NewChatMembers.field.data'><span id='NewChatMembers.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>&lt;<a class="struct" href="../../telegram_bot/types/struct.User.html" title="struct telegram_bot::types::User">User</a>&gt;</code></span></td><td><div class='docblock'><p>Information about user (this member may be the bot itself).</p>
 </div></td></tr></table></span><span id='variant.LeftChatMember' class='variant'><span id='LeftChatMember.v' class='invisible'><code>LeftChatMember</code></span></span><div class='docblock'><p>A member was removed from the group.</p>
 </div><span class='docblock autohide sub-variant' id='variant.LeftChatMember.fields'><h3 class='fields'>Fields of <code>LeftChatMember</code></h3>
 
