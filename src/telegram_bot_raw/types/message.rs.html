@@ -649,6 +649,28 @@
 <span id="604">604</span>
 <span id="605">605</span>
 <span id="606">606</span>
+<span id="607">607</span>
+<span id="608">608</span>
+<span id="609">609</span>
+<span id="610">610</span>
+<span id="611">611</span>
+<span id="612">612</span>
+<span id="613">613</span>
+<span id="614">614</span>
+<span id="615">615</span>
+<span id="616">616</span>
+<span id="617">617</span>
+<span id="618">618</span>
+<span id="619">619</span>
+<span id="620">620</span>
+<span id="621">621</span>
+<span id="622">622</span>
+<span id="623">623</span>
+<span id="624">624</span>
+<span id="625">625</span>
+<span id="626">626</span>
+<span id="627">627</span>
+<span id="628">628</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">serde</span>::<span class="ident">de</span>::{<span class="ident">Deserialize</span>, <span class="ident">Deserializer</span>, <span class="ident">Error</span>};
 
@@ -747,6 +769,11 @@
     <span class="ident">Voice</span> {
         <span class="doccomment">/// Information about the file.</span>
         <span class="ident">data</span>: <span class="ident">Voice</span>,
+    },
+    <span class="doccomment">/// Message is a video note.</span>
+    <span class="ident">VideoNote</span> {
+        <span class="doccomment">/// Information about the file.</span>
+        <span class="ident">data</span>: <span class="ident">VideoNote</span>,
     },
     <span class="doccomment">/// Message is a shared contact.</span>
     <span class="ident">Contact</span> {
@@ -911,6 +938,7 @@
         <span class="macro">maybe_field</span><span class="macro">!</span>(<span class="ident">sticker</span>, <span class="ident">Sticker</span>);
         <span class="macro">maybe_field_with_caption</span><span class="macro">!</span>(<span class="ident">video</span>, <span class="ident">Video</span>);
         <span class="macro">maybe_field</span><span class="macro">!</span>(<span class="ident">voice</span>, <span class="ident">Voice</span>);
+        <span class="macro">maybe_field</span><span class="macro">!</span>(<span class="ident">video_note</span>, <span class="ident">VideoNote</span>);
         <span class="macro">maybe_field</span><span class="macro">!</span>(<span class="ident">contact</span>, <span class="ident">Contact</span>);
         <span class="macro">maybe_field</span><span class="macro">!</span>(<span class="ident">location</span>, <span class="ident">Location</span>);
         <span class="macro">maybe_field</span><span class="macro">!</span>(<span class="ident">venue</span>, <span class="ident">Venue</span>);
@@ -973,6 +1001,8 @@
     <span class="kw">pub</span> <span class="ident">video</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Video</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Message is a voice message, information about the file.</span>
     <span class="kw">pub</span> <span class="ident">voice</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Voice</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Message is a video note message, information about the file.</span>
+    <span class="kw">pub</span> <span class="ident">video_note</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">VideoNote</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Caption for the document, photo or video, 0-200 characters.</span>
     <span class="kw">pub</span> <span class="ident">caption</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Message is a shared contact, information about the contact.</span>
@@ -1196,6 +1226,20 @@
     <span class="kw">pub</span> <span class="ident">duration</span>: <span class="ident">Integer</span>,
     <span class="doccomment">/// MIME type of the file as defined by sender.</span>
     <span class="kw">pub</span> <span class="ident">mime_type</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// File size.</span>
+    <span class="kw">pub</span> <span class="ident">file_size</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Integer</span><span class="op">&gt;</span>,
+}
+
+<span class="doccomment">/// This object represents a video message (available in Telegram apps as of v.4.0).</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Deserialize</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">VideoNote</span> {
+    <span class="doccomment">/// Unique identifier for this file.</span>
+    <span class="kw">pub</span> <span class="ident">file_id</span>: <span class="ident">String</span>,
+    <span class="kw">pub</span> <span class="ident">length</span>: <span class="ident">Integer</span>,
+    <span class="doccomment">/// Duration of the video in seconds as defined by sender.</span>
+    <span class="kw">pub</span> <span class="ident">duration</span>: <span class="ident">Integer</span>,
+    <span class="doccomment">/// Video thumbnail.</span>
+    <span class="kw">pub</span> <span class="ident">thumb</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PhotoSize</span><span class="op">&gt;</span>,
     <span class="doccomment">/// File size.</span>
     <span class="kw">pub</span> <span class="ident">file_size</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Integer</span><span class="op">&gt;</span>,
 }

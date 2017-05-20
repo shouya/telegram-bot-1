@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../src/telegram_bot_raw/types/message.rs.html#55-167' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../../src/telegram_bot_raw/types/message.rs.html#55-172' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum MessageKind {
     Text {
         data: <a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>,
@@ -74,6 +74,9 @@
     },
     Voice {
         data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.Voice.html" title="struct telegram_bot_raw::types::message::Voice">Voice</a>,
+    },
+    VideoNote {
+        data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.VideoNote.html" title="struct telegram_bot_raw::types::message::VideoNote">VideoNote</a>,
     },
     Contact {
         data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.Contact.html" title="struct telegram_bot_raw::types::message::Contact">Contact</a>,
@@ -144,6 +147,10 @@
 </div><span class='docblock autohide sub-variant' id='variant.Voice.fields'><h3 class='fields'>Fields of <code>Voice</code></h3>
 
                            <table><tr><td id='variant.Voice.field.data'><span id='Voice.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Voice.html" title="struct telegram_bot_raw::types::message::Voice">Voice</a></code></span></td><td><div class='docblock'><p>Information about the file.</p>
+</div></td></tr></table></span><span id='variant.VideoNote' class='variant'><span id='VideoNote.v' class='invisible'><code>VideoNote</code></span></span><div class='docblock'><p>Message is a video note.</p>
+</div><span class='docblock autohide sub-variant' id='variant.VideoNote.fields'><h3 class='fields'>Fields of <code>VideoNote</code></h3>
+
+                           <table><tr><td id='variant.VideoNote.field.data'><span id='VideoNote.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.VideoNote.html" title="struct telegram_bot_raw::types::message::VideoNote">VideoNote</a></code></span></td><td><div class='docblock'><p>Information about the file.</p>
 </div></td></tr></table></span><span id='variant.Contact' class='variant'><span id='Contact.v' class='invisible'><code>Contact</code></span></span><div class='docblock'><p>Message is a shared contact.</p>
 </div><span class='docblock autohide sub-variant' id='variant.Contact.fields'><h3 class='fields'>Fields of <code>Contact</code></h3>
 
