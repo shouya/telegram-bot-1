@@ -98,8 +98,8 @@
 <span class="kw">use</span> <span class="ident">types</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">requests</span>::<span class="kw-2">*</span>;
 
-<span class="doccomment">/// Use this method to unban a previously kicked user in a supergroup.</span>
-<span class="doccomment">/// The user will not return to the group automatically, but will be able to</span>
+<span class="doccomment">/// Use this method to unban a previously kicked user in a supergroup or channel.</span>
+<span class="doccomment">/// The user will not return to the group or channel automatically, but will be able to</span>
 <span class="doccomment">/// join via link, etc. The bot must be an administrator in the group for this to work.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Serialize</span>)]</span>
 <span class="attribute">#[<span class="ident">must_use</span> <span class="op">=</span> <span class="string">&quot;requests do nothing unless sent&quot;</span>]</span>
@@ -125,7 +125,7 @@
     }
 }
 
-<span class="doccomment">/// Unban a previously kicked user in a supergroup.</span>
+<span class="doccomment">/// Unban a previously kicked user in a supergroup or channel.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanUnbanChatMemberForChat</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">unban</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">O</span>) <span class="op">-&gt;</span> <span class="ident">UnbanChatMember</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">O</span>: <span class="ident">ToUserId</span>;
 }
@@ -136,7 +136,7 @@
     }
 }
 
-<span class="doccomment">/// Unban a previously kicked user in a supergroup.</span>
+<span class="doccomment">/// Unban a previously kicked user in a supergroup or channel.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanUnbanChatMemberForUser</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">unban_in</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">O</span>) <span class="op">-&gt;</span> <span class="ident">UnbanChatMember</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">O</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>;
 }
