@@ -48,17 +48,20 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/telegram_bot_raw/requests/_base/mod.rs.html#99-102' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/telegram_bot_raw/requests/_base/mod.rs.html#109-115' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait ToRequest&lt;'b, 'c&gt; {
     type <a href='#associatedtype.Request' class="type">Request</a>: <a class="trait" href="../../telegram_bot/types/trait.Request.html" title="trait telegram_bot::types::Request">Request</a>;
     fn <a href='#tymethod.to_request' class='fnname'>to_request</a>&lt;C&gt;(&amp;'b self, chat: C) -&gt; Self::<a class="trait" href="../../telegram_bot/prelude/trait.ToRequest.html" title="trait telegram_bot::prelude::ToRequest">Request</a> <span class="where fmt-newline">where C: <a class="trait" href="../../telegram_bot/types/trait.ToChatRef.html" title="trait telegram_bot::types::ToChatRef">ToChatRef</a>&lt;'c&gt;</span>;
-}</pre>
+}</pre><div class='docblock'><p>Use this trait to convert a complex type to corresponding request and send it to the chat.</p>
+</div>
             <h2 id='associated-types'>Associated Types</h2>
             <div class='methods'>
-        <h3 id='associatedtype.Request' class='method'><span id='Request.t' class='invisible'><code>type <a href='#associatedtype.Request' class="type">Request</a>: <a class="trait" href="../../telegram_bot/types/trait.Request.html" title="trait telegram_bot::types::Request">Request</a></code></span></h3></div>
+        <h3 id='associatedtype.Request' class='method'><span id='Request.t' class='invisible'><code>type <a href='#associatedtype.Request' class="type">Request</a>: <a class="trait" href="../../telegram_bot/types/trait.Request.html" title="trait telegram_bot::types::Request">Request</a></code></span></h3><div class='docblock'><p>Request type.</p>
+</div></div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.to_request' class='method'><span id='to_request.v' class='invisible'><code>fn <a href='#tymethod.to_request' class='fnname'>to_request</a>&lt;C&gt;(&amp;'b self, chat: C) -&gt; Self::<a class="trait" href="../../telegram_bot/prelude/trait.ToRequest.html" title="trait telegram_bot::prelude::ToRequest">Request</a> <span class="where fmt-newline">where C: <a class="trait" href="../../telegram_bot/types/trait.ToChatRef.html" title="trait telegram_bot::types::ToChatRef">ToChatRef</a>&lt;'c&gt;</span></code></span></h3></div>
+        <h3 id='tymethod.to_request' class='method'><span id='to_request.v' class='invisible'><code>fn <a href='#tymethod.to_request' class='fnname'>to_request</a>&lt;C&gt;(&amp;'b self, chat: C) -&gt; Self::<a class="trait" href="../../telegram_bot/prelude/trait.ToRequest.html" title="trait telegram_bot::prelude::ToRequest">Request</a> <span class="where fmt-newline">where C: <a class="trait" href="../../telegram_bot/types/trait.ToChatRef.html" title="trait telegram_bot::types::ToChatRef">ToChatRef</a>&lt;'c&gt;</span></code></span></h3><div class='docblock'><p>Convert type to request and send it to the chat.</p>
+</div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
     <li><code>impl&lt;'b, 'c&gt; ToRequest&lt;'b, 'c&gt; for <a class="struct" href="../../telegram_bot/types/struct.Contact.html" title="struct telegram_bot::types::Contact">Contact</a></code></li>

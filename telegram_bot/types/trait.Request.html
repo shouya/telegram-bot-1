@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/telegram_bot_raw/requests/_base/mod.rs.html#44-57' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/telegram_bot_raw/requests/_base/mod.rs.html#50-65' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Request: <a class="trait" href="../../serde/ser/trait.Serialize.html" title="trait serde::ser::Serialize">Serialize</a> {
     type <a href='#associatedtype.Response' class="type">Response</a>: 'static + <a class="trait" href="../../telegram_bot/types/trait.Response.html" title="trait telegram_bot::types::Response">Response</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a>;
     fn <a href='#tymethod.name' class='fnname'>name</a>(&amp;self) -&gt; &amp;'static <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>;
@@ -58,14 +58,16 @@
 </div>
             <h2 id='associated-types'>Associated Types</h2>
             <div class='methods'>
-        <h3 id='associatedtype.Response' class='method'><span id='Response.t' class='invisible'><code>type <a href='#associatedtype.Response' class="type">Response</a>: 'static + <a class="trait" href="../../telegram_bot/types/trait.Response.html" title="trait telegram_bot::types::Response">Response</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a></code></span></h3></div>
+        <h3 id='associatedtype.Response' class='method'><span id='Response.t' class='invisible'><code>type <a href='#associatedtype.Response' class="type">Response</a>: 'static + <a class="trait" href="../../telegram_bot/types/trait.Response.html" title="trait telegram_bot::types::Response">Response</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a></code></span></h3><div class='docblock'><p>How to parse response from the Telegram server.</p>
+</div></div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
         <h3 id='tymethod.name' class='method'><span id='name.v' class='invisible'><code>fn <a href='#tymethod.name' class='fnname'>name</a>(&amp;self) -&gt; &amp;'static <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code></span></h3><div class='docblock'><p>Name of the method.</p>
 </div></div>
             <h2 id='provided-methods'>Provided Methods</h2>
             <div class='methods'>
-        <h3 id='method.detach' class='method'><span id='detach.v' class='invisible'><code>fn <a href='#method.detach' class='fnname'>detach</a>(&amp;self) -&gt; <a class="struct" href="../../telegram_bot/types/struct.DetachedRequest.html" title="struct telegram_bot::types::DetachedRequest">DetachedRequest</a>&lt;Self::<a class="trait" href="../../telegram_bot/types/trait.Request.html" title="trait telegram_bot::types::Request">Response</a>&gt;</code></span></h3></div>
+        <h3 id='method.detach' class='method'><span id='detach.v' class='invisible'><code>fn <a href='#method.detach' class='fnname'>detach</a>(&amp;self) -&gt; <a class="struct" href="../../telegram_bot/types/struct.DetachedRequest.html" title="struct telegram_bot::types::DetachedRequest">DetachedRequest</a>&lt;Self::<a class="trait" href="../../telegram_bot/types/trait.Request.html" title="trait telegram_bot::types::Request">Response</a>&gt;</code></span></h3><div class='docblock'><p>Detach request from lifetime bounds, so it can be transferred across thread boundaries.</p>
+</div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
     <li><code>impl&lt;'a, Req&gt; Request for &amp;'a Req <span class="where fmt-newline">where Req: <a class="trait" href="../../telegram_bot/types/trait.Request.html" title="trait telegram_bot::types::Request">Request</a></span></code></li>

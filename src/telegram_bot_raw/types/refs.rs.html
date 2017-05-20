@@ -283,6 +283,12 @@
 <span id="238">238</span>
 <span id="239">239</span>
 <span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">Deref</span>;
@@ -479,22 +485,27 @@
     }
 }
 
+<span class="doccomment">/// Unique user identifier.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">UserId</span>(<span class="ident">Integer</span>);
 <span class="macro">specific_chat_id_impls</span><span class="macro">!</span>(<span class="ident">UserId</span>, <span class="ident">User</span>);
 
+<span class="doccomment">/// Unique group identifier.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GroupId</span>(<span class="ident">Integer</span>);
 <span class="macro">specific_chat_id_impls</span><span class="macro">!</span>(<span class="ident">GroupId</span>, <span class="ident">Group</span>);
 
+<span class="doccomment">/// Unique supergroup identifier.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SupergroupId</span>(<span class="ident">Integer</span>);
 <span class="macro">specific_chat_id_impls</span><span class="macro">!</span>(<span class="ident">SupergroupId</span>, <span class="ident">Supergroup</span>);
 
+<span class="doccomment">/// Unique channel identifier.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ChannelId</span>(<span class="ident">Integer</span>);
 <span class="macro">specific_chat_id_impls</span><span class="macro">!</span>(<span class="ident">ChannelId</span>, <span class="ident">Channel</span>);
 
+<span class="doccomment">/// Unique chat identifier.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ChatId</span>(<span class="ident">Integer</span>);
 <span class="macro">chat_id_impls</span><span class="macro">!</span>(<span class="ident">ChatId</span>);
@@ -521,6 +532,7 @@
     }
 }
 
+<span class="doccomment">/// Unique message identifier inside a chat.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MessageId</span>(<span class="ident">Integer</span>);
 <span class="macro">integer_id_impls</span><span class="macro">!</span>(<span class="ident">MessageId</span>);
