@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `IdResponse` struct in crate `telegram_bot_raw`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, IdResponse">
+    <meta name="description" content="API documentation for the Rust `FileResponse` struct in crate `telegram_bot_raw`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, FileResponse">
 
-    <title>telegram_bot_raw::requests::_base::IdResponse - Rust</title>
+    <title>telegram_bot_raw::requests::_base::FileResponse - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>requests</a>::<wbr><a href='index.html'>_base</a></p><script>window.sidebarCurrent = {name: 'IdResponse', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'><a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>requests</a>::<wbr><a href='index.html'>_base</a></p><script>window.sidebarCurrent = {name: 'FileResponse', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -44,18 +44,18 @@
     </nav>
 
     <section id='main' class="content">
-<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>requests</a>::<wbr><a href='index.html'>_base</a>::<wbr><a class="struct" href=''>IdResponse</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>requests</a>::<wbr><a href='index.html'>_base</a>::<wbr><a class="struct" href=''>FileResponse</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../src/telegram_bot_raw/requests/_base/mod.rs.html#25-27' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct IdResponse&lt;T&gt; { /* fields omitted */ }</pre><div class='docblock'><p>Read <code>T</code> from the Telegram server and returns the same type.</p>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl&lt;T:&nbsp;<a class="trait" href="../../../serde/de/trait.DeserializeOwned.html" title="trait serde::de::DeserializeOwned">DeserializeOwned</a>&gt; <a class="trait" href="../../../telegram_bot_raw/requests/_base/trait.Response.html" title="trait telegram_bot_raw::requests::_base::Response">Response</a> for <a class="struct" href="../../../telegram_bot_raw/requests/_base/struct.IdResponse.html" title="struct telegram_bot_raw::requests::_base::IdResponse">IdResponse</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/telegram_bot_raw/requests/_base/mod.rs.html#29-36' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='associatedtype.Raw' class="type"><span id='Raw.t' class='invisible'><code>type <a href='../../../telegram_bot_raw/requests/_base/trait.Response.html#associatedtype.Raw' class="type">Raw</a> = T</code></span></h4>
+               </span><a class='srclink' href='../../../src/telegram_bot_raw/requests/_base/mod.rs.html#51' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct FileResponse;</pre><div class='docblock'><p>Read <code>True</code> from the Telegram server and returns <code>()</code>.</p>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="../../../telegram_bot_raw/requests/_base/trait.Response.html" title="trait telegram_bot_raw::requests::_base::Response">Response</a> for <a class="struct" href="../../../telegram_bot_raw/requests/_base/struct.FileResponse.html" title="struct telegram_bot_raw::requests::_base::FileResponse">FileResponse</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/telegram_bot_raw/requests/_base/mod.rs.html#53-68' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='associatedtype.Raw' class="type"><span id='Raw.t' class='invisible'><code>type <a href='../../../telegram_bot_raw/requests/_base/trait.Response.html#associatedtype.Raw' class="type">Raw</a> = <a class="struct" href="../../../telegram_bot_raw/types/message/struct.RawFile.html" title="struct telegram_bot_raw::types::message::RawFile">RawFile</a></code></span></h4>
 <div class='docblock'><p>Response from the Telegram server.</p>
-</div><h4 id='associatedtype.Type' class="type"><span id='Type.t' class='invisible'><code>type <a href='../../../telegram_bot_raw/requests/_base/trait.Response.html#associatedtype.Type' class="type">Type</a> = T</code></span></h4>
+</div><h4 id='associatedtype.Type' class="type"><span id='Type.t' class='invisible'><code>type <a href='../../../telegram_bot_raw/requests/_base/trait.Response.html#associatedtype.Type' class="type">Type</a> = <a class="struct" href="../../../telegram_bot_raw/types/message/struct.File.html" title="struct telegram_bot_raw::types::message::File">File</a></code></span></h4>
 <div class='docblock'><p>Response that should be returned.</p>
-</div><h4 id='method.map' class="method"><span id='map.v' class='invisible'><code>fn <a href='../../../telegram_bot_raw/requests/_base/trait.Response.html#tymethod.map' class='fnname'>map</a>(raw: Self::<a class="trait" href="../../../telegram_bot_raw/requests/_base/trait.Response.html" title="trait telegram_bot_raw::requests::_base::Response">Raw</a>, _: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self::<a class="trait" href="../../../telegram_bot_raw/requests/_base/trait.Response.html" title="trait telegram_bot_raw::requests::_base::Response">Type</a></code></span></h4>
+</div><h4 id='method.map' class="method"><span id='map.v' class='invisible'><code>fn <a href='../../../telegram_bot_raw/requests/_base/trait.Response.html#tymethod.map' class='fnname'>map</a>(file: Self::<a class="trait" href="../../../telegram_bot_raw/requests/_base/trait.Response.html" title="trait telegram_bot_raw::requests::_base::Response">Raw</a>, token: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self::<a class="trait" href="../../../telegram_bot_raw/requests/_base/trait.Response.html" title="trait telegram_bot_raw::requests::_base::Response">Type</a></code></span></h4>
 <div class='docblock'><p>Map <code>Raw</code> to <code>Type</code>.</p>
 </div></div></section>
     <section id='search' class="content hidden"></section>
