@@ -105,12 +105,12 @@
 <span class="doccomment">/// The bot must be an administrator in the group for this to work.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Serialize</span>)]</span>
 <span class="attribute">#[<span class="ident">must_use</span> <span class="op">=</span> <span class="string">&quot;requests do nothing unless sent&quot;</span>]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">KickChatMember</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
-    <span class="ident">chat_id</span>: <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>,
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">KickChatMember</span> {
+    <span class="ident">chat_id</span>: <span class="ident">ChatRef</span>,
     <span class="ident">user_id</span>: <span class="ident">UserId</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="ident">Request</span> <span class="kw">for</span> <span class="ident">KickChatMember</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">Request</span> <span class="kw">for</span> <span class="ident">KickChatMember</span> {
     <span class="kw">type</span> <span class="ident">Response</span> <span class="op">=</span> <span class="ident">TrueToUnitResponse</span>;
 
     <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
@@ -118,8 +118,8 @@
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="ident">KickChatMember</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">C</span>, <span class="ident">U</span><span class="op">&gt;</span>(<span class="ident">chat</span>: <span class="ident">C</span>, <span class="ident">user</span>: <span class="ident">U</span>) <span class="op">-&gt;</span> <span class="self">Self</span> <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>, <span class="ident">U</span>: <span class="ident">ToUserId</span> {
+<span class="kw">impl</span> <span class="ident">KickChatMember</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">C</span>, <span class="ident">U</span><span class="op">&gt;</span>(<span class="ident">chat</span>: <span class="ident">C</span>, <span class="ident">user</span>: <span class="ident">U</span>) <span class="op">-&gt;</span> <span class="self">Self</span> <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">ToChatRef</span>, <span class="ident">U</span>: <span class="ident">ToUserId</span> {
         <span class="ident">KickChatMember</span> {
             <span class="ident">chat_id</span>: <span class="ident">chat</span>.<span class="ident">to_chat_ref</span>(),
             <span class="ident">user_id</span>: <span class="ident">user</span>.<span class="ident">to_user_id</span>(),
@@ -128,23 +128,23 @@
 }
 
 <span class="doccomment">/// Kick a user from a group or a supergroup.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanKickChatMemberForChat</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">kick</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">O</span>) <span class="op">-&gt;</span> <span class="ident">KickChatMember</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">O</span>: <span class="ident">ToUserId</span>;
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanKickChatMemberForChat</span> {
+    <span class="kw">fn</span> <span class="ident">kick</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">O</span>) <span class="op">-&gt;</span> <span class="ident">KickChatMember</span> <span class="kw">where</span> <span class="ident">O</span>: <span class="ident">ToUserId</span>;
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="ident">C</span><span class="op">&gt;</span> <span class="ident">CanKickChatMemberForChat</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">C</span> <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">kick</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">O</span>) <span class="op">-&gt;</span> <span class="ident">KickChatMember</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">O</span>: <span class="ident">ToUserId</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">C</span><span class="op">&gt;</span> <span class="ident">CanKickChatMemberForChat</span> <span class="kw">for</span> <span class="ident">C</span> <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">ToChatRef</span> {
+    <span class="kw">fn</span> <span class="ident">kick</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">O</span>) <span class="op">-&gt;</span> <span class="ident">KickChatMember</span> <span class="kw">where</span> <span class="ident">O</span>: <span class="ident">ToUserId</span> {
         <span class="ident">KickChatMember</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">other</span>)
     }
 }
 
 <span class="doccomment">/// Kick a user from a group or a supergroup.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanKickChatMemberForUser</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">kick_from</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">O</span>) <span class="op">-&gt;</span> <span class="ident">KickChatMember</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">O</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>;
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanKickChatMemberForUser</span> {
+    <span class="kw">fn</span> <span class="ident">kick_from</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">O</span>) <span class="op">-&gt;</span> <span class="ident">KickChatMember</span> <span class="kw">where</span> <span class="ident">O</span>: <span class="ident">ToChatRef</span>;
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">CanKickChatMemberForUser</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">U</span> <span class="kw">where</span> <span class="ident">U</span>: <span class="ident">ToUserId</span> {
-    <span class="kw">fn</span> <span class="ident">kick_from</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">O</span>) <span class="op">-&gt;</span> <span class="ident">KickChatMember</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">O</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span> <span class="ident">CanKickChatMemberForUser</span> <span class="kw">for</span> <span class="ident">U</span> <span class="kw">where</span> <span class="ident">U</span>: <span class="ident">ToUserId</span> {
+    <span class="kw">fn</span> <span class="ident">kick_from</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">O</span>) <span class="op">-&gt;</span> <span class="ident">KickChatMember</span> <span class="kw">where</span> <span class="ident">O</span>: <span class="ident">ToChatRef</span> {
         <span class="ident">KickChatMember</span>::<span class="ident">new</span>(<span class="ident">other</span>, <span class="self">self</span>)
     }
 }

@@ -215,8 +215,8 @@
 <span class="doccomment">/// Use this method to send information about a venue.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Serialize</span>)]</span>
 <span class="attribute">#[<span class="ident">must_use</span> <span class="op">=</span> <span class="string">&quot;requests do nothing unless sent&quot;</span>]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> {
-    <span class="ident">chat_id</span>: <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>,
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> {
+    <span class="ident">chat_id</span>: <span class="ident">ChatRef</span>,
     <span class="ident">latitude</span>: <span class="ident">Float</span>,
     <span class="ident">longitude</span>: <span class="ident">Float</span>,
     <span class="ident">title</span>: <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="ident">str</span><span class="op">&gt;</span>,
@@ -231,7 +231,7 @@
     <span class="ident">reply_markup</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ReplyMarkup</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> <span class="ident">Request</span> <span class="kw">for</span> <span class="ident">SendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> <span class="ident">Request</span> <span class="kw">for</span> <span class="ident">SendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Response</span> <span class="op">=</span> <span class="ident">IdResponse</span><span class="op">&lt;</span><span class="ident">Message</span><span class="op">&gt;</span>;
 
     <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
@@ -239,9 +239,9 @@
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> <span class="ident">SendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> <span class="ident">SendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">C</span>, <span class="ident">T</span>, <span class="ident">A</span><span class="op">&gt;</span>(<span class="ident">chat</span>: <span class="ident">C</span>, <span class="ident">latitude</span>: <span class="ident">Float</span>, <span class="ident">longitude</span>: <span class="ident">Float</span>, <span class="ident">title</span>: <span class="ident">T</span>, <span class="ident">address</span>: <span class="ident">A</span>) <span class="op">-&gt;</span> <span class="self">Self</span>
-        <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>,
+        <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">ToChatRef</span>,
               <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>,
               <span class="ident">A</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>
     {
@@ -286,26 +286,26 @@
 }
 
 <span class="doccomment">/// Send information about a venue.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanSendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanSendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">venue</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">A</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>,
                    <span class="ident">latitude</span>: <span class="ident">Float</span>,
                    <span class="ident">longitude</span>: <span class="ident">Float</span>,
                    <span class="ident">title</span>: <span class="ident">T</span>,
                    <span class="ident">address</span>: <span class="ident">A</span>)
-                   <span class="op">-&gt;</span> <span class="ident">SendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span>
+                   <span class="op">-&gt;</span> <span class="ident">SendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>,
               <span class="ident">A</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>;
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span>, <span class="ident">C</span><span class="op">&gt;</span> <span class="ident">CanSendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">C</span>
-    <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span>, <span class="ident">C</span><span class="op">&gt;</span> <span class="ident">CanSendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">C</span>
+    <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">ToChatRef</span>
 {
     <span class="kw">fn</span> <span class="ident">venue</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">A</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>,
                    <span class="ident">latitude</span>: <span class="ident">Float</span>,
                    <span class="ident">longitude</span>: <span class="ident">Float</span>,
                    <span class="ident">title</span>: <span class="ident">T</span>,
                    <span class="ident">address</span>: <span class="ident">A</span>)
-                   <span class="op">-&gt;</span> <span class="ident">SendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span>
+                   <span class="op">-&gt;</span> <span class="ident">SendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>,
               <span class="ident">A</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>
     {
@@ -315,23 +315,23 @@
 
 <span class="doccomment">/// Reply with information about a venue.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanReplySendVenue</span> {
-    <span class="kw">fn</span> <span class="ident">venue_reply</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span>, <span class="ident">T</span>, <span class="ident">A</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>,
+    <span class="kw">fn</span> <span class="ident">venue_reply</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span>, <span class="ident">T</span>, <span class="ident">A</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>,
                                          <span class="ident">latitude</span>: <span class="ident">Float</span>,
                                          <span class="ident">longitude</span>: <span class="ident">Float</span>,
                                          <span class="ident">title</span>: <span class="ident">T</span>,
                                          <span class="ident">address</span>: <span class="ident">A</span>)
-                                         <span class="op">-&gt;</span> <span class="ident">SendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span>
+                                         <span class="op">-&gt;</span> <span class="ident">SendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>,
               <span class="ident">A</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span> <span class="ident">CanReplySendVenue</span> <span class="kw">for</span> <span class="ident">M</span> <span class="kw">where</span> <span class="ident">M</span>: <span class="ident">ToMessageId</span> <span class="op">+</span> <span class="ident">ToSourceChat</span> {
-    <span class="kw">fn</span> <span class="ident">venue_reply</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span>, <span class="ident">T</span>, <span class="ident">A</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>,
+    <span class="kw">fn</span> <span class="ident">venue_reply</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span>, <span class="ident">T</span>, <span class="ident">A</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>,
                                          <span class="ident">latitude</span>: <span class="ident">Float</span>,
                                          <span class="ident">longitude</span>: <span class="ident">Float</span>,
                                          <span class="ident">title</span>: <span class="ident">T</span>,
                                          <span class="ident">address</span>: <span class="ident">A</span>)
-                                         <span class="op">-&gt;</span> <span class="ident">SendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span>
+                                         <span class="op">-&gt;</span> <span class="ident">SendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;f</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>,
               <span class="ident">A</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span>
     {
@@ -341,10 +341,10 @@
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="ident">ToRequest</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Venue</span> {
-    <span class="kw">type</span> <span class="ident">Request</span> <span class="op">=</span> <span class="ident">SendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>;
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span> <span class="ident">ToRequest</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Venue</span> {
+    <span class="kw">type</span> <span class="ident">Request</span> <span class="op">=</span> <span class="ident">SendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">to_request</span><span class="op">&lt;</span><span class="ident">C</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="self">self</span>, <span class="ident">chat</span>: <span class="ident">C</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Request</span> <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">to_request</span><span class="op">&lt;</span><span class="ident">C</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="self">self</span>, <span class="ident">chat</span>: <span class="ident">C</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Request</span> <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">ToChatRef</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rq</span> <span class="op">=</span> <span class="ident">chat</span>.<span class="ident">venue</span>(<span class="self">self</span>.<span class="ident">location</span>.<span class="ident">latitude</span>, <span class="self">self</span>.<span class="ident">location</span>.<span class="ident">longitude</span>,
                                 <span class="self">self</span>.<span class="ident">title</span>.<span class="ident">as_str</span>(), <span class="self">self</span>.<span class="ident">address</span>.<span class="ident">as_str</span>());
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">foursquare_id</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">foursquare_id</span> {
@@ -354,8 +354,8 @@
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="ident">ToReplyRequest</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Venue</span> {
-    <span class="kw">type</span> <span class="ident">Request</span> <span class="op">=</span> <span class="ident">SendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>;
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span> <span class="ident">ToReplyRequest</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Venue</span> {
+    <span class="kw">type</span> <span class="ident">Request</span> <span class="op">=</span> <span class="ident">SendVenue</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>;
 
     <span class="kw">fn</span> <span class="ident">to_reply_request</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="self">self</span>, <span class="ident">message</span>: <span class="ident">M</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Request</span>
         <span class="kw">where</span> <span class="ident">M</span>: <span class="ident">ToMessageId</span> <span class="op">+</span> <span class="ident">ToSourceChat</span> {

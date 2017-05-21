@@ -288,16 +288,16 @@
 }
 
 <span class="doccomment">/// Use this trait to convert a complex type to corresponding request and send it to the chat.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ToRequest</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ToRequest</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Request type.</span>
     <span class="kw">type</span> <span class="ident">Request</span>: <span class="ident">Request</span>;
 
     <span class="doccomment">/// Convert type to request and send it to the chat.</span>
-    <span class="kw">fn</span> <span class="ident">to_request</span><span class="op">&lt;</span><span class="ident">C</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="self">self</span>, <span class="ident">chat</span>: <span class="ident">C</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Request</span> <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">to_request</span><span class="op">&lt;</span><span class="ident">C</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="self">self</span>, <span class="ident">chat</span>: <span class="ident">C</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Request</span> <span class="kw">where</span> <span class="ident">C</span>: <span class="ident">ToChatRef</span>;
 }
 
 <span class="doccomment">/// Use this trait to convert a complex type to corresponding request and reply to the message.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ToReplyRequest</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ToReplyRequest</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Request type.</span>
     <span class="kw">type</span> <span class="ident">Request</span>: <span class="ident">Request</span>;
 

@@ -50,12 +50,12 @@
                    </a>
                </span><a class='srclink' href='../../src/telegram_bot_raw/requests/forward_message.rs.html#44-46' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait CanForwardMessage {
-    fn <a href='#tymethod.forward' class='fnname'>forward</a>&lt;'c, 'f, T&gt;(&amp;self, to: T) -&gt; <a class="struct" href="../../telegram_bot/types/requests/struct.ForwardMessage.html" title="struct telegram_bot::types::requests::ForwardMessage">ForwardMessage</a>&lt;'c, 'f&gt; <span class="where fmt-newline">where T: <a class="trait" href="../../telegram_bot/types/trait.ToChatRef.html" title="trait telegram_bot::types::ToChatRef">ToChatRef</a>&lt;'c&gt;</span>;
+    fn <a href='#tymethod.forward' class='fnname'>forward</a>&lt;T&gt;(&amp;self, to: T) -&gt; <a class="struct" href="../../telegram_bot/types/requests/struct.ForwardMessage.html" title="struct telegram_bot::types::requests::ForwardMessage">ForwardMessage</a> <span class="where fmt-newline">where T: <a class="trait" href="../../telegram_bot/types/trait.ToChatRef.html" title="trait telegram_bot::types::ToChatRef">ToChatRef</a></span>;
 }</pre><div class='docblock'><p>Forward message.</p>
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.forward' class='method'><span id='forward.v' class='invisible'><code>fn <a href='#tymethod.forward' class='fnname'>forward</a>&lt;'c, 'f, T&gt;(&amp;self, to: T) -&gt; <a class="struct" href="../../telegram_bot/types/requests/struct.ForwardMessage.html" title="struct telegram_bot::types::requests::ForwardMessage">ForwardMessage</a>&lt;'c, 'f&gt; <span class="where fmt-newline">where T: <a class="trait" href="../../telegram_bot/types/trait.ToChatRef.html" title="trait telegram_bot::types::ToChatRef">ToChatRef</a>&lt;'c&gt;</span></code></span></h3></div>
+        <h3 id='tymethod.forward' class='method'><span id='forward.v' class='invisible'><code>fn <a href='#tymethod.forward' class='fnname'>forward</a>&lt;T&gt;(&amp;self, to: T) -&gt; <a class="struct" href="../../telegram_bot/types/requests/struct.ForwardMessage.html" title="struct telegram_bot::types::requests::ForwardMessage">ForwardMessage</a> <span class="where fmt-newline">where T: <a class="trait" href="../../telegram_bot/types/trait.ToChatRef.html" title="trait telegram_bot::types::ToChatRef">ToChatRef</a></span></code></span></h3></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
     <li><code>impl&lt;M&gt; CanForwardMessage for M <span class="where fmt-newline">where M: <a class="trait" href="../../telegram_bot/types/trait.ToMessageId.html" title="trait telegram_bot::types::ToMessageId">ToMessageId</a> + <a class="trait" href="../../telegram_bot/types/trait.ToSourceChat.html" title="trait telegram_bot::types::ToSourceChat">ToSourceChat</a></span></code></li>

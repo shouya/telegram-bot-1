@@ -293,8 +293,67 @@
 <span id="248">248</span>
 <span id="249">249</span>
 <span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
 </pre><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">Deref</span>;
 
 <span class="kw">use</span> <span class="ident">serde</span>::<span class="ident">ser</span>::{<span class="ident">Serialize</span>, <span class="ident">Serializer</span>};
@@ -366,49 +425,49 @@
 <span class="doccomment">/// Unique identifier for the target chat or username of the</span>
 <span class="doccomment">/// target channel (in the format @channelusername)</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ChatRef</span> {
     <span class="ident">Id</span>(<span class="ident">ChatId</span>),
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-    <span class="ident">ChannelUsername</span>(<span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">str</span><span class="op">&gt;</span>,),
+    <span class="ident">ChannelUsername</span>(<span class="ident">String</span>),
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_chat_id</span>(<span class="ident">chat_id</span>: <span class="ident">ChatId</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">ChatRef</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_chat_id</span>(<span class="ident">chat_id</span>: <span class="ident">ChatId</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span> {
         <span class="ident">ChatRef</span>::<span class="ident">Id</span>(<span class="ident">chat_id</span>)
     }
 }
 
 <span class="doccomment">/// Get `ChatRef` from the type reference.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>;
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ToChatRef</span> {
+    <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span>;
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">S</span><span class="op">&gt;</span> <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">S</span> <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Deref</span>, <span class="ident">S</span>::<span class="ident">Target</span>: <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> <span class="ident">ToChatRef</span> <span class="kw">for</span> <span class="ident">S</span> <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Deref</span>, <span class="ident">S</span>::<span class="ident">Target</span>: <span class="ident">ToChatRef</span> {
+    <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span> {
         <span class="self">self</span>.<span class="ident">deref</span>().<span class="ident">to_chat_ref</span>()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">ToChatRef</span> <span class="kw">for</span> <span class="ident">ChatRef</span> {
+    <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span> {
         <span class="self">self</span>.<span class="ident">clone</span>()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Chat</span> {
-    <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">ToChatRef</span> <span class="kw">for</span> <span class="ident">Chat</span> {
+    <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span> {
         <span class="self">self</span>.<span class="ident">id</span>().<span class="ident">to_chat_ref</span>()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ChatMember</span> {
-    <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">ToChatRef</span> <span class="kw">for</span> <span class="ident">ChatMember</span> {
+    <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span> {
         <span class="self">self</span>.<span class="ident">user</span>.<span class="ident">to_chat_ref</span>()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ForwardFrom</span> {
-    <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">ToChatRef</span> <span class="kw">for</span> <span class="ident">ForwardFrom</span> {
+    <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">ForwardFrom</span>::<span class="ident">User</span> {<span class="kw-2">ref</span> <span class="ident">user</span>, ..} <span class="op">=&gt;</span> <span class="ident">user</span>.<span class="ident">to_chat_ref</span>(),
             <span class="ident">ForwardFrom</span>::<span class="ident">Channel</span> {<span class="kw-2">ref</span> <span class="ident">channel</span>, ..} <span class="op">=&gt;</span> <span class="ident">channel</span>.<span class="ident">to_chat_ref</span>(),
@@ -416,13 +475,13 @@
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Forward</span> {
-    <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">ToChatRef</span> <span class="kw">for</span> <span class="ident">Forward</span> {
+    <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span> {
         <span class="self">self</span>.<span class="ident">from</span>.<span class="ident">to_chat_ref</span>()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Serialize</span> <span class="kw">for</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">Serialize</span> <span class="kw">for</span> <span class="ident">ChatRef</span> {
     <span class="kw">fn</span> <span class="ident">serialize</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">serializer</span>: <span class="ident">S</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">S</span>::<span class="prelude-val">Ok</span>, <span class="ident">S</span>::<span class="ident">Error</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Serializer</span>
     {
@@ -437,8 +496,8 @@
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">id</span>: <span class="ident">ident</span>) <span class="op">=&gt;</span> {
         <span class="macro">integer_id_impls</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">id</span>);
 
-        <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">id</span> {
-            <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+        <span class="kw">impl</span> <span class="ident">ToChatRef</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">id</span> {
+            <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span> {
                 <span class="ident">ChatRef</span>::<span class="ident">from_chat_id</span>((<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">into</span>())
             }
         }
@@ -455,8 +514,8 @@
             }
         }
 
-        <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">typ</span> {
-            <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+        <span class="kw">impl</span> <span class="ident">ToChatRef</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">typ</span> {
+            <span class="kw">fn</span> <span class="ident">to_chat_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ChatRef</span> {
                 <span class="self">self</span>.<span class="ident">id</span>.<span class="ident">to_chat_ref</span>()
             }
         }
@@ -544,7 +603,67 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MessageId</span>(<span class="ident">Integer</span>);
 <span class="macro">integer_id_impls</span><span class="macro">!</span>(<span class="ident">MessageId</span>);
-</pre>
+
+<span class="doccomment">/// Get `FileRef` from the type reference.</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ToFileRef</span> {
+    <span class="kw">fn</span> <span class="ident">to_file_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">FileRef</span>;
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> <span class="ident">ToFileRef</span> <span class="kw">for</span> <span class="ident">S</span> <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Deref</span>, <span class="ident">S</span>::<span class="ident">Target</span>: <span class="ident">ToFileRef</span> {
+    <span class="kw">fn</span> <span class="ident">to_file_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">FileRef</span> {
+        <span class="self">self</span>.<span class="ident">deref</span>().<span class="ident">to_file_ref</span>()
+    }
+}
+
+<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">file_id_impls</span> {
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>: <span class="ident">ident</span>) <span class="op">=&gt;</span> {
+        <span class="kw">impl</span> <span class="ident">ToFileRef</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span> {
+            <span class="kw">fn</span> <span class="ident">to_file_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">FileRef</span> {
+                <span class="self">self</span>.<span class="ident">file_id</span>.<span class="ident">clone</span>().<span class="ident">into</span>()
+            }
+        }
+    }
+}
+
+<span class="macro">file_id_impls</span><span class="macro">!</span>(<span class="ident">PhotoSize</span>);
+<span class="macro">file_id_impls</span><span class="macro">!</span>(<span class="ident">Audio</span>);
+<span class="macro">file_id_impls</span><span class="macro">!</span>(<span class="ident">Document</span>);
+<span class="macro">file_id_impls</span><span class="macro">!</span>(<span class="ident">Sticker</span>);
+<span class="macro">file_id_impls</span><span class="macro">!</span>(<span class="ident">Video</span>);
+<span class="macro">file_id_impls</span><span class="macro">!</span>(<span class="ident">Voice</span>);
+<span class="macro">file_id_impls</span><span class="macro">!</span>(<span class="ident">VideoNote</span>);
+
+<span class="macro">file_id_impls</span><span class="macro">!</span>(<span class="ident">File</span>);
+
+<span class="doccomment">/// Unique file identifier reference.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FileRef</span> {
+    <span class="ident">inner</span>: <span class="ident">String</span>
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">FileRef</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="ident">FileRef</span> {
+            <span class="ident">inner</span>: <span class="ident">s</span>.<span class="ident">to_string</span>()
+        }
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">FileRef</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">s</span>: <span class="ident">String</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="ident">FileRef</span> {
+            <span class="ident">inner</span>: <span class="ident">s</span>.<span class="ident">clone</span>()
+        }
+    }
+}
+
+<span class="kw">impl</span> <span class="ident">Serialize</span> <span class="kw">for</span> <span class="ident">FileRef</span> {
+    <span class="kw">fn</span> <span class="ident">serialize</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">serializer</span>: <span class="ident">S</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">S</span>::<span class="prelude-val">Ok</span>, <span class="ident">S</span>::<span class="ident">Error</span><span class="op">&gt;</span>
+        <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Serializer</span>
+    {
+        <span class="ident">serializer</span>.<span class="ident">serialize_str</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">inner</span>)
+    }
+}</pre>
 </section>
     <section id='search' class="content hidden"></section>
 

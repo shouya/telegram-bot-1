@@ -49,7 +49,7 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../src/telegram_bot_raw/requests/_base/mod.rs.html#118-125' title='goto source code'>[src]</a></span></h1>
-<pre class='rust trait'>pub trait ToReplyRequest&lt;'b, 'c&gt; {
+<pre class='rust trait'>pub trait ToReplyRequest&lt;'b&gt; {
     type <a href='#associatedtype.Request' class="type">Request</a>: <a class="trait" href="../../telegram_bot/types/trait.Request.html" title="trait telegram_bot::types::Request">Request</a>;
     fn <a href='#tymethod.to_reply_request' class='fnname'>to_reply_request</a>&lt;M&gt;(&amp;'b self, message: M) -&gt; Self::<a class="trait" href="../../telegram_bot/prelude/trait.ToReplyRequest.html" title="trait telegram_bot::prelude::ToReplyRequest">Request</a> <span class="where fmt-newline">where M: <a class="trait" href="../../telegram_bot/types/trait.ToMessageId.html" title="trait telegram_bot::types::ToMessageId">ToMessageId</a> + <a class="trait" href="../../telegram_bot/types/trait.ToSourceChat.html" title="trait telegram_bot::types::ToSourceChat">ToSourceChat</a></span>;
 }</pre><div class='docblock'><p>Use this trait to convert a complex type to corresponding request and reply to the message.</p>
@@ -64,9 +64,9 @@
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;'b, 'c&gt; ToReplyRequest&lt;'b, 'c&gt; for <a class="struct" href="../../telegram_bot/types/struct.Contact.html" title="struct telegram_bot::types::Contact">Contact</a></code></li>
-<li><code>impl&lt;'b, 'c&gt; ToReplyRequest&lt;'b, 'c&gt; for <a class="struct" href="../../telegram_bot/types/struct.Location.html" title="struct telegram_bot::types::Location">Location</a></code></li>
-<li><code>impl&lt;'b, 'c&gt; ToReplyRequest&lt;'b, 'c&gt; for <a class="struct" href="../../telegram_bot/types/struct.Venue.html" title="struct telegram_bot::types::Venue">Venue</a></code></li>
+    <li><code>impl&lt;'b&gt; ToReplyRequest&lt;'b&gt; for <a class="struct" href="../../telegram_bot/types/struct.Contact.html" title="struct telegram_bot::types::Contact">Contact</a></code></li>
+<li><code>impl&lt;'b&gt; ToReplyRequest&lt;'b&gt; for <a class="struct" href="../../telegram_bot/types/struct.Location.html" title="struct telegram_bot::types::Location">Location</a></code></li>
+<li><code>impl&lt;'b&gt; ToReplyRequest&lt;'b&gt; for <a class="struct" href="../../telegram_bot/types/struct.Venue.html" title="struct telegram_bot::types::Venue">Venue</a></code></li>
 </ul><script type="text/javascript" async
                          src="../../implementors/telegram_bot_raw/requests/_base/trait.ToReplyRequest.js">
                  </script></section>

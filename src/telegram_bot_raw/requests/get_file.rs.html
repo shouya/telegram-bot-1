@@ -71,9 +71,16 @@
 <span id="26">26</span>
 <span id="27">27</span>
 <span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
 </pre><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
-
 <span class="kw">use</span> <span class="ident">requests</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">types</span>::<span class="kw-2">*</span>;
 
@@ -81,11 +88,11 @@
 <span class="doccomment">/// For the moment, bots can download files of up to 20MB in size.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Serialize</span>)]</span>
 <span class="attribute">#[<span class="ident">must_use</span> <span class="op">=</span> <span class="string">&quot;requests do nothing unless sent&quot;</span>]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GetFile</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span> {
-    <span class="ident">file_id</span>: <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span>, <span class="ident">str</span><span class="op">&gt;</span>,
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GetFile</span> {
+    <span class="ident">file_id</span>: <span class="ident">FileRef</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span> <span class="ident">Request</span> <span class="kw">for</span> <span class="ident">GetFile</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span> <span class="ident">Request</span> <span class="kw">for</span> <span class="ident">GetFile</span> {
     <span class="kw">type</span> <span class="ident">Response</span> <span class="op">=</span> <span class="ident">IdResponse</span><span class="op">&lt;</span><span class="ident">File</span><span class="op">&gt;</span>;
 
     <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
@@ -93,11 +100,22 @@
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span> <span class="ident">GetFile</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">file_id</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="self">Self</span> <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span> {
+<span class="kw">impl</span> <span class="ident">GetFile</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">file</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="self">Self</span> <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">ToFileRef</span> {
         <span class="self">Self</span> {
-            <span class="ident">file_id</span>: <span class="ident">file_id</span>.<span class="ident">into</span>()
+            <span class="ident">file_id</span>: <span class="ident">file</span>.<span class="ident">to_file_ref</span>()
         }
+    }
+}
+
+<span class="doccomment">/// Get basic info about a file and prepare it for downloading.</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CanGetFile</span> {
+    <span class="kw">fn</span> <span class="ident">get_file</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">GetFile</span>;
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="ident">CanGetFile</span> <span class="kw">for</span> <span class="ident">F</span> <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">ToFileRef</span> {
+    <span class="kw">fn</span> <span class="ident">get_file</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">GetFile</span> {
+        <span class="ident">GetFile</span>::<span class="ident">new</span>(<span class="self">self</span>)
     }
 }
 </pre>

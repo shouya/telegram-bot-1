@@ -49,16 +49,16 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../../src/telegram_bot_raw/requests/kick_chat_member.rs.html#44-46' title='goto source code'>[src]</a></span></h1>
-<pre class='rust trait'>pub trait CanKickChatMemberForUser&lt;'c&gt; {
-    fn <a href='#tymethod.kick_from' class='fnname'>kick_from</a>&lt;O&gt;(&amp;self, other: O) -&gt; <a class="struct" href="../../../telegram_bot_raw/requests/kick_chat_member/struct.KickChatMember.html" title="struct telegram_bot_raw::requests::kick_chat_member::KickChatMember">KickChatMember</a>&lt;'c&gt; <span class="where fmt-newline">where O: <a class="trait" href="../../../telegram_bot_raw/types/refs/trait.ToChatRef.html" title="trait telegram_bot_raw::types::refs::ToChatRef">ToChatRef</a>&lt;'c&gt;</span>;
+<pre class='rust trait'>pub trait CanKickChatMemberForUser {
+    fn <a href='#tymethod.kick_from' class='fnname'>kick_from</a>&lt;O&gt;(&amp;self, other: O) -&gt; <a class="struct" href="../../../telegram_bot_raw/requests/kick_chat_member/struct.KickChatMember.html" title="struct telegram_bot_raw::requests::kick_chat_member::KickChatMember">KickChatMember</a> <span class="where fmt-newline">where O: <a class="trait" href="../../../telegram_bot_raw/types/refs/trait.ToChatRef.html" title="trait telegram_bot_raw::types::refs::ToChatRef">ToChatRef</a></span>;
 }</pre><div class='docblock'><p>Kick a user from a group or a supergroup.</p>
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.kick_from' class='method'><span id='kick_from.v' class='invisible'><code>fn <a href='#tymethod.kick_from' class='fnname'>kick_from</a>&lt;O&gt;(&amp;self, other: O) -&gt; <a class="struct" href="../../../telegram_bot_raw/requests/kick_chat_member/struct.KickChatMember.html" title="struct telegram_bot_raw::requests::kick_chat_member::KickChatMember">KickChatMember</a>&lt;'c&gt; <span class="where fmt-newline">where O: <a class="trait" href="../../../telegram_bot_raw/types/refs/trait.ToChatRef.html" title="trait telegram_bot_raw::types::refs::ToChatRef">ToChatRef</a>&lt;'c&gt;</span></code></span></h3></div>
+        <h3 id='tymethod.kick_from' class='method'><span id='kick_from.v' class='invisible'><code>fn <a href='#tymethod.kick_from' class='fnname'>kick_from</a>&lt;O&gt;(&amp;self, other: O) -&gt; <a class="struct" href="../../../telegram_bot_raw/requests/kick_chat_member/struct.KickChatMember.html" title="struct telegram_bot_raw::requests::kick_chat_member::KickChatMember">KickChatMember</a> <span class="where fmt-newline">where O: <a class="trait" href="../../../telegram_bot_raw/types/refs/trait.ToChatRef.html" title="trait telegram_bot_raw::types::refs::ToChatRef">ToChatRef</a></span></code></span></h3></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;'c, U&gt; CanKickChatMemberForUser&lt;'c&gt; for U <span class="where fmt-newline">where U: <a class="trait" href="../../../telegram_bot_raw/types/refs/trait.ToUserId.html" title="trait telegram_bot_raw::types::refs::ToUserId">ToUserId</a></span></code></li>
+    <li><code>impl&lt;U&gt; CanKickChatMemberForUser for U <span class="where fmt-newline">where U: <a class="trait" href="../../../telegram_bot_raw/types/refs/trait.ToUserId.html" title="trait telegram_bot_raw::types::refs::ToUserId">ToUserId</a></span></code></li>
 </ul><script type="text/javascript" async
                          src="../../../implementors/telegram_bot_raw/requests/kick_chat_member/trait.CanKickChatMemberForUser.js">
                  </script></section>
