@@ -351,12 +351,6 @@
 <span id="306">306</span>
 <span id="307">307</span>
 <span id="308">308</span>
-<span id="309">309</span>
-<span id="310">310</span>
-<span id="311">311</span>
-<span id="312">312</span>
-<span id="313">313</span>
-<span id="314">314</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">Deref</span>;
 
@@ -636,12 +630,6 @@
 <span class="macro">file_id_impls</span><span class="macro">!</span>(<span class="ident">Video</span>);
 <span class="macro">file_id_impls</span><span class="macro">!</span>(<span class="ident">Voice</span>);
 <span class="macro">file_id_impls</span><span class="macro">!</span>(<span class="ident">VideoNote</span>);
-
-<span class="kw">impl</span> <span class="ident">ToFileRef</span> <span class="kw">for</span> <span class="ident">File</span> {
-    <span class="kw">fn</span> <span class="ident">to_file_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">FileRef</span> {
-        <span class="self">self</span>.<span class="ident">id</span>.<span class="ident">clone</span>().<span class="ident">into</span>()
-    }
-}
 
 <span class="doccomment">/// Unique file identifier reference.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>

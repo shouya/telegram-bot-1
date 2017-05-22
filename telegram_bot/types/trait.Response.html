@@ -52,7 +52,7 @@
 <pre class='rust trait'>pub trait Response {
     type <a href='#associatedtype.Raw' class="type">Raw</a>: <a class="trait" href="../../serde/de/trait.DeserializeOwned.html" title="trait serde::de::DeserializeOwned">DeserializeOwned</a>;
     type <a href='#associatedtype.Type' class="type">Type</a>;
-    fn <a href='#tymethod.map' class='fnname'>map</a>(raw: Self::<a class="trait" href="../../telegram_bot/types/trait.Response.html" title="trait telegram_bot::types::Response">Raw</a>, token: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self::<a class="trait" href="../../telegram_bot/types/trait.Response.html" title="trait telegram_bot::types::Response">Type</a>;
+    fn <a href='#tymethod.map' class='fnname'>map</a>(raw: Self::<a class="trait" href="../../telegram_bot/types/trait.Response.html" title="trait telegram_bot::types::Response">Raw</a>) -&gt; Self::<a class="trait" href="../../telegram_bot/types/trait.Response.html" title="trait telegram_bot::types::Response">Type</a>;
 }</pre><div class='docblock'><p>This trait represent how to parse response from the Telegram server.</p>
 </div>
             <h2 id='associated-types'>Associated Types</h2>
@@ -62,13 +62,12 @@
 </div></div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.map' class='method'><span id='map.v' class='invisible'><code>fn <a href='#tymethod.map' class='fnname'>map</a>(raw: Self::<a class="trait" href="../../telegram_bot/types/trait.Response.html" title="trait telegram_bot::types::Response">Raw</a>, token: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self::<a class="trait" href="../../telegram_bot/types/trait.Response.html" title="trait telegram_bot::types::Response">Type</a></code></span></h3><div class='docblock'><p>Map <code>Raw</code> to <code>Type</code>.</p>
+        <h3 id='tymethod.map' class='method'><span id='map.v' class='invisible'><code>fn <a href='#tymethod.map' class='fnname'>map</a>(raw: Self::<a class="trait" href="../../telegram_bot/types/trait.Response.html" title="trait telegram_bot::types::Response">Raw</a>) -&gt; Self::<a class="trait" href="../../telegram_bot/types/trait.Response.html" title="trait telegram_bot::types::Response">Type</a></code></span></h3><div class='docblock'><p>Map <code>Raw</code> to <code>Type</code>.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
     <li><code>impl&lt;T&gt; Response for <a class="struct" href="../../telegram_bot/types/struct.IdResponse.html" title="struct telegram_bot::types::IdResponse">IdResponse</a>&lt;T&gt; <span class="where fmt-newline">where T: <a class="trait" href="../../serde/de/trait.DeserializeOwned.html" title="trait serde::de::DeserializeOwned">DeserializeOwned</a></span></code></li>
 <li><code>impl Response for <a class="struct" href="../../telegram_bot/types/struct.TrueToUnitResponse.html" title="struct telegram_bot::types::TrueToUnitResponse">TrueToUnitResponse</a></code></li>
-<li><code>impl Response for <a class="struct" href="../../telegram_bot_raw/requests/_base/struct.FileResponse.html" title="struct telegram_bot_raw::requests::_base::FileResponse">FileResponse</a></code></li>
 </ul><script type="text/javascript" async
                          src="../../implementors/telegram_bot_raw/requests/_base/trait.Response.js">
                  </script></section>
