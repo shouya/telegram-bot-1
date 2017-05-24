@@ -1,7 +1,6 @@
 (function() {var implementors = {};
 implementors["antidote"] = [];
 implementors["bytes"] = [];
-implementors["cpp_demangle"] = [];
 implementors["error_chain"] = [];
 implementors["libc"] = [];
 implementors["mio"] = ["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/ops/trait.Not.html\" title=\"trait core::ops::Not\">Not</a> for <a class=\"struct\" href=\"mio/struct.PollOpt.html\" title=\"struct mio::PollOpt\">PollOpt</a>","impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/ops/trait.Not.html\" title=\"trait core::ops::Not\">Not</a> for <a class=\"struct\" href=\"mio/struct.Ready.html\" title=\"struct mio::Ready\">Ready</a>","impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/ops/trait.Not.html\" title=\"trait core::ops::Not\">Not</a> for <a class=\"struct\" href=\"mio/unix/struct.UnixReady.html\" title=\"struct mio::unix::UnixReady\">UnixReady</a>",];

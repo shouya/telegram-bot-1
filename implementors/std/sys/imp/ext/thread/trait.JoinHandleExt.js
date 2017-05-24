@@ -1,7 +1,6 @@
 (function() {var implementors = {};
 implementors["antidote"] = [];
 implementors["bytes"] = [];
-implementors["cpp_demangle"] = [];
 implementors["error_chain"] = [];
 implementors["libc"] = [];
 implementors["mio"] = [];

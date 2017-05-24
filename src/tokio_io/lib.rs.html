@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-io-0.1.1/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-io-0.1.2/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -415,6 +415,16 @@
 <span id="370">370</span>
 <span id="371">371</span>
 <span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! Core I/O traits and combinators when working with Tokio.</span>
 <span class="doccomment">//!</span>
@@ -422,7 +432,7 @@
 <span class="doccomment">//! addition to a description of the [low level details].</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! [found online]: https://tokio.rs/docs/getting-started/core/</span>
-<span class="doccomment">//! [low level details]: https://tokio.rs/docs/going-deeper/core-low-level/</span>
+<span class="doccomment">//! [low level details]: https://tokio.rs/docs/going-deeper-tokio/core-low-level/</span>
 
 <span class="attribute">#<span class="op">!</span>[<span class="ident">deny</span>(<span class="ident">missing_docs</span>, <span class="ident">missing_debug_implementations</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">doc</span>(<span class="ident">html_root_url</span> <span class="op">=</span> <span class="string">&quot;https://docs.rs/tokio-io/0.1&quot;</span>)]</span>
@@ -652,15 +662,25 @@
     <span class="doccomment">/// This method is intended to be used for asynchronous shutdown of I/O</span>
     <span class="doccomment">/// connections. For example this is suitable for implementing shutdown of a</span>
     <span class="doccomment">/// TLS connection or calling `TcpStream::shutdown` on a proxied connection.</span>
+    <span class="doccomment">/// Protocols sometimes need to flush out final pieces of data or otherwise</span>
+    <span class="doccomment">/// perform a graceful shutdown handshake, reading/writing more data as</span>
+    <span class="doccomment">/// appropriate. This method is the hook for such protocols to implement the</span>
+    <span class="doccomment">/// graceful shutdown logic.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This `shutdown` method is required by implementors of the</span>
     <span class="doccomment">/// `AsyncWrite` trait. Wrappers typically just want to proxy this call</span>
     <span class="doccomment">/// through to the wrapped type, and base types will typically implement</span>
-    <span class="doccomment">/// shutdown logic here or just return `Ok(().into())`.</span>
+    <span class="doccomment">/// shutdown logic here or just return `Ok(().into())`. Note that if you&#39;re</span>
+    <span class="doccomment">/// wrapping an underlying `AsyncWrite` a call to `shutdown` implies that</span>
+    <span class="doccomment">/// transitively the entire stream has been shut down. After your wrapper&#39;s</span>
+    <span class="doccomment">/// shutdown logic has been executed you should shut down the underlying</span>
+    <span class="doccomment">/// stream.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// Invocation of a `shutdown` implies invocation of `flush`. Once this</span>
+    <span class="doccomment">/// Invocation of a `shutdown` implies an invocation of `flush`. Once this</span>
     <span class="doccomment">/// method returns `Ready` it implies that a flush successfully happened</span>
-    <span class="doccomment">/// before the shutdown happened.</span>
+    <span class="doccomment">/// before the shutdown happened. That is, callers don&#39;t need to call</span>
+    <span class="doccomment">/// `flush` before calling `shutdown`. They can rely that by calling</span>
+    <span class="doccomment">/// `shutdown` any pending buffered data will be written out.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Return value</span>
     <span class="doccomment">///</span>

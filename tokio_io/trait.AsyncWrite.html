@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../src/tokio_io/lib.rs.html#230-296' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/tokio_io/lib.rs.html#230-306' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait AsyncWrite: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a> {
     fn <a href='#tymethod.shutdown' class='fnname'>shutdown</a>(&amp;mut self) -&gt; <a class="type" href="../futures/poll/type.Poll.html" title="type futures::poll::Poll">Poll</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">()</a>, <a class="struct" href="https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html" title="struct std::io::error::Error">Error</a>&gt;;
 
@@ -83,16 +83,26 @@ the I/O connection has completely shut down.</p>
 
 <p>This method is intended to be used for asynchronous shutdown of I/O
 connections. For example this is suitable for implementing shutdown of a
-TLS connection or calling <code>TcpStream::shutdown</code> on a proxied connection.</p>
+TLS connection or calling <code>TcpStream::shutdown</code> on a proxied connection.
+Protocols sometimes need to flush out final pieces of data or otherwise
+perform a graceful shutdown handshake, reading/writing more data as
+appropriate. This method is the hook for such protocols to implement the
+graceful shutdown logic.</p>
 
 <p>This <code>shutdown</code> method is required by implementors of the
 <code>AsyncWrite</code> trait. Wrappers typically just want to proxy this call
 through to the wrapped type, and base types will typically implement
-shutdown logic here or just return <code>Ok(().into())</code>.</p>
+shutdown logic here or just return <code>Ok(().into())</code>. Note that if you&#39;re
+wrapping an underlying <code>AsyncWrite</code> a call to <code>shutdown</code> implies that
+transitively the entire stream has been shut down. After your wrapper&#39;s
+shutdown logic has been executed you should shut down the underlying
+stream.</p>
 
-<p>Invocation of a <code>shutdown</code> implies invocation of <code>flush</code>. Once this
+<p>Invocation of a <code>shutdown</code> implies an invocation of <code>flush</code>. Once this
 method returns <code>Ready</code> it implies that a flush successfully happened
-before the shutdown happened.</p>
+before the shutdown happened. That is, callers don&#39;t need to call
+<code>flush</code> before calling <code>shutdown</code>. They can rely that by calling
+<code>shutdown</code> any pending buffered data will be written out.</p>
 
 <h1 id='return-value' class='section-header'><a href='#return-value'>Return value</a></h1>
 <p>This function returns a <code>Poll&lt;(), io::Error&gt;</code> classified as such:</p>

@@ -54,7 +54,7 @@
 <p><code>Builder</code> enables constructing configured length delimited framers. Note
 that not all configuration settings apply to both encoding and decoding. See
 the documentation for specific methods for more detail.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../../tokio_io/codec/length_delimited/struct.Builder.html" title="struct tokio_io::codec::length_delimited::Builder">Builder</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tokio_io/length_delimited.rs.html#506-801' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../../tokio_io/codec/length_delimited/struct.Builder.html" title="struct tokio_io::codec::length_delimited::Builder">Builder</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tokio_io/length_delimited.rs.html#519-812' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class="struct" href="../../../tokio_io/codec/length_delimited/struct.Builder.html" title="struct tokio_io::codec::length_delimited::Builder">Builder</a></code></span></h4>
 <div class='docblock'><p>Creates a new length delimited framer builder with default configuration
 values.</p>
@@ -144,8 +144,6 @@ setting.</p>
 </div><h4 id='method.length_adjustment' class="method"><span id='length_adjustment.v' class='invisible'><code>fn <a href='#method.length_adjustment' class='fnname'>length_adjustment</a>(&amp;mut self, val: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.isize.html">isize</a>) -&gt; &amp;mut Self</code></span></h4>
 <div class='docblock'><p>Delta between the payload length specified in the header and the real
 payload length</p>
-
-<p>This configuration option only applies to decoding.</p>
 
 <h1 id='examples-6' class='section-header'><a href='#examples-6'>Examples</a></h1>
 <pre class="rust rust-example-rendered">
