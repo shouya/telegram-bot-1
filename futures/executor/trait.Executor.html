@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>futures</a>::<wbr><a href='index.html'>executor</a></p><script>window.sidebarCurrent = {name: 'Executor', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait Executor</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>futures</a>::<wbr><a href='index.html'>executor</a></p><script>window.sidebarCurrent = {name: 'Executor', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/futures/task_impl/mod.rs.html#518-521' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/futures/task_impl/std/mod.rs.html#409-412' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Executor: <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html" title="trait core::marker::Sync">Sync</a> + 'static {
     fn <a href='#tymethod.execute' class='fnname'>execute</a>(&amp;self, r: <a class="struct" href="../../futures/executor/struct.Run.html" title="struct futures::executor::Run">Run</a>);
 }</pre><div class='docblock'><p>A trait representing requests to poll futures.</p>
@@ -56,6 +56,10 @@
 <p>This trait is an argument to the <code>Spawn::execute</code> which is used to run a
 future to completion. An executor will receive requests to run a future and
 an executor is responsible for ensuring that happens in a timely fashion.</p>
+
+<p>Note that this trait is likely to be deprecated and/or renamed to avoid
+clashing with the <code>future::Executor</code> trait. If you&#39;ve got a use case for
+this or would like to comment on the name please let us know!</p>
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>

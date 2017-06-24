@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../../index.html'>futures</a>::<wbr><a href='../index.html'>sync</a>::<wbr><a href='index.html'>oneshot</a></p><script>window.sidebarCurrent = {name: 'Sender', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct Sender</p><div class="block items"><ul><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../../index.html'>futures</a>::<wbr><a href='../index.html'>sync</a>::<wbr><a href='index.html'>oneshot</a></p><script>window.sidebarCurrent = {name: 'Sender', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,17 +48,17 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../src/futures/sync/oneshot.rs.html#28-30' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../../src/futures/sync/oneshot.rs.html#29-31' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Sender&lt;T&gt; { /* fields omitted */ }</pre><div class='docblock'><p>Represents the completion half of a oneshot through which the result of a
 computation is signaled.</p>
 
 <p>This is created by the <code>oneshot::channel</code> function.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;T&gt; <a class="struct" href="../../../futures/sync/oneshot/struct.Sender.html" title="struct futures::sync::oneshot::Sender">Sender</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/futures/sync/oneshot.rs.html#112-197' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;T&gt; <a class="struct" href="../../../futures/sync/oneshot/struct.Sender.html" title="struct futures::sync::oneshot::Sender">Sender</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/futures/sync/oneshot.rs.html#278-322' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.send' class="method"><span id='send.v' class='invisible'><code>fn <a href='#method.send' class='fnname'>send</a>(self, t: T) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">()</a>, T&gt;</code></span></h4>
 <div class='docblock'><p>Completes this oneshot with a successful result.</p>
 
 <p>This function will consume <code>self</code> and indicate to the other end, the
-<code>Receiver</code>, that the error provided is the result of the computation this
+<code>Receiver</code>, that the value provided is the result of the computation this
 represents.</p>
 
 <p>If the value is successfully enqueued for the remote end to receive,
@@ -85,10 +85,10 @@ be produced.</p>
 able to receive a message if sent. The current task, however, is
 scheduled to receive a notification if the corresponding <code>Receiver</code> goes
 away.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl&lt;T:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a>&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../../../futures/sync/oneshot/struct.Sender.html" title="struct futures::sync::oneshot::Sender">Sender</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/futures/sync/oneshot.rs.html#27' title='goto source code'>[src]</a></span></h3>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl&lt;T:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a>&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../../../futures/sync/oneshot/struct.Sender.html" title="struct futures::sync::oneshot::Sender">Sender</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/futures/sync/oneshot.rs.html#28' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl&lt;T&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html" title="trait core::ops::Drop">Drop</a> for <a class="struct" href="../../../futures/sync/oneshot/struct.Sender.html" title="struct futures::sync::oneshot::Sender">Sender</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/futures/sync/oneshot.rs.html#199-229' title='goto source code'>[src]</a></span></h3>
+</div></div><h3 class='impl'><span class='in-band'><code>impl&lt;T&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html" title="trait core::ops::Drop">Drop</a> for <a class="struct" href="../../../futures/sync/oneshot/struct.Sender.html" title="struct futures::sync::oneshot::Sender">Sender</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/futures/sync/oneshot.rs.html#324-328' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.drop' class="method"><span id='drop.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span></h4>
 <div class='docblock'><p>A method called when the value goes out of scope. <a href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop">Read more</a></p>
 </div></div></section>

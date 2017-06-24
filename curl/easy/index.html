@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>curl</a></p><script>window.sidebarCurrent = {name: 'easy', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'>Module easy</p><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div><p class='location'><a href='../index.html'>curl</a></p><script>window.sidebarCurrent = {name: 'easy', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/curl/easy.rs.html#1-3949' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/curl/easy/mod.rs.html#1-21' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Bindings to the &quot;easy&quot; libcurl API.</p>
 
 <p>This module contains some simple types like <code>Easy</code> and <code>List</code> which are just
@@ -70,6 +70,13 @@ you can find more docs about its usage on that struct.</p>
                        <tr class=' module-item'>
                            <td><a class="struct" href="struct.Easy.html"
                                   title='struct curl::easy::Easy'>Easy</a></td>
+                           <td class='docblock-short'>
+                                <p>Raw bindings to a libcurl &quot;easy session&quot;.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.Easy2.html"
+                                  title='struct curl::easy::Easy2'>Easy2</a></td>
                            <td class='docblock-short'>
                                 <p>Raw bindings to a libcurl &quot;easy session&quot;.</p>
                            </td>
@@ -187,6 +194,14 @@ callback.</p>
                                   title='enum curl::easy::WriteError'>WriteError</a></td>
                            <td class='docblock-short'>
                                 <p>Possible error codes that can be returned from the <code>write_function</code> callback.</p>
+                           </td>
+                       </tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.Handler.html"
+                                  title='trait curl::easy::Handler'>Handler</a></td>
+                           <td class='docblock-short'>
+                                <p>A trait for the various callbacks used by libcurl to invoke user code.</p>
                            </td>
                        </tr></table></section>
     <section id='search' class="content hidden"></section>

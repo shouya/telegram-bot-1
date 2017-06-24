@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-core-0.1.7/src/reactor/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-core-0.1.8/src/reactor/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -825,6 +825,80 @@
 <span id="780">780</span>
 <span id="781">781</span>
 <span id="782">782</span>
+<span id="783">783</span>
+<span id="784">784</span>
+<span id="785">785</span>
+<span id="786">786</span>
+<span id="787">787</span>
+<span id="788">788</span>
+<span id="789">789</span>
+<span id="790">790</span>
+<span id="791">791</span>
+<span id="792">792</span>
+<span id="793">793</span>
+<span id="794">794</span>
+<span id="795">795</span>
+<span id="796">796</span>
+<span id="797">797</span>
+<span id="798">798</span>
+<span id="799">799</span>
+<span id="800">800</span>
+<span id="801">801</span>
+<span id="802">802</span>
+<span id="803">803</span>
+<span id="804">804</span>
+<span id="805">805</span>
+<span id="806">806</span>
+<span id="807">807</span>
+<span id="808">808</span>
+<span id="809">809</span>
+<span id="810">810</span>
+<span id="811">811</span>
+<span id="812">812</span>
+<span id="813">813</span>
+<span id="814">814</span>
+<span id="815">815</span>
+<span id="816">816</span>
+<span id="817">817</span>
+<span id="818">818</span>
+<span id="819">819</span>
+<span id="820">820</span>
+<span id="821">821</span>
+<span id="822">822</span>
+<span id="823">823</span>
+<span id="824">824</span>
+<span id="825">825</span>
+<span id="826">826</span>
+<span id="827">827</span>
+<span id="828">828</span>
+<span id="829">829</span>
+<span id="830">830</span>
+<span id="831">831</span>
+<span id="832">832</span>
+<span id="833">833</span>
+<span id="834">834</span>
+<span id="835">835</span>
+<span id="836">836</span>
+<span id="837">837</span>
+<span id="838">838</span>
+<span id="839">839</span>
+<span id="840">840</span>
+<span id="841">841</span>
+<span id="842">842</span>
+<span id="843">843</span>
+<span id="844">844</span>
+<span id="845">845</span>
+<span id="846">846</span>
+<span id="847">847</span>
+<span id="848">848</span>
+<span id="849">849</span>
+<span id="850">850</span>
+<span id="851">851</span>
+<span id="852">852</span>
+<span id="853">853</span>
+<span id="854">854</span>
+<span id="855">855</span>
+<span id="856">856</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! The core reactor driving all I/O</span>
 <span class="doccomment">//!</span>
@@ -843,8 +917,8 @@
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">time</span>::{<span class="ident">Instant</span>, <span class="ident">Duration</span>};
 
 <span class="kw">use</span> <span class="ident">futures</span>::{<span class="ident">Future</span>, <span class="ident">IntoFuture</span>, <span class="ident">Async</span>};
-<span class="kw">use</span> <span class="ident">futures</span>::<span class="ident">future</span>;
-<span class="kw">use</span> <span class="ident">futures</span>::<span class="ident">executor</span>::{<span class="self">self</span>, <span class="ident">Spawn</span>, <span class="ident">Unpark</span>};
+<span class="kw">use</span> <span class="ident">futures</span>::<span class="ident">future</span>::{<span class="self">self</span>, <span class="ident">Executor</span>, <span class="ident">ExecuteError</span>};
+<span class="kw">use</span> <span class="ident">futures</span>::<span class="ident">executor</span>::{<span class="self">self</span>, <span class="ident">Spawn</span>, <span class="ident">Notify</span>};
 <span class="kw">use</span> <span class="ident">futures</span>::<span class="ident">sync</span>::<span class="ident">mpsc</span>;
 <span class="kw">use</span> <span class="ident">futures</span>::<span class="ident">task</span>::<span class="ident">Task</span>;
 <span class="kw">use</span> <span class="ident">mio</span>;
@@ -944,7 +1018,7 @@
 <span class="kw">struct</span> <span class="ident">ScheduledTask</span> {
     <span class="ident">_registration</span>: <span class="ident">mio</span>::<span class="ident">Registration</span>,
     <span class="ident">spawn</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Spawn</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Future</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span>(), <span class="ident">Error</span><span class="op">=</span>()<span class="op">&gt;&gt;</span><span class="op">&gt;&gt;</span>,
-    <span class="ident">wake</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">MySetReadiness</span><span class="op">&gt;</span>,
+    <span class="ident">wake</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">MySetReadiness</span><span class="op">&gt;&gt;</span>,
 }
 
 <span class="kw">enum</span> <span class="ident">TimeoutState</span> {
@@ -965,13 +1039,6 @@
     <span class="ident">ResetTimeout</span>(<span class="ident">usize</span>, <span class="ident">Instant</span>),
     <span class="ident">CancelTimeout</span>(<span class="ident">usize</span>),
     <span class="ident">Run</span>(<span class="ident">Box</span><span class="op">&lt;</span><span class="ident">FnBox</span><span class="op">&gt;</span>),
-}
-
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">usize</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">enum</span> <span class="ident">Readiness</span> {
-    <span class="ident">Readable</span> <span class="op">=</span> <span class="number">1</span>,
-    <span class="ident">Writable</span> <span class="op">=</span> <span class="number">2</span>,
 }
 
 <span class="kw">const</span> <span class="ident">TOKEN_MESSAGES</span>: <span class="ident">mio</span>::<span class="ident">Token</span> <span class="op">=</span> <span class="ident">mio</span>::<span class="ident">Token</span>(<span class="number">0</span>);
@@ -995,7 +1062,7 @@
                          <span class="ident">mio</span>::<span class="ident">Ready</span>::<span class="ident">readable</span>(),
                          <span class="ident">mio</span>::<span class="ident">PollOpt</span>::<span class="ident">level</span>()));
         <span class="kw">let</span> <span class="ident">rx_readiness</span> <span class="op">=</span> <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">MySetReadiness</span>(<span class="ident">channel_pair</span>.<span class="number">1</span>));
-        <span class="ident">rx_readiness</span>.<span class="ident">unpark</span>();
+        <span class="ident">rx_readiness</span>.<span class="ident">notify</span>(<span class="number">0</span>);
 
         <span class="prelude-val">Ok</span>(<span class="ident">Core</span> {
             <span class="ident">events</span>: <span class="ident">mio</span>::<span class="ident">Events</span>::<span class="ident">with_capacity</span>(<span class="number">1024</span>),
@@ -1062,13 +1129,12 @@
         <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">Future</span>,
     {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">task</span> <span class="op">=</span> <span class="ident">executor</span>::<span class="ident">spawn</span>(<span class="ident">f</span>);
-        <span class="kw">let</span> <span class="ident">ready</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">future_readiness</span>.<span class="ident">clone</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">future_fired</span> <span class="op">=</span> <span class="bool-val">true</span>;
 
         <span class="kw">loop</span> {
             <span class="kw">if</span> <span class="ident">future_fired</span> {
                 <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="macro">try</span><span class="macro">!</span>(<span class="ident">CURRENT_LOOP</span>.<span class="ident">set</span>(<span class="self">self</span>, <span class="op">||</span> {
-                    <span class="ident">task</span>.<span class="ident">poll_future</span>(<span class="ident">ready</span>.<span class="ident">clone</span>())
+                    <span class="ident">task</span>.<span class="ident">poll_future_notify</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">future_readiness</span>, <span class="number">0</span>)
                 }));
                 <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="ident">res</span> {
                     <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">e</span>)
@@ -1158,15 +1224,12 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">writer</span> <span class="op">=</span> <span class="prelude-val">None</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">inner</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">borrow_mut</span>();
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">io</span>) <span class="op">=</span> <span class="ident">inner</span>.<span class="ident">io_dispatch</span>.<span class="ident">get_mut</span>(<span class="ident">token</span>) {
-            <span class="kw">if</span> <span class="ident">ready</span>.<span class="ident">is_readable</span>() <span class="op">||</span> <span class="ident">platform</span>::<span class="ident">is_hup</span>(<span class="kw-2">&amp;</span><span class="ident">ready</span>) {
-                <span class="ident">reader</span> <span class="op">=</span> <span class="ident">io</span>.<span class="ident">reader</span>.<span class="ident">take</span>();
-                <span class="ident">io</span>.<span class="ident">readiness</span>.<span class="ident">fetch_or</span>(<span class="ident">Readiness</span>::<span class="ident">Readable</span> <span class="kw">as</span> <span class="ident">usize</span>,
-                    <span class="ident">Ordering</span>::<span class="ident">Relaxed</span>);
-            }
+            <span class="ident">io</span>.<span class="ident">readiness</span>.<span class="ident">fetch_or</span>(<span class="ident">ready2usize</span>(<span class="ident">ready</span>), <span class="ident">Ordering</span>::<span class="ident">Relaxed</span>);
             <span class="kw">if</span> <span class="ident">ready</span>.<span class="ident">is_writable</span>() {
                 <span class="ident">writer</span> <span class="op">=</span> <span class="ident">io</span>.<span class="ident">writer</span>.<span class="ident">take</span>();
-                <span class="ident">io</span>.<span class="ident">readiness</span>.<span class="ident">fetch_or</span>(<span class="ident">Readiness</span>::<span class="ident">Writable</span> <span class="kw">as</span> <span class="ident">usize</span>,
-                    <span class="ident">Ordering</span>::<span class="ident">Relaxed</span>);
+            }
+            <span class="kw">if</span> <span class="op">!</span>(<span class="ident">ready</span> <span class="op">&amp;</span> (<span class="op">!</span><span class="ident">mio</span>::<span class="ident">Ready</span>::<span class="ident">writable</span>())).<span class="ident">is_empty</span>() {
+                <span class="ident">reader</span> <span class="op">=</span> <span class="ident">io</span>.<span class="ident">reader</span>.<span class="ident">take</span>();
             }
         }
         <span class="ident">drop</span>(<span class="ident">inner</span>);
@@ -1182,22 +1245,25 @@
     <span class="kw">fn</span> <span class="ident">dispatch_task</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">token</span>: <span class="ident">usize</span>) {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">inner</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">borrow_mut</span>();
         <span class="kw">let</span> (<span class="ident">task</span>, <span class="ident">wake</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">inner</span>.<span class="ident">task_dispatch</span>.<span class="ident">get_mut</span>(<span class="ident">token</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">slot</span>) <span class="op">=&gt;</span> (<span class="ident">slot</span>.<span class="ident">spawn</span>.<span class="ident">take</span>(), <span class="ident">slot</span>.<span class="ident">wake</span>.<span class="ident">clone</span>()),
+            <span class="prelude-val">Some</span>(<span class="ident">slot</span>) <span class="op">=&gt;</span> (<span class="ident">slot</span>.<span class="ident">spawn</span>.<span class="ident">take</span>(), <span class="ident">slot</span>.<span class="ident">wake</span>.<span class="ident">take</span>()),
             <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span>,
+        };
+        <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">task</span>, <span class="ident">wake</span>) <span class="op">=</span> <span class="kw">match</span> (<span class="ident">task</span>, <span class="ident">wake</span>) {
+            (<span class="prelude-val">Some</span>(<span class="ident">task</span>), <span class="prelude-val">Some</span>(<span class="ident">wake</span>)) <span class="op">=&gt;</span> (<span class="ident">task</span>, <span class="ident">wake</span>),
+            _ <span class="op">=&gt;</span> <span class="kw">return</span>,
         };
         <span class="ident">wake</span>.<span class="number">0</span>.<span class="ident">set_readiness</span>(<span class="ident">mio</span>::<span class="ident">Ready</span>::<span class="ident">empty</span>()).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">task</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">task</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">task</span>) <span class="op">=&gt;</span> <span class="ident">task</span>,
-            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span>,
-        };
         <span class="ident">drop</span>(<span class="ident">inner</span>);
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">CURRENT_LOOP</span>.<span class="ident">set</span>(<span class="self">self</span>, <span class="op">||</span> <span class="ident">task</span>.<span class="ident">poll_future</span>(<span class="ident">wake</span>));
+        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">CURRENT_LOOP</span>.<span class="ident">set</span>(<span class="self">self</span>, <span class="op">||</span> {
+            <span class="ident">task</span>.<span class="ident">poll_future_notify</span>(<span class="kw-2">&amp;</span><span class="ident">wake</span>, <span class="number">0</span>)
+        });
         <span class="kw">let</span> <span class="ident">_task_to_drop</span>;
         <span class="ident">inner</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">borrow_mut</span>();
         <span class="kw">match</span> <span class="ident">res</span> {
             <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>) <span class="op">=&gt;</span> {
                 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">inner</span>.<span class="ident">task_dispatch</span>[<span class="ident">token</span>].<span class="ident">spawn</span>.<span class="ident">is_none</span>());
                 <span class="ident">inner</span>.<span class="ident">task_dispatch</span>[<span class="ident">token</span>].<span class="ident">spawn</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">task</span>);
+                <span class="ident">inner</span>.<span class="ident">task_dispatch</span>[<span class="ident">token</span>].<span class="ident">wake</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">wake</span>);
             }
             <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(())) <span class="op">|</span>
             <span class="prelude-val">Err</span>(()) <span class="op">=&gt;</span> {
@@ -1229,19 +1295,18 @@
 
     <span class="doccomment">/// Method used to notify a task handle.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// Note that this should be used instead of `handle.unpark()` to ensure</span>
+    <span class="doccomment">/// Note that this should be used instead of `handle.notify()` to ensure</span>
     <span class="doccomment">/// that the `CURRENT_LOOP` variable is set appropriately.</span>
     <span class="kw">fn</span> <span class="ident">notify_handle</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">handle</span>: <span class="ident">Task</span>) {
         <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot;notifying a task handle&quot;</span>);
-        <span class="ident">CURRENT_LOOP</span>.<span class="ident">set</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="op">||</span> <span class="ident">handle</span>.<span class="ident">unpark</span>());
+        <span class="ident">CURRENT_LOOP</span>.<span class="ident">set</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="op">||</span> <span class="ident">handle</span>.<span class="ident">notify</span>());
     }
 
     <span class="kw">fn</span> <span class="ident">consume_queue</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot;consuming notification queue&quot;</span>);
         <span class="comment">// TODO: can we do better than `.unwrap()` here?</span>
-        <span class="kw">let</span> <span class="ident">unpark</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rx_readiness</span>.<span class="ident">clone</span>();
         <span class="kw">loop</span> {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rx</span>.<span class="ident">borrow_mut</span>().<span class="ident">poll_stream</span>(<span class="ident">unpark</span>.<span class="ident">clone</span>()).<span class="ident">unwrap</span>();
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rx</span>.<span class="ident">borrow_mut</span>().<span class="ident">poll_stream_notify</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">rx_readiness</span>, <span class="number">0</span>).<span class="ident">unwrap</span>();
             <span class="kw">match</span> <span class="ident">msg</span> {
                 <span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">Some</span>(<span class="ident">msg</span>)) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">notify</span>(<span class="ident">msg</span>),
                 <span class="ident">Async</span>::<span class="ident">NotReady</span> <span class="op">|</span>
@@ -1278,6 +1343,14 @@
     <span class="doccomment">/// Get the ID of this loop</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">CoreId</span> {
         <span class="ident">CoreId</span>(<span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">borrow</span>().<span class="ident">id</span>)
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="ident">Executor</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Core</span>
+    <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">Future</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (), <span class="ident">Error</span> <span class="op">=</span> ()<span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+{
+    <span class="kw">fn</span> <span class="ident">execute</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">future</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ExecuteError</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;&gt;</span> {
+        <span class="self">self</span>.<span class="ident">handle</span>().<span class="ident">execute</span>(<span class="ident">future</span>)
     }
 }
 
@@ -1325,14 +1398,16 @@
                 <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Task</span><span class="op">&gt;</span> {
         <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot;scheduling direction for: {}&quot;</span>, <span class="ident">token</span>);
         <span class="kw">let</span> <span class="ident">sched</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">io_dispatch</span>.<span class="ident">get_mut</span>(<span class="ident">token</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> (<span class="ident">slot</span>, <span class="ident">bit</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">dir</span> {
-            <span class="ident">Direction</span>::<span class="ident">Read</span> <span class="op">=&gt;</span> (<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sched</span>.<span class="ident">reader</span>, <span class="ident">Readiness</span>::<span class="ident">Readable</span> <span class="kw">as</span> <span class="ident">usize</span>),
-            <span class="ident">Direction</span>::<span class="ident">Write</span> <span class="op">=&gt;</span> (<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sched</span>.<span class="ident">writer</span>, <span class="ident">Readiness</span>::<span class="ident">Writable</span> <span class="kw">as</span> <span class="ident">usize</span>),
+        <span class="kw">let</span> (<span class="ident">slot</span>, <span class="ident">ready</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">dir</span> {
+            <span class="ident">Direction</span>::<span class="ident">Read</span> <span class="op">=&gt;</span> (<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sched</span>.<span class="ident">reader</span>, <span class="op">!</span><span class="ident">mio</span>::<span class="ident">Ready</span>::<span class="ident">writable</span>()),
+            <span class="ident">Direction</span>::<span class="ident">Write</span> <span class="op">=&gt;</span> (<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sched</span>.<span class="ident">writer</span>, <span class="ident">mio</span>::<span class="ident">Ready</span>::<span class="ident">writable</span>()),
         };
-        <span class="kw">if</span> <span class="ident">sched</span>.<span class="ident">readiness</span>.<span class="ident">load</span>(<span class="ident">Ordering</span>::<span class="ident">SeqCst</span>) <span class="op">&amp;</span> <span class="ident">bit</span> <span class="op">!=</span> <span class="number">0</span> {
+        <span class="kw">if</span> <span class="ident">sched</span>.<span class="ident">readiness</span>.<span class="ident">load</span>(<span class="ident">Ordering</span>::<span class="ident">SeqCst</span>) <span class="op">&amp;</span> <span class="ident">ready2usize</span>(<span class="ident">ready</span>) <span class="op">!=</span> <span class="number">0</span> {
+            <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot;cancelling block&quot;</span>);
             <span class="kw-2">*</span><span class="ident">slot</span> <span class="op">=</span> <span class="prelude-val">None</span>;
             <span class="prelude-val">Some</span>(<span class="ident">wake</span>)
         } <span class="kw">else</span> {
+            <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot;blocking&quot;</span>);
             <span class="kw-2">*</span><span class="ident">slot</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">wake</span>);
             <span class="prelude-val">None</span>
         }
@@ -1390,12 +1465,12 @@
                          <span class="ident">mio</span>::<span class="ident">PollOpt</span>::<span class="ident">level</span>())
             .<span class="ident">expect</span>(<span class="string">&quot;cannot fail future registration with mio&quot;</span>);
         <span class="kw">let</span> <span class="ident">unpark</span> <span class="op">=</span> <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">MySetReadiness</span>(<span class="ident">pair</span>.<span class="number">1</span>));
-        <span class="kw">let</span> <span class="ident">entry</span> <span class="op">=</span> <span class="ident">entry</span>.<span class="ident">insert</span>(<span class="ident">ScheduledTask</span> {
+        <span class="ident">unpark</span>.<span class="ident">notify</span>(<span class="number">0</span>);
+        <span class="ident">entry</span>.<span class="ident">insert</span>(<span class="ident">ScheduledTask</span> {
             <span class="ident">spawn</span>: <span class="prelude-val">Some</span>(<span class="ident">executor</span>::<span class="ident">spawn</span>(<span class="ident">future</span>)),
-            <span class="ident">wake</span>: <span class="ident">unpark</span>,
+            <span class="ident">wake</span>: <span class="prelude-val">Some</span>(<span class="ident">unpark</span>),
             <span class="ident">_registration</span>: <span class="ident">pair</span>.<span class="number">0</span>,
         });
-        <span class="ident">entry</span>.<span class="ident">get</span>().<span class="ident">wake</span>.<span class="ident">clone</span>().<span class="ident">unpark</span>();
     }
 }
 
@@ -1444,7 +1519,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This function takes a closure which is executed within the context of</span>
     <span class="doccomment">/// the I/O loop itself. The future returned by the closure will be</span>
-    <span class="doccomment">/// scheduled on the event loop an run to completion.</span>
+    <span class="doccomment">/// scheduled on the event loop and run to completion.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Note that while the closure, `F`, requires the `Send` bound as it might</span>
     <span class="doccomment">/// cross threads, the future `R` does not.</span>
@@ -1492,6 +1567,15 @@
     }
 }
 
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="ident">Executor</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Remote</span>
+    <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">Future</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (), <span class="ident">Error</span> <span class="op">=</span> ()<span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+{
+    <span class="kw">fn</span> <span class="ident">execute</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">future</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ExecuteError</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;&gt;</span> {
+        <span class="self">self</span>.<span class="ident">spawn</span>(<span class="op">|</span>_<span class="op">|</span> <span class="ident">future</span>);
+        <span class="prelude-val">Ok</span>(())
+    }
+}
+
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Remote</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;Remote&quot;</span>)
@@ -1536,6 +1620,15 @@
     }
 }
 
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="ident">Executor</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Handle</span>
+    <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">Future</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (), <span class="ident">Error</span> <span class="op">=</span> ()<span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+{
+    <span class="kw">fn</span> <span class="ident">execute</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">future</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ExecuteError</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;&gt;</span> {
+        <span class="self">self</span>.<span class="ident">spawn</span>(<span class="ident">future</span>);
+        <span class="prelude-val">Ok</span>(())
+    }
+}
+
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Handle</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;Handle&quot;</span>)
@@ -1565,8 +1658,8 @@
 
 <span class="kw">struct</span> <span class="ident">MySetReadiness</span>(<span class="ident">mio</span>::<span class="ident">SetReadiness</span>);
 
-<span class="kw">impl</span> <span class="ident">Unpark</span> <span class="kw">for</span> <span class="ident">MySetReadiness</span> {
-    <span class="kw">fn</span> <span class="ident">unpark</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl</span> <span class="ident">Notify</span> <span class="kw">for</span> <span class="ident">MySetReadiness</span> {
+    <span class="kw">fn</span> <span class="ident">notify</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_id</span>: <span class="ident">usize</span>) {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">set_readiness</span>(<span class="ident">mio</span>::<span class="ident">Ready</span>::<span class="ident">readable</span>())
               .<span class="ident">expect</span>(<span class="string">&quot;failed to set readiness&quot;</span>);
     }
@@ -1582,17 +1675,68 @@
     }
 }
 
+<span class="kw">fn</span> <span class="ident">read_ready</span>() <span class="op">-&gt;</span> <span class="ident">mio</span>::<span class="ident">Ready</span> {
+    <span class="ident">mio</span>::<span class="ident">Ready</span>::<span class="ident">readable</span>() <span class="op">|</span> <span class="ident">platform</span>::<span class="ident">hup</span>()
+}
+
+<span class="kw">const</span> <span class="ident">READ</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="number">0</span>;
+<span class="kw">const</span> <span class="ident">WRITE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="number">1</span>;
+
+<span class="kw">fn</span> <span class="ident">ready2usize</span>(<span class="ident">ready</span>: <span class="ident">mio</span>::<span class="ident">Ready</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bits</span> <span class="op">=</span> <span class="number">0</span>;
+    <span class="kw">if</span> <span class="ident">ready</span>.<span class="ident">is_readable</span>() {
+        <span class="ident">bits</span> <span class="op">|=</span> <span class="ident">READ</span>;
+    }
+    <span class="kw">if</span> <span class="ident">ready</span>.<span class="ident">is_writable</span>() {
+        <span class="ident">bits</span> <span class="op">|=</span> <span class="ident">WRITE</span>;
+    }
+    <span class="ident">bits</span> <span class="op">|</span> <span class="ident">platform</span>::<span class="ident">ready2usize</span>(<span class="ident">ready</span>)
+}
+
+<span class="kw">fn</span> <span class="ident">usize2ready</span>(<span class="ident">bits</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">mio</span>::<span class="ident">Ready</span> {
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ready</span> <span class="op">=</span> <span class="ident">mio</span>::<span class="ident">Ready</span>::<span class="ident">empty</span>();
+    <span class="kw">if</span> <span class="ident">bits</span> <span class="op">&amp;</span> <span class="ident">READ</span> <span class="op">!=</span> <span class="number">0</span> {
+        <span class="ident">ready</span>.<span class="ident">insert</span>(<span class="ident">mio</span>::<span class="ident">Ready</span>::<span class="ident">readable</span>());
+    }
+    <span class="kw">if</span> <span class="ident">bits</span> <span class="op">&amp;</span> <span class="ident">WRITE</span> <span class="op">!=</span> <span class="number">0</span> {
+        <span class="ident">ready</span>.<span class="ident">insert</span>(<span class="ident">mio</span>::<span class="ident">Ready</span>::<span class="ident">writable</span>());
+    }
+    <span class="ident">ready</span> <span class="op">|</span> <span class="ident">platform</span>::<span class="ident">usize2ready</span>(<span class="ident">bits</span>)
+}
+
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
 <span class="kw">mod</span> <span class="ident">platform</span> {
     <span class="kw">use</span> <span class="ident">mio</span>::<span class="ident">Ready</span>;
     <span class="kw">use</span> <span class="ident">mio</span>::<span class="ident">unix</span>::<span class="ident">UnixReady</span>;
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_hup</span>(<span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">Ready</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-        <span class="ident">UnixReady</span>::<span class="ident">from</span>(<span class="kw-2">*</span><span class="ident">event</span>).<span class="ident">is_hup</span>()
-    }
-
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hup</span>() <span class="op">-&gt;</span> <span class="ident">Ready</span> {
         <span class="ident">UnixReady</span>::<span class="ident">hup</span>().<span class="ident">into</span>()
+    }
+
+    <span class="kw">const</span> <span class="ident">HUP</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="number">2</span>;
+    <span class="kw">const</span> <span class="ident">ERROR</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="number">3</span>;
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ready2usize</span>(<span class="ident">ready</span>: <span class="ident">Ready</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
+        <span class="kw">let</span> <span class="ident">ready</span> <span class="op">=</span> <span class="ident">UnixReady</span>::<span class="ident">from</span>(<span class="ident">ready</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bits</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">if</span> <span class="ident">ready</span>.<span class="ident">is_error</span>() {
+            <span class="ident">bits</span> <span class="op">|=</span> <span class="ident">ERROR</span>;
+        }
+        <span class="kw">if</span> <span class="ident">ready</span>.<span class="ident">is_hup</span>() {
+            <span class="ident">bits</span> <span class="op">|=</span> <span class="ident">HUP</span>;
+        }
+        <span class="ident">bits</span>
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">usize2ready</span>(<span class="ident">bits</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Ready</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ready</span> <span class="op">=</span> <span class="ident">UnixReady</span>::<span class="ident">from</span>(<span class="ident">Ready</span>::<span class="ident">empty</span>());
+        <span class="kw">if</span> <span class="ident">bits</span> <span class="op">&amp;</span> <span class="ident">HUP</span> <span class="op">!=</span> <span class="number">0</span> {
+            <span class="ident">ready</span>.<span class="ident">insert</span>(<span class="ident">UnixReady</span>::<span class="ident">hup</span>());
+        }
+        <span class="kw">if</span> <span class="ident">bits</span> <span class="op">&amp;</span> <span class="ident">ERROR</span> <span class="op">!=</span> <span class="number">0</span> {
+            <span class="ident">ready</span>.<span class="ident">insert</span>(<span class="ident">UnixReady</span>::<span class="ident">error</span>());
+        }
+        <span class="ident">ready</span>.<span class="ident">into</span>()
     }
 }
 
@@ -1600,11 +1744,15 @@
 <span class="kw">mod</span> <span class="ident">platform</span> {
     <span class="kw">use</span> <span class="ident">mio</span>::<span class="ident">Ready</span>;
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_hup</span>(<span class="ident">_event</span>: <span class="kw-2">&amp;</span><span class="ident">Ready</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-        <span class="bool-val">false</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hup</span>() <span class="op">-&gt;</span> <span class="ident">Ready</span> {
+        <span class="ident">Ready</span>::<span class="ident">empty</span>()
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hup</span>() <span class="op">-&gt;</span> <span class="ident">Ready</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ready2usize</span>(<span class="ident">_r</span>: <span class="ident">Ready</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
+        <span class="number">0</span>
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">usize2ready</span>(<span class="ident">_r</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Ready</span> {
         <span class="ident">Ready</span>::<span class="ident">empty</span>()
     }
 }

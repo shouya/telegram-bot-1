@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.13/src/stream/buffer_unordered.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.14/src/stream/buffer_unordered.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>buffer_unordered.rs.html -- source</title>
@@ -178,62 +178,12 @@
 <span id="133">133</span>
 <span id="134">134</span>
 <span id="135">135</span>
-<span id="136">136</span>
-<span id="137">137</span>
-<span id="138">138</span>
-<span id="139">139</span>
-<span id="140">140</span>
-<span id="141">141</span>
-<span id="142">142</span>
-<span id="143">143</span>
-<span id="144">144</span>
-<span id="145">145</span>
-<span id="146">146</span>
-<span id="147">147</span>
-<span id="148">148</span>
-<span id="149">149</span>
-<span id="150">150</span>
-<span id="151">151</span>
-<span id="152">152</span>
-<span id="153">153</span>
-<span id="154">154</span>
-<span id="155">155</span>
-<span id="156">156</span>
-<span id="157">157</span>
-<span id="158">158</span>
-<span id="159">159</span>
-<span id="160">160</span>
-<span id="161">161</span>
-<span id="162">162</span>
-<span id="163">163</span>
-<span id="164">164</span>
-<span id="165">165</span>
-<span id="166">166</span>
-<span id="167">167</span>
-<span id="168">168</span>
-<span id="169">169</span>
-<span id="170">170</span>
-<span id="171">171</span>
-<span id="172">172</span>
-<span id="173">173</span>
-<span id="174">174</span>
-<span id="175">175</span>
-<span id="176">176</span>
-<span id="177">177</span>
-<span id="178">178</span>
-<span id="179">179</span>
-<span id="180">180</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">prelude</span>::<span class="ident">v1</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">mem</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">Arc</span>;
 
-<span class="kw">use</span> <span class="ident">task</span>::{<span class="self">self</span>, <span class="ident">UnparkEvent</span>};
-
-<span class="kw">use</span> {<span class="ident">Async</span>, <span class="ident">IntoFuture</span>, <span class="ident">Poll</span>, <span class="ident">Future</span>};
-<span class="kw">use</span> <span class="ident">stream</span>::{<span class="ident">Stream</span>, <span class="ident">Fuse</span>};
-<span class="kw">use</span> <span class="ident">stack</span>::{<span class="ident">Stack</span>, <span class="ident">Drain</span>};
+<span class="kw">use</span> {<span class="ident">Async</span>, <span class="ident">IntoFuture</span>, <span class="ident">Poll</span>};
+<span class="kw">use</span> <span class="ident">stream</span>::{<span class="ident">Stream</span>, <span class="ident">Fuse</span>, <span class="ident">FuturesUnordered</span>};
 
 <span class="doccomment">/// An adaptor for a stream of futures to execute the futures concurrently, if</span>
 <span class="doccomment">/// possible, delivering results as they become available.</span>
@@ -248,25 +198,11 @@
 {
     <span class="ident">stream</span>: <span class="ident">Fuse</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>,
 
-    <span class="comment">// A slab of futures that are being executed. Each slot in this vector is</span>
-    <span class="comment">// either an active future or a pointer to the next empty slot. This is used</span>
-    <span class="comment">// to get O(1) deallocation in the slab and O(1) allocation.</span>
-    <span class="comment">//</span>
-    <span class="comment">// The `next_future` field is the next slot in the `futures` array that&#39;s a</span>
-    <span class="comment">// `Slot::Next` variant. If it points to the end of the array then the array</span>
-    <span class="comment">// is full.</span>
-    <span class="ident">futures</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Slot</span><span class="op">&lt;&lt;</span><span class="ident">S</span>::<span class="ident">Item</span> <span class="kw">as</span> <span class="ident">IntoFuture</span><span class="op">&gt;</span>::<span class="ident">Future</span><span class="op">&gt;&gt;</span>,
-    <span class="ident">next_future</span>: <span class="ident">usize</span>,
+    <span class="comment">// Handles &quot;in-flight&quot; futures</span>
+    <span class="ident">queue</span>: <span class="ident">FuturesUnordered</span><span class="op">&lt;&lt;</span><span class="ident">S</span>::<span class="ident">Item</span> <span class="kw">as</span> <span class="ident">IntoFuture</span><span class="op">&gt;</span>::<span class="ident">Future</span><span class="op">&gt;</span>,
 
-    <span class="comment">// A list of events that will get pushed onto concurrently by our many</span>
-    <span class="comment">// futures. This is filled in and used with the `with_unpark_event`</span>
-    <span class="comment">// function. The `pending` list here is the last time we drained events from</span>
-    <span class="comment">// our stack.</span>
-    <span class="ident">stack</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Stack</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;&gt;</span>,
-    <span class="ident">pending</span>: <span class="ident">Drain</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
-
-    <span class="comment">// Number of active futures running in the `futures` slab</span>
-    <span class="ident">active</span>: <span class="ident">usize</span>,
+    <span class="comment">// Max number of futures</span>
+    <span class="ident">max</span>: <span class="ident">usize</span>,
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">BufferUnordered</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>
@@ -277,19 +213,10 @@
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="ident">fmt</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;BufferUnordered&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;stream&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">stream</span>)
-            .<span class="ident">field</span>(<span class="string">&quot;futures&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">futures</span>)
-            .<span class="ident">field</span>(<span class="string">&quot;next_future&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">next_future</span>)
-            .<span class="ident">field</span>(<span class="string">&quot;stack&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">stack</span>)
-            .<span class="ident">field</span>(<span class="string">&quot;pending&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">pending</span>)
-            .<span class="ident">field</span>(<span class="string">&quot;active&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">active</span>)
+            .<span class="ident">field</span>(<span class="string">&quot;queue&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">queue</span>)
+            .<span class="ident">field</span>(<span class="string">&quot;max&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">max</span>)
             .<span class="ident">finish</span>()
     }
-}
-
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">enum</span> <span class="ident">Slot</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">Next</span>(<span class="ident">usize</span>),
-    <span class="ident">Data</span>(<span class="ident">T</span>),
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="ident">s</span>: <span class="ident">S</span>, <span class="ident">amt</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">BufferUnordered</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>
@@ -298,11 +225,8 @@
 {
     <span class="ident">BufferUnordered</span> {
         <span class="ident">stream</span>: <span class="kw">super</span>::<span class="ident">fuse</span>::<span class="ident">new</span>(<span class="ident">s</span>),
-        <span class="ident">futures</span>: (<span class="number">0</span>..<span class="ident">amt</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> <span class="ident">Slot</span>::<span class="ident">Next</span>(<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>)).<span class="ident">collect</span>(),
-        <span class="ident">next_future</span>: <span class="number">0</span>,
-        <span class="ident">pending</span>: <span class="ident">Stack</span>::<span class="ident">new</span>().<span class="ident">drain</span>(),
-        <span class="ident">stack</span>: <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">Stack</span>::<span class="ident">new</span>()),
-        <span class="ident">active</span>: <span class="number">0</span>,
+        <span class="ident">queue</span>: <span class="ident">FuturesUnordered</span>::<span class="ident">new</span>(),
+        <span class="ident">max</span>: <span class="ident">amt</span>,
     }
 }
 
@@ -310,27 +234,27 @@
     <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Stream</span>,
           <span class="ident">S</span>::<span class="ident">Item</span>: <span class="ident">IntoFuture</span><span class="op">&lt;</span><span class="ident">Error</span><span class="op">=</span><span class="op">&lt;</span><span class="ident">S</span> <span class="kw">as</span> <span class="ident">Stream</span><span class="op">&gt;</span>::<span class="ident">Error</span><span class="op">&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">poll_pending</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>)
-                    <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Poll</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;&lt;</span><span class="ident">S</span>::<span class="ident">Item</span> <span class="kw">as</span> <span class="ident">IntoFuture</span><span class="op">&gt;</span>::<span class="ident">Item</span><span class="op">&gt;</span>,
-                                   <span class="ident">S</span>::<span class="ident">Error</span><span class="op">&gt;&gt;</span> {
-        <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">idx</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">pending</span>.<span class="ident">next</span>() {
-            <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">futures</span>[<span class="ident">idx</span>] {
-                <span class="ident">Slot</span>::<span class="ident">Data</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">f</span>) <span class="op">=&gt;</span> {
-                    <span class="kw">let</span> <span class="ident">event</span> <span class="op">=</span> <span class="ident">UnparkEvent</span>::<span class="ident">new</span>(<span class="self">self</span>.<span class="ident">stack</span>.<span class="ident">clone</span>(), <span class="ident">idx</span>);
-                    <span class="kw">match</span> <span class="ident">task</span>::<span class="ident">with_unpark_event</span>(<span class="ident">event</span>, <span class="op">||</span> <span class="ident">f</span>.<span class="ident">poll</span>()) {
-                        <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>) <span class="op">=&gt;</span> <span class="kw">continue</span>,
-                        <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="ident">e</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">Some</span>(<span class="ident">e</span>))),
-                        <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>),
-                    }
-                },
-                <span class="ident">Slot</span>::<span class="ident">Next</span>(_) <span class="op">=&gt;</span> <span class="kw">continue</span>,
-            };
-            <span class="self">self</span>.<span class="ident">active</span> <span class="op">-=</span> <span class="number">1</span>;
-            <span class="self">self</span>.<span class="ident">futures</span>[<span class="ident">idx</span>] <span class="op">=</span> <span class="ident">Slot</span>::<span class="ident">Next</span>(<span class="self">self</span>.<span class="ident">next_future</span>);
-            <span class="self">self</span>.<span class="ident">next_future</span> <span class="op">=</span> <span class="ident">idx</span>;
-            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">result</span>)
-        }
-        <span class="prelude-val">None</span>
+    <span class="doccomment">/// Acquires a reference to the underlying stream that this combinator is</span>
+    <span class="doccomment">/// pulling from.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">S</span> {
+        <span class="self">self</span>.<span class="ident">stream</span>.<span class="ident">get_ref</span>()
+    }
+
+    <span class="doccomment">/// Acquires a mutable reference to the underlying stream that this</span>
+    <span class="doccomment">/// combinator is pulling from.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Note that care must be taken to avoid tampering with the state of the</span>
+    <span class="doccomment">/// stream which may otherwise confuse this combinator.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">S</span> {
+        <span class="self">self</span>.<span class="ident">stream</span>.<span class="ident">get_mut</span>()
+    }
+
+    <span class="doccomment">/// Consumes this combinator, returning the underlying stream.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Note that this may discard intermediate state of this combinator, so</span>
+    <span class="doccomment">/// care should be taken to avoid losing resources when this is called.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_inner</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">S</span> {
+        <span class="self">self</span>.<span class="ident">stream</span>.<span class="ident">into_inner</span>()
     }
 }
 
@@ -344,43 +268,29 @@
     <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span><span class="op">&gt;</span>, <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="comment">// First up, try to spawn off as many futures as possible by filling up</span>
         <span class="comment">// our slab of futures.</span>
-        <span class="kw">while</span> <span class="self">self</span>.<span class="ident">next_future</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">futures</span>.<span class="ident">len</span>() {
+        <span class="kw">while</span> <span class="self">self</span>.<span class="ident">queue</span>.<span class="ident">len</span>() <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">max</span> {
             <span class="kw">let</span> <span class="ident">future</span> <span class="op">=</span> <span class="kw">match</span> <span class="macro">try</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">stream</span>.<span class="ident">poll</span>()) {
                 <span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">Some</span>(<span class="ident">s</span>)) <span class="op">=&gt;</span> <span class="ident">s</span>.<span class="ident">into_future</span>(),
                 <span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">None</span>) <span class="op">|</span>
                 <span class="ident">Async</span>::<span class="ident">NotReady</span> <span class="op">=&gt;</span> <span class="kw">break</span>,
             };
-            <span class="self">self</span>.<span class="ident">active</span> <span class="op">+=</span> <span class="number">1</span>;
-            <span class="self">self</span>.<span class="ident">stack</span>.<span class="ident">push</span>(<span class="self">self</span>.<span class="ident">next_future</span>);
-            <span class="kw">match</span> <span class="ident">mem</span>::<span class="ident">replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">futures</span>[<span class="self">self</span>.<span class="ident">next_future</span>],
-                               <span class="ident">Slot</span>::<span class="ident">Data</span>(<span class="ident">future</span>)) {
-                <span class="ident">Slot</span>::<span class="ident">Next</span>(<span class="ident">next</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">next_future</span> <span class="op">=</span> <span class="ident">next</span>,
-                <span class="ident">Slot</span>::<span class="ident">Data</span>(_) <span class="op">=&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(),
-            }
+
+            <span class="self">self</span>.<span class="ident">queue</span>.<span class="ident">push</span>(<span class="ident">future</span>);
         }
 
-        <span class="comment">// Next, see if our list of `pending` events from last time has any</span>
-        <span class="comment">// items, and if so process them here.</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ret</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">poll_pending</span>() {
-            <span class="kw">return</span> <span class="ident">ret</span>
+        <span class="comment">// Try polling a new future</span>
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">val</span>) <span class="op">=</span> <span class="macro">try_ready</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">queue</span>.<span class="ident">poll</span>()) {
+            <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">Some</span>(<span class="ident">val</span>)));
         }
 
-        <span class="comment">// And finally, take a look at our stack of events, attempting to</span>
-        <span class="comment">// process all of those.</span>
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">pending</span>.<span class="ident">next</span>().<span class="ident">is_none</span>());
-        <span class="self">self</span>.<span class="ident">pending</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">stack</span>.<span class="ident">drain</span>();
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ret</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">poll_pending</span>() {
-            <span class="kw">return</span> <span class="ident">ret</span>
-        }
-
-        <span class="comment">// If we&#39;ve gotten this far then there&#39;s no events for us to process and</span>
-        <span class="comment">// nothing was ready, so figure out if we&#39;re not done yet or if we&#39;ve</span>
-        <span class="comment">// reached the end.</span>
-        <span class="prelude-val">Ok</span>(<span class="kw">if</span> <span class="self">self</span>.<span class="ident">active</span> <span class="op">&gt;</span> <span class="number">0</span> <span class="op">||</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">stream</span>.<span class="ident">is_done</span>() {
-            <span class="ident">Async</span>::<span class="ident">NotReady</span>
+        <span class="comment">// If we&#39;ve gotten this far, then there are no events for us to process</span>
+        <span class="comment">// and nothing was ready, so figure out if we&#39;re not done yet  or if</span>
+        <span class="comment">// we&#39;ve reached the end.</span>
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">stream</span>.<span class="ident">is_done</span>() {
+            <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">None</span>))
         } <span class="kw">else</span> {
-            <span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">None</span>)
-        })
+            <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>)
+        }
     }
 }
 

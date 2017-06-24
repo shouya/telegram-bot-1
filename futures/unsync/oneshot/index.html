@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../../index.html'>futures</a>::<wbr><a href='../index.html'>unsync</a></p><script>window.sidebarCurrent = {name: 'oneshot', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'>Module oneshot</p><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#functions">Functions</a></li></ul></div><p class='location'><a href='../../index.html'>futures</a>::<wbr><a href='../index.html'>unsync</a></p><script>window.sidebarCurrent = {name: 'oneshot', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../src/futures/unsync/oneshot.rs.html#1-197' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../../src/futures/unsync/oneshot.rs.html#1-336' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>A one-shot, futures-aware channel</p>
 
 <p>This channel is similar to that in <code>sync::oneshot</code> but cannot be sent across
@@ -60,6 +60,13 @@ threads.</p>
                                   title='struct futures::unsync::oneshot::Canceled'>Canceled</a></td>
                            <td class='docblock-short'>
                                 <p>Represents that the <code>Sender</code> dropped before sending a message.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.Execute.html"
+                                  title='struct futures::unsync::oneshot::Execute'>Execute</a></td>
+                           <td class='docblock-short'>
+                                <p>Type of future which <code>Spawn</code> instances below must be able to spawn.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -77,6 +84,13 @@ memory.</p>
                                 <p>Represents the completion half of a oneshot through which the result of a
 computation is signaled.</p>
                            </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SpawnHandle.html"
+                                  title='struct futures::unsync::oneshot::SpawnHandle'>SpawnHandle</a></td>
+                           <td class='docblock-short'>
+                                <p>Handle returned from the <code>spawn</code> function.</p>
+                           </td>
                        </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
                        <tr class=' module-item'>
@@ -84,6 +98,21 @@ computation is signaled.</p>
                                   title='fn futures::unsync::oneshot::channel'>channel</a></td>
                            <td class='docblock-short'>
                                 <p>Creates a new futures-aware, one-shot channel.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="fn" href="fn.spawn.html"
+                                  title='fn futures::unsync::oneshot::spawn'>spawn</a></td>
+                           <td class='docblock-short'>
+                                <p>Spawns a <code>future</code> onto the instance of <code>Executor</code> provided, <code>executor</code>,
+returning a handle representing the completion of the future.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="fn" href="fn.spawn_fn.html"
+                                  title='fn futures::unsync::oneshot::spawn_fn'>spawn_fn</a></td>
+                           <td class='docblock-short'>
+                                <p>Spawns a function <code>f</code> onto the <code>Spawn</code> instance provided <code>s</code>.</p>
                            </td>
                        </tr></table></section>
     <section id='search' class="content hidden"></section>

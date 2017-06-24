@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>bytes</a>::<wbr><a href='index.html'>buf</a></p><script>window.sidebarCurrent = {name: 'FromBuf', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait FromBuf</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>bytes</a>::<wbr><a href='index.html'>buf</a></p><script>window.sidebarCurrent = {name: 'FromBuf', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -50,7 +50,7 @@
                    </a>
                </span><a class='srclink' href='../../src/bytes/buf/from_buf.rs.html#68-87' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait FromBuf {
-    fn <a href='#tymethod.from_buf' class='fnname'>from_buf</a>&lt;T&gt;(buf: T) -&gt; Self <span class="where fmt-newline">where T: <a class="trait" href="../../bytes/buf/trait.IntoBuf.html" title="trait bytes::buf::IntoBuf">IntoBuf</a></span>;
+    fn <a href='#tymethod.from_buf' class='fnname'>from_buf</a>&lt;T&gt;(buf: T) -&gt; Self<br>&nbsp;&nbsp;&nbsp; <span class="where">where<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../bytes/buf/trait.IntoBuf.html" title="trait bytes::buf::IntoBuf">IntoBuf</a></span>;
 }</pre><div class='docblock'><p>Conversion from a <a href="trait.Buf.html"><code>Buf</code></a></p>
 
 <p>Implementing <code>FromBuf</code> for a type defines how it is created from a buffer.
@@ -110,7 +110,7 @@ through <a href="trait.Buf.html#method.collect"><code>Buf::collect</code></a>. S
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.from_buf' class='method'><span id='from_buf.v' class='invisible'><code>fn <a href='#tymethod.from_buf' class='fnname'>from_buf</a>&lt;T&gt;(buf: T) -&gt; Self <span class="where fmt-newline">where T: <a class="trait" href="../../bytes/buf/trait.IntoBuf.html" title="trait bytes::buf::IntoBuf">IntoBuf</a></span></code></span></h3><div class='docblock'><p>Creates a value from a buffer.</p>
+        <h3 id='tymethod.from_buf' class='method'><span id='from_buf.v' class='invisible'><code>fn <a href='#tymethod.from_buf' class='fnname'>from_buf</a>&lt;T&gt;(buf: T) -&gt; Self <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../bytes/buf/trait.IntoBuf.html" title="trait bytes::buf::IntoBuf">IntoBuf</a>,&nbsp;</span></code></span></h3><div class='docblock'><p>Creates a value from a buffer.</p>
 
 <p>See the <a href="#">type-level documentation</a> for more details.</p>
 

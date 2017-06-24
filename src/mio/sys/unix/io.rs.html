@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.7/src/sys/unix/io.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.9/src/sys/unix/io.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>io.rs.html -- source</title>
@@ -149,6 +149,7 @@
 <span id="104">104</span>
 <span id="105">105</span>
 <span id="106">106</span>
+<span id="107">107</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fs</span>::<span class="ident">File</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>::{<span class="ident">Read</span>, <span class="ident">Write</span>};
@@ -163,14 +164,15 @@
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_nonblock</span>(<span class="ident">fd</span>: <span class="ident">libc</span>::<span class="ident">c_int</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="kw">unsafe</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">nonblocking</span> <span class="op">=</span> <span class="number">1</span> <span class="kw">as</span> <span class="ident">libc</span>::<span class="ident">c_ulong</span>;
-        <span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">ioctl</span>(<span class="ident">fd</span>, <span class="ident">libc</span>::<span class="ident">FIONBIO</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">nonblocking</span>)).<span class="ident">map</span>(<span class="op">|</span>_<span class="op">|</span> ())
+        <span class="kw">let</span> <span class="ident">flags</span> <span class="op">=</span> <span class="ident">libc</span>::<span class="ident">fcntl</span>(<span class="ident">fd</span>, <span class="ident">libc</span>::<span class="ident">F_GETFL</span>);
+        <span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">fcntl</span>(<span class="ident">fd</span>, <span class="ident">libc</span>::<span class="ident">F_SETFL</span>, <span class="ident">flags</span> <span class="op">|</span> <span class="ident">libc</span>::<span class="ident">O_NONBLOCK</span>)).<span class="ident">map</span>(<span class="op">|</span>_<span class="op">|</span>())
     }
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_cloexec</span>(<span class="ident">fd</span>: <span class="ident">libc</span>::<span class="ident">c_int</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="kw">unsafe</span> {
-        <span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">ioctl</span>(<span class="ident">fd</span>, <span class="ident">libc</span>::<span class="ident">FIOCLEX</span>)).<span class="ident">map</span>(<span class="op">|</span>_<span class="op">|</span> ())
+        <span class="kw">let</span> <span class="ident">flags</span> <span class="op">=</span> <span class="ident">libc</span>::<span class="ident">fcntl</span>(<span class="ident">fd</span>, <span class="ident">libc</span>::<span class="ident">F_GETFD</span>);
+        <span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">fcntl</span>(<span class="ident">fd</span>, <span class="ident">libc</span>::<span class="ident">F_SETFD</span>, <span class="ident">flags</span> <span class="op">|</span> <span class="ident">libc</span>::<span class="ident">FD_CLOEXEC</span>)).<span class="ident">map</span>(<span class="op">|</span>_<span class="op">|</span> ())
     }
 }
 

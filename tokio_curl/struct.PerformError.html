@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='index.html'>tokio_curl</a></p><script>window.sidebarCurrent = {name: 'PerformError', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct PerformError</p><div class="block items"><ul><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>tokio_curl</a></p><script>window.sidebarCurrent = {name: 'PerformError', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -54,7 +54,7 @@
 <p>This error can be converted to an <code>io::Error</code> or the underlying <code>Easy</code>
 handle may also be extracted.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../tokio_curl/struct.PerformError.html" title="struct tokio_curl::PerformError">PerformError</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/tokio_curl/lib.rs.html#171-197' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.take_easy' class="method"><span id='take_easy.v' class='invisible'><code>fn <a href='#method.take_easy' class='fnname'>take_easy</a>(&amp;mut self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../curl/easy/struct.Easy.html" title="struct curl::easy::Easy">Easy</a>&gt;</code></span></h4>
+<div class='impl-items'><h4 id='method.take_easy' class="method"><span id='take_easy.v' class='invisible'><code>fn <a href='#method.take_easy' class='fnname'>take_easy</a>(&amp;mut self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../curl/easy/handle/struct.Easy.html" title="struct curl::easy::handle::Easy">Easy</a>&gt;</code></span></h4>
 <div class='docblock'><p>Attempts to extract the underlying <code>Easy</code> handle, if one is available.</p>
 
 <p>For some HTTP requests that fail the <code>Easy</code> handle is still available to

@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'></p><script>window.sidebarCurrent = {name: 'serde_json', ty: 'mod', relpath: '../'};</script>
+        <p class='location'>Crate serde_json</p><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'serde_json', ty: 'mod', relpath: '../'};</script>
     </nav>
 
     <nav class="sub">
@@ -54,19 +54,19 @@
 <p>JSON is a ubiquitous open-standard format that uses human-readable text to
 transmit data objects consisting of key-value pairs.</p>
 
-<pre class="rust rust-example-rendered">
-{
-  <span class="string">&quot;name&quot;</span>: <span class="string">&quot;John Doe&quot;</span>,
-  <span class="string">&quot;age&quot;</span>: <span class="number">43</span>,
-  <span class="string">&quot;address&quot;</span>: {
-    <span class="string">&quot;street&quot;</span>: <span class="string">&quot;10 Downing Street&quot;</span>,
-    <span class="string">&quot;city&quot;</span>: <span class="string">&quot;London&quot;</span>
+<pre><code class="language-json,ignore">{
+  &quot;name&quot;: &quot;John Doe&quot;,
+  &quot;age&quot;: 43,
+  &quot;address&quot;: {
+    &quot;street&quot;: &quot;10 Downing Street&quot;,
+    &quot;city&quot;: &quot;London&quot;
   },
-  <span class="string">&quot;phones&quot;</span>: [
-    <span class="string">&quot;+44 1234567&quot;</span>,
-    <span class="string">&quot;+44 2345678&quot;</span>
+  &quot;phones&quot;: [
+    &quot;+44 1234567&quot;,
+    &quot;+44 2345678&quot;
   ]
-}</pre>
+}
+</code></pre>
 
 <p>There are three common ways that you might find yourself needing to work
 with JSON data in Rust.</p>

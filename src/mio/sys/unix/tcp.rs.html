@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.7/src/sys/unix/tcp.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.9/src/sys/unix/tcp.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>tcp.rs.html -- source</title>
@@ -309,11 +309,45 @@
 <span id="264">264</span>
 <span id="265">265</span>
 <span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cmp</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>::{<span class="ident">Read</span>, <span class="ident">Write</span>};
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">net</span>::{<span class="self">self</span>, <span class="ident">SocketAddr</span>};
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">io</span>::{<span class="ident">RawFd</span>, <span class="ident">FromRawFd</span>, <span class="ident">IntoRawFd</span>, <span class="ident">AsRawFd</span>};
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">time</span>::<span class="ident">Duration</span>;
 
 <span class="kw">use</span> <span class="ident">libc</span>;
 <span class="kw">use</span> <span class="ident">net2</span>::<span class="ident">TcpStreamExt</span>;
@@ -385,12 +419,28 @@
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">nodelay</span>()
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_keepalive_ms</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">millis</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">set_keepalive_ms</span>(<span class="ident">millis</span>)
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_recv_buffer_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">size</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">set_recv_buffer_size</span>(<span class="ident">size</span>)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">keepalive_ms</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;&gt;</span> {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">keepalive_ms</span>()
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">recv_buffer_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">recv_buffer_size</span>()
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_send_buffer_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">size</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">set_send_buffer_size</span>(<span class="ident">size</span>)
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">send_buffer_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">send_buffer_size</span>()
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_keepalive</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">keepalive</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">set_keepalive</span>(<span class="ident">keepalive</span>)
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">keepalive</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;&gt;</span> {
+        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">keepalive</span>()
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_ttl</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ttl</span>: <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
@@ -399,6 +449,22 @@
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ttl</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">ttl</span>()
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_only_v6</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">only_v6</span>: <span class="ident">bool</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">set_only_v6</span>(<span class="ident">only_v6</span>)
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">only_v6</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">only_v6</span>()
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_linger</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">dur</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">set_linger</span>(<span class="ident">dur</span>)
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">linger</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;&gt;</span> {
+        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">linger</span>()
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">take_error</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">io</span>::<span class="ident">Error</span><span class="op">&gt;&gt;</span> {

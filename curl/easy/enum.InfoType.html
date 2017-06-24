@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>curl</a>::<wbr><a href='index.html'>easy</a></p><script>window.sidebarCurrent = {name: 'InfoType', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Enum InfoType</p><div class="block items"><ul><li><a href="#variants">Variants</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../index.html'>curl</a>::<wbr><a href='index.html'>easy</a></p><script>window.sidebarCurrent = {name: 'InfoType', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/curl/easy.rs.html#275-301' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/curl/easy/handler.rs.html#503-529' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum InfoType {
     Text,
     HeaderIn,
@@ -60,7 +60,7 @@
     // some variants omitted
 }</pre><div class='docblock'><p>Possible data chunks that can be witnessed as part of the <code>debug_function</code>
 callback.</p>
-</div><h2 class='variants'>Variants</h2>
+</div><h2 id='variants' class='variants'>Variants</h2>
 <span id='variant.Text' class='variant'><span id='Text.v' class='invisible'><code>Text</code></span></span><div class='docblock'><p>The data is informational text.</p>
 </div><span id='variant.HeaderIn' class='variant'><span id='HeaderIn.v' class='invisible'><code>HeaderIn</code></span></span><div class='docblock'><p>The data is header (or header-like) data received from the peer.</p>
 </div><span id='variant.HeaderOut' class='variant'><span id='HeaderOut.v' class='invisible'><code>HeaderOut</code></span></span><div class='docblock'><p>The data is header (or header-like) data sent to the peer.</p>
@@ -68,7 +68,10 @@ callback.</p>
 </div><span id='variant.DataOut' class='variant'><span id='DataOut.v' class='invisible'><code>DataOut</code></span></span><div class='docblock'><p>The data is protocol data sent to the peer.</p>
 </div><span id='variant.SslDataIn' class='variant'><span id='SslDataIn.v' class='invisible'><code>SslDataIn</code></span></span><div class='docblock'><p>The data is SSL/TLS (binary) data received from the peer.</p>
 </div><span id='variant.SslDataOut' class='variant'><span id='SslDataOut.v' class='invisible'><code>SslDataOut</code></span></span><div class='docblock'><p>The data is SSL/TLS (binary) data sent to the peer.</p>
-</div></section>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="enum" href="../../curl/easy/enum.InfoType.html" title="enum curl::easy::InfoType">InfoType</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/curl/easy/handler.rs.html#502' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>

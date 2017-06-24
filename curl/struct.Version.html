@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='index.html'>curl</a></p><script>window.sidebarCurrent = {name: 'Version', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct Version</p><div class="block items"><ul><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>curl</a></p><script>window.sidebarCurrent = {name: 'Version', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,9 +48,9 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../src/curl/version.rs.html#8-10' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/curl/version.rs.html#9-11' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Version { /* fields omitted */ }</pre><div class='docblock'><p>Version information about libcurl and the capabilities that it supports.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../curl/struct.Version.html" title="struct curl::Version">Version</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/curl/version.rs.html#21-228' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../curl/struct.Version.html" title="struct curl::Version">Version</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/curl/version.rs.html#23-234' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.num' class="method"><span id='num.v' class='invisible'><code>fn <a href='#method.num' class='fnname'>num</a>() -&gt; &amp;'static <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code></span></h4>
 <div class='docblock'><p>Returns the libcurl version that this library is currently linked against.</p>
 </div><h4 id='method.get' class="method"><span id='get.v' class='invisible'><code>fn <a href='#method.get' class='fnname'>get</a>() -&gt; <a class="struct" href="../curl/struct.Version.html" title="struct curl::Version">Version</a></code></span></h4>
@@ -61,7 +61,7 @@
 <div class='docblock'><p>Returns a numeric representation of the version number</p>
 
 <p>This is a 24 bit number made up of the major number, minor, and then
-patch number. For example 7.9.8 willr eturn 0x070908.</p>
+patch number. For example 7.9.8 will return 0x070908.</p>
 </div><h4 id='method.host' class="method"><span id='host.v' class='invisible'><code>fn <a href='#method.host' class='fnname'>host</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code></span></h4>
 <div class='docblock'><p>Returns a human readable string of the host libcurl is built for.</p>
 
@@ -97,6 +97,8 @@ conversions.</p>
 </div><h4 id='method.feature_ntlm_wb' class="method"><span id='feature_ntlm_wb.v' class='invisible'><code>fn <a href='#method.feature_ntlm_wb' class='fnname'>feature_ntlm_wb</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h4>
 <div class='docblock'><p>Returns whether libcurl was built with support for NTLM delegation to
 winbind helper.</p>
+</div><h4 id='method.feature_unix_domain_socket' class="method"><span id='feature_unix_domain_socket.v' class='invisible'><code>fn <a href='#method.feature_unix_domain_socket' class='fnname'>feature_unix_domain_socket</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h4>
+<div class='docblock'><p>Returns whether libcurl was built with support for unix domain socket</p>
 </div><h4 id='method.ssl_version' class="method"><span id='ssl_version.v' class='invisible'><code>fn <a href='#method.ssl_version' class='fnname'>ssl_version</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>&gt;</code></span></h4>
 <div class='docblock'><p>Returns the version of OpenSSL that is used, or None if there is no SSL
 support.</p>
@@ -117,9 +119,12 @@ against.</p>
 <div class='docblock'><p>If available, the version of iconv libcurl is linked against.</p>
 </div><h4 id='method.libssh_version' class="method"><span id='libssh_version.v' class='invisible'><code>fn <a href='#method.libssh_version' class='fnname'>libssh_version</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>&gt;</code></span></h4>
 <div class='docblock'><p>If available, the version of iconv libcurl is linked against.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> for <a class="struct" href="../curl/struct.Version.html" title="struct curl::Version">Version</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/curl/version.rs.html#12' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html" title="trait core::marker::Sync">Sync</a> for <a class="struct" href="../curl/struct.Version.html" title="struct curl::Version">Version</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/curl/version.rs.html#13' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'></div></section>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> for <a class="struct" href="../curl/struct.Version.html" title="struct curl::Version">Version</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/curl/version.rs.html#13' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html" title="trait core::marker::Sync">Sync</a> for <a class="struct" href="../curl/struct.Version.html" title="struct curl::Version">Version</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/curl/version.rs.html#14' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../curl/struct.Version.html" title="struct curl::Version">Version</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/curl/version.rs.html#236-280' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>

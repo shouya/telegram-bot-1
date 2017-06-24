@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='index.html'>tokio_io</a></p><script>window.sidebarCurrent = {name: 'AsyncWrite', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait AsyncWrite</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#provided-methods">Provided Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='index.html'>tokio_io</a></p><script>window.sidebarCurrent = {name: 'AsyncWrite', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -52,7 +52,8 @@
 <pre class='rust trait'>pub trait AsyncWrite: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a> {
     fn <a href='#tymethod.shutdown' class='fnname'>shutdown</a>(&amp;mut self) -&gt; <a class="type" href="../futures/poll/type.Poll.html" title="type futures::poll::Poll">Poll</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">()</a>, <a class="struct" href="https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html" title="struct std::io::error::Error">Error</a>&gt;;
 
-    fn <a href='#method.write_buf' class='fnname'>write_buf</a>&lt;B:&nbsp;<a class="trait" href="../bytes/buf/buf/trait.Buf.html" title="trait bytes::buf::buf::Buf">Buf</a>&gt;(&amp;mut self, buf: &amp;mut B) -&gt; <a class="type" href="../futures/poll/type.Poll.html" title="type futures::poll::Poll">Poll</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>, <a class="struct" href="https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html" title="struct std::io::error::Error">Error</a>&gt; <span class="where fmt-newline">where Self: <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a></span> { ... }
+    fn <a href='#method.write_buf' class='fnname'>write_buf</a>&lt;B:&nbsp;<a class="trait" href="../bytes/buf/buf/trait.Buf.html" title="trait bytes::buf::buf::Buf">Buf</a>&gt;(&amp;mut self, buf: &amp;mut B) -&gt; <a class="type" href="../futures/poll/type.Poll.html" title="type futures::poll::Poll">Poll</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>, <a class="struct" href="https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html" title="struct std::io::error::Error">Error</a>&gt;<br>&nbsp;&nbsp;&nbsp; <span class="where">where<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Self: <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a></span>,
+    { ... }
 }</pre><div class='docblock'><p>A trait for writable objects which operated in an asynchronous and
 futures-aware fashion.</p>
 
@@ -136,7 +137,7 @@ task.</p>
 </div></div>
             <h2 id='provided-methods'>Provided Methods</h2>
             <div class='methods'>
-        <h3 id='method.write_buf' class='method'><span id='write_buf.v' class='invisible'><code>fn <a href='#method.write_buf' class='fnname'>write_buf</a>&lt;B:&nbsp;<a class="trait" href="../bytes/buf/buf/trait.Buf.html" title="trait bytes::buf::buf::Buf">Buf</a>&gt;(&amp;mut self, buf: &amp;mut B) -&gt; <a class="type" href="../futures/poll/type.Poll.html" title="type futures::poll::Poll">Poll</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>, <a class="struct" href="https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html" title="struct std::io::error::Error">Error</a>&gt; <span class="where fmt-newline">where Self: <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a></span></code></span></h3><div class='docblock'><p>Write a <code>Buf</code> into this value, returning how many bytes were written.</p>
+        <h3 id='method.write_buf' class='method'><span id='write_buf.v' class='invisible'><code>fn <a href='#method.write_buf' class='fnname'>write_buf</a>&lt;B:&nbsp;<a class="trait" href="../bytes/buf/buf/trait.Buf.html" title="trait bytes::buf::buf::Buf">Buf</a>&gt;(&amp;mut self, buf: &amp;mut B) -&gt; <a class="type" href="../futures/poll/type.Poll.html" title="type futures::poll::Poll">Poll</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>, <a class="struct" href="https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html" title="struct std::io::error::Error">Error</a>&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;Self: <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></code></span></h3><div class='docblock'><p>Write a <code>Buf</code> into this value, returning how many bytes were written.</p>
 
 <p>Note that this method will advance the <code>buf</code> provided automatically by
 the number of bytes written.</p>

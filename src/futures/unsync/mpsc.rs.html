@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.13/src/unsync/mpsc.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.14/src/unsync/mpsc.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mpsc.rs.html -- source</title>
@@ -444,14 +444,14 @@
 
         <span class="kw">match</span> <span class="ident">shared</span>.<span class="ident">capacity</span> {
             <span class="prelude-val">Some</span>(<span class="ident">capacity</span>) <span class="kw">if</span> <span class="ident">shared</span>.<span class="ident">buffer</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="ident">capacity</span> <span class="op">=&gt;</span> {
-                <span class="ident">shared</span>.<span class="ident">blocked_senders</span>.<span class="ident">push_back</span>(<span class="ident">task</span>::<span class="ident">park</span>());
+                <span class="ident">shared</span>.<span class="ident">blocked_senders</span>.<span class="ident">push_back</span>(<span class="ident">task</span>::<span class="ident">current</span>());
                 <span class="prelude-val">Ok</span>(<span class="ident">AsyncSink</span>::<span class="ident">NotReady</span>(<span class="ident">msg</span>))
             }
             _ <span class="op">=&gt;</span> {
                 <span class="ident">shared</span>.<span class="ident">buffer</span>.<span class="ident">push_back</span>(<span class="ident">msg</span>);
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">task</span>) <span class="op">=</span> <span class="ident">shared</span>.<span class="ident">blocked_recv</span>.<span class="ident">take</span>() {
                     <span class="ident">drop</span>(<span class="ident">shared</span>);
-                    <span class="ident">task</span>.<span class="ident">unpark</span>();
+                    <span class="ident">task</span>.<span class="ident">notify</span>();
                 }
                 <span class="prelude-val">Ok</span>(<span class="ident">AsyncSink</span>::<span class="ident">Ready</span>)
             }
@@ -498,7 +498,7 @@
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">task</span>) <span class="op">=</span> <span class="ident">shared</span>.<span class="ident">blocked_recv</span>.<span class="ident">take</span>() {
                 <span class="comment">// Wake up receiver as its stream has ended</span>
                 <span class="ident">drop</span>(<span class="ident">shared</span>);
-                <span class="ident">task</span>.<span class="ident">unpark</span>();
+                <span class="ident">task</span>.<span class="ident">notify</span>();
             }
         }
     }
@@ -537,7 +537,7 @@
         };
         <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State</span>::<span class="ident">Closed</span>(<span class="ident">items</span>);
         <span class="kw">for</span> <span class="ident">task</span> <span class="kw">in</span> <span class="ident">blockers</span> {
-            <span class="ident">task</span>.<span class="ident">unpark</span>();
+            <span class="ident">task</span>.<span class="ident">notify</span>();
         }
     }
 }
@@ -564,11 +564,11 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">msg</span>) <span class="op">=</span> <span class="ident">shared</span>.<span class="ident">buffer</span>.<span class="ident">pop_front</span>() {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">task</span>) <span class="op">=</span> <span class="ident">shared</span>.<span class="ident">blocked_senders</span>.<span class="ident">pop_front</span>() {
                 <span class="ident">drop</span>(<span class="ident">shared</span>);
-                <span class="ident">task</span>.<span class="ident">unpark</span>();
+                <span class="ident">task</span>.<span class="ident">notify</span>();
             }
             <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">Some</span>(<span class="ident">msg</span>)))
         } <span class="kw">else</span> {
-            <span class="ident">shared</span>.<span class="ident">blocked_recv</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">task</span>::<span class="ident">park</span>());
+            <span class="ident">shared</span>.<span class="ident">blocked_recv</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">task</span>::<span class="ident">current</span>());
             <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>)
         }
     }
@@ -639,7 +639,7 @@
         <span class="ident">shared</span>.<span class="ident">buffer</span>.<span class="ident">push_back</span>(<span class="ident">msg</span>);
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">task</span>) <span class="op">=</span> <span class="ident">shared</span>.<span class="ident">blocked_recv</span>.<span class="ident">take</span>() {
             <span class="ident">drop</span>(<span class="ident">shared</span>);
-            <span class="ident">task</span>.<span class="ident">unpark</span>();
+            <span class="ident">task</span>.<span class="ident">notify</span>();
         }
         <span class="prelude-val">Ok</span>(())
     }

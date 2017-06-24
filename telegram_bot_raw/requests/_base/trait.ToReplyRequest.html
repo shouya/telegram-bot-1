@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>requests</a>::<wbr><a href='index.html'>_base</a></p><script>window.sidebarCurrent = {name: 'ToReplyRequest', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait ToReplyRequest</p><div class="block items"><ul><li><a href="#associated-types">Associated Types</a></li><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>requests</a>::<wbr><a href='index.html'>_base</a></p><script>window.sidebarCurrent = {name: 'ToReplyRequest', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -51,7 +51,7 @@
                </span><a class='srclink' href='../../../src/telegram_bot_raw/requests/_base/mod.rs.html#123-130' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait ToReplyRequest&lt;'b&gt; {
     type <a href='#associatedtype.Request' class="type">Request</a>: <a class="trait" href="../../../telegram_bot_raw/requests/_base/trait.Request.html" title="trait telegram_bot_raw::requests::_base::Request">Request</a>;
-    fn <a href='#tymethod.to_reply_request' class='fnname'>to_reply_request</a>&lt;M&gt;(&amp;'b self, message: M) -&gt; Self::<a class="trait" href="../../../telegram_bot_raw/requests/_base/trait.ToReplyRequest.html" title="trait telegram_bot_raw::requests::_base::ToReplyRequest">Request</a> <span class="where fmt-newline">where M: <a class="trait" href="../../../telegram_bot_raw/types/refs/trait.ToMessageId.html" title="trait telegram_bot_raw::types::refs::ToMessageId">ToMessageId</a> + <a class="trait" href="../../../telegram_bot_raw/types/refs/trait.ToSourceChat.html" title="trait telegram_bot_raw::types::refs::ToSourceChat">ToSourceChat</a></span>;
+    fn <a href='#tymethod.to_reply_request' class='fnname'>to_reply_request</a>&lt;M&gt;(&amp;'b self, message: M) -&gt; Self::<a class="trait" href="../../../telegram_bot_raw/requests/_base/trait.ToReplyRequest.html" title="trait telegram_bot_raw::requests::_base::ToReplyRequest">Request</a><br>&nbsp;&nbsp;&nbsp; <span class="where">where<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;M: <a class="trait" href="../../../telegram_bot_raw/types/refs/trait.ToMessageId.html" title="trait telegram_bot_raw::types::refs::ToMessageId">ToMessageId</a> + <a class="trait" href="../../../telegram_bot_raw/types/refs/trait.ToSourceChat.html" title="trait telegram_bot_raw::types::refs::ToSourceChat">ToSourceChat</a></span>;
 }</pre><div class='docblock'><p>Use this trait to convert a complex type to corresponding request and reply to the message.</p>
 </div>
             <h2 id='associated-types'>Associated Types</h2>
@@ -60,7 +60,7 @@
 </div></div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.to_reply_request' class='method'><span id='to_reply_request.v' class='invisible'><code>fn <a href='#tymethod.to_reply_request' class='fnname'>to_reply_request</a>&lt;M&gt;(&amp;'b self, message: M) -&gt; Self::<a class="trait" href="../../../telegram_bot_raw/requests/_base/trait.ToReplyRequest.html" title="trait telegram_bot_raw::requests::_base::ToReplyRequest">Request</a> <span class="where fmt-newline">where M: <a class="trait" href="../../../telegram_bot_raw/types/refs/trait.ToMessageId.html" title="trait telegram_bot_raw::types::refs::ToMessageId">ToMessageId</a> + <a class="trait" href="../../../telegram_bot_raw/types/refs/trait.ToSourceChat.html" title="trait telegram_bot_raw::types::refs::ToSourceChat">ToSourceChat</a></span></code></span></h3><div class='docblock'><p>Convert type to request and reply to the message.</p>
+        <h3 id='tymethod.to_reply_request' class='method'><span id='to_reply_request.v' class='invisible'><code>fn <a href='#tymethod.to_reply_request' class='fnname'>to_reply_request</a>&lt;M&gt;(&amp;'b self, message: M) -&gt; Self::<a class="trait" href="../../../telegram_bot_raw/requests/_base/trait.ToReplyRequest.html" title="trait telegram_bot_raw::requests::_base::ToReplyRequest">Request</a> <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;M: <a class="trait" href="../../../telegram_bot_raw/types/refs/trait.ToMessageId.html" title="trait telegram_bot_raw::types::refs::ToMessageId">ToMessageId</a> + <a class="trait" href="../../../telegram_bot_raw/types/refs/trait.ToSourceChat.html" title="trait telegram_bot_raw::types::refs::ToSourceChat">ToSourceChat</a>,&nbsp;</span></code></span></h3><div class='docblock'><p>Convert type to request and reply to the message.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>

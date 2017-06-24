@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>futures</a></p><script>window.sidebarCurrent = {name: 'stream', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'>Module stream</p><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'><a href='../index.html'>futures</a></p><script>window.sidebarCurrent = {name: 'stream', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/futures/stream/mod.rs.html#1-993' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/futures/stream/mod.rs.html#1-1061' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Asynchronous streams</p>
 
 <p>This module contains the <code>Stream</code> trait and a number of adaptors for this
@@ -126,6 +126,14 @@ yielded item.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class="struct" href="struct.Concat2.html"
+                                  title='struct futures::stream::Concat2'>Concat2</a></td>
+                           <td class='docblock-short'>
+                                <p>A stream combinator to concatenate the results of a stream into the first
+yielded item.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class="struct" href="struct.Empty.html"
                                   title='struct futures::stream::Empty'>Empty</a></td>
                            <td class='docblock-short'>
@@ -197,8 +205,7 @@ to a sink and then waits until the sink has fully flushed those values.</p>
                            <td><a class="struct" href="struct.FuturesUnordered.html"
                                   title='struct futures::stream::FuturesUnordered'>FuturesUnordered</a></td>
                            <td class='docblock-short'>
-                                <p>An adaptor for a stream of futures to execute the futures concurrently, if
-possible, delivering results as they become available.</p>
+                                <p>An unbounded queue of futures.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>

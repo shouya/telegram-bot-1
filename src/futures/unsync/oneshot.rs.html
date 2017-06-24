@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.13/src/unsync/oneshot.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.14/src/unsync/oneshot.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>oneshot.rs.html -- source</title>
@@ -240,16 +240,157 @@
 <span id="195">195</span>
 <span id="196">196</span>
 <span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! A one-shot, futures-aware channel</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! This channel is similar to that in `sync::oneshot` but cannot be sent across</span>
 <span class="doccomment">//! threads.</span>
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::<span class="ident">RefCell</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::{<span class="ident">Cell</span>, <span class="ident">RefCell</span>};
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">rc</span>::{<span class="ident">Rc</span>, <span class="ident">Weak</span>};
 
 <span class="kw">use</span> {<span class="ident">Future</span>, <span class="ident">Poll</span>, <span class="ident">Async</span>};
+<span class="kw">use</span> <span class="ident">future</span>::{<span class="ident">Executor</span>, <span class="ident">IntoFuture</span>, <span class="ident">Lazy</span>, <span class="ident">lazy</span>};
 <span class="kw">use</span> <span class="ident">task</span>::{<span class="self">self</span>, <span class="ident">Task</span>};
 
 <span class="doccomment">/// Creates a new futures-aware, one-shot channel.</span>
@@ -353,7 +494,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">poll_cancel</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), ()<span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">upgrade</span>() {
             <span class="prelude-val">Some</span>(<span class="ident">inner</span>) <span class="op">=&gt;</span> {
-                <span class="ident">inner</span>.<span class="ident">borrow_mut</span>().<span class="ident">tx_task</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">task</span>::<span class="ident">park</span>());
+                <span class="ident">inner</span>.<span class="ident">borrow_mut</span>().<span class="ident">tx_task</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">task</span>::<span class="ident">current</span>());
                 <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>)
             }
             <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(().<span class="ident">into</span>()),
@@ -373,7 +514,7 @@
             <span class="ident">borrow</span>.<span class="ident">rx_task</span>.<span class="ident">take</span>()
         };
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">task</span>) <span class="op">=</span> <span class="ident">rx_task</span> {
-            <span class="ident">task</span>.<span class="ident">unpark</span>();
+            <span class="ident">task</span>.<span class="ident">notify</span>();
         }
     }
 }
@@ -396,7 +537,7 @@
         };
         <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State</span>::<span class="ident">Closed</span>(<span class="ident">item</span>);
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">task</span>) <span class="op">=</span> <span class="ident">task</span> {
-            <span class="ident">task</span>.<span class="ident">unpark</span>();
+            <span class="ident">task</span>.<span class="ident">notify</span>();
         }
     }
 }
@@ -427,7 +568,7 @@
         <span class="kw">if</span> <span class="ident">Rc</span>::<span class="ident">get_mut</span>(<span class="ident">inner</span>).<span class="ident">is_some</span>() {
             <span class="prelude-val">Err</span>(<span class="ident">Canceled</span>)
         } <span class="kw">else</span> {
-            <span class="ident">inner</span>.<span class="ident">borrow_mut</span>().<span class="ident">rx_task</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">task</span>::<span class="ident">park</span>());
+            <span class="ident">inner</span>.<span class="ident">borrow_mut</span>().<span class="ident">rx_task</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">task</span>::<span class="ident">current</span>());
             <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>)
         }
     }
@@ -436,6 +577,143 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">Receiver</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
         <span class="self">self</span>.<span class="ident">close</span>();
+    }
+}
+
+<span class="doccomment">/// Handle returned from the `spawn` function.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// This handle is a future representing the completion of a different future on</span>
+<span class="doccomment">/// a separate executor. Created through the `oneshot::spawn` function this</span>
+<span class="doccomment">/// handle will resolve when the future provided to `spawn` resolves on the</span>
+<span class="doccomment">/// `Executor` instance provided to that function.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// If this handle is dropped then the future will automatically no longer be</span>
+<span class="doccomment">/// polled and is scheduled to be dropped. This can be canceled with the</span>
+<span class="doccomment">/// `forget` function, however.</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SpawnHandle</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">E</span><span class="op">&gt;</span> {
+    <span class="ident">rx</span>: <span class="ident">Receiver</span><span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">E</span><span class="op">&gt;&gt;</span>,
+    <span class="ident">keep_running</span>: <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">Cell</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;&gt;</span>,
+}
+
+<span class="doccomment">/// Type of future which `Spawn` instances below must be able to spawn.</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Execute</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Future</span><span class="op">&gt;</span> {
+    <span class="ident">future</span>: <span class="ident">F</span>,
+    <span class="ident">tx</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Sender</span><span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">F</span>::<span class="ident">Item</span>, <span class="ident">F</span>::<span class="ident">Error</span><span class="op">&gt;&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">keep_running</span>: <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">Cell</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;&gt;</span>,
+}
+
+<span class="doccomment">/// Spawns a `future` onto the instance of `Executor` provided, `executor`,</span>
+<span class="doccomment">/// returning a handle representing the completion of the future.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// The `SpawnHandle` returned is a future that is a proxy for `future` itself.</span>
+<span class="doccomment">/// When `future` completes on `executor` then the `SpawnHandle` will itself be</span>
+<span class="doccomment">/// resolved.  Internally `SpawnHandle` contains a `oneshot` channel and is</span>
+<span class="doccomment">/// thus not safe to send across threads.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// The `future` will be canceled if the `SpawnHandle` is dropped. If this is</span>
+<span class="doccomment">/// not desired then the `SpawnHandle::forget` function can be used to continue</span>
+<span class="doccomment">/// running the future to completion.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # Panics</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// This function will panic if the instance of `Spawn` provided is unable to</span>
+<span class="doccomment">/// spawn the `future` provided.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// If the provided instance of `Spawn` does not actually run `future` to</span>
+<span class="doccomment">/// completion, then the returned handle may panic when polled. Typically this</span>
+<span class="doccomment">/// is not a problem, though, as most instances of `Spawn` will run futures to</span>
+<span class="doccomment">/// completion.</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">E</span><span class="op">&gt;</span>(<span class="ident">future</span>: <span class="ident">F</span>, <span class="ident">executor</span>: <span class="kw-2">&amp;</span><span class="ident">E</span>) <span class="op">-&gt;</span> <span class="ident">SpawnHandle</span><span class="op">&lt;</span><span class="ident">F</span>::<span class="ident">Item</span>, <span class="ident">F</span>::<span class="ident">Error</span><span class="op">&gt;</span>
+    <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">Future</span>,
+          <span class="ident">E</span>: <span class="ident">Executor</span><span class="op">&lt;</span><span class="ident">Execute</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;&gt;</span>,
+{
+    <span class="kw">let</span> <span class="ident">flag</span> <span class="op">=</span> <span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">Cell</span>::<span class="ident">new</span>(<span class="bool-val">true</span>));
+    <span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">channel</span>();
+    <span class="ident">executor</span>.<span class="ident">execute</span>(<span class="ident">Execute</span> {
+        <span class="ident">future</span>: <span class="ident">future</span>,
+        <span class="ident">tx</span>: <span class="prelude-val">Some</span>(<span class="ident">tx</span>),
+        <span class="ident">keep_running</span>: <span class="ident">flag</span>.<span class="ident">clone</span>(),
+    }).<span class="ident">expect</span>(<span class="string">&quot;failed to spawn future&quot;</span>);
+    <span class="ident">SpawnHandle</span> {
+        <span class="ident">rx</span>: <span class="ident">rx</span>,
+        <span class="ident">keep_running</span>: <span class="ident">flag</span>,
+    }
+}
+
+<span class="doccomment">/// Spawns a function `f` onto the `Spawn` instance provided `s`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// For more information see the `spawn` function in this module. This function</span>
+<span class="doccomment">/// is just a thin wrapper around `spawn` which will execute the closure on the</span>
+<span class="doccomment">/// executor provided and then complete the future that the closure returns.</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_fn</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">R</span>, <span class="ident">E</span><span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>, <span class="ident">executor</span>: <span class="kw-2">&amp;</span><span class="ident">E</span>) <span class="op">-&gt;</span> <span class="ident">SpawnHandle</span><span class="op">&lt;</span><span class="ident">R</span>::<span class="ident">Item</span>, <span class="ident">R</span>::<span class="ident">Error</span><span class="op">&gt;</span>
+    <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnOnce</span>() <span class="op">-&gt;</span> <span class="ident">R</span>,
+          <span class="ident">R</span>: <span class="ident">IntoFuture</span>,
+          <span class="ident">E</span>: <span class="ident">Executor</span><span class="op">&lt;</span><span class="ident">Execute</span><span class="op">&lt;</span><span class="ident">Lazy</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">R</span><span class="op">&gt;&gt;</span><span class="op">&gt;</span>,
+{
+    <span class="ident">spawn</span>(<span class="ident">lazy</span>(<span class="ident">f</span>), <span class="ident">executor</span>)
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">E</span><span class="op">&gt;</span> <span class="ident">SpawnHandle</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">E</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// Drop this future without canceling the underlying future.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// When `SpawnHandle` is dropped, the spawned future will be canceled as</span>
+    <span class="doccomment">/// well if the future hasn&#39;t already resolved. This function can be used</span>
+    <span class="doccomment">/// when to drop this future but keep executing the underlying future.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">forget</span>(<span class="self">self</span>) {
+        <span class="self">self</span>.<span class="ident">keep_running</span>.<span class="ident">set</span>(<span class="bool-val">false</span>);
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">E</span><span class="op">&gt;</span> <span class="ident">Future</span> <span class="kw">for</span> <span class="ident">SpawnHandle</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">E</span><span class="op">&gt;</span> {
+    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">T</span>;
+    <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">E</span>;
+
+    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">E</span><span class="op">&gt;</span> {
+        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">rx</span>.<span class="ident">poll</span>() {
+            <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">Ok</span>(<span class="ident">t</span>))) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">t</span>.<span class="ident">into</span>()),
+            <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">Err</span>(<span class="ident">e</span>))) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>),
+            <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>),
+            <span class="prelude-val">Err</span>(_) <span class="op">=&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;future was canceled before completion&quot;</span>),
+        }
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">fmt</span>::<span class="ident">Debug</span>, <span class="ident">E</span>: <span class="ident">fmt</span>::<span class="ident">Debug</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">SpawnHandle</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">E</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+        <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;SpawnHandle&quot;</span>)
+         .<span class="ident">finish</span>()
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Future</span><span class="op">&gt;</span> <span class="ident">Future</span> <span class="kw">for</span> <span class="ident">Execute</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> {
+    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> ();
+    <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> ();
+
+    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), ()<span class="op">&gt;</span> {
+        <span class="comment">// If we&#39;re canceled then we may want to bail out early.</span>
+        <span class="comment">//</span>
+        <span class="comment">// If the `forget` function was called, though, then we keep going.</span>
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">tx</span>.<span class="ident">as_mut</span>().<span class="ident">unwrap</span>().<span class="ident">poll_cancel</span>().<span class="ident">unwrap</span>().<span class="ident">is_ready</span>() {
+            <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">keep_running</span>.<span class="ident">get</span>() {
+                <span class="kw">return</span> <span class="prelude-val">Ok</span>(().<span class="ident">into</span>())
+            }
+        }
+
+        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">future</span>.<span class="ident">poll</span>() {
+            <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>),
+            <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="ident">t</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">t</span>),
+            <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>),
+        };
+        <span class="ident">drop</span>(<span class="self">self</span>.<span class="ident">tx</span>.<span class="ident">take</span>().<span class="ident">unwrap</span>().<span class="ident">send</span>(<span class="ident">result</span>));
+        <span class="prelude-val">Ok</span>(().<span class="ident">into</span>())
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Future</span> <span class="op">+</span> <span class="ident">fmt</span>::<span class="ident">Debug</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Execute</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+        <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;Execute&quot;</span>)
+         .<span class="ident">field</span>(<span class="string">&quot;future&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">future</span>)
+         .<span class="ident">finish</span>()
     }
 }
 </pre>

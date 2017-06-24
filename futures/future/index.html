@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>futures</a></p><script>window.sidebarCurrent = {name: 'future', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'>Module future</p><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'><a href='../index.html'>futures</a></p><script>window.sidebarCurrent = {name: 'future', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/futures/future/mod.rs.html#1-959' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/futures/future/mod.rs.html#1-1046' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Futures</p>
 
 <p>This module contains the <code>Future</code> trait and a number of adaptors for this
@@ -75,6 +75,13 @@ another future which completes successfully.</p>
                                   title='struct futures::future::Empty'>Empty</a></td>
                            <td class='docblock-short'>
                                 <p>A future which is never resolved.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.ExecuteError.html"
+                                  title='struct futures::future::ExecuteError'>ExecuteError</a></td>
+                           <td class='docblock-short'>
+                                <p>Errors returned from the <code>Spawn::spawn</code> function.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -288,6 +295,13 @@ types into a single type.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class="enum" href="enum.ExecuteErrorKind.html"
+                                  title='enum futures::future::ExecuteErrorKind'>ExecuteErrorKind</a></td>
+                           <td class='docblock-short'>
+                                <p>Kinds of errors that can be returned from the <code>Execute::spawn</code> function.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class="enum" href="enum.Loop.html"
                                   title='enum futures::future::Loop'>Loop</a></td>
                            <td class='docblock-short'>
@@ -295,6 +309,13 @@ types into a single type.</p>
                            </td>
                        </tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.Executor.html"
+                                  title='trait futures::future::Executor'>Executor</a></td>
+                           <td class='docblock-short'>
+                                <p>A trait for types which can spawn fresh futures.</p>
+                           </td>
+                       </tr>
                        <tr class=' module-item'>
                            <td><a class="trait" href="trait.Future.html"
                                   title='trait futures::future::Future'>Future</a></td>

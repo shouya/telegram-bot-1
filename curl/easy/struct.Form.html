@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>curl</a>::<wbr><a href='index.html'>easy</a></p><script>window.sidebarCurrent = {name: 'Form', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct Form</p><div class="block items"><ul><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../index.html'>curl</a>::<wbr><a href='index.html'>easy</a></p><script>window.sidebarCurrent = {name: 'Form', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,12 +48,12 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/curl/easy.rs.html#148-154' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/curl/easy/form.rs.html#13-19' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Form { /* fields omitted */ }</pre><div class='docblock'><p>Multipart/formdata for an HTTP POST request.</p>
 
 <p>This structure is built up and then passed to the <code>Easy::httppost</code> method to
 be sent off with a request.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../curl/easy/struct.Form.html" title="struct curl::easy::Form">Form</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/curl/easy.rs.html#3542-3569' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../curl/easy/struct.Form.html" title="struct curl::easy::Form">Form</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/curl/easy/form.rs.html#33-60' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class="struct" href="../../curl/easy/struct.Form.html" title="struct curl::easy::Form">Form</a></code></span></h4>
 <div class='docblock'><p>Creates a new blank form ready for the addition of new data.</p>
 </div><h4 id='method.part' class="method"><span id='part.v' class='invisible'><code>fn <a href='#method.part' class='fnname'>part</a>&lt;'a, 'data&gt;(&amp;'a mut self, name: &amp;'data <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="struct" href="../../curl/easy/struct.Part.html" title="struct curl::easy::Part">Part</a>&lt;'a, 'data&gt;</code></span></h4>
@@ -61,7 +61,10 @@ be sent off with a request.</p>
 
 <p>Note that the part is not actually added to the form until the <code>add</code>
 method is called on <code>Part</code>, which may or may not fail.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html" title="trait core::ops::Drop">Drop</a> for <a class="struct" href="../../curl/easy/struct.Form.html" title="struct curl::easy::Form">Form</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/curl/easy.rs.html#3571-3577' title='goto source code'>[src]</a></span></h3>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../../curl/easy/struct.Form.html" title="struct curl::easy::Form">Form</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/curl/easy/form.rs.html#62-69' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html" title="trait core::ops::Drop">Drop</a> for <a class="struct" href="../../curl/easy/struct.Form.html" title="struct curl::easy::Form">Form</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/curl/easy/form.rs.html#71-77' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.drop' class="method"><span id='drop.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span></h4>
 <div class='docblock'><p>A method called when the value goes out of scope. <a href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop">Read more</a></p>
 </div></div></section>

@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>curl</a>::<wbr><a href='index.html'>easy</a></p><script>window.sidebarCurrent = {name: 'Auth', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct Auth</p><div class="block items"><ul><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../index.html'>curl</a>::<wbr><a href='index.html'>easy</a></p><script>window.sidebarCurrent = {name: 'Auth', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,10 +48,10 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/curl/easy.rs.html#362-364' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/curl/easy/handler.rs.html#580-582' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Auth { /* fields omitted */ }</pre><div class='docblock'><p>Structure which stores possible authentication methods to get passed to
 <code>http_auth</code> and <code>proxy_auth</code>.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../curl/easy/struct.Auth.html" title="struct curl::easy::Auth">Auth</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/curl/easy.rs.html#3815-3907' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../curl/easy/struct.Auth.html" title="struct curl::easy::Auth">Auth</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/curl/easy/handler.rs.html#2951-3043' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class="struct" href="../../curl/easy/struct.Auth.html" title="struct curl::easy::Auth">Auth</a></code></span></h4>
 <div class='docblock'><p>Creates a new set of authentications with no members.</p>
 
@@ -114,13 +114,13 @@ libcurl.</p>
 <p>A proprietary protocol invented and used by Microsoft. It uses a
 challenge-response and hash concept similar to Digest, to prevent the
 password from being eavesdropped.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="struct" href="../../curl/easy/struct.Auth.html" title="struct curl::easy::Auth">Auth</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/curl/easy.rs.html#361' title='goto source code'>[src]</a></span></h3>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="struct" href="../../curl/easy/struct.Auth.html" title="struct curl::easy::Auth">Auth</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/curl/easy/handler.rs.html#579' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class="struct" href="../../curl/easy/struct.Auth.html" title="struct curl::easy::Auth">Auth</a></code></span></h4>
 <div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
 </div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
 <div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../../curl/easy/struct.Auth.html" title="struct curl::easy::Auth">Auth</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/curl/easy.rs.html#361' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../../curl/easy/struct.Auth.html" title="struct curl::easy::Auth">Auth</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/curl/easy/handler.rs.html#3045-3057' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
 </div></div></section>
     <section id='search' class="content hidden"></section>

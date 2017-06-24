@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.13/src/sink/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.14/src/sink/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -476,6 +476,8 @@
 <span id="431">431</span>
 <span id="432">432</span>
 <span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! Asynchronous sinks</span>
 <span class="doccomment">//!</span>
@@ -877,11 +879,13 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This future will drive the stream to keep producing items until it is</span>
     <span class="doccomment">/// exhausted, sending each item to the sink. It will complete once both the</span>
-    <span class="doccomment">/// stream is exhausted, and the sink has fully processed and flushed all of</span>
-    <span class="doccomment">/// the items sent to it.</span>
+    <span class="doccomment">/// stream is exhausted, the sink has received all items, the sink has been</span>
+    <span class="doccomment">/// flushed, and the sink has been closed.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Doing `sink.send_all(stream)` is roughly equivalent to</span>
-    <span class="doccomment">/// `stream.forward(sink)`.</span>
+    <span class="doccomment">/// `stream.forward(sink)`. The returned future will exhaust all items from</span>
+    <span class="doccomment">/// `stream` and send them to `self`, closing `self` when all items have ben</span>
+    <span class="doccomment">/// received.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// On completion, the pair `(sink, source)` is returned.</span>
     <span class="kw">fn</span> <span class="ident">send_all</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">stream</span>: <span class="ident">S</span>) <span class="op">-&gt;</span> <span class="ident">SendAll</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">S</span><span class="op">&gt;</span>

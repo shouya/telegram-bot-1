@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>futures</a></p><script>window.sidebarCurrent = {name: 'executor', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'>Module executor</p><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li></ul></div><p class='location'><a href='../index.html'>futures</a></p><script>window.sidebarCurrent = {name: 'executor', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,15 +48,23 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/futures/executor.rs.html#1-10' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/futures/executor.rs.html#1-16' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Executors</p>
 
 <p>This module contains tools for managing the raw execution of futures,
 which is needed when building <em>executors</em> (places where futures can run).</p>
 
-<p>More information about executors can be <a href="https://tokio.rs/docs/going-deeper/tasks/">found online at tokio.rs</a>.</p>
+<p>More information about executors can be <a href="https://tokio.rs/docs/going-deeper-futures/tasks/">found online at tokio.rs</a>.</p>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.NotifyHandle.html"
+                                  title='struct futures::executor::NotifyHandle'>NotifyHandle</a></td>
+                           <td class='docblock-short'>
+                                <p>A <code>NotifyHandle</code> is the core value through which notifications are routed
+in the <code>futures</code> crate.</p>
+                           </td>
+                       </tr>
                        <tr class=' module-item'>
                            <td><a class="struct" href="struct.Run.html"
                                   title='struct futures::executor::Run'>Run</a></td>
@@ -81,11 +89,27 @@ internally.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class="trait" href="trait.Unpark.html"
-                                  title='trait futures::executor::Unpark'>Unpark</a></td>
+                           <td><a class="trait" href="trait.Notify.html"
+                                  title='trait futures::executor::Notify'>Notify</a></td>
                            <td class='docblock-short'>
                                 <p>A trait which represents a sink of notifications that a future is ready to
 make progress.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.Unpark.html"
+                                  title='trait futures::executor::Unpark'>Unpark</a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab deprecated'>Deprecated</div>] <p>A trait which represents a sink of notifications that a future is ready to
+make progress.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.UnsafeNotify.html"
+                                  title='trait futures::executor::UnsafeNotify'>UnsafeNotify</a></td>
+                           <td class='docblock-short'>
+                                <p>An unsafe trait for implementing custom forms of memory management behind a
+<code>Task</code>.</p>
                            </td>
                        </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>

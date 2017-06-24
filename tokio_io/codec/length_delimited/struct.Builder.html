@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../../index.html'>tokio_io</a>::<wbr><a href='../index.html'>codec</a>::<wbr><a href='index.html'>length_delimited</a></p><script>window.sidebarCurrent = {name: 'Builder', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct Builder</p><div class="block items"><ul><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../../index.html'>tokio_io</a>::<wbr><a href='../index.html'>codec</a>::<wbr><a href='index.html'>length_delimited</a></p><script>window.sidebarCurrent = {name: 'Builder', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -166,7 +166,7 @@ payload length</p>
 <span class="ident">Builder</span>::<span class="ident">new</span>()
     .<span class="ident">num_skip</span>(<span class="number">4</span>)
     .<span class="ident">new_read</span>(<span class="ident">io</span>);</pre>
-</div><h4 id='method.new_read' class="method"><span id='new_read.v' class='invisible'><code>fn <a href='#method.new_read' class='fnname'>new_read</a>&lt;T&gt;(&amp;self, upstream: T) -&gt; <a class="struct" href="../../../tokio_io/codec/length_delimited/struct.FramedRead.html" title="struct tokio_io::codec::length_delimited::FramedRead">FramedRead</a>&lt;T&gt; <span class="where fmt-newline">where T: <a class="trait" href="../../../tokio_io/trait.AsyncRead.html" title="trait tokio_io::AsyncRead">AsyncRead</a></span></code></span></h4>
+</div><h4 id='method.new_read' class="method"><span id='new_read.v' class='invisible'><code>fn <a href='#method.new_read' class='fnname'>new_read</a>&lt;T&gt;(&amp;self, upstream: T) -&gt; <a class="struct" href="../../../tokio_io/codec/length_delimited/struct.FramedRead.html" title="struct tokio_io::codec::length_delimited::FramedRead">FramedRead</a>&lt;T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../../tokio_io/trait.AsyncRead.html" title="trait tokio_io::AsyncRead">AsyncRead</a>,&nbsp;</span></code></span></h4>
 <div class='docblock'><p>Create a configured length delimited <code>FramedRead</code></p>
 
 <h1 id='examples-8' class='section-header'><a href='#examples-8'>Examples</a></h1>
@@ -179,7 +179,7 @@ payload length</p>
     .<span class="ident">length_adjustment</span>(<span class="number">0</span>)
     .<span class="ident">num_skip</span>(<span class="number">0</span>)
     .<span class="ident">new_read</span>(<span class="ident">io</span>);</pre>
-</div><h4 id='method.new_write' class="method"><span id='new_write.v' class='invisible'><code>fn <a href='#method.new_write' class='fnname'>new_write</a>&lt;T, B&gt;(&amp;self, inner: T) -&gt; <a class="struct" href="../../../tokio_io/codec/length_delimited/struct.FramedWrite.html" title="struct tokio_io::codec::length_delimited::FramedWrite">FramedWrite</a>&lt;T, B&gt; <span class="where fmt-newline">where T: <a class="trait" href="../../../tokio_io/trait.AsyncWrite.html" title="trait tokio_io::AsyncWrite">AsyncWrite</a>, B: <a class="trait" href="../../../bytes/buf/into_buf/trait.IntoBuf.html" title="trait bytes::buf::into_buf::IntoBuf">IntoBuf</a></span></code></span></h4>
+</div><h4 id='method.new_write' class="method"><span id='new_write.v' class='invisible'><code>fn <a href='#method.new_write' class='fnname'>new_write</a>&lt;T, B&gt;(&amp;self, inner: T) -&gt; <a class="struct" href="../../../tokio_io/codec/length_delimited/struct.FramedWrite.html" title="struct tokio_io::codec::length_delimited::FramedWrite">FramedWrite</a>&lt;T, B&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../../tokio_io/trait.AsyncWrite.html" title="trait tokio_io::AsyncWrite">AsyncWrite</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;B: <a class="trait" href="../../../bytes/buf/into_buf/trait.IntoBuf.html" title="trait bytes::buf::into_buf::IntoBuf">IntoBuf</a>,&nbsp;</span></code></span></h4>
 <div class='docblock'><p>Create a configured length delimited <code>FramedWrite</code></p>
 
 <h1 id='examples-9' class='section-header'><a href='#examples-9'>Examples</a></h1>
@@ -187,7 +187,7 @@ payload length</p>
 <span class="ident">length_delimited</span>::<span class="ident">Builder</span>::<span class="ident">new</span>()
     .<span class="ident">length_field_length</span>(<span class="number">2</span>)
     .<span class="ident">new_write</span>(<span class="ident">io</span>);</pre>
-</div><h4 id='method.new_framed' class="method"><span id='new_framed.v' class='invisible'><code>fn <a href='#method.new_framed' class='fnname'>new_framed</a>&lt;T, B&gt;(&amp;self, inner: T) -&gt; <a class="struct" href="../../../tokio_io/codec/length_delimited/struct.Framed.html" title="struct tokio_io::codec::length_delimited::Framed">Framed</a>&lt;T, B&gt; <span class="where fmt-newline">where T: <a class="trait" href="../../../tokio_io/trait.AsyncRead.html" title="trait tokio_io::AsyncRead">AsyncRead</a> + <a class="trait" href="../../../tokio_io/trait.AsyncWrite.html" title="trait tokio_io::AsyncWrite">AsyncWrite</a>, B: <a class="trait" href="../../../bytes/buf/into_buf/trait.IntoBuf.html" title="trait bytes::buf::into_buf::IntoBuf">IntoBuf</a></span></code></span></h4>
+</div><h4 id='method.new_framed' class="method"><span id='new_framed.v' class='invisible'><code>fn <a href='#method.new_framed' class='fnname'>new_framed</a>&lt;T, B&gt;(&amp;self, inner: T) -&gt; <a class="struct" href="../../../tokio_io/codec/length_delimited/struct.Framed.html" title="struct tokio_io::codec::length_delimited::Framed">Framed</a>&lt;T, B&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../../tokio_io/trait.AsyncRead.html" title="trait tokio_io::AsyncRead">AsyncRead</a> + <a class="trait" href="../../../tokio_io/trait.AsyncWrite.html" title="trait tokio_io::AsyncWrite">AsyncWrite</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;B: <a class="trait" href="../../../bytes/buf/into_buf/trait.IntoBuf.html" title="trait bytes::buf::into_buf::IntoBuf">IntoBuf</a>,&nbsp;</span></code></span></h4>
 <div class='docblock'><p>Create a configured length delimited <code>Framed</code></p>
 
 <h1 id='examples-10' class='section-header'><a href='#examples-10'>Examples</a></h1>

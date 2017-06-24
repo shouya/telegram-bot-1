@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.7/src/sys/unix/ready.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.9/src/sys/unix/ready.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>ready.rs.html -- source</title>
@@ -312,6 +312,45 @@
 <span id="267">267</span>
 <span id="268">268</span>
 <span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">event_imp</span>::{<span class="ident">Ready</span>, <span class="ident">ready_from_usize</span>};
 
@@ -399,10 +438,31 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">UnixReady</span>(<span class="ident">Ready</span>);
 
-<span class="kw">const</span> <span class="ident">ERROR</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">0b0100</span>;
-<span class="kw">const</span> <span class="ident">HUP</span>: <span class="ident">usize</span>   <span class="op">=</span> <span class="number">0b1000</span>;
+<span class="kw">const</span> <span class="ident">ERROR</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">0b00100</span>;
+<span class="kw">const</span> <span class="ident">HUP</span>: <span class="ident">usize</span>   <span class="op">=</span> <span class="number">0b01000</span>;
+<span class="kw">const</span> <span class="ident">AIO</span>: <span class="ident">usize</span>   <span class="op">=</span> <span class="number">0b10000</span>;
 
 <span class="kw">impl</span> <span class="ident">UnixReady</span> {
+    <span class="doccomment">/// Returns a `Ready` representing AIO completion readiness</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// See [`Poll`] for more documentation on polling.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// use mio::unix::UnixReady;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let ready = UnixReady::aio();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert!(ready.is_aio());</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`Poll`]: struct.Poll.html</span>
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">aio</span>() <span class="op">-&gt;</span> <span class="ident">UnixReady</span> {
+        <span class="ident">UnixReady</span>(<span class="ident">ready_from_usize</span>(<span class="ident">AIO</span>))
+    }
+
     <span class="doccomment">/// Returns a `Ready` representing error readiness.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// **Note that only readable and writable readiness is guaranteed to be</span>
@@ -456,6 +516,24 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hup</span>() <span class="op">-&gt;</span> <span class="ident">UnixReady</span> {
         <span class="ident">UnixReady</span>(<span class="ident">ready_from_usize</span>(<span class="ident">HUP</span>))
+    }
+
+    <span class="doccomment">/// Returns true if `Ready` contains AIO readiness</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// See [`Poll`] for more documentation on polling.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// use mio::unix::UnixReady;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let ready = UnixReady::aio();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert!(ready.is_aio());</span>
+    <span class="doccomment">/// ```</span>
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_aio</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="ident">contains</span>(<span class="ident">ready_from_usize</span>(<span class="ident">AIO</span>))
     }
 
     <span class="doccomment">/// Returns true if the value includes error readiness</span>

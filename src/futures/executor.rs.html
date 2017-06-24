@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.13/src/executor.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.14/src/executor.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>executor.rs.html -- source</title>
@@ -53,6 +53,12 @@
 <span id="8"> 8</span>
 <span id="9"> 9</span>
 <span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! Executors</span>
 <span class="doccomment">//!</span>
@@ -61,9 +67,15 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! More information about executors can be [found online at tokio.rs][online].</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! [online]: https://tokio.rs/docs/going-deeper/tasks/</span>
+<span class="doccomment">//! [online]: https://tokio.rs/docs/going-deeper-futures/tasks/</span>
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">task_impl</span>::{<span class="ident">Spawn</span>, <span class="ident">spawn</span>, <span class="ident">Unpark</span>, <span class="ident">Executor</span>, <span class="ident">Run</span>};
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_std&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">task_impl</span>::{<span class="ident">Unpark</span>, <span class="ident">Executor</span>, <span class="ident">Run</span>};
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">task_impl</span>::{<span class="ident">Spawn</span>, <span class="ident">spawn</span>, <span class="ident">Notify</span>};
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">task_impl</span>::{<span class="ident">UnsafeNotify</span>, <span class="ident">NotifyHandle</span>};
 </pre>
 </section>
     <section id='search' class="content hidden"></section>

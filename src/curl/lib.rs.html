@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/curl-0.4.6/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/curl-0.4.7/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -165,6 +165,7 @@
 <span id="120">120</span>
 <span id="121">121</span>
 <span id="122">122</span>
+<span id="123">123</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! Rust bindings to the libcurl C library</span>
 <span class="doccomment">//!</span>
@@ -214,11 +215,12 @@
 <span class="doccomment">//! capabilities. Robust programs may wish to inspect `Version::get()` to test</span>
 <span class="doccomment">//! what features are implemented in the linked build of libcurl at runtime.</span>
 
-<span class="attribute">#<span class="op">!</span>[<span class="ident">deny</span>(<span class="ident">missing_docs</span>)]</span>
+<span class="attribute">#<span class="op">!</span>[<span class="ident">deny</span>(<span class="ident">missing_docs</span>, <span class="ident">missing_debug_implementations</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">doc</span>(<span class="ident">html_root_url</span> <span class="op">=</span> <span class="string">&quot;https://docs.rs/curl/0.4&quot;</span>)]</span>
 
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">curl_sys</span>;
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">libc</span>;
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">socket2</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">unix</span>, <span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)))]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">openssl_sys</span>;

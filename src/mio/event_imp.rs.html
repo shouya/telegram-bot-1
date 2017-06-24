@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.7/src/event_imp.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.9/src/event_imp.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>event_imp.rs.html -- source</title>
@@ -1045,6 +1045,7 @@
 <span id="1000">1000</span>
 <span id="1001">1001</span>
 <span id="1002">1002</span>
+<span id="1003">1003</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> {<span class="ident">Poll</span>, <span class="ident">Token</span>};
 <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">fmt</span>, <span class="ident">io</span>, <span class="ident">ops</span>};
@@ -1591,10 +1592,10 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Ready</span>(<span class="ident">usize</span>);
 
-<span class="kw">const</span> <span class="ident">READABLE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">0b0001</span>;
-<span class="kw">const</span> <span class="ident">WRITABLE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">0b0010</span>;
-<span class="kw">const</span> <span class="ident">ERROR</span>: <span class="ident">usize</span>    <span class="op">=</span> <span class="number">0b0100</span>;
-<span class="kw">const</span> <span class="ident">HUP</span>: <span class="ident">usize</span>      <span class="op">=</span> <span class="number">0b1000</span>;
+<span class="kw">const</span> <span class="ident">READABLE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">0b00001</span>;
+<span class="kw">const</span> <span class="ident">WRITABLE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">0b00010</span>;
+<span class="kw">const</span> <span class="ident">ERROR</span>: <span class="ident">usize</span>    <span class="op">=</span> <span class="number">0b00100</span>;
+<span class="kw">const</span> <span class="ident">HUP</span>: <span class="ident">usize</span>      <span class="op">=</span> <span class="number">0b01000</span>;
 
 <span class="kw">impl</span> <span class="ident">Ready</span> {
     <span class="doccomment">/// Returns the empty `Ready` set.</span>
@@ -1908,6 +1909,7 @@
     }
 }
 
+<span class="comment">// TODO: impl Debug for UnixReady</span>
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Ready</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">one</span> <span class="op">=</span> <span class="bool-val">false</span>;

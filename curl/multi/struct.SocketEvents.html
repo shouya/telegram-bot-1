@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>curl</a>::<wbr><a href='index.html'>multi</a></p><script>window.sidebarCurrent = {name: 'SocketEvents', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct SocketEvents</p><div class="block items"><ul><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../index.html'>curl</a>::<wbr><a href='index.html'>multi</a></p><script>window.sidebarCurrent = {name: 'SocketEvents', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,12 +48,12 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/curl/multi.rs.html#73-75' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/curl/multi.rs.html#84-86' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SocketEvents { /* fields omitted */ }</pre><div class='docblock'><p>Notification of events that are requested on a socket.</p>
 
 <p>This type is yielded to the <code>socket_function</code> callback to indicate what
 events are requested on a socket.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../curl/multi/struct.SocketEvents.html" title="struct curl::multi::SocketEvents">SocketEvents</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/curl/multi.rs.html#673-694' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../curl/multi/struct.SocketEvents.html" title="struct curl::multi::SocketEvents">SocketEvents</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/curl/multi.rs.html#758-779' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.input' class="method"><span id='input.v' class='invisible'><code>fn <a href='#method.input' class='fnname'>input</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h4>
 <div class='docblock'><p>Wait for incoming data. For the socket to become readable.</p>
 </div><h4 id='method.output' class="method"><span id='output.v' class='invisible'><code>fn <a href='#method.output' class='fnname'>output</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h4>
@@ -63,8 +63,8 @@ events are requested on a socket.</p>
 or writable.</p>
 </div><h4 id='method.remove' class="method"><span id='remove.v' class='invisible'><code>fn <a href='#method.remove' class='fnname'>remove</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h4>
 <div class='docblock'><p>The specified socket/file descriptor is no longer used by libcurl.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../../curl/multi/struct.SocketEvents.html" title="struct curl::multi::SocketEvents">SocketEvents</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/curl/multi.rs.html#72' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../../curl/multi/struct.SocketEvents.html" title="struct curl::multi::SocketEvents">SocketEvents</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/curl/multi.rs.html#781-789' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
 </div></div></section>
     <section id='search' class="content hidden"></section>

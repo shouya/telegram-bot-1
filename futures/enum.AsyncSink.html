@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='index.html'>futures</a></p><script>window.sidebarCurrent = {name: 'AsyncSink', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Enum AsyncSink</p><div class="block items"><ul><li><a href="#variants">Variants</a></li><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>futures</a></p><script>window.sidebarCurrent = {name: 'AsyncSink', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -53,7 +53,7 @@
     Ready,
     NotReady(T),
 }</pre><div class='docblock'><p>The result of an asynchronous attempt to send a value to a sink.</p>
-</div><h2 class='variants'>Variants</h2>
+</div><h2 id='variants' class='variants'>Variants</h2>
 <span id='variant.Ready' class='variant'><span id='Ready.v' class='invisible'><code>Ready</code></span></span><div class='docblock'><p>The <code>start_send</code> attempt succeeded, so the sending process has
 <em>started</em>; you must use <code>Sink::poll_complete</code> to drive the send
 to completion.</p>

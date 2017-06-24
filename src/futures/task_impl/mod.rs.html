@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.13/src/task_impl/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.14/src/task_impl/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -647,43 +647,85 @@
 <span id="602">602</span>
 <span id="603">603</span>
 <span id="604">604</span>
+<span id="605">605</span>
+<span id="606">606</span>
+<span id="607">607</span>
+<span id="608">608</span>
+<span id="609">609</span>
+<span id="610">610</span>
+<span id="611">611</span>
+<span id="612">612</span>
+<span id="613">613</span>
+<span id="614">614</span>
+<span id="615">615</span>
+<span id="616">616</span>
+<span id="617">617</span>
+<span id="618">618</span>
+<span id="619">619</span>
+<span id="620">620</span>
+<span id="621">621</span>
+<span id="622">622</span>
+<span id="623">623</span>
+<span id="624">624</span>
+<span id="625">625</span>
+<span id="626">626</span>
+<span id="627">627</span>
+<span id="628">628</span>
+<span id="629">629</span>
+<span id="630">630</span>
+<span id="631">631</span>
+<span id="632">632</span>
+<span id="633">633</span>
+<span id="634">634</span>
+<span id="635">635</span>
+<span id="636">636</span>
+<span id="637">637</span>
+<span id="638">638</span>
+<span id="639">639</span>
+<span id="640">640</span>
+<span id="641">641</span>
+<span id="642">642</span>
+<span id="643">643</span>
+<span id="644">644</span>
+<span id="645">645</span>
+<span id="646">646</span>
+<span id="647">647</span>
+<span id="648">648</span>
+<span id="649">649</span>
 </pre><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">prelude</span>::<span class="ident">v1</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">fmt</span>;
+<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span>;
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::<span class="ident">Cell</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">mem</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">Arc</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::{<span class="ident">Ordering</span>, <span class="ident">AtomicBool</span>, <span class="ident">AtomicUsize</span>, <span class="ident">ATOMIC_USIZE_INIT</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">thread</span>;
+<span class="kw">use</span> {<span class="ident">Poll</span>, <span class="ident">Future</span>, <span class="ident">Stream</span>, <span class="ident">Sink</span>, <span class="ident">StartSend</span>};
 
-<span class="kw">use</span> {<span class="ident">Poll</span>, <span class="ident">Future</span>, <span class="ident">Async</span>, <span class="ident">Stream</span>, <span class="ident">Sink</span>, <span class="ident">StartSend</span>, <span class="ident">AsyncSink</span>};
-<span class="kw">use</span> <span class="ident">future</span>::<span class="ident">BoxFuture</span>;
+<span class="kw">mod</span> <span class="ident">atomic_task</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">atomic_task</span>::<span class="ident">AtomicTask</span>;
 
-<span class="kw">mod</span> <span class="ident">unpark_mutex</span>;
-<span class="kw">use</span> <span class="self">self</span>::<span class="ident">unpark_mutex</span>::<span class="ident">UnparkMutex</span>;
+<span class="kw">mod</span> <span class="ident">core</span>;
 
-<span class="kw">mod</span> <span class="ident">task_rc</span>;
-<span class="kw">mod</span> <span class="ident">data</span>;
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">task_rc</span>::<span class="ident">TaskRc</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">data</span>::<span class="ident">LocalKey</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_std&quot;</span>)]</span>
+<span class="kw">mod</span> <span class="ident">std</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_std&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">std</span>::<span class="kw-2">*</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_std&quot;</span>))]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">core</span>::<span class="kw-2">*</span>;
 
-<span class="kw">struct</span> <span class="ident">BorrowedTask</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BorrowedTask</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="ident">id</span>: <span class="ident">usize</span>,
-    <span class="ident">unpark</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Unpark</span><span class="op">&gt;</span>,
-    <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">data</span>::<span class="ident">LocalMap</span>,
-    <span class="ident">events</span>: <span class="ident">Events</span>,
+    <span class="ident">unpark</span>: <span class="ident">BorrowedUnpark</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
+    <span class="ident">events</span>: <span class="ident">BorrowedEvents</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
+    <span class="comment">// Task-local storage</span>
+    <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">LocalMap</span>,
 }
 
-<span class="macro">thread_local</span><span class="macro">!</span>(<span class="kw">static</span> <span class="ident">CURRENT_TASK</span>: <span class="ident">Cell</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw">const</span> <span class="ident">BorrowedTask</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;&gt;</span> <span class="op">=</span> {
-    <span class="ident">Cell</span>::<span class="ident">new</span>(<span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _)
-});
-
 <span class="kw">fn</span> <span class="ident">fresh_task_id</span>() <span class="op">-&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::{<span class="ident">AtomicUsize</span>, <span class="ident">Ordering</span>, <span class="ident">ATOMIC_USIZE_INIT</span>};
+
     <span class="comment">// TODO: this assert is a real bummer, need to figure out how to reuse</span>
     <span class="comment">//       old IDs that are no longer in use.</span>
+    <span class="comment">//</span>
+    <span class="comment">// Note, though, that it is intended that these ids go away entirely</span>
+    <span class="comment">// eventually, see the comment on `is_current` below.</span>
     <span class="kw">static</span> <span class="ident">NEXT_ID</span>: <span class="ident">AtomicUsize</span> <span class="op">=</span> <span class="ident">ATOMIC_USIZE_INIT</span>;
     <span class="kw">let</span> <span class="ident">id</span> <span class="op">=</span> <span class="ident">NEXT_ID</span>.<span class="ident">fetch_add</span>(<span class="number">1</span>, <span class="ident">Ordering</span>::<span class="ident">Relaxed</span>);
     <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">id</span> <span class="op">&lt;</span> <span class="ident">usize</span>::<span class="ident">max_value</span>() <span class="op">/</span> <span class="number">2</span>,
@@ -691,32 +733,11 @@
     <span class="ident">id</span>
 }
 
-<span class="kw">fn</span> <span class="ident">set</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">F</span>, <span class="ident">R</span><span class="op">&gt;</span>(<span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">BorrowedTask</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">R</span>
-    <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnOnce</span>() <span class="op">-&gt;</span> <span class="ident">R</span>
-{
-    <span class="kw">struct</span> <span class="ident">Reset</span>(<span class="kw-2">*</span><span class="kw">const</span> <span class="ident">BorrowedTask</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span>);
-    <span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">Reset</span> {
-        <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
-            <span class="ident">CURRENT_TASK</span>.<span class="ident">with</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">set</span>(<span class="self">self</span>.<span class="number">0</span>));
-        }
-    }
-
-    <span class="ident">CURRENT_TASK</span>.<span class="ident">with</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">c</span><span class="op">|</span> {
-        <span class="kw">let</span> <span class="ident">_reset</span> <span class="op">=</span> <span class="ident">Reset</span>(<span class="ident">c</span>.<span class="ident">get</span>());
-        <span class="kw">let</span> <span class="ident">task</span> <span class="op">=</span> <span class="kw">unsafe</span> {
-            <span class="ident">mem</span>::<span class="ident">transmute</span>::<span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">BorrowedTask</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-                             <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">BorrowedTask</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;&gt;</span>(<span class="ident">task</span>)
-        };
-        <span class="ident">c</span>.<span class="ident">set</span>(<span class="ident">task</span>);
-        <span class="ident">f</span>()
-    })
-}
-
 <span class="kw">fn</span> <span class="ident">with</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="kw-2">&amp;</span><span class="ident">BorrowedTask</span>) <span class="op">-&gt;</span> <span class="ident">R</span>, <span class="ident">R</span><span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">R</span> {
-    <span class="kw">let</span> <span class="ident">task</span> <span class="op">=</span> <span class="ident">CURRENT_TASK</span>.<span class="ident">with</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">get</span>());
-    <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">task</span>.<span class="ident">is_null</span>(), <span class="string">&quot;no Task is currently running&quot;</span>);
     <span class="kw">unsafe</span> {
-        <span class="ident">f</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">task</span>)
+        <span class="kw">let</span> <span class="ident">task</span> <span class="op">=</span> <span class="ident">get_ptr</span>();
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">task</span>.<span class="ident">is_null</span>(), <span class="string">&quot;no Task is currently running&quot;</span>);
+        <span class="ident">f</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="ident">task</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">BorrowedTask</span>))
     }
 }
 
@@ -727,12 +748,12 @@
 <span class="doccomment">/// spawned as tasks onto an *executor*. The executor is responsible for polling</span>
 <span class="doccomment">/// the future as notifications arrive, until the future terminates.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// This is obtained by the `task::park` function.</span>
+<span class="doccomment">/// This is obtained by the `task::current` function.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Task</span> {
     <span class="ident">id</span>: <span class="ident">usize</span>,
-    <span class="ident">unpark</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Unpark</span><span class="op">&gt;</span>,
-    <span class="ident">events</span>: <span class="ident">Events</span>,
+    <span class="ident">unpark</span>: <span class="ident">TaskUnpark</span>,
+    <span class="ident">events</span>: <span class="ident">UnparkEvents</span>,
 }
 
 <span class="kw">fn</span> <span class="ident">_assert_kinds</span>() {
@@ -740,11 +761,7 @@
     <span class="ident">_assert_send</span>::<span class="op">&lt;</span><span class="ident">Task</span><span class="op">&gt;</span>();
 }
 
-<span class="doccomment">/// Returns a handle to the current task to call `unpark` at a later date.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This function is similar to the standard library&#39;s `thread::park` function</span>
-<span class="doccomment">/// except that it won&#39;t block the current thread but rather the current future</span>
-<span class="doccomment">/// that is being executed.</span>
+<span class="doccomment">/// Returns a handle to the current task to call `notify` at a later date.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// The returned handle implements the `Send` and `&#39;static` bounds and may also</span>
 <span class="doccomment">/// be cheaply cloned. This is useful for squirreling away the handle into a</span>
@@ -752,170 +769,131 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// Implementations of the `Future` trait typically use this function if they</span>
 <span class="doccomment">/// would otherwise perform a blocking operation. When something isn&#39;t ready</span>
-<span class="doccomment">/// yet, this `park` function is called to acquire a handle to the current</span>
-<span class="doccomment">/// task, and then the future arranges it such that when the block operation</span>
-<span class="doccomment">/// otherwise finishes (perhaps in the background) it will `unpark` the returned</span>
-<span class="doccomment">/// handle.</span>
+<span class="doccomment">/// yet, this `current` function is called to acquire a handle to the current</span>
+<span class="doccomment">/// task, and then the future arranges it such that when the blocking operation</span>
+<span class="doccomment">/// otherwise finishes (perhaps in the background) it will `notify` the</span>
+<span class="doccomment">/// returned handle.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// It&#39;s sometimes necessary to pass extra information to the task when</span>
-<span class="doccomment">/// unparking it, so that the task knows something about *why* it was woken. See</span>
-<span class="doccomment">/// the `with_unpark_event` for details on how to do this.</span>
+<span class="doccomment">/// unparking it, so that the task knows something about *why* it was woken.</span>
+<span class="doccomment">/// See the `FutureQueue` documentation for details on how to do this.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Panics</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function will panic if a task is not currently being executed. That</span>
 <span class="doccomment">/// is, this method can be dangerous to call outside of an implementation of</span>
 <span class="doccomment">/// `poll`.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">park</span>() <span class="op">-&gt;</span> <span class="ident">Task</span> {
-    <span class="ident">with</span>(<span class="op">|</span><span class="ident">task</span><span class="op">|</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">current</span>() <span class="op">-&gt;</span> <span class="ident">Task</span> {
+    <span class="ident">with</span>(<span class="op">|</span><span class="ident">borrowed</span><span class="op">|</span> {
+        <span class="kw">let</span> <span class="ident">unpark</span> <span class="op">=</span> <span class="ident">borrowed</span>.<span class="ident">unpark</span>.<span class="ident">to_owned</span>();
+        <span class="kw">let</span> <span class="ident">events</span> <span class="op">=</span> <span class="ident">borrowed</span>.<span class="ident">events</span>.<span class="ident">to_owned</span>();
+
         <span class="ident">Task</span> {
-            <span class="ident">id</span>: <span class="ident">task</span>.<span class="ident">id</span>,
-            <span class="ident">events</span>: <span class="ident">task</span>.<span class="ident">events</span>.<span class="ident">clone</span>(),
-            <span class="ident">unpark</span>: <span class="ident">task</span>.<span class="ident">unpark</span>.<span class="ident">clone</span>(),
+            <span class="ident">id</span>: <span class="ident">borrowed</span>.<span class="ident">id</span>,
+            <span class="ident">unpark</span>: <span class="ident">unpark</span>,
+            <span class="ident">events</span>: <span class="ident">events</span>,
         }
     })
+}
+
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
+<span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;renamed to `current`&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">park</span>() <span class="op">-&gt;</span> <span class="ident">Task</span> {
+    <span class="ident">current</span>()
 }
 
 <span class="kw">impl</span> <span class="ident">Task</span> {
     <span class="doccomment">/// Indicate that the task should attempt to poll its future in a timely</span>
     <span class="doccomment">/// fashion.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// It&#39;s typically guaranteed that, for each call to `unpark`, `poll` will</span>
-    <span class="doccomment">/// be called at least once subsequently (unless the task has terminated).</span>
-    <span class="doccomment">/// If the task is currently polling its future when `unpark` is called, it</span>
+    <span class="doccomment">/// It&#39;s typically guaranteed that, for each call to `notify`, `poll` will</span>
+    <span class="doccomment">/// be called at least once subsequently (unless the future has terminated).</span>
+    <span class="doccomment">/// If the task is currently polling its future when `notify` is called, it</span>
     <span class="doccomment">/// must poll the future *again* afterwards, ensuring that all relevant</span>
     <span class="doccomment">/// events are eventually observed by the future.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unpark</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">events</span>.<span class="ident">trigger</span>();
-        <span class="self">self</span>.<span class="ident">unpark</span>.<span class="ident">unpark</span>();
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">notify</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+        <span class="self">self</span>.<span class="ident">events</span>.<span class="ident">notify</span>();
+        <span class="self">self</span>.<span class="ident">unpark</span>.<span class="ident">notify</span>();
     }
 
-    <span class="doccomment">/// Returns `true` when called from within the context of the task. In</span>
-    <span class="doccomment">/// other words, the task is currently running on the thread calling the</span>
-    <span class="doccomment">/// function.</span>
+    <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
+    <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;renamed to `notify`&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unpark</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+        <span class="self">self</span>.<span class="ident">notify</span>()
+    }
+
+    <span class="doccomment">/// Returns `true` when called from within the context of the task.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// In other words, the task is currently running on the thread calling the</span>
+    <span class="doccomment">/// function. Note that this is currently, and has historically, been</span>
+    <span class="doccomment">/// implemented by tracking an `id` on every instance of `Spawn` created.</span>
+    <span class="doccomment">/// When a `Spawn` is being polled it stores in thread-local-storage the id</span>
+    <span class="doccomment">/// of the instance, and then `task::current` will return a `Task` that also</span>
+    <span class="doccomment">/// stores this id.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The intention of this function was to answer questions like &quot;if I</span>
+    <span class="doccomment">/// `notify` this task, is it equivalent to `task::current().notify()`?&quot;</span>
+    <span class="doccomment">/// The answer &quot;yes&quot; may be able to avoid some extra work to block the</span>
+    <span class="doccomment">/// current task, such as sending a task along a channel or updating a</span>
+    <span class="doccomment">/// stored `Task` somewhere. An answer of &quot;no&quot; typically results in doing</span>
+    <span class="doccomment">/// the work anyway.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Unfortunately this function has been somewhat buggy in the past and is</span>
+    <span class="doccomment">/// not intended to be supported in the future. By simply matching `id` the</span>
+    <span class="doccomment">/// intended question above isn&#39;t accurately taking into account, for</span>
+    <span class="doccomment">/// example, unpark events (now deprecated, but still a feature). Thus many</span>
+    <span class="doccomment">/// old users of this API weren&#39;t fully accounting for the question it was</span>
+    <span class="doccomment">/// intended they were asking.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This API continues to be implemented but will in the future, e.g. in the</span>
+    <span class="doccomment">/// 0.1.x series of this crate, eventually return `false` unconditionally.</span>
+    <span class="doccomment">/// It is intended that this function will be removed in the next breaking</span>
+    <span class="doccomment">/// change of this crate. If you&#39;d like to continue to be able to answer the</span>
+    <span class="doccomment">/// example question above, it&#39;s recommended you use the</span>
+    <span class="doccomment">/// `will_notify_current` method.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// If you&#39;ve got questions about this though please let us know! We&#39;d like</span>
+    <span class="doccomment">/// to learn about other use cases here that we did not consider.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Panics</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This function will panic if no current future is being polled.</span>
+    <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;intended to be removed, see docs for details&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_current</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="ident">with</span>(<span class="op">|</span><span class="ident">current</span><span class="op">|</span> <span class="ident">current</span>.<span class="ident">id</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">id</span>)
+    }
+
+    <span class="doccomment">/// This function is intended as a performance optimization for structures</span>
+    <span class="doccomment">/// which store a `Task` internally.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The purpose of this function is to answer the question &quot;if I `notify`</span>
+    <span class="doccomment">/// this task is it equivalent to `task::current().notify()`&quot;. An answer</span>
+    <span class="doccomment">/// &quot;yes&quot; may mean that you don&#39;t actually need to call `task::current()`</span>
+    <span class="doccomment">/// and store it, but rather you can simply leave a stored task in place. An</span>
+    <span class="doccomment">/// answer of &quot;no&quot; typically means that you need to call `task::current()`</span>
+    <span class="doccomment">/// and store it somewhere.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// As this is purely a peformance optimization a valid implementation for</span>
+    <span class="doccomment">/// this function is to always return `false`. A best effort is done to</span>
+    <span class="doccomment">/// return `true` where possible, but false negatives may happen. Note that</span>
+    <span class="doccomment">/// this function will not return a false positive, however.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Panics</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This function will panic if no current future is being polled.</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">will_notify_current</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="ident">with</span>(<span class="op">|</span><span class="ident">current</span><span class="op">|</span> {
+            <span class="self">self</span>.<span class="ident">unpark</span>.<span class="ident">will_notify</span>(<span class="kw-2">&amp;</span><span class="ident">current</span>.<span class="ident">unpark</span>) <span class="op">&amp;&amp;</span>
+                <span class="self">self</span>.<span class="ident">events</span>.<span class="ident">will_notify</span>(<span class="kw-2">&amp;</span><span class="ident">current</span>.<span class="ident">events</span>)
+        })
     }
 }
 
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Task</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;Task&quot;</span>)
-         .<span class="ident">field</span>(<span class="string">&quot;id&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">id</span>)
          .<span class="ident">finish</span>()
-    }
-}
-
-<span class="doccomment">/// For the duration of the given callback, add an &quot;unpark event&quot; to be</span>
-<span class="doccomment">/// triggered when the task handle is used to unpark the task.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Unpark events are used to pass information about what event caused a task to</span>
-<span class="doccomment">/// be unparked. In some cases, tasks are waiting on a large number of possible</span>
-<span class="doccomment">/// events, and need precise information about the wakeup to avoid extraneous</span>
-<span class="doccomment">/// polling.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Every `Task` handle comes with a set of unpark events which will fire when</span>
-<span class="doccomment">/// `unpark` is called. When fired, these events insert an identifer into a</span>
-<span class="doccomment">/// concurrent set, which the task can read from to determine what events</span>
-<span class="doccomment">/// occurred.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This function immediately invokes the closure, `f`, but arranges things so</span>
-<span class="doccomment">/// that `task::park` will produce a `Task` handle that includes the given</span>
-<span class="doccomment">/// unpark event.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Panics</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This function will panic if a task is not currently being executed. That</span>
-<span class="doccomment">/// is, this method can be dangerous to call outside of an implementation of</span>
-<span class="doccomment">/// `poll`.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_unpark_event</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">R</span><span class="op">&gt;</span>(<span class="ident">event</span>: <span class="ident">UnparkEvent</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">R</span>
-    <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnOnce</span>() <span class="op">-&gt;</span> <span class="ident">R</span>
-{
-    <span class="ident">with</span>(<span class="op">|</span><span class="ident">task</span><span class="op">|</span> {
-        <span class="kw">let</span> <span class="ident">new_task</span> <span class="op">=</span> <span class="ident">BorrowedTask</span> {
-            <span class="ident">id</span>: <span class="ident">task</span>.<span class="ident">id</span>,
-            <span class="ident">unpark</span>: <span class="ident">task</span>.<span class="ident">unpark</span>,
-            <span class="ident">events</span>: <span class="ident">task</span>.<span class="ident">events</span>.<span class="ident">with_event</span>(<span class="ident">event</span>),
-            <span class="ident">map</span>: <span class="ident">task</span>.<span class="ident">map</span>,
-        };
-        <span class="ident">set</span>(<span class="kw-2">&amp;</span><span class="ident">new_task</span>, <span class="ident">f</span>)
-    })
-}
-
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="doccomment">/// A set insertion to trigger upon `unpark`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Unpark events are used to communicate information about *why* an unpark</span>
-<span class="doccomment">/// occured, in particular populating sets with event identifiers so that the</span>
-<span class="doccomment">/// unparked task can avoid extraneous polling. See `with_unpark_event` for</span>
-<span class="doccomment">/// more.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">UnparkEvent</span> {
-    <span class="ident">set</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">EventSet</span><span class="op">&gt;</span>,
-    <span class="ident">item</span>: <span class="ident">usize</span>,
-}
-
-<span class="kw">impl</span> <span class="ident">UnparkEvent</span> {
-    <span class="doccomment">/// Construct an unpark event that will insert `id` into `set` when</span>
-    <span class="doccomment">/// triggered.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">set</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">EventSet</span><span class="op">&gt;</span>, <span class="ident">id</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">UnparkEvent</span> {
-        <span class="ident">UnparkEvent</span> {
-            <span class="ident">set</span>: <span class="ident">set</span>,
-            <span class="ident">item</span>: <span class="ident">id</span>,
-        }
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">UnparkEvent</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;UnparkEvent&quot;</span>)
-         .<span class="ident">field</span>(<span class="string">&quot;set&quot;</span>, <span class="kw-2">&amp;</span><span class="string">&quot;...&quot;</span>)
-         .<span class="ident">field</span>(<span class="string">&quot;item&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">item</span>)
-         .<span class="ident">finish</span>()
-    }
-}
-
-<span class="doccomment">/// A concurrent set which allows for the insertion of `usize` values.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// `EventSet`s are used to communicate precise information about the event(s)</span>
-<span class="doccomment">/// that trigged a task notification. See `task::with_unpark_event` for details.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">EventSet</span>: <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span> {
-    <span class="doccomment">/// Insert the given ID into the set</span>
-    <span class="kw">fn</span> <span class="ident">insert</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">usize</span>);
-}
-
-<span class="comment">// A collection of UnparkEvents to trigger on `unpark`</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">enum</span> <span class="ident">Events</span> {
-    <span class="ident">Zero</span>,
-    <span class="ident">One</span>(<span class="ident">UnparkEvent</span>),
-    <span class="ident">Lots</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">UnparkEvent</span><span class="op">&gt;</span>),
-}
-
-<span class="kw">impl</span> <span class="ident">Events</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="ident">Events</span> {
-        <span class="ident">Events</span>::<span class="ident">Zero</span>
-    }
-
-    <span class="kw">fn</span> <span class="ident">trigger</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">Events</span>::<span class="ident">Zero</span> <span class="op">=&gt;</span> {}
-            <span class="ident">Events</span>::<span class="ident">One</span>(<span class="kw-2">ref</span> <span class="ident">event</span>) <span class="op">=&gt;</span> <span class="ident">event</span>.<span class="ident">set</span>.<span class="ident">insert</span>(<span class="ident">event</span>.<span class="ident">item</span>),
-            <span class="ident">Events</span>::<span class="ident">Lots</span>(<span class="kw-2">ref</span> <span class="ident">list</span>) <span class="op">=&gt;</span> {
-                <span class="kw">for</span> <span class="ident">event</span> <span class="kw">in</span> <span class="ident">list</span> {
-                    <span class="ident">event</span>.<span class="ident">set</span>.<span class="ident">insert</span>(<span class="ident">event</span>.<span class="ident">item</span>);
-                }
-            }
-        }
-    }
-
-    <span class="kw">fn</span> <span class="ident">with_event</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">event</span>: <span class="ident">UnparkEvent</span>) <span class="op">-&gt;</span> <span class="ident">Events</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">list</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">Events</span>::<span class="ident">Zero</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="ident">Events</span>::<span class="ident">One</span>(<span class="ident">event</span>),
-            <span class="ident">Events</span>::<span class="ident">One</span>(<span class="kw-2">ref</span> <span class="ident">event</span>) <span class="op">=&gt;</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="ident">event</span>.<span class="ident">clone</span>()],
-            <span class="ident">Events</span>::<span class="ident">Lots</span>(<span class="kw-2">ref</span> <span class="ident">list</span>) <span class="op">=&gt;</span> <span class="ident">list</span>.<span class="ident">clone</span>(),
-        };
-        <span class="ident">list</span>.<span class="ident">push</span>(<span class="ident">event</span>);
-        <span class="ident">Events</span>::<span class="ident">Lots</span>(<span class="ident">list</span>)
     }
 }
 
@@ -930,9 +908,9 @@
 <span class="doccomment">/// with either futures or streams, with different methods being available on</span>
 <span class="doccomment">/// `Spawn` depending which is used.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Spawn</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">obj</span>: <span class="ident">T</span>,
     <span class="ident">id</span>: <span class="ident">usize</span>,
-    <span class="ident">data</span>: <span class="ident">data</span>::<span class="ident">LocalMap</span>,
+    <span class="ident">obj</span>: <span class="ident">T</span>,
+    <span class="ident">data</span>: <span class="ident">LocalMap</span>,
 }
 
 <span class="doccomment">/// Spawns a new future, returning the fused future and task.</span>
@@ -946,9 +924,9 @@
 <span class="doccomment">/// until the methods on `Spawn` are called in turn.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">obj</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">Spawn</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="ident">Spawn</span> {
-        <span class="ident">obj</span>: <span class="ident">obj</span>,
         <span class="ident">id</span>: <span class="ident">fresh_task_id</span>(),
-        <span class="ident">data</span>: <span class="ident">data</span>::<span class="ident">local_map</span>(),
+        <span class="ident">obj</span>: <span class="ident">obj</span>,
+        <span class="ident">data</span>: <span class="ident">local_map</span>(),
     }
 }
 
@@ -971,167 +949,102 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Future</span><span class="op">&gt;</span> <span class="ident">Spawn</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Polls the internal future, scheduling notifications to be sent to the</span>
-    <span class="doccomment">/// `unpark` argument.</span>
+    <span class="doccomment">/// `notify` argument.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This method will poll the internal future, testing if it&#39;s completed</span>
-    <span class="doccomment">/// yet. The `unpark` argument is used as a sink for notifications sent to</span>
+    <span class="doccomment">/// yet. The `notify` argument is used as a sink for notifications sent to</span>
     <span class="doccomment">/// this future. That is, while the future is being polled, any call to</span>
-    <span class="doccomment">/// `task::park()` will return a handle that contains the `unpark`</span>
+    <span class="doccomment">/// `task::current()` will return a handle that contains the `notify`</span>
     <span class="doccomment">/// specified.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If this function returns `NotReady`, then the `unpark` should have been</span>
+    <span class="doccomment">/// If this function returns `NotReady`, then the `notify` should have been</span>
     <span class="doccomment">/// scheduled to receive a notification when poll can be called again.</span>
     <span class="doccomment">/// Otherwise if `Ready` or `Err` is returned, the `Spawn` task can be</span>
     <span class="doccomment">/// safely destroyed.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">poll_future</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">unpark</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Unpark</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="ident">F</span>::<span class="ident">Item</span>, <span class="ident">F</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">enter</span>(<span class="kw-2">&amp;</span><span class="ident">unpark</span>, <span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">poll</span>())
-    }
-
-    <span class="doccomment">/// Waits for the internal future to complete, blocking this thread&#39;s</span>
-    <span class="doccomment">/// execution until it does.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// This function will call `poll_future` in a loop, waiting for the future</span>
-    <span class="doccomment">/// to complete. When a future cannot make progress it will use</span>
-    <span class="doccomment">/// `thread::park` to block the current thread.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wait_future</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">F</span>::<span class="ident">Item</span>, <span class="ident">F</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">unpark</span> <span class="op">=</span> <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">ThreadUnpark</span>::<span class="ident">new</span>(<span class="ident">thread</span>::<span class="ident">current</span>()));
-        <span class="kw">loop</span> {
-            <span class="kw">match</span> <span class="macro">try</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">poll_future</span>(<span class="ident">unpark</span>.<span class="ident">clone</span>())) {
-                <span class="ident">Async</span>::<span class="ident">NotReady</span> <span class="op">=&gt;</span> <span class="ident">unpark</span>.<span class="ident">park</span>(),
-                <span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">e</span>),
-            }
-        }
-    }
-
-    <span class="doccomment">/// A specialized function to request running a future to completion on the</span>
-    <span class="doccomment">/// specified executor.</span>
+    <span class="doccomment">/// Note that `notify` itself is passed as a shared reference, and is itself</span>
+    <span class="doccomment">/// not required to be a `NotifyHandle`. The `Clone` and `Into` trait bounds</span>
+    <span class="doccomment">/// will be used to convert this `notify` to a `NotifyHandle` if necessary.</span>
+    <span class="doccomment">/// This construction can avoid an unnecessary atomic reference count bump</span>
+    <span class="doccomment">/// in some situations.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// This function only works for futures whose item and error types are `()`</span>
-    <span class="doccomment">/// and also implement the `Send` and `&#39;static` bounds. This will submit</span>
-    <span class="doccomment">/// units of work (instances of `Run`) to the `exec` argument provided</span>
-    <span class="doccomment">/// necessary to drive the future to completion.</span>
+    <span class="doccomment">/// ## Unsafety and `id`</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// When the future would block, it&#39;s arranged that when the future is again</span>
-    <span class="doccomment">/// ready it will submit another unit of work to the `exec` provided. This</span>
-    <span class="doccomment">/// will happen in a loop until the future has completed.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This method is not appropriate for all futures, and other kinds of</span>
-    <span class="doccomment">/// executors typically provide a similar function with perhaps relaxed</span>
-    <span class="doccomment">/// bounds as well.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">execute</span>(<span class="self">self</span>, <span class="ident">exec</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Executor</span><span class="op">&gt;</span>)
-        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">Future</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span>(), <span class="ident">Error</span><span class="op">=</span>()<span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+    <span class="doccomment">/// This function and all other `*_notify` functions on this type will treat</span>
+    <span class="doccomment">/// the `id` specified very carefully, explicitly calling functions like the</span>
+    <span class="doccomment">/// `notify` argument&#39;s `clone_id` and `drop_id` functions. It should be</span>
+    <span class="doccomment">/// safe to encode a pointer itself into the `id` specified, such as an</span>
+    <span class="doccomment">/// `Arc&lt;T&gt;` or a `Box&lt;T&gt;`. The `clone_id` and `drop_id` functions are then</span>
+    <span class="doccomment">/// intended to be sufficient for the memory management related to that</span>
+    <span class="doccomment">/// pointer.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">poll_future_notify</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
+                                 <span class="ident">notify</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>,
+                                 <span class="ident">id</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="ident">F</span>::<span class="ident">Item</span>, <span class="ident">F</span>::<span class="ident">Error</span><span class="op">&gt;</span>
+        <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">NotifyHandle</span><span class="op">&gt;</span>,
     {
-        <span class="ident">exec</span>.<span class="ident">clone</span>().<span class="ident">execute</span>(<span class="ident">Run</span> {
-            <span class="comment">// Ideally this method would be defined directly on</span>
-            <span class="comment">// `Spawn&lt;BoxFuture&lt;(), ()&gt;&gt;` so we wouldn&#39;t have to box here and</span>
-            <span class="comment">// it&#39;d be more explicit, but unfortunately that currently has a</span>
-            <span class="comment">// link error on nightly: rust-lang/rust#36155</span>
-            <span class="ident">spawn</span>: <span class="ident">Spawn</span> {
-                <span class="ident">id</span>: <span class="self">self</span>.<span class="ident">id</span>,
-                <span class="ident">data</span>: <span class="self">self</span>.<span class="ident">data</span>,
-                <span class="ident">obj</span>: <span class="self">self</span>.<span class="ident">obj</span>.<span class="ident">boxed</span>(),
-            },
-            <span class="ident">inner</span>: <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">Inner</span> {
-                <span class="ident">exec</span>: <span class="ident">exec</span>,
-                <span class="ident">mutex</span>: <span class="ident">UnparkMutex</span>::<span class="ident">new</span>()
-            }),
-        })
+        <span class="kw">let</span> <span class="ident">mk</span> <span class="op">=</span> <span class="op">||</span> <span class="ident">notify</span>.<span class="ident">clone</span>().<span class="ident">into</span>();
+        <span class="self">self</span>.<span class="ident">enter</span>(<span class="ident">BorrowedUnpark</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="ident">mk</span>, <span class="ident">id</span>), <span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">poll</span>())
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">Stream</span><span class="op">&gt;</span> <span class="ident">Spawn</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Like `poll_future`, except polls the underlying stream.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">poll_stream</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">unpark</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Unpark</span><span class="op">&gt;</span>)
-                       <span class="op">-&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">S</span>::<span class="ident">Item</span><span class="op">&gt;</span>, <span class="ident">S</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">enter</span>(<span class="kw-2">&amp;</span><span class="ident">unpark</span>, <span class="op">|</span><span class="ident">stream</span><span class="op">|</span> <span class="ident">stream</span>.<span class="ident">poll</span>())
-    }
-
-    <span class="doccomment">/// Like `wait_future`, except only waits for the next element to arrive on</span>
-    <span class="doccomment">/// the underlying stream.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wait_stream</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">S</span>::<span class="ident">Item</span>, <span class="ident">S</span>::<span class="ident">Error</span><span class="op">&gt;&gt;</span> {
-        <span class="kw">let</span> <span class="ident">unpark</span> <span class="op">=</span> <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">ThreadUnpark</span>::<span class="ident">new</span>(<span class="ident">thread</span>::<span class="ident">current</span>()));
-        <span class="kw">loop</span> {
-            <span class="kw">match</span> <span class="self">self</span>.<span class="ident">poll_stream</span>(<span class="ident">unpark</span>.<span class="ident">clone</span>()) {
-                <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>) <span class="op">=&gt;</span> <span class="ident">unpark</span>.<span class="ident">park</span>(),
-                <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">Some</span>(<span class="ident">e</span>))) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="ident">e</span>)),
-                <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">None</span>)) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
-                <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="ident">e</span>)),
-            }
-        }
+    <span class="doccomment">/// Like `poll_future_notify`, except polls the underlying stream.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">poll_stream_notify</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
+                                 <span class="ident">notify</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>,
+                                 <span class="ident">id</span>: <span class="ident">usize</span>)
+                                 <span class="op">-&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">S</span>::<span class="ident">Item</span><span class="op">&gt;</span>, <span class="ident">S</span>::<span class="ident">Error</span><span class="op">&gt;</span>
+        <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">NotifyHandle</span><span class="op">&gt;</span>,
+    {
+        <span class="kw">let</span> <span class="ident">mk</span> <span class="op">=</span> <span class="op">||</span> <span class="ident">notify</span>.<span class="ident">clone</span>().<span class="ident">into</span>();
+        <span class="self">self</span>.<span class="ident">enter</span>(<span class="ident">BorrowedUnpark</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="ident">mk</span>, <span class="ident">id</span>), <span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">poll</span>())
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">Sink</span><span class="op">&gt;</span> <span class="ident">Spawn</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Invokes the underlying `start_send` method with this task in place.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If the underlying operation returns `NotReady` then the `unpark` value</span>
+    <span class="doccomment">/// If the underlying operation returns `NotReady` then the `notify` value</span>
     <span class="doccomment">/// passed in will receive a notification when the operation is ready to be</span>
     <span class="doccomment">/// attempted again.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">start_send</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">S</span>::<span class="ident">SinkItem</span>, <span class="ident">unpark</span>: <span class="kw-2">&amp;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Unpark</span><span class="op">&gt;</span>)
-                       <span class="op">-&gt;</span> <span class="ident">StartSend</span><span class="op">&lt;</span><span class="ident">S</span>::<span class="ident">SinkItem</span>, <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">enter</span>(<span class="ident">unpark</span>, <span class="op">|</span><span class="ident">sink</span><span class="op">|</span> <span class="ident">sink</span>.<span class="ident">start_send</span>(<span class="ident">value</span>))
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">start_send_notify</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
+                                <span class="ident">value</span>: <span class="ident">S</span>::<span class="ident">SinkItem</span>,
+                                <span class="ident">notify</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>,
+                                <span class="ident">id</span>: <span class="ident">usize</span>)
+                               <span class="op">-&gt;</span> <span class="ident">StartSend</span><span class="op">&lt;</span><span class="ident">S</span>::<span class="ident">SinkItem</span>, <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span>
+        <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">NotifyHandle</span><span class="op">&gt;</span>,
+    {
+        <span class="kw">let</span> <span class="ident">mk</span> <span class="op">=</span> <span class="op">||</span> <span class="ident">notify</span>.<span class="ident">clone</span>().<span class="ident">into</span>();
+        <span class="self">self</span>.<span class="ident">enter</span>(<span class="ident">BorrowedUnpark</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="ident">mk</span>, <span class="ident">id</span>), <span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">start_send</span>(<span class="ident">value</span>))
     }
 
     <span class="doccomment">/// Invokes the underlying `poll_complete` method with this task in place.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If the underlying operation returns `NotReady` then the `unpark` value</span>
+    <span class="doccomment">/// If the underlying operation returns `NotReady` then the `notify` value</span>
     <span class="doccomment">/// passed in will receive a notification when the operation is ready to be</span>
     <span class="doccomment">/// attempted again.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">poll_flush</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">unpark</span>: <span class="kw-2">&amp;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Unpark</span><span class="op">&gt;</span>)
-                       <span class="op">-&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">enter</span>(<span class="ident">unpark</span>, <span class="op">|</span><span class="ident">sink</span><span class="op">|</span> <span class="ident">sink</span>.<span class="ident">poll_complete</span>())
-    }
-
-    <span class="doccomment">/// Blocks the current thread until it&#39;s able to send `value` on this sink.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This function will send the `value` on the sink that this task wraps. If</span>
-    <span class="doccomment">/// the sink is not ready to send the value yet then the current thread will</span>
-    <span class="doccomment">/// be blocked until it&#39;s able to send the value.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wait_send</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">value</span>: <span class="ident">S</span>::<span class="ident">SinkItem</span>)
-                     <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">unpark</span> <span class="op">=</span> <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">ThreadUnpark</span>::<span class="ident">new</span>(<span class="ident">thread</span>::<span class="ident">current</span>()));
-        <span class="kw">let</span> <span class="ident">unpark2</span> <span class="op">=</span> <span class="ident">unpark</span>.<span class="ident">clone</span>() <span class="kw">as</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Unpark</span><span class="op">&gt;</span>;
-        <span class="kw">loop</span> {
-            <span class="ident">value</span> <span class="op">=</span> <span class="kw">match</span> <span class="macro">try</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">start_send</span>(<span class="ident">value</span>, <span class="kw-2">&amp;</span><span class="ident">unpark2</span>)) {
-                <span class="ident">AsyncSink</span>::<span class="ident">NotReady</span>(<span class="ident">v</span>) <span class="op">=&gt;</span> <span class="ident">v</span>,
-                <span class="ident">AsyncSink</span>::<span class="ident">Ready</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(()),
-            };
-            <span class="ident">unpark</span>.<span class="ident">park</span>();
-        }
-    }
-
-    <span class="doccomment">/// Blocks the current thread until it&#39;s able to flush this sink.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This function will call the underlying sink&#39;s `poll_complete` method</span>
-    <span class="doccomment">/// until it returns that it&#39;s ready, proxying out errors upwards to the</span>
-    <span class="doccomment">/// caller if one occurs.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The thread will be blocked until `poll_complete` returns that it&#39;s</span>
-    <span class="doccomment">/// ready.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wait_flush</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">unpark</span> <span class="op">=</span> <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">ThreadUnpark</span>::<span class="ident">new</span>(<span class="ident">thread</span>::<span class="ident">current</span>()));
-        <span class="kw">let</span> <span class="ident">unpark2</span> <span class="op">=</span> <span class="ident">unpark</span>.<span class="ident">clone</span>() <span class="kw">as</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Unpark</span><span class="op">&gt;</span>;
-        <span class="kw">loop</span> {
-            <span class="kw">if</span> <span class="macro">try</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">poll_flush</span>(<span class="kw-2">&amp;</span><span class="ident">unpark2</span>)).<span class="ident">is_ready</span>() {
-                <span class="kw">return</span> <span class="prelude-val">Ok</span>(())
-            }
-            <span class="ident">unpark</span>.<span class="ident">park</span>();
-        }
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">poll_flush_notify</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
+                                <span class="ident">notify</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>,
+                                <span class="ident">id</span>: <span class="ident">usize</span>)
+                                <span class="op">-&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span>
+        <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">NotifyHandle</span><span class="op">&gt;</span>,
+    {
+        <span class="kw">let</span> <span class="ident">mk</span> <span class="op">=</span> <span class="op">||</span> <span class="ident">notify</span>.<span class="ident">clone</span>().<span class="ident">into</span>();
+        <span class="self">self</span>.<span class="ident">enter</span>(<span class="ident">BorrowedUnpark</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="ident">mk</span>, <span class="ident">id</span>), <span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">poll_complete</span>())
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Spawn</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">enter</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">unpark</span>: <span class="kw-2">&amp;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Unpark</span><span class="op">&gt;</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">R</span>
+    <span class="kw">fn</span> <span class="ident">enter</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">unpark</span>: <span class="ident">BorrowedUnpark</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">R</span>
         <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">R</span>
     {
-        <span class="kw">let</span> <span class="ident">task</span> <span class="op">=</span> <span class="ident">BorrowedTask</span> {
+        <span class="kw">let</span> <span class="ident">borrowed</span> <span class="op">=</span> <span class="ident">BorrowedTask</span> {
             <span class="ident">id</span>: <span class="self">self</span>.<span class="ident">id</span>,
             <span class="ident">unpark</span>: <span class="ident">unpark</span>,
-            <span class="ident">events</span>: <span class="ident">Events</span>::<span class="ident">new</span>(),
+            <span class="ident">events</span>: <span class="ident">BorrowedEvents</span>::<span class="ident">new</span>(),
             <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>,
         };
         <span class="kw">let</span> <span class="ident">obj</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">obj</span>;
-        <span class="ident">set</span>(<span class="kw-2">&amp;</span><span class="ident">task</span>, <span class="op">||</span> <span class="ident">f</span>(<span class="ident">obj</span>))
+        <span class="ident">set</span>(<span class="kw-2">&amp;</span><span class="ident">borrowed</span>, <span class="op">||</span> <span class="ident">f</span>(<span class="ident">obj</span>))
     }
 }
 
@@ -1139,7 +1052,6 @@
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;Spawn&quot;</span>)
          .<span class="ident">field</span>(<span class="string">&quot;obj&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">obj</span>)
-         .<span class="ident">field</span>(<span class="string">&quot;id&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">id</span>)
          .<span class="ident">finish</span>()
     }
 }
@@ -1147,109 +1059,287 @@
 <span class="doccomment">/// A trait which represents a sink of notifications that a future is ready to</span>
 <span class="doccomment">/// make progress.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// This trait is provided as an argument to the `Spawn::poll_future` and</span>
-<span class="doccomment">/// `Spawn::poll_stream` functions. It&#39;s transitively used as part of the</span>
-<span class="doccomment">/// `Task::unpark` method to internally deliver notifications of readiness of a</span>
-<span class="doccomment">/// future to move forward.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Unpark</span>: <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> {
+<span class="doccomment">/// This trait is provided as an argument to the `Spawn::*_notify` family of</span>
+<span class="doccomment">/// functions. It&#39;s transitively used as part of the `Task::notify` method to</span>
+<span class="doccomment">/// internally deliver notifications of readiness of a future to move forward.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// An instance of `Notify` has one primary method, `notify`, which is given a</span>
+<span class="doccomment">/// contextual argument as to what&#39;s being notified. This contextual argument is</span>
+<span class="doccomment">/// *also* provided to the `Spawn::*_notify` family of functions and can be used</span>
+<span class="doccomment">/// to reuse an instance of `Notify` across many futures.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Instances of `Notify` must be safe to share across threads, and the methods</span>
+<span class="doccomment">/// be invoked concurrently. They must also live for the `&#39;static` lifetime,</span>
+<span class="doccomment">/// not containing any stack references.</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Notify</span>: <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> {
     <span class="doccomment">/// Indicates that an associated future and/or task are ready to make</span>
     <span class="doccomment">/// progress.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Typically this means that the receiver of the notification should</span>
     <span class="doccomment">/// arrange for the future to get poll&#39;d in a prompt fashion.</span>
-    <span class="kw">fn</span> <span class="ident">unpark</span>(<span class="kw-2">&amp;</span><span class="self">self</span>);
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This method takes an `id` as an argument which was transitively passed</span>
+    <span class="doccomment">/// in from the original call to `Spawn::*_notify`. This id can be used to</span>
+    <span class="doccomment">/// disambiguate which precise future became ready for polling.</span>
+    <span class="kw">fn</span> <span class="ident">notify</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">usize</span>);
+
+    <span class="doccomment">/// This function is called whenever a new copy of `id` is needed.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This is called in one of two situations:</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// * A `Task` is being created through `task::current` while a future is</span>
+    <span class="doccomment">///   being polled. In that case the instance of `Notify` passed in to one</span>
+    <span class="doccomment">///   of the `poll_*` functions is called with the `id` passed into the same</span>
+    <span class="doccomment">///   `poll_*` function.</span>
+    <span class="doccomment">/// * A `Task` is itself being cloned. Each `Task` contains its own id and a</span>
+    <span class="doccomment">///   handle to the `Notify` behind it, and the task&#39;s `Notify` is used to</span>
+    <span class="doccomment">///   clone the internal `id` to assign to the new task.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The `id` returned here will be stored in the `Task`-to-be and used later</span>
+    <span class="doccomment">/// to pass to `notify` when the `Task::notify` function is called on that</span>
+    <span class="doccomment">/// `Task`.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Note that typically this is just the identity function, passing through</span>
+    <span class="doccomment">/// the identifier. For more unsafe situations, however, if `id` is itself a</span>
+    <span class="doccomment">/// pointer of some kind this can be used as a hook to &quot;clone&quot; the pointer,</span>
+    <span class="doccomment">/// depending on what that means for the specified pointer.</span>
+    <span class="kw">fn</span> <span class="ident">clone_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
+        <span class="ident">id</span>
+    }
+
+    <span class="doccomment">/// All instances of `Task` store an `id` that they&#39;re going to internally</span>
+    <span class="doccomment">/// notify with, and this function is called when the `Task` is dropped.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This function provides a hook for schemes which encode pointers in this</span>
+    <span class="doccomment">/// `id` argument to deallocate resources associated with the pointer. It&#39;s</span>
+    <span class="doccomment">/// guaranteed that after this function is called the `Task` containing this</span>
+    <span class="doccomment">/// `id` will no longer use the `id`.</span>
+    <span class="kw">fn</span> <span class="ident">drop_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">usize</span>) {
+        <span class="ident">drop</span>(<span class="ident">id</span>);
+    }
 }
 
-<span class="doccomment">/// A trait representing requests to poll futures.</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_notify</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span>, <span class="ident">R</span><span class="op">&gt;</span>(<span class="ident">notify</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">id</span>: <span class="ident">usize</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">R</span>
+    <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnOnce</span>() <span class="op">-&gt;</span> <span class="ident">R</span>,
+          <span class="ident">T</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">NotifyHandle</span><span class="op">&gt;</span>,
+{
+    <span class="ident">with</span>(<span class="op">|</span><span class="ident">task</span><span class="op">|</span> {
+        <span class="kw">let</span> <span class="ident">mk</span> <span class="op">=</span> <span class="op">||</span> <span class="ident">notify</span>.<span class="ident">clone</span>().<span class="ident">into</span>();
+        <span class="kw">let</span> <span class="ident">new_task</span> <span class="op">=</span> <span class="ident">BorrowedTask</span> {
+            <span class="ident">id</span>: <span class="ident">task</span>.<span class="ident">id</span>,
+            <span class="ident">unpark</span>: <span class="ident">BorrowedUnpark</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="ident">mk</span>, <span class="ident">id</span>),
+            <span class="ident">events</span>: <span class="ident">task</span>.<span class="ident">events</span>,
+            <span class="ident">map</span>: <span class="ident">task</span>.<span class="ident">map</span>,
+        };
+
+        <span class="ident">set</span>(<span class="kw-2">&amp;</span><span class="ident">new_task</span>, <span class="ident">f</span>)
+    })
+}
+
+<span class="doccomment">/// An unsafe trait for implementing custom forms of memory management behind a</span>
+<span class="doccomment">/// `Task`.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// This trait is an argument to the `Spawn::execute` which is used to run a</span>
-<span class="doccomment">/// future to completion. An executor will receive requests to run a future and</span>
-<span class="doccomment">/// an executor is responsible for ensuring that happens in a timely fashion.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Executor</span>: <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span> {
-    <span class="doccomment">/// Requests that `Run` is executed soon on the given executor.</span>
-    <span class="kw">fn</span> <span class="ident">execute</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">r</span>: <span class="ident">Run</span>);
+<span class="doccomment">/// The `futures` critically relies on &quot;notification handles&quot; to extract for</span>
+<span class="doccomment">/// futures to contain and then later inform that they&#39;re ready to make</span>
+<span class="doccomment">/// progress. These handles, however, must be cheap to create and cheap</span>
+<span class="doccomment">/// to clone to ensure that this operation is efficient throughout the</span>
+<span class="doccomment">/// execution of a program.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Typically this sort of memory management is done in the standard library</span>
+<span class="doccomment">/// with the `Arc` type. An `Arc` is relatively cheap to allocate an is</span>
+<span class="doccomment">/// quite cheap to clone and pass around. Plus, it&#39;s 100% safe!</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// When working outside the standard library, however, you don&#39;t always have</span>
+<span class="doccomment">/// and `Arc` type available to you. This trait, `UnsafeNotify`, is intended</span>
+<span class="doccomment">/// to be the &quot;unsafe version&quot; of the `Notify` trait. This trait encodes the</span>
+<span class="doccomment">/// memory management operations of a `Task`&#39;s notification handle, allowing</span>
+<span class="doccomment">/// custom implementations for the memory management of a notification handle.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Put another way, the core notification type in this library,</span>
+<span class="doccomment">/// `NotifyHandle`, simply internally contains an instance of</span>
+<span class="doccomment">/// `*mut UnsafeNotify`. This &quot;unsafe trait object&quot; is then used exclusively</span>
+<span class="doccomment">/// to operate with, dynamically dispatching calls to clone, drop, and notify.</span>
+<span class="doccomment">/// Critically though as a raw pointer it doesn&#39;t require a particular form</span>
+<span class="doccomment">/// of memory management, allowing external implementations.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// A default implementation of the `UnsafeNotify` trait is provided for the</span>
+<span class="doccomment">/// `Arc` type in the standard library. If the `use_std` feature of this crate</span>
+<span class="doccomment">/// is not available however, you&#39;ll be required to implement your own</span>
+<span class="doccomment">/// instance of this trait to pass it into `NotifyHandle::new`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # Unsafety</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// This trait is manually encoding the memory management of the underlying</span>
+<span class="doccomment">/// handle, and as a result is quite unsafe to implement! Implementors of</span>
+<span class="doccomment">/// this trait must guarantee:</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// * Calls to `clone_raw` produce uniquely owned handles. It should be safe</span>
+<span class="doccomment">///   to drop the current handle and have the returned handle still be valid.</span>
+<span class="doccomment">/// * Calls to `drop_raw` work with `self` as a raw pointer, deallocating</span>
+<span class="doccomment">///   resources associated with it. This is a pretty unsafe operation as it&#39;s</span>
+<span class="doccomment">///   invalidating the `self` pointer, so extreme care needs to be taken.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// In general it&#39;s recommended to review the trait documentation as well as</span>
+<span class="doccomment">/// the implementation for `Arc` in this crate. When in doubt ping the</span>
+<span class="doccomment">/// `futures` authors to clarify an unsafety question here.</span>
+<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">trait</span> <span class="ident">UnsafeNotify</span>: <span class="ident">Notify</span> {
+    <span class="doccomment">/// Creates a new `NotifyHandle` from this instance of `UnsafeNotify`.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This function will create a new uniquely owned handle that under the</span>
+    <span class="doccomment">/// hood references the same notification instance. In other words calls</span>
+    <span class="doccomment">/// to `notify` on the returned handle should be equivalent to calls to</span>
+    <span class="doccomment">/// `notify` on this handle.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Unsafety</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This trait is unsafe to implement, as are all these methods. This</span>
+    <span class="doccomment">/// method is also unsafe to call as it&#39;s asserting the `UnsafeNotify`</span>
+    <span class="doccomment">/// value is in a consistent state. In general it&#39;s recommended to</span>
+    <span class="doccomment">/// review the trait documentation as well as the implementation for `Arc`</span>
+    <span class="doccomment">/// in this crate. When in doubt ping the `futures` authors to clarify</span>
+    <span class="doccomment">/// an unsafety question here.</span>
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">clone_raw</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">NotifyHandle</span>;
+
+    <span class="doccomment">/// Drops this instance of `UnsafeNotify`, deallocating resources</span>
+    <span class="doccomment">/// associated with it.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This method is intended to have a signature such as:</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```ignore</span>
+    <span class="doccomment">/// fn drop_raw(self: *mut Self);</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Unfortunately in Rust today that signature is not object safe.</span>
+    <span class="doccomment">/// Nevertheless it&#39;s recommended to implement this function *as if* that</span>
+    <span class="doccomment">/// were its signature. As such it is not safe to call on an invalid</span>
+    <span class="doccomment">/// pointer, nor is the validity of the pointer guaranteed after this</span>
+    <span class="doccomment">/// function returns.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Unsafety</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This trait is unsafe to implement, as are all these methods. This</span>
+    <span class="doccomment">/// method is also unsafe to call as it&#39;s asserting the `UnsafeNotify`</span>
+    <span class="doccomment">/// value is in a consistent state. In general it&#39;s recommended to</span>
+    <span class="doccomment">/// review the trait documentation as well as the implementation for `Arc`</span>
+    <span class="doccomment">/// in this crate. When in doubt ping the `futures` authors to clarify</span>
+    <span class="doccomment">/// an unsafety question here.</span>
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">drop_raw</span>(<span class="kw-2">&amp;</span><span class="self">self</span>);
 }
 
-<span class="kw">struct</span> <span class="ident">ThreadUnpark</span> {
-    <span class="ident">thread</span>: <span class="ident">thread</span>::<span class="ident">Thread</span>,
-    <span class="ident">ready</span>: <span class="ident">AtomicBool</span>,
+<span class="doccomment">/// A `NotifyHandle` is the core value through which notifications are routed</span>
+<span class="doccomment">/// in the `futures` crate.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// All instances of `Task` will contain a `NotifyHandle` handle internally.</span>
+<span class="doccomment">/// This handle itself contains a trait object pointing to an instance of the</span>
+<span class="doccomment">/// `Notify` trait, allowing notifications to get routed through it.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// The `NotifyHandle` type internally does not codify any particular memory</span>
+<span class="doccomment">/// management strategy. Internally it contains an instance of `*mut</span>
+<span class="doccomment">/// UnsafeNotify`, and more details about that trait can be found on its own</span>
+<span class="doccomment">/// documentation. Consequently, though, the one constructor of this type,</span>
+<span class="doccomment">/// `NotifyHandle::new`, is `unsafe` to call. It is not recommended to call</span>
+<span class="doccomment">/// this constructor directly.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// If you&#39;re working with the standard library then it&#39;s recommended to</span>
+<span class="doccomment">/// work with the `Arc` type. If you have a struct, `T`, which implements the</span>
+<span class="doccomment">/// `Notify` trait, then you can construct this with</span>
+<span class="doccomment">/// `NotifyHandle::from(t: Arc&lt;T&gt;)`. The coercion to `UnsafeNotify` will</span>
+<span class="doccomment">/// happen automatically and safely for you.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// When working externally from the standard library it&#39;s recommended to</span>
+<span class="doccomment">/// provide a similar safe constructor for your custom type as opposed to</span>
+<span class="doccomment">/// recommending an invocation of `NotifyHandle::new` directly.</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">NotifyHandle</span> {
+    <span class="ident">inner</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">UnsafeNotify</span>,
 }
 
-<span class="kw">impl</span> <span class="ident">ThreadUnpark</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">thread</span>: <span class="ident">thread</span>::<span class="ident">Thread</span>) <span class="op">-&gt;</span> <span class="ident">ThreadUnpark</span> {
-        <span class="ident">ThreadUnpark</span> {
-            <span class="ident">thread</span>: <span class="ident">thread</span>,
-            <span class="ident">ready</span>: <span class="ident">AtomicBool</span>::<span class="ident">new</span>(<span class="bool-val">false</span>),
-        }
+<span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">NotifyHandle</span> {}
+<span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Sync</span> <span class="kw">for</span> <span class="ident">NotifyHandle</span> {}
+
+<span class="kw">impl</span> <span class="ident">NotifyHandle</span> {
+    <span class="doccomment">/// Constructs a new `NotifyHandle` directly.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Note that most code will not need to call this. Implementors of the</span>
+    <span class="doccomment">/// `UnsafeNotify` trait will typically provide a wrapper that calls this</span>
+    <span class="doccomment">/// but you otherwise shouldn&#39;t call it directly.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// If you&#39;re working with the standard library then it&#39;s recommended to</span>
+    <span class="doccomment">/// use the `NotifyHandle::from` function instead which works with the safe</span>
+    <span class="doccomment">/// `Arc` type and the safe `Notify` trait.</span>
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">inner</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">UnsafeNotify</span>) <span class="op">-&gt;</span> <span class="ident">NotifyHandle</span> {
+        <span class="ident">NotifyHandle</span> { <span class="ident">inner</span>: <span class="ident">inner</span> }
     }
 
-    <span class="kw">fn</span> <span class="ident">park</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">ready</span>.<span class="ident">swap</span>(<span class="bool-val">false</span>, <span class="ident">Ordering</span>::<span class="ident">SeqCst</span>) {
-            <span class="ident">thread</span>::<span class="ident">park</span>();
-        }
+    <span class="doccomment">/// Invokes the underlying instance of `Notify` with the provided `id`.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">notify</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">usize</span>) {
+        <span class="kw">unsafe</span> { (<span class="kw-2">*</span><span class="self">self</span>.<span class="ident">inner</span>).<span class="ident">notify</span>(<span class="ident">id</span>) }
+    }
+
+    <span class="kw">fn</span> <span class="ident">clone_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
+        <span class="kw">unsafe</span> { (<span class="kw-2">*</span><span class="self">self</span>.<span class="ident">inner</span>).<span class="ident">clone_id</span>(<span class="ident">id</span>) }
+    }
+
+    <span class="kw">fn</span> <span class="ident">drop_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">usize</span>) {
+        <span class="kw">unsafe</span> { (<span class="kw-2">*</span><span class="self">self</span>.<span class="ident">inner</span>).<span class="ident">drop_id</span>(<span class="ident">id</span>) }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Unpark</span> <span class="kw">for</span> <span class="ident">ThreadUnpark</span> {
-    <span class="kw">fn</span> <span class="ident">unpark</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">ready</span>.<span class="ident">store</span>(<span class="bool-val">true</span>, <span class="ident">Ordering</span>::<span class="ident">SeqCst</span>);
-        <span class="self">self</span>.<span class="ident">thread</span>.<span class="ident">unpark</span>()
-    }
-}
-
-<span class="doccomment">/// Units of work submitted to an `Executor`, currently only created</span>
-<span class="doccomment">/// internally.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Run</span> {
-    <span class="ident">spawn</span>: <span class="ident">Spawn</span><span class="op">&lt;</span><span class="ident">BoxFuture</span><span class="op">&lt;</span>(), ()<span class="op">&gt;&gt;</span>,
-    <span class="ident">inner</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Inner</span><span class="op">&gt;</span>,
-}
-
-<span class="kw">struct</span> <span class="ident">Inner</span> {
-    <span class="ident">mutex</span>: <span class="ident">UnparkMutex</span><span class="op">&lt;</span><span class="ident">Run</span><span class="op">&gt;</span>,
-    <span class="ident">exec</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Executor</span><span class="op">&gt;</span>,
-}
-
-<span class="kw">impl</span> <span class="ident">Run</span> {
-    <span class="doccomment">/// Actually run the task (invoking `poll` on its future) on the current</span>
-    <span class="doccomment">/// thread.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">run</span>(<span class="self">self</span>) {
-        <span class="kw">let</span> <span class="ident">Run</span> { <span class="kw-2">mut</span> <span class="ident">spawn</span>, <span class="ident">inner</span> } <span class="op">=</span> <span class="self">self</span>;
-
-        <span class="comment">// SAFETY: the ownership of this `Run` object is evidence that</span>
-        <span class="comment">// we are in the `POLLING`/`REPOLL` state for the mutex.</span>
+<span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">NotifyHandle</span> {
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="kw">unsafe</span> {
-            <span class="ident">inner</span>.<span class="ident">mutex</span>.<span class="ident">start_poll</span>();
-
-            <span class="kw">loop</span> {
-                <span class="kw">match</span> <span class="ident">spawn</span>.<span class="ident">poll_future</span>(<span class="ident">inner</span>.<span class="ident">clone</span>()) {
-                    <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>) <span class="op">=&gt;</span> {}
-                    <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(())) <span class="op">|</span>
-                    <span class="prelude-val">Err</span>(()) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="ident">inner</span>.<span class="ident">mutex</span>.<span class="ident">complete</span>(),
-                }
-                <span class="kw">let</span> <span class="ident">run</span> <span class="op">=</span> <span class="ident">Run</span> { <span class="ident">spawn</span>: <span class="ident">spawn</span>, <span class="ident">inner</span>: <span class="ident">inner</span>.<span class="ident">clone</span>() };
-                <span class="kw">match</span> <span class="ident">inner</span>.<span class="ident">mutex</span>.<span class="ident">wait</span>(<span class="ident">run</span>) {
-                    <span class="prelude-val">Ok</span>(()) <span class="op">=&gt;</span> <span class="kw">return</span>,            <span class="comment">// we&#39;ve waited</span>
-                    <span class="prelude-val">Err</span>(<span class="ident">r</span>) <span class="op">=&gt;</span> <span class="ident">spawn</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">spawn</span>,   <span class="comment">// someone&#39;s notified us</span>
-                }
-            }
+            (<span class="kw-2">*</span><span class="self">self</span>.<span class="ident">inner</span>).<span class="ident">clone_raw</span>()
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Run</span> {
+<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">NotifyHandle</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;Run&quot;</span>)
-         .<span class="ident">field</span>(<span class="string">&quot;contents&quot;</span>, <span class="kw-2">&amp;</span><span class="string">&quot;...&quot;</span>)
+        <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;NotifyHandle&quot;</span>)
          .<span class="ident">finish</span>()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Unpark</span> <span class="kw">for</span> <span class="ident">Inner</span> {
-    <span class="kw">fn</span> <span class="ident">unpark</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">mutex</span>.<span class="ident">notify</span>() {
-            <span class="prelude-val">Ok</span>(<span class="ident">run</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">exec</span>.<span class="ident">execute</span>(<span class="ident">run</span>),
-            <span class="prelude-val">Err</span>(()) <span class="op">=&gt;</span> {}
+<span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">NotifyHandle</span> {
+    <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+        <span class="kw">unsafe</span> {
+            (<span class="kw-2">*</span><span class="self">self</span>.<span class="ident">inner</span>).<span class="ident">drop_raw</span>()
         }
+    }
+}
+
+<span class="doccomment">/// Marker for a `T` that is behind &amp;&#39;static.</span>
+<span class="kw">struct</span> <span class="ident">StaticRef</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Notify</span><span class="op">&gt;</span> <span class="ident">Notify</span> <span class="kw">for</span> <span class="ident">StaticRef</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">notify</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">usize</span>) {
+        <span class="kw">let</span> <span class="ident">me</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>) };
+        <span class="ident">me</span>.<span class="ident">notify</span>(<span class="ident">id</span>);
+    }
+
+    <span class="kw">fn</span> <span class="ident">clone_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
+        <span class="kw">let</span> <span class="ident">me</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>) };
+        <span class="ident">me</span>.<span class="ident">clone_id</span>(<span class="ident">id</span>)
+    }
+
+    <span class="kw">fn</span> <span class="ident">drop_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">usize</span>) {
+        <span class="kw">let</span> <span class="ident">me</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>) };
+        <span class="ident">me</span>.<span class="ident">drop_id</span>(<span class="ident">id</span>);
+    }
+}
+
+<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Notify</span> <span class="op">+</span> <span class="lifetime">&#39;static</span><span class="op">&gt;</span> <span class="ident">UnsafeNotify</span> <span class="kw">for</span> <span class="ident">StaticRef</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">clone_raw</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">NotifyHandle</span> {
+        <span class="ident">NotifyHandle</span>::<span class="ident">new</span>(<span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">StaticRef</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>)
+    }
+
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">drop_raw</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {}
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Notify</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">NotifyHandle</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">src</span> : <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">NotifyHandle</span> {
+        <span class="kw">unsafe</span> { <span class="ident">NotifyHandle</span>::<span class="ident">new</span>(<span class="ident">src</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">StaticRef</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) }
     }
 }
 </pre>

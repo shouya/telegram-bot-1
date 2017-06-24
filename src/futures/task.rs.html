@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.13/src/task.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.14/src/task.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>task.rs.html -- source</title>
@@ -83,6 +83,12 @@
 <span id="38">38</span>
 <span id="39">39</span>
 <span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! Tasks used to drive a future computation</span>
 <span class="doccomment">//!</span>
@@ -104,24 +110,30 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! More information about the task model can be found [online at tokio.rs].</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! [online at tokio.rs]: https://tokio.rs/docs/going-deeper/futures-model/</span>
+<span class="doccomment">//! [online at tokio.rs]: https://tokio.rs/docs/going-deeper-futures/futures-model/</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Functions</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! There is an important bare function in this module: `park`. The `park`</span>
-<span class="doccomment">//! function is similar to the standard library&#39;s `thread::park` method where it</span>
-<span class="doccomment">//! returns a handle to wake up a task at a later date (via an `unpark` method).</span>
+<span class="doccomment">//! There is an important bare function in this module: `current`. The</span>
+<span class="doccomment">//! `current` function returns a handle to the currently running task, panicking</span>
+<span class="doccomment">//! if one isn&#39;t present. This handle is then used to later notify the task that</span>
+<span class="doccomment">//! it&#39;s ready to make progress through the `Task::notify` method.</span>
 
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;0.1.4&quot;</span>, <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;import through the executor module instead&quot;</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">task_impl</span>::{<span class="ident">Spawn</span>, <span class="ident">spawn</span>, <span class="ident">Unpark</span>, <span class="ident">Executor</span>, <span class="ident">Run</span>};
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_std&quot;</span>))]</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">task_impl</span>::{<span class="ident">Spawn</span>, <span class="ident">spawn</span>, <span class="ident">Unpark</span>, <span class="ident">Executor</span>, <span class="ident">Run</span>, <span class="ident">park</span>};
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">task_impl</span>::{<span class="ident">Task</span>, <span class="ident">LocalKey</span>, <span class="ident">park</span>, <span class="ident">with_unpark_event</span>, <span class="ident">UnparkEvent</span>, <span class="ident">EventSet</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">task_impl</span>::{<span class="ident">Task</span>, <span class="ident">current</span>, <span class="ident">init</span>};
+
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_std&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">task_impl</span>::{<span class="ident">LocalKey</span>, <span class="ident">with_unpark_event</span>, <span class="ident">UnparkEvent</span>, <span class="ident">EventSet</span>};
 
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;0.1.4&quot;</span>, <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;import through the executor module instead&quot;</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_std&quot;</span>))]</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">task_impl</span>::<span class="ident">TaskRc</span>;
 </pre>
