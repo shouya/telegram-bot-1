@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/net2-0.2.29/src/ext.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/net2-0.2.30/src/ext.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>ext.rs.html -- source</title>
@@ -1350,40 +1350,6 @@
 <span id="1305">1305</span>
 <span id="1306">1306</span>
 <span id="1307">1307</span>
-<span id="1308">1308</span>
-<span id="1309">1309</span>
-<span id="1310">1310</span>
-<span id="1311">1311</span>
-<span id="1312">1312</span>
-<span id="1313">1313</span>
-<span id="1314">1314</span>
-<span id="1315">1315</span>
-<span id="1316">1316</span>
-<span id="1317">1317</span>
-<span id="1318">1318</span>
-<span id="1319">1319</span>
-<span id="1320">1320</span>
-<span id="1321">1321</span>
-<span id="1322">1322</span>
-<span id="1323">1323</span>
-<span id="1324">1324</span>
-<span id="1325">1325</span>
-<span id="1326">1326</span>
-<span id="1327">1327</span>
-<span id="1328">1328</span>
-<span id="1329">1329</span>
-<span id="1330">1330</span>
-<span id="1331">1331</span>
-<span id="1332">1332</span>
-<span id="1333">1333</span>
-<span id="1334">1334</span>
-<span id="1335">1335</span>
-<span id="1336">1336</span>
-<span id="1337">1337</span>
-<span id="1338">1338</span>
-<span id="1339">1339</span>
-<span id="1340">1340</span>
-<span id="1341">1341</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1421,7 +1387,6 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">time</span>::<span class="ident">Duration</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span> <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Socket</span> <span class="op">=</span> <span class="ident">c_int</span>;
@@ -1544,7 +1509,6 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Some platforms specify this value in seconds, so sub-second</span>
     <span class="doccomment">/// specifications may be omitted.</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">set_keepalive</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">keepalive</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
 
     <span class="doccomment">/// Returns whether keepalive messages are enabled on this socket, and if so</span>
@@ -1553,7 +1517,6 @@
     <span class="doccomment">/// For more information about this option, see [`set_keepalive`][link].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [link]: #tymethod.set_keepalive</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">keepalive</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;&gt;</span>;
 
     <span class="doccomment">/// Sets the `SO_RCVTIMEO` option for this socket.</span>
@@ -1570,7 +1533,6 @@
     <span class="doccomment">/// `read` function will wait before returning a timeout. A value of `None`</span>
     <span class="doccomment">/// means that no read timeout should be specified and otherwise `Some`</span>
     <span class="doccomment">/// indicates the number of duration of the timeout.</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">set_read_timeout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">val</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
 
     <span class="doccomment">/// Gets the value of the `SO_RCVTIMEO` option for this socket.</span>
@@ -1585,7 +1547,6 @@
     <span class="doccomment">/// For more information about this option, see [`set_read_timeout`][link].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [link]: #tymethod.set_read_timeout</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">read_timeout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;&gt;</span>;
 
     <span class="doccomment">/// Sets the `SO_SNDTIMEO` option for this socket.</span>
@@ -1602,7 +1563,6 @@
     <span class="doccomment">/// `write` function will wait before returning a timeout. A value of `None`</span>
     <span class="doccomment">/// means that no read timeout should be specified and otherwise `Some`</span>
     <span class="doccomment">/// indicates the duration of the timeout.</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">set_write_timeout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">val</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
 
     <span class="doccomment">/// Gets the value of the `SO_SNDTIMEO` option for this socket.</span>
@@ -1617,7 +1577,6 @@
     <span class="doccomment">/// For more information about this option, see [`set_write_timeout`][link].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [link]: #tymethod.set_write_timeout</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">write_timeout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;&gt;</span>;
 
     <span class="doccomment">/// Sets the value for the `IP_TTL` option on this socket.</span>
@@ -1675,11 +1634,9 @@
     <span class="kw">fn</span> <span class="ident">set_nonblocking</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">nonblocking</span>: <span class="ident">bool</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
 
     <span class="doccomment">/// Sets the linger duration of this socket by setting the SO_LINGER option</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">set_linger</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">dur</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
 
     <span class="doccomment">/// reads the linger duration for this socket by getting the SO_LINGER option</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">linger</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;&gt;</span>;
 }
 
@@ -1732,13 +1689,11 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// [link]: trait.TcpStreamExt.html#tymethod.set_nonblocking</span>
     <span class="kw">fn</span> <span class="ident">set_nonblocking</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">nonblocking</span>: <span class="ident">bool</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
-    
+
     <span class="doccomment">/// Sets the linger duration of this socket by setting the SO_LINGER option</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">set_linger</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">dur</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
 
     <span class="doccomment">/// reads the linger duration for this socket by getting the SO_LINGER option</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">linger</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;&gt;</span>;
 }
 
@@ -1910,7 +1865,6 @@
     <span class="doccomment">/// `read` function will wait before returning a timeout. A value of `None`</span>
     <span class="doccomment">/// means that no read timeout should be specified and otherwise `Some`</span>
     <span class="doccomment">/// indicates the number of duration of the timeout.</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">set_read_timeout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">val</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
 
     <span class="doccomment">/// Gets the value of the `SO_RCVTIMEO` option for this socket.</span>
@@ -1925,7 +1879,6 @@
     <span class="doccomment">/// For more information about this option, see [`set_read_timeout`][link].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [link]: #tymethod.set_read_timeout</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">read_timeout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;&gt;</span>;
 
     <span class="doccomment">/// Sets the `SO_SNDTIMEO` option for this socket.</span>
@@ -1942,7 +1895,6 @@
     <span class="doccomment">/// `write` function will wait before returning a timeout. A value of `None`</span>
     <span class="doccomment">/// means that no read timeout should be specified and otherwise `Some`</span>
     <span class="doccomment">/// indicates the duration of the timeout.</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">set_write_timeout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">val</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
 
     <span class="doccomment">/// Gets the value of the `SO_SNDTIMEO` option for this socket.</span>
@@ -1957,7 +1909,6 @@
     <span class="doccomment">/// For more information about this option, see [`set_write_timeout`][link].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [link]: #tymethod.set_write_timeout</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">write_timeout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;&gt;</span>;
 
     <span class="doccomment">/// Get the value of the `SO_ERROR` option on this socket.</span>
@@ -2048,12 +1999,10 @@
             .<span class="ident">map</span>(<span class="ident">int2bool</span>)
     }
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">set_keepalive</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">keepalive</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">set_keepalive_ms</span>(<span class="ident">keepalive</span>.<span class="ident">map</span>(<span class="ident">dur2ms</span>))
     }
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">keepalive</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;&gt;</span> {
         <span class="self">self</span>.<span class="ident">keepalive_ms</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">map</span>(<span class="ident">ms2dur</span>))
     }
@@ -2149,22 +2098,18 @@
             .<span class="ident">map</span>(<span class="ident">timeout2ms</span>)
     }
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">set_read_timeout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">dur</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">set_read_timeout_ms</span>(<span class="ident">dur</span>.<span class="ident">map</span>(<span class="ident">dur2ms</span>))
     }
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">read_timeout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;&gt;</span> {
         <span class="self">self</span>.<span class="ident">read_timeout_ms</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">map</span>(<span class="ident">ms2dur</span>))
     }
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">set_write_timeout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">dur</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">set_write_timeout_ms</span>(<span class="ident">dur</span>.<span class="ident">map</span>(<span class="ident">dur2ms</span>))
     }
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">write_timeout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;&gt;</span> {
         <span class="self">self</span>.<span class="ident">write_timeout_ms</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">map</span>(<span class="ident">ms2dur</span>))
     }
@@ -2197,15 +2142,13 @@
     <span class="kw">fn</span> <span class="ident">set_nonblocking</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">nonblocking</span>: <span class="ident">bool</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="ident">set_nonblocking</span>(<span class="self">self</span>.<span class="ident">as_sock</span>(), <span class="ident">nonblocking</span>)
     }
-    
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
+
     <span class="kw">fn</span> <span class="ident">set_linger</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">dur</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="ident">set_opt</span>(<span class="self">self</span>.<span class="ident">as_sock</span>(), <span class="ident">SOL_SOCKET</span>, <span class="ident">SO_LINGER</span>, <span class="ident">dur2linger</span>(<span class="ident">dur</span>))
     }
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">linger</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;&gt;</span> {
-        <span class="ident">get_opt</span>(<span class="self">self</span>.<span class="ident">as_sock</span>(), <span class="ident">SOL_SOCKET</span>, <span class="ident">SO_LINGER</span>).<span class="ident">map</span>(<span class="ident">linger2dur</span>)        
+        <span class="ident">get_opt</span>(<span class="self">self</span>.<span class="ident">as_sock</span>(), <span class="ident">SOL_SOCKET</span>, <span class="ident">SO_LINGER</span>).<span class="ident">map</span>(<span class="ident">linger2dur</span>)
     }
 }
 
@@ -2244,7 +2187,6 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
 <span class="kw">fn</span> <span class="ident">linger2dur</span>(<span class="ident">linger_opt</span>: <span class="ident">linger</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span> {
     <span class="kw">if</span> <span class="ident">linger_opt</span>.<span class="ident">l_onoff</span> <span class="op">==</span> <span class="number">0</span> {
         <span class="prelude-val">None</span>
@@ -2254,7 +2196,7 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>), <span class="ident">windows</span>))]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
 <span class="kw">fn</span> <span class="ident">dur2linger</span>(<span class="ident">dur</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">linger</span> {
     <span class="kw">match</span> <span class="ident">dur</span> {
         <span class="prelude-val">Some</span>(<span class="ident">d</span>) <span class="op">=&gt;</span> {
@@ -2267,7 +2209,7 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>), <span class="ident">unix</span>))]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
 <span class="kw">fn</span> <span class="ident">dur2linger</span>(<span class="ident">dur</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">linger</span> {
     <span class="kw">match</span> <span class="ident">dur</span> {
         <span class="prelude-val">Some</span>(<span class="ident">d</span>) <span class="op">=&gt;</span> {
@@ -2280,12 +2222,10 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
 <span class="kw">fn</span> <span class="ident">ms2dur</span>(<span class="ident">ms</span>: <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">Duration</span> {
     <span class="ident">Duration</span>::<span class="ident">new</span>((<span class="ident">ms</span> <span class="kw">as</span> <span class="ident">u64</span>) <span class="op">/</span> <span class="number">1000</span>, (<span class="ident">ms</span> <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">%</span> <span class="number">1000</span> <span class="op">*</span> <span class="number">1_000_000</span>)
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
 <span class="kw">fn</span> <span class="ident">dur2ms</span>(<span class="ident">dur</span>: <span class="ident">Duration</span>) <span class="op">-&gt;</span> <span class="ident">u32</span> {
     (<span class="ident">dur</span>.<span class="ident">as_secs</span>() <span class="kw">as</span> <span class="ident">u32</span> <span class="op">*</span> <span class="number">1000</span>) <span class="op">+</span> (<span class="ident">dur</span>.<span class="ident">subsec_nanos</span>() <span class="op">/</span> <span class="number">1_000_000</span>)
 }
@@ -2433,22 +2373,18 @@
             .<span class="ident">map</span>(<span class="ident">timeout2ms</span>)
     }
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">set_read_timeout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">dur</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">set_read_timeout_ms</span>(<span class="ident">dur</span>.<span class="ident">map</span>(<span class="ident">dur2ms</span>))
     }
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">read_timeout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;&gt;</span> {
         <span class="self">self</span>.<span class="ident">read_timeout_ms</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">map</span>(<span class="ident">ms2dur</span>))
     }
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">set_write_timeout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">dur</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">set_write_timeout_ms</span>(<span class="ident">dur</span>.<span class="ident">map</span>(<span class="ident">dur2ms</span>))
     }
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">write_timeout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;&gt;</span> {
         <span class="self">self</span>.<span class="ident">write_timeout_ms</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">map</span>(<span class="ident">ms2dur</span>))
     }
@@ -2612,14 +2548,12 @@
         <span class="ident">set_nonblocking</span>(<span class="self">self</span>.<span class="ident">as_sock</span>(), <span class="ident">nonblocking</span>)
     }
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">set_linger</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">dur</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="ident">set_opt</span>(<span class="self">self</span>.<span class="ident">as_sock</span>(), <span class="ident">SOL_SOCKET</span>, <span class="ident">SO_LINGER</span>, <span class="ident">dur2linger</span>(<span class="ident">dur</span>))
     }
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">linger</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;&gt;</span> {
-        <span class="ident">get_opt</span>(<span class="self">self</span>.<span class="ident">as_sock</span>(), <span class="ident">SOL_SOCKET</span>, <span class="ident">SO_LINGER</span>).<span class="ident">map</span>(<span class="ident">linger2dur</span>)        
+        <span class="ident">get_opt</span>(<span class="self">self</span>.<span class="ident">as_sock</span>(), <span class="ident">SOL_SOCKET</span>, <span class="ident">SO_LINGER</span>).<span class="ident">map</span>(<span class="ident">linger2dur</span>)
     }
 }
 
@@ -2669,15 +2603,13 @@
     }
 
     <span class="doccomment">/// Sets the linger option for this socket</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">set_linger</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">dur</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="ident">set_opt</span>(<span class="self">self</span>.<span class="ident">as_sock</span>(), <span class="ident">SOL_SOCKET</span>, <span class="ident">SO_LINGER</span>, <span class="ident">dur2linger</span>(<span class="ident">dur</span>))
     }
 
     <span class="doccomment">/// Gets the linger option for this socket</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;duration&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">linger</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;&gt;</span> {
-        <span class="ident">get_opt</span>(<span class="self">self</span>.<span class="ident">as_sock</span>(), <span class="ident">SOL_SOCKET</span>, <span class="ident">SO_LINGER</span>).<span class="ident">map</span>(<span class="ident">linger2dur</span>)        
+        <span class="ident">get_opt</span>(<span class="self">self</span>.<span class="ident">as_sock</span>(), <span class="ident">SOL_SOCKET</span>, <span class="ident">SO_LINGER</span>).<span class="ident">map</span>(<span class="ident">linger2dur</span>)
     }
 }
 
@@ -2784,7 +2716,6 @@
         window.rootPath = "../../";
         window.currentCrate = "net2";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

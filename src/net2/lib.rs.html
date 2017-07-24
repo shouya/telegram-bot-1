@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/net2-0.2.29/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/net2-0.2.30/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -166,8 +166,6 @@
 <span id="121">121</span>
 <span id="122">122</span>
 <span id="123">123</span>
-<span id="124">124</span>
-<span id="125">125</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -235,9 +233,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span> <span class="attribute">#[<span class="ident">path</span> <span class="op">=</span> <span class="string">&quot;sys/unix/mod.rs&quot;</span>]</span> <span class="kw">mod</span> <span class="ident">sys</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span> <span class="attribute">#[<span class="ident">path</span> <span class="op">=</span> <span class="string">&quot;sys/windows/mod.rs&quot;</span>]</span> <span class="kw">mod</span> <span class="ident">sys</span>;
-<span class="comment">// FIXME: should include android here once SO_REUSEPORT has been fixed in</span>
-<span class="comment">//        liblibc on android</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">unix</span>, <span class="ident">not</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;solaris&quot;</span>))))]</span> <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">unix</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">unix</span>, <span class="ident">not</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;solaris&quot;</span>))))]</span> <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">unix</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">tcp</span>::<span class="ident">TcpBuilder</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">udp</span>::<span class="ident">UdpBuilder</span>;
@@ -352,7 +348,6 @@
         window.rootPath = "../../";
         window.currentCrate = "net2";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>
