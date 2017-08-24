@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.9/src/sys/unix/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.10/src/sys/unix/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -139,10 +139,10 @@
 <span class="attribute">#[<span class="ident">macro_use</span>]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">dlsym</span>;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;fuchsia&quot;</span>))]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>))]</span>
 <span class="kw">mod</span> <span class="ident">epoll</span>;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;fuchsia&quot;</span>))]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>))]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">epoll</span>::{<span class="ident">Events</span>, <span class="ident">Selector</span>};
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;bitrig&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;dragonfly&quot;</span>,
@@ -189,10 +189,10 @@
     <span class="kw">unsafe</span> {
         <span class="kw">match</span> <span class="ident">pipe2</span>.<span class="ident">get</span>() {
             <span class="prelude-val">Some</span>(<span class="ident">pipe2_fn</span>) <span class="op">=&gt;</span> {
-                <span class="macro">try</span><span class="macro">!</span>(<span class="ident">cvt</span>(<span class="ident">pipe2_fn</span>(<span class="ident">pipes</span>.<span class="ident">as_mut_ptr</span>(), <span class="ident">flags</span>)));
+                <span class="ident">cvt</span>(<span class="ident">pipe2_fn</span>(<span class="ident">pipes</span>.<span class="ident">as_mut_ptr</span>(), <span class="ident">flags</span>))<span class="question-mark">?</span>;
             }
             <span class="prelude-val">None</span> <span class="op">=&gt;</span> {
-                <span class="macro">try</span><span class="macro">!</span>(<span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">pipe</span>(<span class="ident">pipes</span>.<span class="ident">as_mut_ptr</span>())));
+                <span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">pipe</span>(<span class="ident">pipes</span>.<span class="ident">as_mut_ptr</span>()))<span class="question-mark">?</span>;
                 <span class="ident">libc</span>::<span class="ident">fcntl</span>(<span class="ident">pipes</span>[<span class="number">0</span>], <span class="ident">libc</span>::<span class="ident">F_SETFL</span>, <span class="ident">flags</span>);
                 <span class="ident">libc</span>::<span class="ident">fcntl</span>(<span class="ident">pipes</span>[<span class="number">1</span>], <span class="ident">libc</span>::<span class="ident">F_SETFL</span>, <span class="ident">flags</span>);
             }

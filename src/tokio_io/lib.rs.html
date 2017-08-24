@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-io-0.1.2/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-io-0.1.3/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -425,6 +425,8 @@
 <span id="380">380</span>
 <span id="381">381</span>
 <span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! Core I/O traits and combinators when working with Tokio.</span>
 <span class="doccomment">//!</span>
@@ -503,8 +505,9 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This trait inherits from `io::Read` and indicates as a marker that an I/O</span>
 <span class="doccomment">/// object is **nonblocking**, meaning that it will return an error instead of</span>
-<span class="doccomment">/// blocking when bytes are read. Specifically this means that the `read`</span>
-<span class="doccomment">/// function for traits that implement this type can have a few return values:</span>
+<span class="doccomment">/// blocking when bytes are unavailable, but the stream hasn&#39;t reached EOF.</span>
+<span class="doccomment">/// Specifically this means that the `read` function for types that implement</span>
+<span class="doccomment">/// this trait can have a few return values:</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// * `Ok(n)` means that `n` bytes of data was immediately read and placed into</span>
 <span class="doccomment">///   the output buffer, where `n` == 0 implies that EOF has been reached.</span>
@@ -640,8 +643,9 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This trait inherits from `io::Write` and indicates that an I/O object is</span>
 <span class="doccomment">/// **nonblocking**, meaning that it will return an error instead of blocking</span>
-<span class="doccomment">/// when bytes are written. Specifically this means that the `write` function</span>
-<span class="doccomment">/// for traits that implement this type can have a few return values:</span>
+<span class="doccomment">/// when bytes cannot currently be written, but hasn&#39;t closed. Specifically</span>
+<span class="doccomment">/// this means that the `write` function for types that implement this trait</span>
+<span class="doccomment">/// can have a few return values:</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// * `Ok(n)` means that `n` bytes of data was immediately written .</span>
 <span class="doccomment">/// * `Err(e) if e.kind() == ErrorKind::WouldBlock` means that no data was</span>

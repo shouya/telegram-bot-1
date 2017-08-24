@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.9/src/sys/unix/io.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.10/src/sys/unix/io.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>io.rs.html -- source</title>
@@ -191,7 +191,7 @@
 <span class="kw">impl</span> <span class="ident">Io</span> {
     <span class="doccomment">/// Try to clone the FD</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Io</span><span class="op">&gt;</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">Io</span> { <span class="ident">fd</span>: <span class="macro">try</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">fd</span>.<span class="ident">try_clone</span>()) })
+        <span class="prelude-val">Ok</span>(<span class="ident">Io</span> { <span class="ident">fd</span>: <span class="self">self</span>.<span class="ident">fd</span>.<span class="ident">try_clone</span>()<span class="question-mark">?</span> })
     }
 }
 

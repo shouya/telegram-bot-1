@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.9/src/sys/unix/uds.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.10/src/sys/unix/uds.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>uds.rs.html -- source</title>
@@ -401,10 +401,10 @@
                 }
             }
 
-            <span class="kw">let</span> <span class="ident">fd</span> <span class="op">=</span> <span class="macro">try</span><span class="macro">!</span>(<span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">socket</span>(<span class="ident">libc</span>::<span class="ident">AF_UNIX</span>, <span class="ident">libc</span>::<span class="ident">SOCK_STREAM</span>, <span class="number">0</span>)));
+            <span class="kw">let</span> <span class="ident">fd</span> <span class="op">=</span> <span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">socket</span>(<span class="ident">libc</span>::<span class="ident">AF_UNIX</span>, <span class="ident">libc</span>::<span class="ident">SOCK_STREAM</span>, <span class="number">0</span>))<span class="question-mark">?</span>;
             <span class="kw">let</span> <span class="ident">fd</span> <span class="op">=</span> <span class="ident">UnixSocket</span>::<span class="ident">from_raw_fd</span>(<span class="ident">fd</span>);
-            <span class="macro">try</span><span class="macro">!</span>(<span class="ident">set_cloexec</span>(<span class="ident">fd</span>.<span class="ident">as_raw_fd</span>()));
-            <span class="macro">try</span><span class="macro">!</span>(<span class="ident">set_nonblock</span>(<span class="ident">fd</span>.<span class="ident">as_raw_fd</span>()));
+            <span class="ident">set_cloexec</span>(<span class="ident">fd</span>.<span class="ident">as_raw_fd</span>())<span class="question-mark">?</span>;
+            <span class="ident">set_nonblock</span>(<span class="ident">fd</span>.<span class="ident">as_raw_fd</span>())<span class="question-mark">?</span>;
             <span class="prelude-val">Ok</span>(<span class="ident">fd</span>)
         }
     }
@@ -412,10 +412,10 @@
     <span class="doccomment">/// Connect the socket to the specified address</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">connect</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">addr</span>: <span class="kw-2">&amp;</span><span class="ident">P</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
-            <span class="kw">let</span> (<span class="ident">addr</span>, <span class="ident">len</span>) <span class="op">=</span> <span class="macro">try</span><span class="macro">!</span>(<span class="ident">sockaddr_un</span>(<span class="ident">addr</span>.<span class="ident">as_ref</span>()));
-            <span class="macro">try</span><span class="macro">!</span>(<span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">connect</span>(<span class="self">self</span>.<span class="ident">as_raw_fd</span>(),
+            <span class="kw">let</span> (<span class="ident">addr</span>, <span class="ident">len</span>) <span class="op">=</span> <span class="ident">sockaddr_un</span>(<span class="ident">addr</span>.<span class="ident">as_ref</span>())<span class="question-mark">?</span>;
+            <span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">connect</span>(<span class="self">self</span>.<span class="ident">as_raw_fd</span>(),
                                    <span class="kw-2">&amp;</span><span class="ident">addr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _,
-                                   <span class="ident">len</span>)));
+                                   <span class="ident">len</span>))<span class="question-mark">?</span>;
             <span class="prelude-val">Ok</span>(())
         }
     }
@@ -423,19 +423,19 @@
     <span class="doccomment">/// Listen for incoming requests</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">listen</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">backlog</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
-            <span class="macro">try</span><span class="macro">!</span>(<span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">listen</span>(<span class="self">self</span>.<span class="ident">as_raw_fd</span>(), <span class="ident">backlog</span> <span class="kw">as</span> <span class="ident">i32</span>)));
+            <span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">listen</span>(<span class="self">self</span>.<span class="ident">as_raw_fd</span>(), <span class="ident">backlog</span> <span class="kw">as</span> <span class="ident">i32</span>))<span class="question-mark">?</span>;
             <span class="prelude-val">Ok</span>(())
         }
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">accept</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">UnixSocket</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
-            <span class="kw">let</span> <span class="ident">fd</span> <span class="op">=</span> <span class="macro">try</span><span class="macro">!</span>(<span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">accept</span>(<span class="self">self</span>.<span class="ident">as_raw_fd</span>(),
+            <span class="kw">let</span> <span class="ident">fd</span> <span class="op">=</span> <span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">accept</span>(<span class="self">self</span>.<span class="ident">as_raw_fd</span>(),
                                            <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _,
-                                           <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _)));
+                                           <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _))<span class="question-mark">?</span>;
             <span class="kw">let</span> <span class="ident">fd</span> <span class="op">=</span> <span class="ident">Io</span>::<span class="ident">from_raw_fd</span>(<span class="ident">fd</span>);
-            <span class="macro">try</span><span class="macro">!</span>(<span class="ident">set_cloexec</span>(<span class="ident">fd</span>.<span class="ident">as_raw_fd</span>()));
-            <span class="macro">try</span><span class="macro">!</span>(<span class="ident">set_nonblock</span>(<span class="ident">fd</span>.<span class="ident">as_raw_fd</span>()));
+            <span class="ident">set_cloexec</span>(<span class="ident">fd</span>.<span class="ident">as_raw_fd</span>())<span class="question-mark">?</span>;
+            <span class="ident">set_nonblock</span>(<span class="ident">fd</span>.<span class="ident">as_raw_fd</span>())<span class="question-mark">?</span>;
             <span class="prelude-val">Ok</span>(<span class="ident">UnixSocket</span> { <span class="ident">io</span>: <span class="ident">fd</span> })
         }
     }
@@ -444,10 +444,10 @@
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">all</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;aarch64&quot;</span>,<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>)))]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bind</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">addr</span>: <span class="kw-2">&amp;</span><span class="ident">P</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
-            <span class="kw">let</span> (<span class="ident">addr</span>, <span class="ident">len</span>) <span class="op">=</span> <span class="macro">try</span><span class="macro">!</span>(<span class="ident">sockaddr_un</span>(<span class="ident">addr</span>.<span class="ident">as_ref</span>()));
-            <span class="macro">try</span><span class="macro">!</span>(<span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">bind</span>(<span class="self">self</span>.<span class="ident">as_raw_fd</span>(),
+            <span class="kw">let</span> (<span class="ident">addr</span>, <span class="ident">len</span>) <span class="op">=</span> <span class="ident">sockaddr_un</span>(<span class="ident">addr</span>.<span class="ident">as_ref</span>())<span class="question-mark">?</span>;
+            <span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">bind</span>(<span class="self">self</span>.<span class="ident">as_raw_fd</span>(),
                                 <span class="kw-2">&amp;</span><span class="ident">addr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _,
-                                <span class="ident">len</span>)));
+                                <span class="ident">len</span>))<span class="question-mark">?</span>;
             <span class="prelude-val">Ok</span>(())
         }
     }
@@ -455,17 +455,17 @@
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;aarch64&quot;</span>,<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>))]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bind</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">addr</span>: <span class="kw-2">&amp;</span><span class="ident">P</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
-            <span class="kw">let</span> (<span class="ident">addr</span>, <span class="ident">len</span>) <span class="op">=</span> <span class="macro">try</span><span class="macro">!</span>(<span class="ident">sockaddr_un</span>(<span class="ident">addr</span>.<span class="ident">as_ref</span>()));
+            <span class="kw">let</span> (<span class="ident">addr</span>, <span class="ident">len</span>) <span class="op">=</span> <span class="ident">sockaddr_un</span>(<span class="ident">addr</span>.<span class="ident">as_ref</span>())<span class="question-mark">?</span>;
             <span class="kw">let</span> <span class="ident">len_i32</span> <span class="op">=</span> <span class="ident">len</span> <span class="kw">as</span> <span class="ident">i32</span>;
-            <span class="macro">try</span><span class="macro">!</span>(<span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">bind</span>(<span class="self">self</span>.<span class="ident">as_raw_fd</span>(),
+            <span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">bind</span>(<span class="self">self</span>.<span class="ident">as_raw_fd</span>(),
                                 <span class="kw-2">&amp;</span><span class="ident">addr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _,
-                                <span class="ident">len_i32</span>)));
+                                <span class="ident">len_i32</span>))<span class="question-mark">?</span>;
             <span class="prelude-val">Ok</span>(())
         }
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">UnixSocket</span><span class="op">&gt;</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">UnixSocket</span> { <span class="ident">io</span>: <span class="macro">try</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">io</span>.<span class="ident">try_clone</span>()) })
+        <span class="prelude-val">Ok</span>(<span class="ident">UnixSocket</span> { <span class="ident">io</span>: <span class="self">self</span>.<span class="ident">io</span>.<span class="ident">try_clone</span>()<span class="question-mark">?</span> })
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shutdown</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">how</span>: <span class="ident">Shutdown</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
@@ -475,7 +475,7 @@
             <span class="ident">Shutdown</span>::<span class="ident">Both</span> <span class="op">=&gt;</span> <span class="ident">libc</span>::<span class="ident">SHUT_RDWR</span>,
         };
         <span class="kw">unsafe</span> {
-            <span class="macro">try</span><span class="macro">!</span>(<span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">shutdown</span>(<span class="self">self</span>.<span class="ident">as_raw_fd</span>(), <span class="ident">how</span>)));
+            <span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">shutdown</span>(<span class="self">self</span>.<span class="ident">as_raw_fd</span>(), <span class="ident">how</span>))<span class="question-mark">?</span>;
             <span class="prelude-val">Ok</span>(())
         }
     }
@@ -496,7 +496,7 @@
             <span class="ident">msg</span>.<span class="ident">msg_iovlen</span> <span class="op">=</span> <span class="number">1</span>;
             <span class="ident">msg</span>.<span class="ident">msg_control</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">cmsg</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _;
             <span class="ident">msg</span>.<span class="ident">msg_controllen</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">size_of_val</span>(<span class="kw-2">&amp;</span><span class="ident">cmsg</span>).<span class="ident">my_into</span>();
-            <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="macro">try</span><span class="macro">!</span>(<span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">recvmsg</span>(<span class="self">self</span>.<span class="ident">as_raw_fd</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">msg</span>, <span class="number">0</span>)));
+            <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">recvmsg</span>(<span class="self">self</span>.<span class="ident">as_raw_fd</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">msg</span>, <span class="number">0</span>))<span class="question-mark">?</span>;
 
             <span class="kw">const</span> <span class="ident">SCM_RIGHTS</span>: <span class="ident">libc</span>::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">1</span>;
 
@@ -530,7 +530,7 @@
             <span class="ident">msg</span>.<span class="ident">msg_iovlen</span> <span class="op">=</span> <span class="number">1</span>;
             <span class="ident">msg</span>.<span class="ident">msg_control</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">cmsg</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _;
             <span class="ident">msg</span>.<span class="ident">msg_controllen</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">size_of_val</span>(<span class="kw-2">&amp;</span><span class="ident">cmsg</span>).<span class="ident">my_into</span>();
-            <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="macro">try</span><span class="macro">!</span>(<span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">sendmsg</span>(<span class="self">self</span>.<span class="ident">as_raw_fd</span>(), <span class="kw-2">&amp;</span><span class="ident">msg</span>, <span class="number">0</span>)));
+            <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="ident">cvt</span>(<span class="ident">libc</span>::<span class="ident">sendmsg</span>(<span class="self">self</span>.<span class="ident">as_raw_fd</span>(), <span class="kw-2">&amp;</span><span class="ident">msg</span>, <span class="number">0</span>))<span class="question-mark">?</span>;
             <span class="prelude-val">Ok</span>(<span class="ident">bytes</span> <span class="kw">as</span> <span class="ident">usize</span>)
         }
     }

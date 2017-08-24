@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.9/src/channel.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.10/src/channel.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>channel.rs.html -- source</title>
@@ -553,7 +553,7 @@
         <span class="self">self</span>.<span class="ident">tx</span>.<span class="ident">send</span>(<span class="ident">t</span>)
             .<span class="ident">map_err</span>(<span class="ident">SendError</span>::<span class="ident">from</span>)
             .<span class="ident">and_then</span>(<span class="op">|</span>_<span class="op">|</span> {
-                <span class="macro">try</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">ctl</span>.<span class="ident">inc</span>());
+                <span class="self">self</span>.<span class="ident">ctl</span>.<span class="ident">inc</span>()<span class="question-mark">?</span>;
                 <span class="prelude-val">Ok</span>(())
             })
     }
@@ -573,7 +573,7 @@
         <span class="self">self</span>.<span class="ident">tx</span>.<span class="ident">send</span>(<span class="ident">t</span>)
             .<span class="ident">map_err</span>(<span class="ident">From</span>::<span class="ident">from</span>)
             .<span class="ident">and_then</span>(<span class="op">|</span>_<span class="op">|</span> {
-                <span class="macro">try</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">ctl</span>.<span class="ident">inc</span>());
+                <span class="self">self</span>.<span class="ident">ctl</span>.<span class="ident">inc</span>()<span class="question-mark">?</span>;
                 <span class="prelude-val">Ok</span>(())
             })
     }
@@ -582,7 +582,7 @@
         <span class="self">self</span>.<span class="ident">tx</span>.<span class="ident">try_send</span>(<span class="ident">t</span>)
             .<span class="ident">map_err</span>(<span class="ident">From</span>::<span class="ident">from</span>)
             .<span class="ident">and_then</span>(<span class="op">|</span>_<span class="op">|</span> {
-                <span class="macro">try</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">ctl</span>.<span class="ident">inc</span>());
+                <span class="self">self</span>.<span class="ident">ctl</span>.<span class="ident">inc</span>()<span class="question-mark">?</span>;
                 <span class="prelude-val">Ok</span>(())
             })
     }
@@ -634,7 +634,7 @@
         <span class="kw">if</span> <span class="number">0</span> <span class="op">==</span> <span class="ident">cnt</span> {
             <span class="comment">// Toggle readiness to readable</span>
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">set_readiness</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">set_readiness</span>.<span class="ident">borrow</span>() {
-                <span class="macro">try</span><span class="macro">!</span>(<span class="ident">set_readiness</span>.<span class="ident">set_readiness</span>(<span class="ident">Ready</span>::<span class="ident">readable</span>()));
+                <span class="ident">set_readiness</span>.<span class="ident">set_readiness</span>(<span class="ident">Ready</span>::<span class="ident">readable</span>())<span class="question-mark">?</span>;
             }
         }
 
@@ -664,7 +664,7 @@
         <span class="kw">if</span> <span class="ident">first</span> <span class="op">==</span> <span class="number">1</span> {
             <span class="comment">// Unset readiness</span>
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">set_readiness</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">set_readiness</span>.<span class="ident">borrow</span>() {
-                <span class="macro">try</span><span class="macro">!</span>(<span class="ident">set_readiness</span>.<span class="ident">set_readiness</span>(<span class="ident">Ready</span>::<span class="ident">empty</span>()));
+                <span class="ident">set_readiness</span>.<span class="ident">set_readiness</span>(<span class="ident">Ready</span>::<span class="ident">empty</span>())<span class="question-mark">?</span>;
             }
         }
 
@@ -675,7 +675,7 @@
             <span class="comment">// There are still pending messages. Since readiness was</span>
             <span class="comment">// previously unset, it must be reset here</span>
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">set_readiness</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">set_readiness</span>.<span class="ident">borrow</span>() {
-                <span class="macro">try</span><span class="macro">!</span>(<span class="ident">set_readiness</span>.<span class="ident">set_readiness</span>(<span class="ident">Ready</span>::<span class="ident">readable</span>()));
+                <span class="ident">set_readiness</span>.<span class="ident">set_readiness</span>(<span class="ident">Ready</span>::<span class="ident">readable</span>())<span class="question-mark">?</span>;
             }
         }
 

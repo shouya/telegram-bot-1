@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../src/tokio_io/lib.rs.html#230-306' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/tokio_io/lib.rs.html#232-308' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait AsyncWrite: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a> {
     fn <a href='#tymethod.shutdown' class='fnname'>shutdown</a>(&amp;mut self) -&gt; <a class="type" href="../futures/poll/type.Poll.html" title="type futures::poll::Poll">Poll</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">()</a>, <a class="struct" href="https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html" title="struct std::io::error::Error">Error</a>&gt;;
 
@@ -59,8 +59,9 @@ futures-aware fashion.</p>
 
 <p>This trait inherits from <code>io::Write</code> and indicates that an I/O object is
 <strong>nonblocking</strong>, meaning that it will return an error instead of blocking
-when bytes are written. Specifically this means that the <code>write</code> function
-for traits that implement this type can have a few return values:</p>
+when bytes cannot currently be written, but hasn&#39;t closed. Specifically
+this means that the <code>write</code> function for types that implement this trait
+can have a few return values:</p>
 
 <ul>
 <li><code>Ok(n)</code> means that <code>n</code> bytes of data was immediately written .</li>

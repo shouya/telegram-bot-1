@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.9/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.10/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -309,6 +309,17 @@
 <span id="264">264</span>
 <span id="265">265</span>
 <span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! A fast, low-level IO library for Rust focusing on non-blocking APIs, event</span>
 <span class="doccomment">//! notification, and other useful utilities for building high performance IO</span>
@@ -396,6 +407,11 @@
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">net2</span>;
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">slab</span>;
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">iovec</span>;
+
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;fuchsia&quot;</span>)]</span>
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">magenta</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;fuchsia&quot;</span>)]</span>
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">magenta_sys</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">libc</span>;
@@ -493,13 +509,19 @@
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">io</span>::<span class="ident">deprecated</span>::<span class="ident">would_block</span>;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">unix</span>, <span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;fuchsia&quot;</span>)))]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">unix</span> {
     <span class="doccomment">//! Unix only extensions</span>
     <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sys</span>::{
         <span class="ident">EventedFd</span>,
     };
     <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sys</span>::<span class="ident">unix</span>::<span class="ident">UnixReady</span>;
+}
+
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;fuchsia&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">fuchsia</span> {
+    <span class="doccomment">//! Fuchsia-only extensions</span>
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sys</span>::<span class="ident">EventedHandle</span>;
 }
 
 <span class="doccomment">/// Windows-only extensions to the mio crate.</span>

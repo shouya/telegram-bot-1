@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../src/tokio_io/lib.rs.html#94-190' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/tokio_io/lib.rs.html#95-191' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait AsyncRead: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a> {
     unsafe fn <a href='#method.prepare_uninitialized_buffer' class='fnname'>prepare_uninitialized_buffer</a>(&amp;self, buf: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;mut [</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a> { ... }
     fn <a href='#method.read_buf' class='fnname'>read_buf</a>&lt;B:&nbsp;<a class="trait" href="../bytes/buf/buf_mut/trait.BufMut.html" title="trait bytes::buf::buf_mut::BufMut">BufMut</a>&gt;(&amp;mut self, buf: &amp;mut B) -&gt; <a class="type" href="../futures/poll/type.Poll.html" title="type futures::poll::Poll">Poll</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>, <a class="struct" href="https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html" title="struct std::io::error::Error">Error</a>&gt;<br>&nbsp;&nbsp;&nbsp; <span class="where">where<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Self: <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a></span>,
@@ -62,8 +62,9 @@ futures-aware fashion.</p>
 
 <p>This trait inherits from <code>io::Read</code> and indicates as a marker that an I/O
 object is <strong>nonblocking</strong>, meaning that it will return an error instead of
-blocking when bytes are read. Specifically this means that the <code>read</code>
-function for traits that implement this type can have a few return values:</p>
+blocking when bytes are unavailable, but the stream hasn&#39;t reached EOF.
+Specifically this means that the <code>read</code> function for types that implement
+this trait can have a few return values:</p>
 
 <ul>
 <li><code>Ok(n)</code> means that <code>n</code> bytes of data was immediately read and placed into
