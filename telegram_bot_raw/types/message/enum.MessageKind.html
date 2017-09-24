@@ -51,26 +51,26 @@
                </span><a class='srclink' href='../../../src/telegram_bot_raw/types/message.rs.html#56-173' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum MessageKind {
     Text {
-        data: <a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>,
-        entities: <a class="struct" href="https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.MessageEntity.html" title="struct telegram_bot_raw::types::message::MessageEntity">MessageEntity</a>&gt;,
+        data: <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>,
+        entities: <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.MessageEntity.html" title="struct telegram_bot_raw::types::message::MessageEntity">MessageEntity</a>&gt;,
     },
     Audio {
         data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.Audio.html" title="struct telegram_bot_raw::types::message::Audio">Audio</a>,
     },
     Document {
         data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.Document.html" title="struct telegram_bot_raw::types::message::Document">Document</a>,
-        caption: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>&gt;,
+        caption: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt;,
     },
     Photo {
-        data: <a class="struct" href="https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.PhotoSize.html" title="struct telegram_bot_raw::types::message::PhotoSize">PhotoSize</a>&gt;,
-        caption: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>&gt;,
+        data: <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.PhotoSize.html" title="struct telegram_bot_raw::types::message::PhotoSize">PhotoSize</a>&gt;,
+        caption: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt;,
     },
     Sticker {
         data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.Sticker.html" title="struct telegram_bot_raw::types::message::Sticker">Sticker</a>,
     },
     Video {
         data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.Video.html" title="struct telegram_bot_raw::types::message::Video">Video</a>,
-        caption: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>&gt;,
+        caption: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt;,
     },
     Voice {
         data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.Voice.html" title="struct telegram_bot_raw::types::message::Voice">Voice</a>,
@@ -88,13 +88,13 @@
         data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.Venue.html" title="struct telegram_bot_raw::types::message::Venue">Venue</a>,
     },
     NewChatMembers {
-        data: <a class="struct" href="https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/chat/struct.User.html" title="struct telegram_bot_raw::types::chat::User">User</a>&gt;,
+        data: <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/chat/struct.User.html" title="struct telegram_bot_raw::types::chat::User">User</a>&gt;,
     },
     LeftChatMember {
         data: <a class="struct" href="../../../telegram_bot_raw/types/chat/struct.User.html" title="struct telegram_bot_raw::types::chat::User">User</a>,
     },
     NewChatTitle {
-        data: <a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>,
+        data: <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>,
     },
     NewChatPhoto {
         data: <a class="struct" href="../../../telegram_bot_raw/types/message/struct.PhotoSize.html" title="struct telegram_bot_raw::types::message::PhotoSize">PhotoSize</a>,
@@ -118,8 +118,8 @@
 <span id='variant.Text' class='variant'><span id='Text.v' class='invisible'><code>Text</code></span></span><div class='docblock'><p>Text message.</p>
 </div><span class='docblock autohide sub-variant' id='variant.Text.fields'><h3 class='fields'>Fields of <code>Text</code></h3>
 
-                           <table><tr><td id='variant.Text.field.data'><span id='Text.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a></code></span></td><td><div class='docblock'><p>Actual UTF-8 text of the message, 0-4096 characters.</p>
-</div></td></tr><tr><td id='variant.Text.field.entities'><span id='Text.v.entities.v' class='invisible'><code>entities:&nbsp;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.MessageEntity.html" title="struct telegram_bot_raw::types::message::MessageEntity">MessageEntity</a>&gt;</code></span></td><td><div class='docblock'><p>Special entities like usernames, URLs, bot commands, etc. that appear in the text</p>
+                           <table><tr><td id='variant.Text.field.data'><span id='Text.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a></code></span></td><td><div class='docblock'><p>Actual UTF-8 text of the message, 0-4096 characters.</p>
+</div></td></tr><tr><td id='variant.Text.field.entities'><span id='Text.v.entities.v' class='invisible'><code>entities:&nbsp;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.MessageEntity.html" title="struct telegram_bot_raw::types::message::MessageEntity">MessageEntity</a>&gt;</code></span></td><td><div class='docblock'><p>Special entities like usernames, URLs, bot commands, etc. that appear in the text</p>
 </div></td></tr></table></span><span id='variant.Audio' class='variant'><span id='Audio.v' class='invisible'><code>Audio</code></span></span><div class='docblock'><p>Message is an audio file.</p>
 </div><span class='docblock autohide sub-variant' id='variant.Audio.fields'><h3 class='fields'>Fields of <code>Audio</code></h3>
 
@@ -128,12 +128,12 @@
 </div><span class='docblock autohide sub-variant' id='variant.Document.fields'><h3 class='fields'>Fields of <code>Document</code></h3>
 
                            <table><tr><td id='variant.Document.field.data'><span id='Document.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Document.html" title="struct telegram_bot_raw::types::message::Document">Document</a></code></span></td><td><div class='docblock'><p>Information about the file.</p>
-</div></td></tr><tr><td id='variant.Document.field.caption'><span id='Document.v.caption.v' class='invisible'><code>caption:&nbsp;<a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>&gt;</code></span></td><td><div class='docblock'><p>Caption for the document, 0-200 characters.</p>
+</div></td></tr><tr><td id='variant.Document.field.caption'><span id='Document.v.caption.v' class='invisible'><code>caption:&nbsp;<a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt;</code></span></td><td><div class='docblock'><p>Caption for the document, 0-200 characters.</p>
 </div></td></tr></table></span><span id='variant.Photo' class='variant'><span id='Photo.v' class='invisible'><code>Photo</code></span></span><div class='docblock'><p>Message is a photo.</p>
 </div><span class='docblock autohide sub-variant' id='variant.Photo.fields'><h3 class='fields'>Fields of <code>Photo</code></h3>
 
-                           <table><tr><td id='variant.Photo.field.data'><span id='Photo.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.PhotoSize.html" title="struct telegram_bot_raw::types::message::PhotoSize">PhotoSize</a>&gt;</code></span></td><td><div class='docblock'><p>Available sizes of the photo.</p>
-</div></td></tr><tr><td id='variant.Photo.field.caption'><span id='Photo.v.caption.v' class='invisible'><code>caption:&nbsp;<a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>&gt;</code></span></td><td><div class='docblock'><p>Caption for the photo, 0-200 characters.</p>
+                           <table><tr><td id='variant.Photo.field.data'><span id='Photo.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.PhotoSize.html" title="struct telegram_bot_raw::types::message::PhotoSize">PhotoSize</a>&gt;</code></span></td><td><div class='docblock'><p>Available sizes of the photo.</p>
+</div></td></tr><tr><td id='variant.Photo.field.caption'><span id='Photo.v.caption.v' class='invisible'><code>caption:&nbsp;<a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt;</code></span></td><td><div class='docblock'><p>Caption for the photo, 0-200 characters.</p>
 </div></td></tr></table></span><span id='variant.Sticker' class='variant'><span id='Sticker.v' class='invisible'><code>Sticker</code></span></span><div class='docblock'><p>Message is a sticker.</p>
 </div><span class='docblock autohide sub-variant' id='variant.Sticker.fields'><h3 class='fields'>Fields of <code>Sticker</code></h3>
 
@@ -142,7 +142,7 @@
 </div><span class='docblock autohide sub-variant' id='variant.Video.fields'><h3 class='fields'>Fields of <code>Video</code></h3>
 
                            <table><tr><td id='variant.Video.field.data'><span id='Video.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Video.html" title="struct telegram_bot_raw::types::message::Video">Video</a></code></span></td><td><div class='docblock'><p>Information about the video.</p>
-</div></td></tr><tr><td id='variant.Video.field.caption'><span id='Video.v.caption.v' class='invisible'><code>caption:&nbsp;<a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>&gt;</code></span></td><td><div class='docblock'><p>Caption for the video, 0-200 characters.</p>
+</div></td></tr><tr><td id='variant.Video.field.caption'><span id='Video.v.caption.v' class='invisible'><code>caption:&nbsp;<a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt;</code></span></td><td><div class='docblock'><p>Caption for the video, 0-200 characters.</p>
 </div></td></tr></table></span><span id='variant.Voice' class='variant'><span id='Voice.v' class='invisible'><code>Voice</code></span></span><div class='docblock'><p>Message is a voice message.</p>
 </div><span class='docblock autohide sub-variant' id='variant.Voice.fields'><h3 class='fields'>Fields of <code>Voice</code></h3>
 
@@ -167,7 +167,7 @@
 information about them (the bot itself may be one of these members)</p>
 </div><span class='docblock autohide sub-variant' id='variant.NewChatMembers.fields'><h3 class='fields'>Fields of <code>NewChatMembers</code></h3>
 
-                           <table><tr><td id='variant.NewChatMembers.field.data'><span id='NewChatMembers.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/chat/struct.User.html" title="struct telegram_bot_raw::types::chat::User">User</a>&gt;</code></span></td><td><div class='docblock'><p>Information about user (this member may be the bot itself).</p>
+                           <table><tr><td id='variant.NewChatMembers.field.data'><span id='NewChatMembers.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/chat/struct.User.html" title="struct telegram_bot_raw::types::chat::User">User</a>&gt;</code></span></td><td><div class='docblock'><p>Information about user (this member may be the bot itself).</p>
 </div></td></tr></table></span><span id='variant.LeftChatMember' class='variant'><span id='LeftChatMember.v' class='invisible'><code>LeftChatMember</code></span></span><div class='docblock'><p>A member was removed from the group.</p>
 </div><span class='docblock autohide sub-variant' id='variant.LeftChatMember.fields'><h3 class='fields'>Fields of <code>LeftChatMember</code></h3>
 
@@ -175,7 +175,7 @@ information about them (the bot itself may be one of these members)</p>
 </div></td></tr></table></span><span id='variant.NewChatTitle' class='variant'><span id='NewChatTitle.v' class='invisible'><code>NewChatTitle</code></span></span><div class='docblock'><p>New chat title.</p>
 </div><span class='docblock autohide sub-variant' id='variant.NewChatTitle.fields'><h3 class='fields'>Fields of <code>NewChatTitle</code></h3>
 
-                           <table><tr><td id='variant.NewChatTitle.field.data'><span id='NewChatTitle.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a></code></span></td><td><div class='docblock'><p>A chat title was changed to this value.</p>
+                           <table><tr><td id='variant.NewChatTitle.field.data'><span id='NewChatTitle.v.data.v' class='invisible'><code>data:&nbsp;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a></code></span></td><td><div class='docblock'><p>A chat title was changed to this value.</p>
 </div></td></tr></table></span><span id='variant.NewChatPhoto' class='variant'><span id='NewChatPhoto.v' class='invisible'><code>NewChatPhoto</code></span></span><div class='docblock'><p>New chat photo.</p>
 </div><span class='docblock autohide sub-variant' id='variant.NewChatPhoto.fields'><h3 class='fields'>Fields of <code>NewChatPhoto</code></h3>
 

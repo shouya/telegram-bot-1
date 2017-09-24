@@ -50,16 +50,16 @@
                    </a>
                </span><a class='srclink' href='../../../src/telegram_bot_raw/types/message.rs.html#450-464' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct RawMessageEntity {
-    pub type_: <a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>,
+    pub type_: <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>,
     pub offset: <a class="type" href="../../../telegram_bot_raw/types/primitive/type.Integer.html" title="type telegram_bot_raw::types::primitive::Integer">Integer</a>,
     pub length: <a class="type" href="../../../telegram_bot_raw/types/primitive/type.Integer.html" title="type telegram_bot_raw::types::primitive::Integer">Integer</a>,
-    pub url: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>&gt;,
+    pub url: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt;,
     pub user: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../../../telegram_bot_raw/types/chat/struct.User.html" title="struct telegram_bot_raw::types::chat::User">User</a>&gt;,
 }</pre><div class='docblock'><p>This object represents one special entity in a text message.
 For example, hashtags, usernames, URLs, etc. Directly mapped.</p>
 </div><h2 id='fields' class='fields'>Fields</h2><span id='structfield.type_' class="structfield">
                            <span id='type_.v' class='invisible'>
-                           <code>type_: <a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a></code>
+                           <code>type_: <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a></code>
                            </span></span><div class='docblock'><p>Type of the entity. Can be mention (@username), hashtag, bot_command, url, email,
 bold (bold text), italic (italic text), code (monowidth string), pre (monowidth block),
 text_link (for clickable text URLs), text_mention (for users without usernames).</p>
@@ -73,7 +73,7 @@ text_link (for clickable text URLs), text_mention (for users without usernames).
                            </span></span><div class='docblock'><p>Length of the entity in UTF-16 code units.</p>
 </div><span id='structfield.url' class="structfield">
                            <span id='url.v' class='invisible'>
-                           <code>url: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>&gt;</code>
+                           <code>url: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt;</code>
                            </span></span><div class='docblock'><p>For “text_link” only, url that will be opened after user taps on the text.</p>
 </div><span id='structfield.user' class="structfield">
                            <span id='user.v' class='invisible'>

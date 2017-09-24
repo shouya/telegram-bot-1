@@ -115,7 +115,7 @@ and store it, but rather you can simply leave a stored task in place. An
 answer of &quot;no&quot; typically means that you need to call <code>task::current()</code>
 and store it somewhere.</p>
 
-<p>As this is purely a peformance optimization a valid implementation for
+<p>As this is purely a performance optimization a valid implementation for
 this function is to always return <code>false</code>. A best effort is done to
 return <code>true</code> where possible, but false negatives may happen. Note that
 this function will not return a false positive, however.</p>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.15/src/task_impl/std/task_rc.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.16/src/task_impl/std/task_rc.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>task_rc.rs.html -- source</title>
@@ -188,7 +188,7 @@
 <span class="comment">// The purpose of this is to conceptually be able to store data in a task,</span>
 <span class="comment">// allowing it to be accessed within multiple futures at once. For example if</span>
 <span class="comment">// you have some concurrent futures working, they may all want mutable access to</span>
-<span class="comment">// some data. We already know that when the futures are being poll&#39;ed that we&#39;re</span>
+<span class="comment">// some data. We already know that when the futures are being poll&#39;d that we&#39;re</span>
 <span class="comment">// entirely synchronized (aka `&amp;mut Task`), so you shouldn&#39;t require an</span>
 <span class="comment">// `Arc&lt;Mutex&lt;T&gt;&gt;` to share as the synchronization isn&#39;t necessary!</span>
 <span class="comment">//</span>
