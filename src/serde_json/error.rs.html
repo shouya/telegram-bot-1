@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.3/src/error.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.4/src/error.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>error.rs.html -- source</title>
@@ -457,6 +457,11 @@
 <span id="412">412</span>
 <span id="413">413</span>
 <span id="414">414</span>
+<span id="415">415</span>
+<span id="416">416</span>
+<span id="417">417</span>
+<span id="418">418</span>
+<span id="419">419</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2017 Serde Developers</span>
 <span class="comment">//</span>
@@ -535,6 +540,7 @@
             <span class="ident">ErrorCode</span>::<span class="ident">InvalidUnicodeCodePoint</span> <span class="op">|</span>
             <span class="ident">ErrorCode</span>::<span class="ident">KeyMustBeAString</span> <span class="op">|</span>
             <span class="ident">ErrorCode</span>::<span class="ident">LoneLeadingSurrogateInHexEscape</span> <span class="op">|</span>
+            <span class="ident">ErrorCode</span>::<span class="ident">TrailingComma</span> <span class="op">|</span>
             <span class="ident">ErrorCode</span>::<span class="ident">TrailingCharacters</span> <span class="op">|</span>
             <span class="ident">ErrorCode</span>::<span class="ident">UnexpectedEndOfHexEscape</span> <span class="op">|</span>
             <span class="ident">ErrorCode</span>::<span class="ident">RecursionLimitExceeded</span> <span class="op">=&gt;</span> <span class="ident">Category</span>::<span class="ident">Syntax</span>,
@@ -704,6 +710,9 @@
     <span class="doccomment">/// Lone leading surrogate in hex escape.</span>
     <span class="ident">LoneLeadingSurrogateInHexEscape</span>,
 
+    <span class="doccomment">/// JSON has a comma after the last value in an array or map.</span>
+    <span class="ident">TrailingComma</span>,
+
     <span class="doccomment">/// JSON has non-whitespace trailing characters after the value.</span>
     <span class="ident">TrailingCharacters</span>,
 
@@ -781,6 +790,7 @@
             <span class="ident">ErrorCode</span>::<span class="ident">LoneLeadingSurrogateInHexEscape</span> <span class="op">=&gt;</span> {
                 <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;lone leading surrogate in hex escape&quot;</span>)
             }
+            <span class="ident">ErrorCode</span>::<span class="ident">TrailingComma</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;trailing comma&quot;</span>),
             <span class="ident">ErrorCode</span>::<span class="ident">TrailingCharacters</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;trailing characters&quot;</span>),
             <span class="ident">ErrorCode</span>::<span class="ident">UnexpectedEndOfHexEscape</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;unexpected end of hex escape&quot;</span>),
             <span class="ident">ErrorCode</span>::<span class="ident">RecursionLimitExceeded</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;recursion limit exceeded&quot;</span>),

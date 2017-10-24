@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.3/src/de.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.4/src/de.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>de.rs.html -- source</title>
@@ -1603,6 +1603,20 @@
 <span id="1558">1558</span>
 <span id="1559">1559</span>
 <span id="1560">1560</span>
+<span id="1561">1561</span>
+<span id="1562">1562</span>
+<span id="1563">1563</span>
+<span id="1564">1564</span>
+<span id="1565">1565</span>
+<span id="1566">1566</span>
+<span id="1567">1567</span>
+<span id="1568">1568</span>
+<span id="1569">1569</span>
+<span id="1570">1570</span>
+<span id="1571">1571</span>
+<span id="1572">1572</span>
+<span id="1573">1573</span>
+<span id="1574">1574</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2017 Serde Developers</span>
 <span class="comment">//</span>
@@ -2123,6 +2137,13 @@
                 <span class="self">self</span>.<span class="ident">eat_char</span>();
                 <span class="prelude-val">Ok</span>(())
             }
+            <span class="prelude-val">Some</span>(<span class="string">b&#39;,&#39;</span>) <span class="op">=&gt;</span> {
+                <span class="self">self</span>.<span class="ident">eat_char</span>();
+                <span class="kw">match</span> <span class="self">self</span>.<span class="ident">parse_whitespace</span>() {
+                    <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="string">b&#39;]&#39;</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="self">self</span>.<span class="ident">peek_error</span>(<span class="ident">ErrorCode</span>::<span class="ident">TrailingComma</span>)),
+                    _ <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="self">self</span>.<span class="ident">peek_error</span>(<span class="ident">ErrorCode</span>::<span class="ident">TrailingCharacters</span>)),
+                }
+            }
             <span class="prelude-val">Some</span>(_) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="self">self</span>.<span class="ident">peek_error</span>(<span class="ident">ErrorCode</span>::<span class="ident">TrailingCharacters</span>)),
             <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="self">self</span>.<span class="ident">peek_error</span>(<span class="ident">ErrorCode</span>::<span class="ident">EofWhileParsingList</span>)),
         }
@@ -2134,6 +2155,7 @@
                 <span class="self">self</span>.<span class="ident">eat_char</span>();
                 <span class="prelude-val">Ok</span>(())
             }
+            <span class="prelude-val">Some</span>(<span class="string">b&#39;,&#39;</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="self">self</span>.<span class="ident">peek_error</span>(<span class="ident">ErrorCode</span>::<span class="ident">TrailingComma</span>)),
             <span class="prelude-val">Some</span>(_) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="self">self</span>.<span class="ident">peek_error</span>(<span class="ident">ErrorCode</span>::<span class="ident">TrailingCharacters</span>)),
             <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="self">self</span>.<span class="ident">peek_error</span>(<span class="ident">ErrorCode</span>::<span class="ident">EofWhileParsingObject</span>)),
         }
@@ -2600,16 +2622,18 @@
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">de</span>::<span class="ident">DeserializeSeed</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
     {
-        <span class="kw">match</span> <span class="macro">try</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">de</span>.<span class="ident">parse_whitespace</span>()) {
+        <span class="kw">let</span> <span class="ident">peek</span> <span class="op">=</span> <span class="kw">match</span> <span class="macro">try</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">de</span>.<span class="ident">parse_whitespace</span>()) {
             <span class="prelude-val">Some</span>(<span class="string">b&#39;]&#39;</span>) <span class="op">=&gt;</span> {
                 <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>);
             }
             <span class="prelude-val">Some</span>(<span class="string">b&#39;,&#39;</span>) <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">first</span> <span class="op">=&gt;</span> {
                 <span class="self">self</span>.<span class="ident">de</span>.<span class="ident">eat_char</span>();
+                <span class="macro">try</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">de</span>.<span class="ident">parse_whitespace</span>())
             }
-            <span class="prelude-val">Some</span>(_) <span class="op">=&gt;</span> {
+            <span class="prelude-val">Some</span>(<span class="ident">b</span>) <span class="op">=&gt;</span> {
                 <span class="kw">if</span> <span class="self">self</span>.<span class="ident">first</span> {
                     <span class="self">self</span>.<span class="ident">first</span> <span class="op">=</span> <span class="bool-val">false</span>;
+                    <span class="prelude-val">Some</span>(<span class="ident">b</span>)
                 } <span class="kw">else</span> {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="self">self</span>.<span class="ident">de</span>.<span class="ident">peek_error</span>(<span class="ident">ErrorCode</span>::<span class="ident">ExpectedListCommaOrEnd</span>));
                 }
@@ -2617,10 +2641,13 @@
             <span class="prelude-val">None</span> <span class="op">=&gt;</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="self">self</span>.<span class="ident">de</span>.<span class="ident">peek_error</span>(<span class="ident">ErrorCode</span>::<span class="ident">EofWhileParsingList</span>));
             }
-        }
+        };
 
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="macro">try</span><span class="macro">!</span>(<span class="ident">seed</span>.<span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">de</span>));
-        <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">value</span>))
+        <span class="kw">match</span> <span class="ident">peek</span> {
+            <span class="prelude-val">Some</span>(<span class="string">b&#39;]&#39;</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="self">self</span>.<span class="ident">de</span>.<span class="ident">peek_error</span>(<span class="ident">ErrorCode</span>::<span class="ident">TrailingComma</span>)),
+            <span class="prelude-val">Some</span>(_) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="macro">try</span><span class="macro">!</span>(<span class="ident">seed</span>.<span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">de</span>)))),
+            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="self">self</span>.<span class="ident">de</span>.<span class="ident">peek_error</span>(<span class="ident">ErrorCode</span>::<span class="ident">EofWhileParsingValue</span>)),
+        }
     }
 }
 
@@ -2668,6 +2695,7 @@
 
         <span class="kw">match</span> <span class="ident">peek</span> {
             <span class="prelude-val">Some</span>(<span class="string">b&#39;&quot;&#39;</span>) <span class="op">=&gt;</span> <span class="ident">seed</span>.<span class="ident">deserialize</span>(<span class="ident">MapKey</span> { <span class="ident">de</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">de</span> }).<span class="ident">map</span>(<span class="prelude-val">Some</span>),
+            <span class="prelude-val">Some</span>(<span class="string">b&#39;}&#39;</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="self">self</span>.<span class="ident">de</span>.<span class="ident">peek_error</span>(<span class="ident">ErrorCode</span>::<span class="ident">TrailingComma</span>)),
             <span class="prelude-val">Some</span>(_) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="self">self</span>.<span class="ident">de</span>.<span class="ident">peek_error</span>(<span class="ident">ErrorCode</span>::<span class="ident">KeyMustBeAString</span>)),
             <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="self">self</span>.<span class="ident">de</span>.<span class="ident">peek_error</span>(<span class="ident">ErrorCode</span>::<span class="ident">EofWhileParsingValue</span>)),
         }

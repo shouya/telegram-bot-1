@@ -57,8 +57,12 @@ between.</p>
 
 <p>Sessions are created through the <code>Session::new</code> method, which returns a
 future that will resolve to a session once it&#39;s been initialized.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../tokio_curl/struct.Session.html" title="struct tokio_curl::Session">Session</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/tokio_curl/lib.rs.html#119-153' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(handle: <a class="struct" href="../tokio_core/reactor/struct.Handle.html" title="struct tokio_core::reactor::Handle">Handle</a>) -&gt; <a class="struct" href="../tokio_curl/struct.Session.html" title="struct tokio_curl::Session">Session</a></code></span></h4>
+</div>
+                    <h2 id='methods' class='small-section-header'>
+                      Methods<a href='#methods' class='anchor'></a>
+                    </h2>
+                <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../tokio_curl/struct.Session.html" title="struct tokio_curl::Session">Session</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/tokio_curl/lib.rs.html#119-153' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(handle: <a class="struct" href="../tokio_core/reactor/struct.Handle.html" title="struct tokio_core::reactor::Handle">Handle</a>) -&gt; <a class="struct" href="../tokio_curl/struct.Session.html" title="struct tokio_curl::Session">Session</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/tokio_curl/lib.rs.html#131-133' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Creates a new HTTP session object which will be bound to the given event
 loop.</p>
 
@@ -70,7 +74,7 @@ thread.</p>
 
 <p>This function returns a future which will resolve to a <code>Session</code> once
 it&#39;s been initialized.</p>
-</div><h4 id='method.perform' class="method"><span id='perform.v' class='invisible'><code>fn <a href='#method.perform' class='fnname'>perform</a>(&amp;self, handle: <a class="struct" href="../curl/easy/handle/struct.Easy.html" title="struct curl::easy::handle::Easy">Easy</a>) -&gt; <a class="struct" href="../tokio_curl/struct.Perform.html" title="struct tokio_curl::Perform">Perform</a></code></span></h4>
+</div><h4 id='method.perform' class="method"><span id='perform.v' class='invisible'><code>fn <a href='#method.perform' class='fnname'>perform</a>(&amp;self, handle: <a class="struct" href="../curl/easy/handle/struct.Easy.html" title="struct curl::easy::handle::Easy">Easy</a>) -&gt; <a class="struct" href="../tokio_curl/struct.Perform.html" title="struct tokio_curl::Perform">Perform</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/tokio_curl/lib.rs.html#150-152' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Execute and HTTP request asynchronously, returning a future representing
 the request&#39;s completion.</p>
 
@@ -86,10 +90,14 @@ otherwise fatal errors for the <code>Easy</code> provided.</p>
 
 <p>Note that if the <code>Perform</code> future is dropped it will cancel the
 outstanding HTTP request, cleaning up all resources associated with it.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="struct" href="../tokio_curl/struct.Session.html" title="struct tokio_curl::Session">Session</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/tokio_curl/lib.rs.html#96' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class="struct" href="../tokio_curl/struct.Session.html" title="struct tokio_curl::Session">Session</a></code></span></h4>
+</div></div>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Clone' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="struct" href="../tokio_curl/struct.Session.html" title="struct tokio_curl::Session">Session</a></code><a href='#impl-Clone' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/tokio_curl/lib.rs.html#96' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class="struct" href="../tokio_curl/struct.Session.html" title="struct tokio_curl::Session">Session</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/tokio_curl/lib.rs.html#96' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
-</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>Self)</code></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/clone.rs.html#112-114' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
 </div></div></section>
     <section id='search' class="content hidden"></section>

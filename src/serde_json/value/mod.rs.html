@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.3/src/value/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.4/src/value/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -1072,6 +1072,16 @@
 <span id="1027">1027</span>
 <span id="1028">1028</span>
 <span id="1029">1029</span>
+<span id="1030">1030</span>
+<span id="1031">1031</span>
+<span id="1032">1032</span>
+<span id="1033">1033</span>
+<span id="1034">1034</span>
+<span id="1035">1035</span>
+<span id="1036">1036</span>
+<span id="1037">1037</span>
+<span id="1038">1038</span>
+<span id="1039">1039</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2017 Serde Developers</span>
 <span class="comment">//</span>
@@ -1535,6 +1545,16 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// // The boolean `false` is not a string.</span>
     <span class="doccomment">/// assert_eq!(v[&quot;b&quot;].as_str(), None);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// // JSON values are printed in JSON representation, so strings are in quotes.</span>
+    <span class="doccomment">/// //</span>
+    <span class="doccomment">/// //    The value is: &quot;some string&quot;</span>
+    <span class="doccomment">/// println!(&quot;The value is: {}&quot;, v[&quot;a&quot;]);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// // Rust strings are printed without quotes.</span>
+    <span class="doccomment">/// //</span>
+    <span class="doccomment">/// //    The value is: some string</span>
+    <span class="doccomment">/// println!(&quot;The value is: {}&quot;, v[&quot;a&quot;].as_str().unwrap());</span>
     <span class="doccomment">/// # }</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_str</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> {
