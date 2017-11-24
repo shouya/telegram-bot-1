@@ -8,6 +8,7 @@ implementors["serde"] = ["impl <a class=\"trait\" href=\"https://doc.rust-lang.o
 implementors["serde_json"] = ["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/std/error/trait.Error.html\" title=\"trait std::error::Error\">Error</a> for <a class=\"struct\" href=\"serde_json/error/struct.Error.html\" title=\"struct serde_json::error::Error\">Error</a>",];
 implementors["telegram_bot"] = ["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/std/error/trait.Error.html\" title=\"trait std::error::Error\">Error</a> for <a class=\"struct\" href=\"telegram_bot/struct.Error.html\" title=\"struct telegram_bot::Error\">Error</a>",];
 implementors["tokio_curl"] = ["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/std/error/trait.Error.html\" title=\"trait std::error::Error\">Error</a> for <a class=\"struct\" href=\"tokio_curl/struct.PerformError.html\" title=\"struct tokio_curl::PerformError\">PerformError</a>",];
+implementors["tokio_io"] = ["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/std/error/trait.Error.html\" title=\"trait std::error::Error\">StdError</a> for <a class=\"struct\" href=\"tokio_io/codec/length_delimited/struct.FrameTooBig.html\" title=\"struct tokio_io::codec::length_delimited::FrameTooBig\">FrameTooBig</a>",];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.10/src/net/udp.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.11/src/net/udp.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>udp.rs.html -- source</title>
@@ -469,6 +469,14 @@
         <span class="self">self</span>.<span class="ident">sys</span>.<span class="ident">connect</span>(<span class="ident">addr</span>)
     }
 
+    <span class="doccomment">/// Sets the value of the `SO_BROADCAST` option for this socket.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// When enabled, this socket is allowed to send packets to a broadcast</span>
+    <span class="doccomment">/// address.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_broadcast</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">on</span>: <span class="ident">bool</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">sys</span>.<span class="ident">set_broadcast</span>(<span class="ident">on</span>)
+    }
+
     <span class="doccomment">/// Gets the value of the `SO_BROADCAST` option for this socket.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// For more information about this option, see</span>
@@ -479,12 +487,12 @@
         <span class="self">self</span>.<span class="ident">sys</span>.<span class="ident">broadcast</span>()
     }
 
-    <span class="doccomment">/// Sets the value of the `SO_BROADCAST` option for this socket.</span>
+    <span class="doccomment">/// Sets the value of the `IP_MULTICAST_LOOP` option for this socket.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// When enabled, this socket is allowed to send packets to a broadcast</span>
-    <span class="doccomment">/// address.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_broadcast</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">on</span>: <span class="ident">bool</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">sys</span>.<span class="ident">set_broadcast</span>(<span class="ident">on</span>)
+    <span class="doccomment">/// If enabled, multicast packets will be looped back to the local socket.</span>
+    <span class="doccomment">/// Note that this may not have any affect on IPv6 sockets.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_multicast_loop_v4</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">on</span>: <span class="ident">bool</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">sys</span>.<span class="ident">set_multicast_loop_v4</span>(<span class="ident">on</span>)
     }
 
     <span class="doccomment">/// Gets the value of the `IP_MULTICAST_LOOP` option for this socket.</span>
@@ -495,24 +503,6 @@
     <span class="doccomment">/// [link]: #method.set_multicast_loop_v4</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">multicast_loop_v4</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">sys</span>.<span class="ident">multicast_loop_v4</span>()
-    }
-
-    <span class="doccomment">/// Sets the value of the `IP_MULTICAST_LOOP` option for this socket.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// If enabled, multicast packets will be looped back to the local socket.</span>
-    <span class="doccomment">/// Note that this may not have any affect on IPv6 sockets.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_multicast_loop_v4</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">on</span>: <span class="ident">bool</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">sys</span>.<span class="ident">set_multicast_loop_v4</span>(<span class="ident">on</span>)
-    }
-
-    <span class="doccomment">/// Gets the value of the `IP_MULTICAST_TTL` option for this socket.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// For more information about this option, see</span>
-    <span class="doccomment">/// [`set_multicast_ttl_v4`][link].</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// [link]: #method.set_multicast_ttl_v4</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">multicast_ttl_v4</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">sys</span>.<span class="ident">multicast_ttl_v4</span>()
     }
 
     <span class="doccomment">/// Sets the value of the `IP_MULTICAST_TTL` option for this socket.</span>
@@ -526,14 +516,14 @@
         <span class="self">self</span>.<span class="ident">sys</span>.<span class="ident">set_multicast_ttl_v4</span>(<span class="ident">ttl</span>)
     }
 
-    <span class="doccomment">/// Gets the value of the `IPV6_MULTICAST_LOOP` option for this socket.</span>
+    <span class="doccomment">/// Gets the value of the `IP_MULTICAST_TTL` option for this socket.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// For more information about this option, see</span>
-    <span class="doccomment">/// [`set_multicast_loop_v6`][link].</span>
+    <span class="doccomment">/// [`set_multicast_ttl_v4`][link].</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// [link]: #method.set_multicast_loop_v6</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">multicast_loop_v6</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">sys</span>.<span class="ident">multicast_loop_v6</span>()
+    <span class="doccomment">/// [link]: #method.set_multicast_ttl_v4</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">multicast_ttl_v4</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">sys</span>.<span class="ident">multicast_ttl_v4</span>()
     }
 
     <span class="doccomment">/// Sets the value of the `IPV6_MULTICAST_LOOP` option for this socket.</span>
@@ -544,13 +534,14 @@
         <span class="self">self</span>.<span class="ident">sys</span>.<span class="ident">set_multicast_loop_v6</span>(<span class="ident">on</span>)
     }
 
-    <span class="doccomment">/// Gets the value of the `IP_TTL` option for this socket.</span>
+    <span class="doccomment">/// Gets the value of the `IPV6_MULTICAST_LOOP` option for this socket.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// For more information about this option, see [`set_ttl`][link].</span>
+    <span class="doccomment">/// For more information about this option, see</span>
+    <span class="doccomment">/// [`set_multicast_loop_v6`][link].</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// [link]: #method.set_ttl</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ttl</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">sys</span>.<span class="ident">ttl</span>()
+    <span class="doccomment">/// [link]: #method.set_multicast_loop_v6</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">multicast_loop_v6</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">sys</span>.<span class="ident">multicast_loop_v6</span>()
     }
 
     <span class="doccomment">/// Sets the value for the `IP_TTL` option on this socket.</span>
@@ -559,6 +550,15 @@
     <span class="doccomment">/// from this socket.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_ttl</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ttl</span>: <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">sys</span>.<span class="ident">set_ttl</span>(<span class="ident">ttl</span>)
+    }
+
+    <span class="doccomment">/// Gets the value of the `IP_TTL` option for this socket.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// For more information about this option, see [`set_ttl`][link].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [link]: #method.set_ttl</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ttl</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">sys</span>.<span class="ident">ttl</span>()
     }
 
     <span class="doccomment">/// Executes an operation of the `IP_ADD_MEMBERSHIP` type.</span>

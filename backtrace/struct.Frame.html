@@ -60,7 +60,7 @@ until runtime.</p>
                       Methods<a href='#methods' class='anchor'></a>
                     </h2>
                 <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../backtrace/struct.Frame.html" title="struct backtrace::Frame">Frame</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/backtrace/backtrace/mod.rs.html#55-79' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.ip' class="method"><span id='ip.v' class='invisible'><code>fn <a href='#method.ip' class='fnname'>ip</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/backtrace/backtrace/mod.rs.html#64-66' title='goto source code'>[src]</a></span></h4>
+<div class='impl-items'><h4 id='method.ip' class="method"><span id='ip.v' class='invisible'><code>pub fn <a href='#method.ip' class='fnname'>ip</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/backtrace/backtrace/mod.rs.html#64-66' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Returns the current instruction pointer of this frame.</p>
 
 <p>This is normally the next instruction to execute in the frame, but not
@@ -69,7 +69,7 @@ pretty close).</p>
 
 <p>It is recommended to pass this value to <code>backtrace::resolve</code> to turn it
 into a symbol name.</p>
-</div><h4 id='method.symbol_address' class="method"><span id='symbol_address.v' class='invisible'><code>fn <a href='#method.symbol_address' class='fnname'>symbol_address</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/backtrace/backtrace/mod.rs.html#76-78' title='goto source code'>[src]</a></span></h4>
+</div><h4 id='method.symbol_address' class="method"><span id='symbol_address.v' class='invisible'><code>pub fn <a href='#method.symbol_address' class='fnname'>symbol_address</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/backtrace/backtrace/mod.rs.html#76-78' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Returns the starting symbol address of the frame of this function.</p>
 
 <p>This will attempt to rewind the instruction pointer returned by <code>ip</code> to

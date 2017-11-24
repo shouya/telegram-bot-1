@@ -58,7 +58,7 @@ program and later used to inspect what the backtrace was at that time.</p>
                       Methods<a href='#methods' class='anchor'></a>
                     </h2>
                 <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../backtrace/struct.Backtrace.html" title="struct backtrace::Backtrace">Backtrace</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/backtrace/capture.rs.html#46-128' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class="struct" href="../backtrace/struct.Backtrace.html" title="struct backtrace::Backtrace">Backtrace</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/backtrace/capture.rs.html#62-66' title='goto source code'>[src]</a></span></h4>
+<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>pub fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class="struct" href="../backtrace/struct.Backtrace.html" title="struct backtrace::Backtrace">Backtrace</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/backtrace/capture.rs.html#62-66' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Captures a backtrace at the callsite of this function, returning an
 owned representation.</p>
 
@@ -72,7 +72,7 @@ contained.</p>
 <span class="kw">use</span> <span class="ident">backtrace</span>::<span class="ident">Backtrace</span>;
 
 <span class="kw">let</span> <span class="ident">current_backtrace</span> <span class="op">=</span> <span class="ident">Backtrace</span>::<span class="ident">new</span>();</pre>
-</div><h4 id='method.new_unresolved' class="method"><span id='new_unresolved.v' class='invisible'><code>fn <a href='#method.new_unresolved' class='fnname'>new_unresolved</a>() -&gt; <a class="struct" href="../backtrace/struct.Backtrace.html" title="struct backtrace::Backtrace">Backtrace</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/backtrace/capture.rs.html#86-98' title='goto source code'>[src]</a></span></h4>
+</div><h4 id='method.new_unresolved' class="method"><span id='new_unresolved.v' class='invisible'><code>pub fn <a href='#method.new_unresolved' class='fnname'>new_unresolved</a>() -&gt; <a class="struct" href="../backtrace/struct.Backtrace.html" title="struct backtrace::Backtrace">Backtrace</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/backtrace/capture.rs.html#86-98' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Similar to <code>new</code> except that this does not resolve any symbols, this
 simply captures the backtrace as a list of addresses.</p>
 
@@ -89,13 +89,13 @@ whereas any one backtrace may only be rarely printed.</p>
 <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">current_backtrace</span>); <span class="comment">// no symbol names</span>
 <span class="ident">current_backtrace</span>.<span class="ident">resolve</span>();
 <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">current_backtrace</span>); <span class="comment">// symbol names now present</span></pre>
-</div><h4 id='method.frames' class="method"><span id='frames.v' class='invisible'><code>fn <a href='#method.frames' class='fnname'>frames</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a><a class="struct" href="../backtrace/struct.BacktraceFrame.html" title="struct backtrace::BacktraceFrame">BacktraceFrame</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/backtrace/capture.rs.html#105-107' title='goto source code'>[src]</a></span></h4>
+</div><h4 id='method.frames' class="method"><span id='frames.v' class='invisible'><code>pub fn <a href='#method.frames' class='fnname'>frames</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a><a class="struct" href="../backtrace/struct.BacktraceFrame.html" title="struct backtrace::BacktraceFrame">BacktraceFrame</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/backtrace/capture.rs.html#105-107' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Returns the frames from when this backtrace was captured.</p>
 
 <p>The first entry of this slice is likely the function <code>Backtrace::new</code>,
 and the last frame is likely something about how this thread or the main
 function started.</p>
-</div><h4 id='method.resolve' class="method"><span id='resolve.v' class='invisible'><code>fn <a href='#method.resolve' class='fnname'>resolve</a>(&amp;mut self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/backtrace/capture.rs.html#114-127' title='goto source code'>[src]</a></span></h4>
+</div><h4 id='method.resolve' class="method"><span id='resolve.v' class='invisible'><code>pub fn <a href='#method.resolve' class='fnname'>resolve</a>(&amp;mut self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/backtrace/capture.rs.html#114-127' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>If this backtrace was created from <code>new_unresolved</code> then this function
 will resolve all addresses in the backtrace to their symbolic names.</p>
 

@@ -64,7 +64,7 @@ polled and is scheduled to be dropped. This can be canceled with the
                       Methods<a href='#methods' class='anchor'></a>
                     </h2>
                 <h3 id='impl' class='impl'><span class='in-band'><code>impl&lt;T, E&gt; <a class="struct" href="../../../futures/sync/oneshot/struct.SpawnHandle.html" title="struct futures::sync::oneshot::SpawnHandle">SpawnHandle</a>&lt;T, E&gt;</code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/futures/sync/oneshot.rs.html#479-488' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.forget' class="method"><span id='forget.v' class='invisible'><code>fn <a href='#method.forget' class='fnname'>forget</a>(self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/futures/sync/oneshot.rs.html#485-487' title='goto source code'>[src]</a></span></h4>
+<div class='impl-items'><h4 id='method.forget' class="method"><span id='forget.v' class='invisible'><code>pub fn <a href='#method.forget' class='fnname'>forget</a>(self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/futures/sync/oneshot.rs.html#485-487' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Drop this future without canceling the underlying future.</p>
 
 <p>When <code>SpawnHandle</code> is dropped, the spawned future will be canceled as

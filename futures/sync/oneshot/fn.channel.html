@@ -65,15 +65,15 @@ was given to the <code>Sender</code> handle.</p>
 <span class="kw">use</span> <span class="ident">futures</span>::<span class="ident">sync</span>::<span class="ident">oneshot</span>;
 <span class="kw">use</span> <span class="ident">futures</span>::<span class="kw-2">*</span>;
 
-<span class="kw">let</span> (<span class="ident">c</span>, <span class="ident">p</span>) <span class="op">=</span> <span class="ident">oneshot</span>::<span class="ident">channel</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>();
+<span class="kw">let</span> (<span class="ident">p</span>, <span class="ident">c</span>) <span class="op">=</span> <span class="ident">oneshot</span>::<span class="ident">channel</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>();
 
 <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="op">||</span> {
-    <span class="ident">p</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> {
+    <span class="ident">c</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> {
         <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;got: {}&quot;</span>, <span class="ident">i</span>);
     }).<span class="ident">wait</span>();
 });
 
-<span class="ident">c</span>.<span class="ident">send</span>(<span class="number">3</span>).<span class="ident">unwrap</span>();</pre>
+<span class="ident">p</span>.<span class="ident">send</span>(<span class="number">3</span>).<span class="ident">unwrap</span>();</pre>
 </div></section>
     <section id='search' class="content hidden"></section>
 

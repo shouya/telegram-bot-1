@@ -58,7 +58,7 @@ handle may also be extracted.</p>
                       Methods<a href='#methods' class='anchor'></a>
                     </h2>
                 <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../tokio_curl/struct.PerformError.html" title="struct tokio_curl::PerformError">PerformError</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/tokio_curl/lib.rs.html#171-197' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.take_easy' class="method"><span id='take_easy.v' class='invisible'><code>fn <a href='#method.take_easy' class='fnname'>take_easy</a>(&amp;mut self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../curl/easy/handle/struct.Easy.html" title="struct curl::easy::handle::Easy">Easy</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/tokio_curl/lib.rs.html#182-184' title='goto source code'>[src]</a></span></h4>
+<div class='impl-items'><h4 id='method.take_easy' class="method"><span id='take_easy.v' class='invisible'><code>pub fn <a href='#method.take_easy' class='fnname'>take_easy</a>(&amp;mut self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../curl/easy/handle/struct.Easy.html" title="struct curl::easy::handle::Easy">Easy</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/tokio_curl/lib.rs.html#182-184' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Attempts to extract the underlying <code>Easy</code> handle, if one is available.</p>
 
 <p>For some HTTP requests that fail the <code>Easy</code> handle is still available to
@@ -69,7 +69,7 @@ method can be called to extract the easy handle.</p>
 <p>Note that not all failed HTTP requests will have an easy handle
 available to return. Some requests may end up destroying the original
 easy handle as it couldn&#39;t be reclaimed.</p>
-</div><h4 id='method.into_error' class="method"><span id='into_error.v' class='invisible'><code>fn <a href='#method.into_error' class='fnname'>into_error</a>(self) -&gt; <a class="struct" href="https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html" title="struct std::io::error::Error">Error</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/tokio_curl/lib.rs.html#194-196' title='goto source code'>[src]</a></span></h4>
+</div><h4 id='method.into_error' class="method"><span id='into_error.v' class='invisible'><code>pub fn <a href='#method.into_error' class='fnname'>into_error</a>(self) -&gt; <a class="struct" href="https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html" title="struct std::io::error::Error">Error</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/tokio_curl/lib.rs.html#194-196' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Returns the underlying I/O error that caused this error.</p>
 
 <p>All <code>PerformError</code> structures will have an associated I/O error with

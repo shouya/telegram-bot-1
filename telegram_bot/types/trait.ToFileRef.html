@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'>Trait ToFileRef</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>telegram_bot</a>::<wbr><a href='index.html'>types</a></p><script>window.sidebarCurrent = {name: 'ToFileRef', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait ToFileRef</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#foreign-impls">Implementations on Foreign Types</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>telegram_bot</a>::<wbr><a href='index.html'>types</a></p><script>window.sidebarCurrent = {name: 'ToFileRef', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -58,18 +58,23 @@
             </h2>
             <div class='methods'>
         <h3 id='tymethod.to_file_ref' class='method'><span id='to_file_ref.v' class='invisible'><code>fn <a href='#tymethod.to_file_ref' class='fnname'>to_file_ref</a>(&amp;self) -&gt; <a class="struct" href="../../telegram_bot/types/struct.FileRef.html" title="struct telegram_bot::types::FileRef">FileRef</a></code></span></h3></div>
+                <h2 id='foreign-impls' class='section-header'>
+                  Implementations on Foreign Types<a href='#foreign-impls' class='anchor'></a>
+                </h2>
+            <h3 id='impl-ToFileRef' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../telegram_bot/types/trait.ToFileRef.html" title="trait telegram_bot::types::ToFileRef">ToFileRef</a> for <a class="struct" href="../../telegram_bot_raw/types/message/struct.VideoNote.html" title="struct telegram_bot_raw::types::message::VideoNote">VideoNote</a></code><a href='#impl-ToFileRef' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/telegram_bot_raw/types/refs.rs.html#264-268' title='goto source code'>[src]</a></span></h3>
+<span class='docblock autohide'><div class='impl-items'><h4 id='method.to_file_ref' class="method"><span id='to_file_ref.v-1' class='invisible'><code>fn <a href='#method.to_file_ref' class='fnname'>to_file_ref</a>(&amp;self) -&gt; <a class="struct" href="../../telegram_bot/types/struct.FileRef.html" title="struct telegram_bot::types::FileRef">FileRef</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/telegram_bot_raw/types/refs.rs.html#265-267' title='goto source code'>[src]</a></span></h4>
+</div></span>
         <h2 id='implementors' class='small-section-header'>
           Implementors<a href='#implementors' class='anchor'></a>
         </h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;S&gt; ToFileRef for S <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;S: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/deref/trait.Deref.html" title="trait core::ops::deref::Deref">Deref</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;S as <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/deref/trait.Deref.html" title="trait core::ops::deref::Deref">Deref</a>&gt;::<a class="type" href="https://doc.rust-lang.org/nightly/core/ops/deref/trait.Deref.html#associatedtype.Target" title="type core::ops::deref::Deref::Target">Target</a>: <a class="trait" href="../../telegram_bot/types/trait.ToFileRef.html" title="trait telegram_bot::types::ToFileRef">ToFileRef</a>,&nbsp;</span></code></li>
-<li><code>impl ToFileRef for <a class="struct" href="../../telegram_bot/types/struct.Document.html" title="struct telegram_bot::types::Document">Document</a></code></li>
-<li><code>impl ToFileRef for <a class="struct" href="../../telegram_bot_raw/types/message/struct.VideoNote.html" title="struct telegram_bot_raw::types::message::VideoNote">VideoNote</a></code></li>
-<li><code>impl ToFileRef for <a class="struct" href="../../telegram_bot/types/struct.Voice.html" title="struct telegram_bot::types::Voice">Voice</a></code></li>
-<li><code>impl ToFileRef for <a class="struct" href="../../telegram_bot/types/struct.PhotoSize.html" title="struct telegram_bot::types::PhotoSize">PhotoSize</a></code></li>
-<li><code>impl ToFileRef for <a class="struct" href="../../telegram_bot/types/struct.Audio.html" title="struct telegram_bot::types::Audio">Audio</a></code></li>
-<li><code>impl ToFileRef for <a class="struct" href="../../telegram_bot/types/struct.Sticker.html" title="struct telegram_bot::types::Sticker">Sticker</a></code></li>
-<li><code>impl ToFileRef for <a class="struct" href="../../telegram_bot/types/struct.Video.html" title="struct telegram_bot::types::Video">Video</a></code></li>
+    <li><div class='out-of-band'><a class='srclink' href='../../src/telegram_bot_raw/types/refs.rs.html#264-268' title='goto source code'>[src]</a></div><code>impl ToFileRef for <a class="struct" href="../../telegram_bot/types/struct.Voice.html" title="struct telegram_bot::types::Voice">Voice</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/telegram_bot_raw/types/refs.rs.html#264-268' title='goto source code'>[src]</a></div><code>impl ToFileRef for <a class="struct" href="../../telegram_bot/types/struct.PhotoSize.html" title="struct telegram_bot::types::PhotoSize">PhotoSize</a></code></li>
+<li><code>impl&lt;S&gt; ToFileRef for S <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;S: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/deref/trait.Deref.html" title="trait core::ops::deref::Deref">Deref</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;S as <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/deref/trait.Deref.html" title="trait core::ops::deref::Deref">Deref</a>&gt;::<a class="type" href="https://doc.rust-lang.org/nightly/core/ops/deref/trait.Deref.html#associatedtype.Target" title="type core::ops::deref::Deref::Target">Target</a>: <a class="trait" href="../../telegram_bot/types/trait.ToFileRef.html" title="trait telegram_bot::types::ToFileRef">ToFileRef</a>,&nbsp;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/telegram_bot_raw/types/refs.rs.html#264-268' title='goto source code'>[src]</a></div><code>impl ToFileRef for <a class="struct" href="../../telegram_bot/types/struct.Audio.html" title="struct telegram_bot::types::Audio">Audio</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/telegram_bot_raw/types/refs.rs.html#264-268' title='goto source code'>[src]</a></div><code>impl ToFileRef for <a class="struct" href="../../telegram_bot/types/struct.Video.html" title="struct telegram_bot::types::Video">Video</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/telegram_bot_raw/types/refs.rs.html#264-268' title='goto source code'>[src]</a></div><code>impl ToFileRef for <a class="struct" href="../../telegram_bot/types/struct.Document.html" title="struct telegram_bot::types::Document">Document</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/telegram_bot_raw/types/refs.rs.html#264-268' title='goto source code'>[src]</a></div><code>impl ToFileRef for <a class="struct" href="../../telegram_bot/types/struct.Sticker.html" title="struct telegram_bot::types::Sticker">Sticker</a></code></li>
 </ul><script type="text/javascript" async
                          src="../../implementors/telegram_bot_raw/types/refs/trait.ToFileRef.js">
                  </script></section>

@@ -59,7 +59,7 @@ details.</p>
                       Methods<a href='#methods' class='anchor'></a>
                     </h2>
                 <h3 id='impl' class='impl'><span class='in-band'><code>impl&lt;B:&nbsp;<a class="trait" href="../../bytes/buf/trait.BufMut.html" title="trait bytes::buf::BufMut">BufMut</a>&gt; <a class="struct" href="../../bytes/buf/struct.Writer.html" title="struct bytes::buf::Writer">Writer</a>&lt;B&gt;</code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/bytes/buf/writer.rs.html#19-75' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.get_ref' class="method"><span id='get_ref.v' class='invisible'><code>fn <a href='#method.get_ref' class='fnname'>get_ref</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>B</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/bytes/buf/writer.rs.html#33-35' title='goto source code'>[src]</a></span></h4>
+<div class='impl-items'><h4 id='method.get_ref' class="method"><span id='get_ref.v' class='invisible'><code>pub fn <a href='#method.get_ref' class='fnname'>get_ref</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>B</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/bytes/buf/writer.rs.html#33-35' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Gets a reference to the underlying <code>BufMut</code>.</p>
 
 <p>It is inadvisable to directly write to the underlying <code>BufMut</code>.</p>
@@ -71,7 +71,7 @@ details.</p>
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="number">1024</span>).<span class="ident">writer</span>();
 
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">1024</span>, <span class="ident">buf</span>.<span class="ident">get_ref</span>().<span class="ident">capacity</span>());</pre>
-</div><h4 id='method.get_mut' class="method"><span id='get_mut.v' class='invisible'><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;mut </a>B</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/bytes/buf/writer.rs.html#52-54' title='goto source code'>[src]</a></span></h4>
+</div><h4 id='method.get_mut' class="method"><span id='get_mut.v' class='invisible'><code>pub fn <a href='#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;mut </a>B</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/bytes/buf/writer.rs.html#52-54' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Gets a mutable reference to the underlying <code>BufMut</code>.</p>
 
 <p>It is inadvisable to directly write to the underlying <code>BufMut</code>.</p>
@@ -85,7 +85,7 @@ details.</p>
 <span class="ident">buf</span>.<span class="ident">get_mut</span>().<span class="ident">reserve</span>(<span class="number">1024</span>);
 
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">1024</span>, <span class="ident">buf</span>.<span class="ident">get_ref</span>().<span class="ident">capacity</span>());</pre>
-</div><h4 id='method.into_inner' class="method"><span id='into_inner.v' class='invisible'><code>fn <a href='#method.into_inner' class='fnname'>into_inner</a>(self) -&gt; B</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/bytes/buf/writer.rs.html#72-74' title='goto source code'>[src]</a></span></h4>
+</div><h4 id='method.into_inner' class="method"><span id='into_inner.v' class='invisible'><code>pub fn <a href='#method.into_inner' class='fnname'>into_inner</a>(self) -&gt; B</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/bytes/buf/writer.rs.html#72-74' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Consumes this <code>Writer</code>, returning the underlying value.</p>
 
 <h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>

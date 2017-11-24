@@ -62,7 +62,7 @@ the future as notifications arrive, until the future terminates.</p>
                       Methods<a href='#methods' class='anchor'></a>
                     </h2>
                 <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../../futures/task/struct.Task.html" title="struct futures::task::Task">Task</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/futures/task_impl/mod.rs.html#108-194' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.notify' class="method"><span id='notify.v' class='invisible'><code>fn <a href='#method.notify' class='fnname'>notify</a>(&amp;self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/futures/task_impl/mod.rs.html#117-120' title='goto source code'>[src]</a></span></h4>
+<div class='impl-items'><h4 id='method.notify' class="method"><span id='notify.v' class='invisible'><code>pub fn <a href='#method.notify' class='fnname'>notify</a>(&amp;self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/futures/task_impl/mod.rs.html#117-120' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Indicate that the task should attempt to poll its future in a timely
 fashion.</p>
 
@@ -71,7 +71,7 @@ be called at least once subsequently (unless the future has terminated).
 If the task is currently polling its future when <code>notify</code> is called, it
 must poll the future <em>again</em> afterwards, ensuring that all relevant
 events are eventually observed by the future.</p>
-</div><h4 id='method.is_current' class="method"><span id='is_current.v' class='invisible'><code>fn <a href='#method.is_current' class='fnname'>is_current</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/futures/task_impl/mod.rs.html#165-167' title='goto source code'>[src]</a></span></h4>
+</div><h4 id='method.is_current' class="method"><span id='is_current.v' class='invisible'><code>pub fn <a href='#method.is_current' class='fnname'>is_current</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/futures/task_impl/mod.rs.html#165-167' title='goto source code'>[src]</a></span></h4>
 <div class='stability'><div class='stab deprecated'>Deprecated<p>: intended to be removed, see docs for details</p>
 </div></div><div class='docblock'><p>Returns <code>true</code> when called from within the context of the task.</p>
 
@@ -108,7 +108,7 @@ to learn about other use cases here that we did not consider.</p>
 
 <h1 id='panics' class='section-header'><a href='#panics'>Panics</a></h1>
 <p>This function will panic if no current future is being polled.</p>
-</div><h4 id='method.will_notify_current' class="method"><span id='will_notify_current.v' class='invisible'><code>fn <a href='#method.will_notify_current' class='fnname'>will_notify_current</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/futures/task_impl/mod.rs.html#188-193' title='goto source code'>[src]</a></span></h4>
+</div><h4 id='method.will_notify_current' class="method"><span id='will_notify_current.v' class='invisible'><code>pub fn <a href='#method.will_notify_current' class='fnname'>will_notify_current</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/futures/task_impl/mod.rs.html#188-193' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>This function is intended as a performance optimization for structures
 which store a <code>Task</code> internally.</p>
 

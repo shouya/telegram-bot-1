@@ -59,7 +59,7 @@ memory.</p>
                       Methods<a href='#methods' class='anchor'></a>
                     </h2>
                 <h3 id='impl' class='impl'><span class='in-band'><code>impl&lt;T&gt; <a class="struct" href="../../../futures/sync/oneshot/struct.Receiver.html" title="struct futures::sync::oneshot::Receiver">Receiver</a>&lt;T&gt;</code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/futures/sync/oneshot.rs.html#373-383' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.close' class="method"><span id='close.v' class='invisible'><code>fn <a href='#method.close' class='fnname'>close</a>(&amp;mut self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/futures/sync/oneshot.rs.html#380-382' title='goto source code'>[src]</a></span></h4>
+<div class='impl-items'><h4 id='method.close' class="method"><span id='close.v' class='invisible'><code>pub fn <a href='#method.close' class='fnname'>close</a>(&amp;mut self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/futures/sync/oneshot.rs.html#380-382' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Gracefully close this receiver, preventing sending any future messages.</p>
 
 <p>Any <code>send</code> operation which happens after this method returns is

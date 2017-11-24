@@ -176,7 +176,7 @@
 <span class="doccomment">//! A lock-free stack which supports concurrent pushes and a concurrent call to</span>
 <span class="doccomment">//! drain the entire stack all at once.</span>
 
-<span class="attribute">#<span class="op">!</span>[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
 
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::<span class="ident">AtomicUsize</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">mem</span>;

@@ -59,7 +59,7 @@ details.</p>
                       Methods<a href='#methods' class='anchor'></a>
                     </h2>
                 <h3 id='impl' class='impl'><span class='in-band'><code>impl&lt;B:&nbsp;<a class="trait" href="../../bytes/buf/trait.Buf.html" title="trait bytes::buf::Buf">Buf</a>&gt; <a class="struct" href="../../bytes/buf/struct.Reader.html" title="struct bytes::buf::Reader">Reader</a>&lt;B&gt;</code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/bytes/buf/reader.rs.html#19-79' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.get_ref' class="method"><span id='get_ref.v' class='invisible'><code>fn <a href='#method.get_ref' class='fnname'>get_ref</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>B</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/bytes/buf/reader.rs.html#34-36' title='goto source code'>[src]</a></span></h4>
+<div class='impl-items'><h4 id='method.get_ref' class="method"><span id='get_ref.v' class='invisible'><code>pub fn <a href='#method.get_ref' class='fnname'>get_ref</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>B</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/bytes/buf/reader.rs.html#34-36' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Gets a reference to the underlying <code>Buf</code>.</p>
 
 <p>It is inadvisable to directly read from the underlying <code>Buf</code>.</p>
@@ -72,7 +72,7 @@ details.</p>
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Cursor</span>::<span class="ident">new</span>(<span class="string">b&quot;hello world&quot;</span>).<span class="ident">reader</span>();
 
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">0</span>, <span class="ident">buf</span>.<span class="ident">get_ref</span>().<span class="ident">position</span>());</pre>
-</div><h4 id='method.get_mut' class="method"><span id='get_mut.v' class='invisible'><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;mut </a>B</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/bytes/buf/reader.rs.html#56-58' title='goto source code'>[src]</a></span></h4>
+</div><h4 id='method.get_mut' class="method"><span id='get_mut.v' class='invisible'><code>pub fn <a href='#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;mut </a>B</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/bytes/buf/reader.rs.html#56-58' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Gets a mutable reference to the underlying <code>Buf</code>.</p>
 
 <p>It is inadvisable to directly read from the underlying <code>Buf</code>.</p>
@@ -89,7 +89,7 @@ details.</p>
 <span class="ident">io</span>::<span class="ident">copy</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">dst</span>).<span class="ident">unwrap</span>();
 
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw-2">*</span><span class="ident">dst</span>, <span class="string">b&quot;llo world&quot;</span>[..]);</pre>
-</div><h4 id='method.into_inner' class="method"><span id='into_inner.v' class='invisible'><code>fn <a href='#method.into_inner' class='fnname'>into_inner</a>(self) -&gt; B</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/bytes/buf/reader.rs.html#76-78' title='goto source code'>[src]</a></span></h4>
+</div><h4 id='method.into_inner' class="method"><span id='into_inner.v' class='invisible'><code>pub fn <a href='#method.into_inner' class='fnname'>into_inner</a>(self) -&gt; B</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/bytes/buf/reader.rs.html#76-78' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Consumes this <code>Reader</code>, returning the underlying value.</p>
 
 <h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>

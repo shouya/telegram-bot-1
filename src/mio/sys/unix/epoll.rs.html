@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.10/src/sys/unix/epoll.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.11/src/sys/unix/epoll.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>epoll.rs.html -- source</title>
@@ -305,23 +305,8 @@
 <span id="260">260</span>
 <span id="261">261</span>
 <span id="262">262</span>
-<span id="263">263</span>
-<span id="264">264</span>
-<span id="265">265</span>
-<span id="266">266</span>
-<span id="267">267</span>
-<span id="268">268</span>
-<span id="269">269</span>
-<span id="270">270</span>
-<span id="271">271</span>
-<span id="272">272</span>
-<span id="273">273</span>
-<span id="274">274</span>
-<span id="275">275</span>
-<span id="276">276</span>
-<span id="277">277</span>
 </pre><pre class="rust ">
-<span class="attribute">#<span class="op">!</span>[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">io</span>::<span class="ident">AsRawFd</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">io</span>::<span class="ident">RawFd</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::{<span class="ident">AtomicUsize</span>, <span class="ident">Ordering</span>, <span class="ident">ATOMIC_USIZE_INIT</span>};
@@ -463,26 +448,11 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>)]</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
-<span class="kw">fn</span> <span class="ident">is_urgent</span>(<span class="ident">opts</span>: <span class="ident">PollOpt</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-    <span class="ident">opts</span>.<span class="ident">is_urgent</span>()
-}
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>))]</span>
-<span class="kw">fn</span> <span class="ident">is_urgent</span>(_: <span class="ident">PollOpt</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-    <span class="bool-val">false</span>
-}
-
 <span class="kw">fn</span> <span class="ident">ioevent_to_epoll</span>(<span class="ident">interest</span>: <span class="ident">Ready</span>, <span class="ident">opts</span>: <span class="ident">PollOpt</span>) <span class="op">-&gt;</span> <span class="ident">u32</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">kind</span> <span class="op">=</span> <span class="number">0</span>;
 
     <span class="kw">if</span> <span class="ident">interest</span>.<span class="ident">is_readable</span>() {
-        <span class="kw">if</span> <span class="ident">is_urgent</span>(<span class="ident">opts</span>) {
-            <span class="ident">kind</span> <span class="op">|=</span> <span class="ident">EPOLLPRI</span>;
-        } <span class="kw">else</span> {
-            <span class="ident">kind</span> <span class="op">|=</span> <span class="ident">EPOLLIN</span>;
-        }
+        <span class="ident">kind</span> <span class="op">|=</span> <span class="ident">EPOLLIN</span>;
     }
 
     <span class="kw">if</span> <span class="ident">interest</span>.<span class="ident">is_writable</span>() {

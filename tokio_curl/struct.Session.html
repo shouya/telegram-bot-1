@@ -62,7 +62,7 @@ future that will resolve to a session once it&#39;s been initialized.</p>
                       Methods<a href='#methods' class='anchor'></a>
                     </h2>
                 <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../tokio_curl/struct.Session.html" title="struct tokio_curl::Session">Session</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/tokio_curl/lib.rs.html#119-153' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(handle: <a class="struct" href="../tokio_core/reactor/struct.Handle.html" title="struct tokio_core::reactor::Handle">Handle</a>) -&gt; <a class="struct" href="../tokio_curl/struct.Session.html" title="struct tokio_curl::Session">Session</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/tokio_curl/lib.rs.html#131-133' title='goto source code'>[src]</a></span></h4>
+<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>pub fn <a href='#method.new' class='fnname'>new</a>(handle: <a class="struct" href="../tokio_core/reactor/struct.Handle.html" title="struct tokio_core::reactor::Handle">Handle</a>) -&gt; <a class="struct" href="../tokio_curl/struct.Session.html" title="struct tokio_curl::Session">Session</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/tokio_curl/lib.rs.html#131-133' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Creates a new HTTP session object which will be bound to the given event
 loop.</p>
 
@@ -74,7 +74,7 @@ thread.</p>
 
 <p>This function returns a future which will resolve to a <code>Session</code> once
 it&#39;s been initialized.</p>
-</div><h4 id='method.perform' class="method"><span id='perform.v' class='invisible'><code>fn <a href='#method.perform' class='fnname'>perform</a>(&amp;self, handle: <a class="struct" href="../curl/easy/handle/struct.Easy.html" title="struct curl::easy::handle::Easy">Easy</a>) -&gt; <a class="struct" href="../tokio_curl/struct.Perform.html" title="struct tokio_curl::Perform">Perform</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/tokio_curl/lib.rs.html#150-152' title='goto source code'>[src]</a></span></h4>
+</div><h4 id='method.perform' class="method"><span id='perform.v' class='invisible'><code>pub fn <a href='#method.perform' class='fnname'>perform</a>(&amp;self, handle: <a class="struct" href="../curl/easy/handle/struct.Easy.html" title="struct curl::easy::handle::Easy">Easy</a>) -&gt; <a class="struct" href="../tokio_curl/struct.Perform.html" title="struct tokio_curl::Perform">Perform</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/tokio_curl/lib.rs.html#150-152' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Execute and HTTP request asynchronously, returning a future representing
 the request&#39;s completion.</p>
 
