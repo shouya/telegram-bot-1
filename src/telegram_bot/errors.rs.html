@@ -58,12 +58,8 @@
 <span id="13">13</span>
 <span id="14">14</span>
 <span id="15">15</span>
-<span id="16">16</span>
-<span id="17">17</span>
-<span id="18">18</span>
-<span id="19">19</span>
 </pre><pre class="rust ">
-<span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::<span class="ident">ResponseParameters</span>;
+<span class="kw">use</span> <span class="ident">telegram_bot_raw</span>;
 
 <span class="macro">error_chain</span><span class="macro">!</span> {
     <span class="ident">foreign_links</span> {
@@ -71,15 +67,11 @@
         <span class="ident">Hyper</span>(::<span class="ident">hyper</span>::<span class="ident">Error</span>) <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;hyper_connector&quot;</span>)]</span>;
         <span class="ident">Curl</span>(::<span class="ident">curl</span>::<span class="ident">Error</span>) <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;curl_connector&quot;</span>)]</span>;
         <span class="ident">CurlPerformError</span>(::<span class="ident">tokio_curl</span>::<span class="ident">PerformError</span>) <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;curl_connector&quot;</span>)]</span>;
-        <span class="ident">Json</span>(::<span class="ident">serde_json</span>::<span class="ident">Error</span>);
         <span class="ident">Io</span>(::<span class="ident">std</span>::<span class="ident">io</span>::<span class="ident">Error</span>);
     }
 
-    <span class="ident">errors</span> {
-        <span class="ident">TelegramError</span> {
-            <span class="ident">description</span>: <span class="ident">String</span>,
-            <span class="ident">parameters</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ResponseParameters</span><span class="op">&gt;</span>
-        }
+    <span class="ident">links</span> {
+        <span class="ident">Raw</span>(<span class="ident">telegram_bot_raw</span>::<span class="ident">Error</span>, <span class="ident">telegram_bot_raw</span>::<span class="ident">ErrorKind</span>);
     }
 }
 </pre>

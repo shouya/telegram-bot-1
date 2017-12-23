@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.6/src/error.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.8/src/error.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>error.rs.html -- source</title>
@@ -656,7 +656,7 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ErrorCode</span> {
     <span class="doccomment">/// Catchall for syntax error messages</span>
-    <span class="ident">Message</span>(<span class="ident">String</span>),
+    <span class="ident">Message</span>(<span class="ident">Box</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span>),
 
     <span class="doccomment">/// Some IO error occurred while serializing or deserializing.</span>
     <span class="ident">Io</span>(<span class="ident">io</span>::<span class="ident">Error</span>),
@@ -854,7 +854,7 @@
         <span class="ident">Error</span> {
             <span class="ident">err</span>: <span class="ident">Box</span>::<span class="ident">new</span>(
                 <span class="ident">ErrorImpl</span> {
-                    <span class="ident">code</span>: <span class="ident">ErrorCode</span>::<span class="ident">Message</span>(<span class="ident">msg</span>.<span class="ident">to_string</span>()),
+                    <span class="ident">code</span>: <span class="ident">ErrorCode</span>::<span class="ident">Message</span>(<span class="ident">msg</span>.<span class="ident">to_string</span>().<span class="ident">into_boxed_str</span>()),
                     <span class="ident">line</span>: <span class="number">0</span>,
                     <span class="ident">column</span>: <span class="number">0</span>,
                 },
@@ -876,7 +876,7 @@
         <span class="ident">Error</span> {
             <span class="ident">err</span>: <span class="ident">Box</span>::<span class="ident">new</span>(
                 <span class="ident">ErrorImpl</span> {
-                    <span class="ident">code</span>: <span class="ident">ErrorCode</span>::<span class="ident">Message</span>(<span class="ident">msg</span>.<span class="ident">to_string</span>()),
+                    <span class="ident">code</span>: <span class="ident">ErrorCode</span>::<span class="ident">Message</span>(<span class="ident">msg</span>.<span class="ident">to_string</span>().<span class="ident">into_boxed_str</span>()),
                     <span class="ident">line</span>: <span class="number">0</span>,
                     <span class="ident">column</span>: <span class="number">0</span>,
                 },

@@ -1,6 +1,7 @@
 (function() {var implementors = {};
 implementors["error_chain"] = [];
 implementors["telegram_bot"] = ["impl <a class=\"trait\" href=\"error_chain/trait.ChainedError.html\" title=\"trait error_chain::ChainedError\">ChainedError</a> for <a class=\"struct\" href=\"telegram_bot/struct.Error.html\" title=\"struct telegram_bot::Error\">Error</a>",];
+implementors["telegram_bot_raw"] = ["impl <a class=\"trait\" href=\"error_chain/trait.ChainedError.html\" title=\"trait error_chain::ChainedError\">ChainedError</a> for <a class=\"struct\" href=\"telegram_bot_raw/requests/_base/struct.Error.html\" title=\"struct telegram_bot_raw::requests::_base::Error\">Error</a>",];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);

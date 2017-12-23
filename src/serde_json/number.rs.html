@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.6/src/number.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.8/src/number.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>number.rs.html -- source</title>
@@ -419,9 +419,6 @@
 <span id="374">374</span>
 <span id="375">375</span>
 <span id="376">376</span>
-<span id="377">377</span>
-<span id="378">378</span>
-<span id="379">379</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2017 Serde Developers</span>
 <span class="comment">//</span>
@@ -444,9 +441,6 @@
     <span class="ident">n</span>: <span class="ident">N</span>,
 }
 
-<span class="comment">// &quot;N&quot; is a prefix of &quot;NegInt&quot;... this is a false positive.</span>
-<span class="comment">// https://github.com/Manishearth/rust-clippy/issues/1241</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;cargo-clippy&quot;</span>, <span class="ident">allow</span>(<span class="ident">enum_variant_names</span>))]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">enum</span> <span class="ident">N</span> {
     <span class="ident">PosInt</span>(<span class="ident">u64</span>),

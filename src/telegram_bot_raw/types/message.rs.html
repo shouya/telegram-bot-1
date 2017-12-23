@@ -678,6 +678,17 @@
 <span id="633">633</span>
 <span id="634">634</span>
 <span id="635">635</span>
+<span id="636">636</span>
+<span id="637">637</span>
+<span id="638">638</span>
+<span id="639">639</span>
+<span id="640">640</span>
+<span id="641">641</span>
+<span id="642">642</span>
+<span id="643">643</span>
+<span id="644">644</span>
+<span id="645">645</span>
+<span id="646">646</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">serde</span>::<span class="ident">de</span>::{<span class="ident">Deserialize</span>, <span class="ident">Deserializer</span>, <span class="ident">Error</span>};
 
@@ -1313,6 +1324,17 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_url</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">token</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">file_path</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">path</span><span class="op">|</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}file/bot{}/{}&quot;</span>, <span class="ident">TELEGRAM_URL</span>, <span class="ident">token</span>, <span class="ident">path</span>))
     }
+}
+
+<span class="doccomment">/// Strongly typed ParseMode.</span>
+<span class="doccomment">/// See [documentation](https://core.telegram.org/bots/api#formatting-options) for details.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Serialize</span>)]</span>
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ParseMode</span> {
+    <span class="doccomment">/// Use markdown formatting.</span>
+    <span class="ident">Markdown</span>,
+    <span class="doccomment">/// Use HTML formatting.</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;HTML&quot;</span>)]</span>
+    <span class="ident">Html</span>,
 }
 </pre>
 </section>

@@ -6,6 +6,7 @@ implementors["futures"] = ["impl&lt;T&gt; <a class=\"trait\" href=\"https://doc.
 implementors["iovec"] = ["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/ops/deref/trait.Deref.html\" title=\"trait core::ops::deref::Deref\">Deref</a> for <a class=\"struct\" href=\"iovec/struct.IoVec.html\" title=\"struct iovec::IoVec\">IoVec</a>",];
 implementors["mio"] = ["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/ops/deref/trait.Deref.html\" title=\"trait core::ops::deref::Deref\">Deref</a> for <a class=\"struct\" href=\"mio/unix/struct.UnixReady.html\" title=\"struct mio::unix::UnixReady\">UnixReady</a>",];
 implementors["telegram_bot"] = ["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/ops/deref/trait.Deref.html\" title=\"trait core::ops::deref::Deref\">Deref</a> for <a class=\"struct\" href=\"telegram_bot/struct.Error.html\" title=\"struct telegram_bot::Error\">Error</a>",];
+implementors["telegram_bot_raw"] = ["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/ops/deref/trait.Deref.html\" title=\"trait core::ops::deref::Deref\">Deref</a> for <a class=\"struct\" href=\"telegram_bot_raw/requests/_base/struct.Error.html\" title=\"struct telegram_bot_raw::requests::_base::Error\">Error</a>",];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);

@@ -140,6 +140,7 @@
 <span id="95">95</span>
 <span id="96">96</span>
 <span id="97">97</span>
+<span id="98">98</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">Not</span>;
 
@@ -162,10 +163,11 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Request</span> <span class="kw">for</span> <span class="ident">SendLocation</span> {
-    <span class="kw">type</span> <span class="ident">Response</span> <span class="op">=</span> <span class="ident">IdResponse</span><span class="op">&lt;</span><span class="ident">Message</span><span class="op">&gt;</span>;
+    <span class="kw">type</span> <span class="ident">Type</span> <span class="op">=</span> <span class="ident">JsonRequestType</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
+    <span class="kw">type</span> <span class="ident">Response</span> <span class="op">=</span> <span class="ident">JsonIdResponse</span><span class="op">&lt;</span><span class="ident">Message</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-        <span class="string">&quot;sendLocation&quot;</span>
+    <span class="kw">fn</span> <span class="ident">serialize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">HttpRequest</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="self">Self</span>::<span class="ident">Type</span>::<span class="ident">serialize</span>(<span class="ident">RequestUrl</span>::<span class="ident">method</span>(<span class="string">&quot;sendLocation&quot;</span>), <span class="self">self</span>)
     }
 }
 

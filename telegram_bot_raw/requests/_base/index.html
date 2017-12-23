@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'>Module _base</p><div class="block items"><ul><li><a href="#reexports">Reexports</a></li><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div><p class='location'><a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>requests</a></p><script>window.sidebarCurrent = {name: '_base', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'>Module _base</p><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div><p class='location'><a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>requests</a></p><script>window.sidebarCurrent = {name: '_base', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,61 +48,121 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../src/telegram_bot_raw/requests/_base/mod.rs.html#1-141' title='goto source code'>[src]</a></span></h1>
-<h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
-<table><tr><td><code>pub use self::<a class="mod" href="../../../telegram_bot_raw/requests/_base/reply_markup/index.html" title="mod telegram_bot_raw::requests::_base::reply_markup">reply_markup</a>::*;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
-<table>
-                       <tr class=' module-item'>
-                           <td><a class="mod" href="reply_markup/index.html"
-                                  title='mod telegram_bot_raw::requests::_base::reply_markup'>reply_markup</a></td>
-                           <td class='docblock-short'>
-                                
-                           </td>
-                       </tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+               </span><a class='srclink' href='../../../src/telegram_bot_raw/requests/_base/mod.rs.html#1-15' title='goto source code'>[src]</a></span></h1>
+<h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                        <tr class=' module-item'>
                            <td><a class="struct" href="struct.DetachedRequest.html"
                                   title='struct telegram_bot_raw::requests::_base::DetachedRequest'>DetachedRequest</a></td>
                            <td class='docblock-short'>
-                                <p>Partially serialized request.</p>
+                                
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class="struct" href="struct.IdResponse.html"
-                                  title='struct telegram_bot_raw::requests::_base::IdResponse'>IdResponse</a></td>
+                           <td><a class="struct" href="struct.DetachedRequestType.html"
+                                  title='struct telegram_bot_raw::requests::_base::DetachedRequestType'>DetachedRequestType</a></td>
                            <td class='docblock-short'>
-                                <p>Read <code>T</code> from the Telegram server and returns the same type.</p>
+                                
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class="struct" href="struct.TrueToUnitResponse.html"
-                                  title='struct telegram_bot_raw::requests::_base::TrueToUnitResponse'>TrueToUnitResponse</a></td>
+                           <td><a class="struct" href="struct.Error.html"
+                                  title='struct telegram_bot_raw::requests::_base::Error'>Error</a></td>
                            <td class='docblock-short'>
-                                <p>Read <code>True</code> from the Telegram server and returns <code>()</code>.</p>
+                                <p>The Error type.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.HttpRequest.html"
+                                  title='struct telegram_bot_raw::requests::_base::HttpRequest'>HttpRequest</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.HttpResponse.html"
+                                  title='struct telegram_bot_raw::requests::_base::HttpResponse'>HttpResponse</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.JsonIdResponse.html"
+                                  title='struct telegram_bot_raw::requests::_base::JsonIdResponse'>JsonIdResponse</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.JsonRequestType.html"
+                                  title='struct telegram_bot_raw::requests::_base::JsonRequestType'>JsonRequestType</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.JsonTrueToUnitResponse.html"
+                                  title='struct telegram_bot_raw::requests::_base::JsonTrueToUnitResponse'>JsonTrueToUnitResponse</a></td>
+                           <td class='docblock-short'>
+                                
                            </td>
                        </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
                        <tr class=' module-item'>
-                           <td><a class="enum" href="enum.ParseMode.html"
-                                  title='enum telegram_bot_raw::requests::_base::ParseMode'>ParseMode</a></td>
+                           <td><a class="enum" href="enum.Body.html"
+                                  title='enum telegram_bot_raw::requests::_base::Body'>Body</a></td>
                            <td class='docblock-short'>
-                                <p>Strongly typed ParseMode.
-See <a href="https://core.telegram.org/bots/api#formatting-options">documentation</a> for details.</p>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.ErrorKind.html"
+                                  title='enum telegram_bot_raw::requests::_base::ErrorKind'>ErrorKind</a></td>
+                           <td class='docblock-short'>
+                                <p>The kind of an error.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.Method.html"
+                                  title='enum telegram_bot_raw::requests::_base::Method'>Method</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.RequestUrl.html"
+                                  title='enum telegram_bot_raw::requests::_base::RequestUrl'>RequestUrl</a></td>
+                           <td class='docblock-short'>
+                                
                            </td>
                        </tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table>
                        <tr class=' module-item'>
-                           <td><a class="trait" href="trait.Request.html"
-                                  title='trait telegram_bot_raw::requests::_base::Request'>Request</a></td>
+                           <td><a class="trait" href="trait.JsonResponse.html"
+                                  title='trait telegram_bot_raw::requests::_base::JsonResponse'>JsonResponse</a></td>
                            <td class='docblock-short'>
-                                <p>Request corresponds to the specific Telegram API method.</p>
+                                
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class="trait" href="trait.Response.html"
-                                  title='trait telegram_bot_raw::requests::_base::Response'>Response</a></td>
+                           <td><a class="trait" href="trait.Request.html"
+                                  title='trait telegram_bot_raw::requests::_base::Request'>Request</a></td>
                            <td class='docblock-short'>
-                                <p>This trait represent how to parse response from the Telegram server.</p>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.RequestType.html"
+                                  title='trait telegram_bot_raw::requests::_base::RequestType'>RequestType</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.ResponseType.html"
+                                  title='trait telegram_bot_raw::requests::_base::ResponseType'>ResponseType</a></td>
+                           <td class='docblock-short'>
+                                
                            </td>
                        </tr>
                        <tr class=' module-item'>
