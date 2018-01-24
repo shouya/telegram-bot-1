@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["default_connector","Returns default curl connector."]],"struct":[["CurlConnector","This connector uses `tokio-curl` backend."]]});

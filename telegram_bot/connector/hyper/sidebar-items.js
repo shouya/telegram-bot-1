@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["default_connector","Returns default hyper connector. Uses one resolve thread and `HttpsConnector`."]],"struct":[["HyperConnector","This connector uses `hyper` backend."]]});

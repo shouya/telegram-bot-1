@@ -76,7 +76,14 @@
 <span id="31">31</span>
 <span id="32">32</span>
 <span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
 </pre><pre class="rust ">
+<span class="doccomment">//! This crate helps writing bots for the messenger Telegram.</span>
+<span class="doccomment">//! See [readme](https://github.com/telegram-rs/telegram-bot) for details.</span>
+
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">antidote</span>;
 <span class="attribute">#[<span class="ident">macro_use</span>]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">error_chain</span>;
@@ -97,6 +104,7 @@
 <span class="kw">mod</span> <span class="ident">api</span>;
 <span class="kw">mod</span> <span class="ident">errors</span>;
 <span class="kw">mod</span> <span class="ident">future</span>;
+<span class="kw">mod</span> <span class="ident">macros</span>;
 <span class="kw">mod</span> <span class="ident">stream</span>;
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">connector</span>;
@@ -128,13 +136,15 @@
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
+                    <dt style="width:31px;">+ / -</dt>
                     <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>

@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'>Enum UpdateKind</p><div class="block items"><ul><li><a href="#variants">Variants</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>types</a>::<wbr><a href='index.html'>update</a></p><script>window.sidebarCurrent = {name: 'UpdateKind', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Enum UpdateKind</p><div class="block items"><a class="sidebar-title" href="#variants">Variants</a><div class="sidebar-links"><a href="#variant.Message">Message</a><a href="#variant.EditedMessage">EditedMessage</a><a href="#variant.ChannelPost">ChannelPost</a><a href="#variant.EditedChannelPost">EditedChannelPost</a><a href="#variant.CallbackQuery">CallbackQuery</a></div><a class="sidebar-title" href="#implementations">Trait Implementations</a><div class="sidebar-links"><a href="#impl-Debug">Debug</a><a href="#impl-Clone">Clone</a><a href="#impl-PartialEq">PartialEq</a><a href="#impl-PartialOrd">PartialOrd</a></div></div><p class='location'><a href='../../index.html'>telegram_bot_raw</a>::<wbr><a href='../index.html'>types</a>::<wbr><a href='index.html'>update</a></p><script>window.sidebarCurrent = {name: 'UpdateKind', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -52,23 +52,24 @@
 <pre class='rust enum'>pub enum UpdateKind {
     Message(<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Message.html" title="struct telegram_bot_raw::types::message::Message">Message</a>),
     EditedMessage(<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Message.html" title="struct telegram_bot_raw::types::message::Message">Message</a>),
-    ChannelPost(<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Message.html" title="struct telegram_bot_raw::types::message::Message">Message</a>),
-    EditedChannelPost(<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Message.html" title="struct telegram_bot_raw::types::message::Message">Message</a>),
+    ChannelPost(<a class="struct" href="../../../telegram_bot_raw/types/message/struct.ChannelPost.html" title="struct telegram_bot_raw::types::message::ChannelPost">ChannelPost</a>),
+    EditedChannelPost(<a class="struct" href="../../../telegram_bot_raw/types/message/struct.ChannelPost.html" title="struct telegram_bot_raw::types::message::ChannelPost">ChannelPost</a>),
+    CallbackQuery(<a class="struct" href="../../../telegram_bot_raw/types/callback_query/struct.CallbackQuery.html" title="struct telegram_bot_raw::types::callback_query::CallbackQuery">CallbackQuery</a>),
     // some variants omitted
 }</pre><div class='docblock'><p>Kind of the incoming update.</p>
 </div><h2 id='variants' class='variants small-section-header'>
                    Variants<a href='#variants' class='anchor'></a></h2>
 <span id="variant.Message" class="variant small-section-header"><a href="#variant.Message" class="anchor field"></a><span id='Message.v' class='invisible'><code>Message(<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Message.html" title="struct telegram_bot_raw::types::message::Message">Message</a>)</code></span></span><div class='docblock'><p>New incoming message of any kind — text, photo, sticker, etc.</p>
 </div><span id="variant.EditedMessage" class="variant small-section-header"><a href="#variant.EditedMessage" class="anchor field"></a><span id='EditedMessage.v' class='invisible'><code>EditedMessage(<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Message.html" title="struct telegram_bot_raw::types::message::Message">Message</a>)</code></span></span><div class='docblock'><p>New version of a message that is known to the bot and was edited</p>
-</div><span id="variant.ChannelPost" class="variant small-section-header"><a href="#variant.ChannelPost" class="anchor field"></a><span id='ChannelPost.v' class='invisible'><code>ChannelPost(<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Message.html" title="struct telegram_bot_raw::types::message::Message">Message</a>)</code></span></span><div class='docblock'><p>New incoming channel post of any kind — text, photo, sticker, etc.</p>
-</div><span id="variant.EditedChannelPost" class="variant small-section-header"><a href="#variant.EditedChannelPost" class="anchor field"></a><span id='EditedChannelPost.v' class='invisible'><code>EditedChannelPost(<a class="struct" href="../../../telegram_bot_raw/types/message/struct.Message.html" title="struct telegram_bot_raw::types::message::Message">Message</a>)</code></span></span><div class='docblock'><p>New version of a channel post that is known to the bot and was edited</p>
-</div>
+</div><span id="variant.ChannelPost" class="variant small-section-header"><a href="#variant.ChannelPost" class="anchor field"></a><span id='ChannelPost.v' class='invisible'><code>ChannelPost(<a class="struct" href="../../../telegram_bot_raw/types/message/struct.ChannelPost.html" title="struct telegram_bot_raw::types::message::ChannelPost">ChannelPost</a>)</code></span></span><div class='docblock'><p>New incoming channel post of any kind — text, photo, sticker, etc.</p>
+</div><span id="variant.EditedChannelPost" class="variant small-section-header"><a href="#variant.EditedChannelPost" class="anchor field"></a><span id='EditedChannelPost.v' class='invisible'><code>EditedChannelPost(<a class="struct" href="../../../telegram_bot_raw/types/message/struct.ChannelPost.html" title="struct telegram_bot_raw::types::message::ChannelPost">ChannelPost</a>)</code></span></span><div class='docblock'><p>New version of a channel post that is known to the bot and was edited</p>
+</div><span id="variant.CallbackQuery" class="variant small-section-header"><a href="#variant.CallbackQuery" class="anchor field"></a><span id='CallbackQuery.v' class='invisible'><code>CallbackQuery(<a class="struct" href="../../../telegram_bot_raw/types/callback_query/struct.CallbackQuery.html" title="struct telegram_bot_raw::types::callback_query::CallbackQuery">CallbackQuery</a>)</code></span></span>
             <h2 id='implementations' class='small-section-header'>
               Trait Implementations<a href='#implementations' class='anchor'></a>
             </h2>
         <h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="enum" href="../../../telegram_bot_raw/types/update/enum.UpdateKind.html" title="enum telegram_bot_raw::types::update::UpdateKind">UpdateKind</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/telegram_bot_raw/types/update.rs.html#16' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/telegram_bot_raw/types/update.rs.html#16' title='goto source code'>[src]</a></span></h4>
-<div class='docblock'><p>Formats the value using the given formatter.</p>
+<div class='docblock'><p>Formats the value using the given formatter. <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt">Read more</a></p>
 </div></div><h3 id='impl-Clone' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="enum" href="../../../telegram_bot_raw/types/update/enum.UpdateKind.html" title="enum telegram_bot_raw::types::update::UpdateKind">UpdateKind</a></code><a href='#impl-Clone' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/telegram_bot_raw/types/update.rs.html#16' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class="enum" href="../../../telegram_bot_raw/types/update/enum.UpdateKind.html" title="enum telegram_bot_raw::types::update::UpdateKind">UpdateKind</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/telegram_bot_raw/types/update.rs.html#16' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
@@ -107,13 +108,15 @@
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
+                    <dt style="width:31px;">+ / -</dt>
                     <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>

@@ -147,12 +147,12 @@
     <span class="doccomment">/// New version of a message that is known to the bot and was edited</span>
     <span class="ident">EditedMessage</span>(<span class="ident">Message</span>),
     <span class="doccomment">/// New incoming channel post of any kind — text, photo, sticker, etc.</span>
-    <span class="ident">ChannelPost</span>(<span class="ident">Message</span>),
+    <span class="ident">ChannelPost</span>(<span class="ident">ChannelPost</span>),
     <span class="doccomment">/// New version of a channel post that is known to the bot and was edited</span>
-    <span class="ident">EditedChannelPost</span>(<span class="ident">Message</span>),
+    <span class="ident">EditedChannelPost</span>(<span class="ident">ChannelPost</span>),
     <span class="comment">// InlineQuery(InlineQuery),</span>
     <span class="comment">// ChosenInlineResult(ChosenInlineResult),</span>
-    <span class="comment">// CallbackQuery(OptionCallbackQuery),</span>
+    <span class="ident">CallbackQuery</span>(<span class="ident">CallbackQuery</span>),
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="ident">Unknown</span>(<span class="ident">RawUpdate</span>),
 }
@@ -179,7 +179,7 @@
         <span class="macro">maybe_field</span><span class="macro">!</span>(<span class="ident">edited_channel_post</span>, <span class="ident">EditedChannelPost</span>);
         <span class="comment">// maybe_field!(inline_query, InlineQuery);</span>
         <span class="comment">// maybe_field!(chosen_inline_result, ChosenInlineResult);</span>
-        <span class="comment">// maybe_field!(callback_query, CallbackQuery);</span>
+         <span class="macro">maybe_field</span><span class="macro">!</span>(<span class="ident">callback_query</span>, <span class="ident">CallbackQuery</span>);
 
         <span class="prelude-val">Ok</span>(<span class="ident">Update</span> {
             <span class="ident">id</span>: <span class="ident">raw</span>.<span class="ident">update_id</span>,
@@ -199,12 +199,12 @@
     <span class="doccomment">/// New version of a message that is known to the bot and was edited</span>
     <span class="kw">pub</span> <span class="ident">edited_message</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Message</span><span class="op">&gt;</span>,
     <span class="doccomment">/// New incoming channel post of any kind — text, photo, sticker, etc.</span>
-    <span class="kw">pub</span> <span class="ident">channel_post</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Message</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">channel_post</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ChannelPost</span><span class="op">&gt;</span>,
     <span class="doccomment">/// New version of a channel post that is known to the bot and was edited</span>
-    <span class="kw">pub</span> <span class="ident">edited_channel_post</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Message</span><span class="op">&gt;</span>, 
+    <span class="kw">pub</span> <span class="ident">edited_channel_post</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ChannelPost</span><span class="op">&gt;</span>,
     <span class="comment">// pub inline_query: Option&lt;InlineQuery&gt;,</span>
     <span class="comment">// pub chosen_inline_result: Option&lt;ChosenInlineResult&gt;,</span>
-    <span class="comment">// pub callback_query: Option&lt;CallbackQuery&gt;,</span>
+    <span class="kw">pub</span> <span class="ident">callback_query</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CallbackQuery</span><span class="op">&gt;</span>,
 }
 </pre>
 </section>
@@ -224,13 +224,15 @@
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
+                    <dt style="width:31px;">+ / -</dt>
                     <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>

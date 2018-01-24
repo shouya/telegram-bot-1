@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["chat",""],["chat_member",""],["message",""],["primitive",""],["refs",""],["reply_markup",""],["response_parameters",""],["update",""]]});
+initSidebarItems({"mod":[["callback_query",""],["chat",""],["chat_member",""],["message",""],["primitive",""],["refs",""],["reply_markup",""],["response_parameters",""],["update",""]]});

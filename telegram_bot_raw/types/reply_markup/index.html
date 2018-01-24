@@ -48,49 +48,57 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../src/telegram_bot_raw/types/reply_markup.rs.html#1-188' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../../src/telegram_bot_raw/types/reply_markup.rs.html#1-324' title='goto source code'>[src]</a></span></h1>
 <h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                        <tr class=' module-item'>
                            <td><a class="struct" href="struct.ForceReply.html"
                                   title='struct telegram_bot_raw::types::reply_markup::ForceReply'>ForceReply</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Upon receiving a message with this object, Telegram clients will
+display a reply interface to the user (act as if the user has
+selected the bot‘s message and tapped ’Reply&#39;). This can be
+extremely useful if you want to create user-friendly step-by-step
+interfaces without having to sacrifice privacy mod</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="struct" href="struct.InlineKeyboardButton.html"
                                   title='struct telegram_bot_raw::types::reply_markup::InlineKeyboardButton'>InlineKeyboardButton</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>This object represents one button of an inline keyboard.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="struct" href="struct.InlineKeyboardMarkup.html"
                                   title='struct telegram_bot_raw::types::reply_markup::InlineKeyboardMarkup'>InlineKeyboardMarkup</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>This object represents an inline keyboard that appears right next to the message it belongs to.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="struct" href="struct.KeyboardButton.html"
                                   title='struct telegram_bot_raw::types::reply_markup::KeyboardButton'>KeyboardButton</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>This object represents one button of the reply keyboard.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="struct" href="struct.ReplyKeyboardMarkup.html"
                                   title='struct telegram_bot_raw::types::reply_markup::ReplyKeyboardMarkup'>ReplyKeyboardMarkup</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>This object represents a custom keyboard with reply options.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="struct" href="struct.ReplyKeyboardRemove.html"
                                   title='struct telegram_bot_raw::types::reply_markup::ReplyKeyboardRemove'>ReplyKeyboardRemove</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Upon receiving a message with this object, Telegram clients will remove
+the current custom keyboard and display the default letter-keyboard.
+By default, custom keyboards are displayed until a new keyboard is sent
+by a bot. An exception is made for one-time keyboards that are hidden
+immediately after the user presses a button (see ReplyKeyboardMarkup).</p>
                            </td>
                        </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
@@ -124,13 +132,15 @@
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
+                    <dt style="width:31px;">+ / -</dt>
                     <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>

@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../src/telegram_bot_raw/types/message.rs.html#1-646' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../../src/telegram_bot_raw/types/message.rs.html#1-830' title='goto source code'>[src]</a></span></h1>
 <h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                        <tr class=' module-item'>
@@ -56,6 +56,13 @@
                                   title='struct telegram_bot_raw::types::message::Audio'>Audio</a></td>
                            <td class='docblock-short'>
                                 <p>This object represents an audio file to be treated as music by the Telegram clients.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.ChannelPost.html"
+                                  title='struct telegram_bot_raw::types::message::ChannelPost'>ChannelPost</a></td>
+                           <td class='docblock-short'>
+                                <p>This object represents a channel message.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -99,7 +106,7 @@ It is guaranteed that the link will be valid for at least 1 hour.</p>
                            <td><a class="struct" href="struct.Message.html"
                                   title='struct telegram_bot_raw::types::message::Message'>Message</a></td>
                            <td class='docblock-short'>
-                                <p>This object represents a message.</p>
+                                <p>This object represents a chat message.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -197,6 +204,13 @@ For example, hashtags, usernames, URLs, etc. Directly mapped.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class="enum" href="enum.MessageOrChannelPost.html"
+                                  title='enum telegram_bot_raw::types::message::MessageOrChannelPost'>MessageOrChannelPost</a></td>
+                           <td class='docblock-short'>
+                                <p>This object represents a chat message or a channel post.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class="enum" href="enum.ParseMode.html"
                                   title='enum telegram_bot_raw::types::message::ParseMode'>ParseMode</a></td>
                            <td class='docblock-short'>
@@ -220,13 +234,15 @@ See <a href="https://core.telegram.org/bots/api#formatting-options">documentatio
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
+                    <dt style="width:31px;">+ / -</dt>
                     <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
