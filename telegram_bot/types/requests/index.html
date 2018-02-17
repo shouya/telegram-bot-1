@@ -28,8 +28,9 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         
-        <p class='location'>Module requests</p><div class="block items"><ul><li><a href="#structs">Structs</a></li></ul></div><p class='location'><a href='../../index.html'>telegram_bot</a>::<wbr><a href='../index.html'>types</a></p><script>window.sidebarCurrent = {name: 'requests', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'>Module requests</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#structs">Structs</a></li></ul></div><p class='location'><a href='../../index.html'>telegram_bot</a>::<wbr><a href='../index.html'>types</a></p><script>window.sidebarCurrent = {name: 'requests', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script></div>
     </nav>
 
     <nav class="sub">
@@ -48,7 +49,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../src/telegram_bot/types/requests.rs.html#1-11' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../../src/telegram_bot/types/requests.rs.html#1-13' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Telegram Bot API methods.</p>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
@@ -73,6 +74,15 @@ the chat screen or as an alert.</p>
                                   title='struct telegram_bot::types::requests::EditMessageCaption'>EditMessageCaption</a></td>
                            <td class='docblock-short'>
                                 <p>Use this method to edit captions of messages sent by the bot.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.EditMessageLiveLocation.html"
+                                  title='struct telegram_bot::types::requests::EditMessageLiveLocation'>EditMessageLiveLocation</a></td>
+                           <td class='docblock-short'>
+                                <p>Use this method to edit live location messages sent by the bot.
+A location can be edited until its live_period expires or editing
+is explicitly disabled by a call to stopMessageLiveLocation.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -174,6 +184,16 @@ The bot must be an administrator in the group for this to work.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class="struct" href="struct.PinChatMessage.html"
+                                  title='struct telegram_bot::types::requests::PinChatMessage'>PinChatMessage</a></td>
+                           <td class='docblock-short'>
+                                <p>Use this method to pin a message in a supergroup or a channel.
+The bot must be an administrator in the chat for this to work
+and must have the ‘can_pin_messages’ admin right in the supergroup
+or ‘can_edit_messages’ admin right in the channel.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class="struct" href="struct.SendChatAction.html"
                                   title='struct telegram_bot::types::requests::SendChatAction'>SendChatAction</a></td>
                            <td class='docblock-short'>
@@ -211,12 +231,30 @@ Telegram clients clear its typing status).</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class="struct" href="struct.StopMessageLiveLocation.html"
+                                  title='struct telegram_bot::types::requests::StopMessageLiveLocation'>StopMessageLiveLocation</a></td>
+                           <td class='docblock-short'>
+                                <p>Use this method to stop updating a live location message sent by the bot
+before live_period expires.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class="struct" href="struct.UnbanChatMember.html"
                                   title='struct telegram_bot::types::requests::UnbanChatMember'>UnbanChatMember</a></td>
                            <td class='docblock-short'>
                                 <p>Use this method to unban a previously kicked user in a supergroup or channel.
 The user will not return to the group or channel automatically, but will be able to
 join via link, etc. The bot must be an administrator in the group for this to work.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.UnpinChatMessage.html"
+                                  title='struct telegram_bot::types::requests::UnpinChatMessage'>UnpinChatMessage</a></td>
+                           <td class='docblock-short'>
+                                <p>Use this method to unpin a message in a supergroup or a channel.
+The bot must be an administrator in the chat for this to work
+and must have the ‘can_pin_messages’ admin right in the
+supergroup or ‘can_edit_messages’ admin right in the channel.</p>
                            </td>
                        </tr></table></section>
     <section id='search' class="content hidden"></section>

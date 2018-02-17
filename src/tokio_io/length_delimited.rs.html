@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-io-0.1.4/src/length_delimited.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-io-0.1.5/src/length_delimited.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>length_delimited.rs.html -- source</title>
@@ -28,6 +28,7 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         
         
     </nav>
@@ -908,6 +909,24 @@
 <span id="863">863</span>
 <span id="864">864</span>
 <span id="865">865</span>
+<span id="866">866</span>
+<span id="867">867</span>
+<span id="868">868</span>
+<span id="869">869</span>
+<span id="870">870</span>
+<span id="871">871</span>
+<span id="872">872</span>
+<span id="873">873</span>
+<span id="874">874</span>
+<span id="875">875</span>
+<span id="876">876</span>
+<span id="877">877</span>
+<span id="878">878</span>
+<span id="879">879</span>
+<span id="880">880</span>
+<span id="881">881</span>
+<span id="882">882</span>
+<span id="883">883</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> {<span class="ident">codec</span>, <span class="ident">AsyncRead</span>, <span class="ident">AsyncWrite</span>};
 
@@ -1297,6 +1316,24 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">B</span>: <span class="ident">IntoBuf</span><span class="op">&gt;</span> <span class="ident">FramedWrite</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">B</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// Returns the current max frame setting</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This is the largest size this codec will write to the wire. Larger</span>
+    <span class="doccomment">/// frames will be rejected.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">max_frame_length</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
+        <span class="self">self</span>.<span class="ident">builder</span>.<span class="ident">max_frame_len</span>
+    }
+
+    <span class="doccomment">/// Updates the max frame setting.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The change takes effect the next time a frame is encoded. In other</span>
+    <span class="doccomment">/// words, if a frame is currently in process of being encoded with a frame</span>
+    <span class="doccomment">/// size greater than `val` but less than the max frame length in effect</span>
+    <span class="doccomment">/// before calling this function, then the frame will be allowed.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_max_frame_length</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="ident">usize</span>) {
+        <span class="self">self</span>.<span class="ident">builder</span>.<span class="ident">max_frame_length</span>(<span class="ident">val</span>);
+    }
+
     <span class="doccomment">/// Returns a reference to the underlying I/O stream wrapped by</span>
     <span class="doccomment">/// `FramedWrite`.</span>
     <span class="doccomment">///</span>

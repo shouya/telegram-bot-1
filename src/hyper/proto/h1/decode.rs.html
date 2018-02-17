@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.11.15/src/proto/h1/decode.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.11.18/src/proto/h1/decode.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>decode.rs.html -- source</title>
@@ -28,6 +28,7 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         
         
     </nav>
@@ -579,6 +580,7 @@
 <span id="534">534</span>
 <span id="535">535</span>
 <span id="536">536</span>
+<span id="537">537</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">error</span>::<span class="ident">Error</span> <span class="kw">as</span> <span class="ident">StdError</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
@@ -587,7 +589,8 @@
 
 <span class="kw">use</span> <span class="ident">futures</span>::{<span class="ident">Async</span>, <span class="ident">Poll</span>};
 <span class="kw">use</span> <span class="ident">bytes</span>::<span class="ident">Bytes</span>;
-<span class="kw">use</span> <span class="ident">proto</span>::<span class="ident">io</span>::<span class="ident">MemRead</span>;
+
+<span class="kw">use</span> <span class="kw">super</span>::<span class="ident">io</span>::<span class="ident">MemRead</span>;
 
 <span class="kw">use</span> <span class="self">self</span>::<span class="ident">Kind</span>::{<span class="ident">Length</span>, <span class="ident">Chunked</span>, <span class="ident">Eof</span>};
 
@@ -902,7 +905,7 @@
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>::<span class="ident">Write</span>;
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">Decoder</span>;
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">ChunkedState</span>;
-    <span class="kw">use</span> <span class="ident">proto</span>::<span class="ident">io</span>::<span class="ident">MemRead</span>;
+    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw">super</span>::<span class="ident">io</span>::<span class="ident">MemRead</span>;
     <span class="kw">use</span> <span class="ident">futures</span>::{<span class="ident">Async</span>, <span class="ident">Poll</span>};
     <span class="kw">use</span> <span class="ident">bytes</span>::{<span class="ident">BytesMut</span>, <span class="ident">Bytes</span>};
     <span class="kw">use</span> <span class="ident">mock</span>::<span class="ident">AsyncIo</span>;

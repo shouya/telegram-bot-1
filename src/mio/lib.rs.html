@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.12/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/mio-0.6.13/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -28,6 +28,7 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         
         
     </nav>
@@ -325,6 +326,21 @@
 <span id="280">280</span>
 <span id="281">281</span>
 <span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! A fast, low-level IO library for Rust focusing on non-blocking APIs, event</span>
 <span class="doccomment">//! notification, and other useful utilities for building high performance IO</span>
@@ -337,6 +353,21 @@
 <span class="doccomment">//! * A scalable readiness-based API, similar to epoll on Linux</span>
 <span class="doccomment">//! * Design to allow for stack allocated buffers when possible (avoid double buffering).</span>
 <span class="doccomment">//! * Provide utilities such as a timers, a notification channel, buffer abstractions, and a slab.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! # Platforms</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! Currently supported platforms:</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! * Linux</span>
+<span class="doccomment">//! * OS X</span>
+<span class="doccomment">//! * Windows</span>
+<span class="doccomment">//! * FreeBSD</span>
+<span class="doccomment">//! * NetBSD</span>
+<span class="doccomment">//! * Android</span>
+<span class="doccomment">//! * iOS</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! mio can handle interfacing with each of the event notification systems of the aforementioned platforms. The details of</span>
+<span class="doccomment">//! their implementation are further discussed in [`Poll`].</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! # Usage</span>
 <span class="doccomment">//!</span>
@@ -403,7 +434,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```</span>
 
-<span class="attribute">#![<span class="ident">doc</span>(<span class="ident">html_root_url</span> <span class="op">=</span> <span class="string">&quot;https://docs.rs/mio/0.6.12&quot;</span>)]</span>
+<span class="attribute">#![<span class="ident">doc</span>(<span class="ident">html_root_url</span> <span class="op">=</span> <span class="string">&quot;https://docs.rs/mio/0.6.13&quot;</span>)]</span>
 <span class="attribute">#![<span class="ident">crate_name</span> <span class="op">=</span> <span class="string">&quot;mio&quot;</span>]</span>
 
 <span class="attribute">#![<span class="ident">deny</span>(<span class="ident">warnings</span>, <span class="ident">missing_docs</span>, <span class="ident">missing_debug_implementations</span>)]</span>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-sys-0.9.24/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-sys-0.9.25/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -28,6 +28,7 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         
         
     </nav>
@@ -2750,6 +2751,7 @@
 <span id="2705">2705</span>
 <span id="2706">2706</span>
 <span id="2707">2707</span>
+<span id="2708">2708</span>
 </pre><pre class="rust ">
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>, <span class="ident">non_upper_case_globals</span>, <span class="ident">non_snake_case</span>)]</span>
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">dead_code</span>, <span class="ident">overflowing_literals</span>)]</span>
@@ -4641,6 +4643,7 @@
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">EVP_des_cbc</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">EVP_CIPHER</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">EVP_des_ecb</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">EVP_CIPHER</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">EVP_des_ede3</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">EVP_CIPHER</span>;
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">EVP_BytesToKey</span>(
         <span class="ident">typ</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">EVP_CIPHER</span>,

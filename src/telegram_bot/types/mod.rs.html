@@ -28,6 +28,7 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         
         
     </nav>
@@ -65,6 +66,7 @@
 <span id="20">20</span>
 <span id="21">21</span>
 <span id="22">22</span>
+<span id="23">23</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! Telegram bot types.</span>
 
@@ -74,10 +76,11 @@
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">Integer</span>, <span class="ident">Float</span>, <span class="ident">Request</span>, <span class="ident">DetachedRequest</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">ResponseType</span>, <span class="ident">JsonResponse</span>, <span class="ident">JsonIdResponse</span>, <span class="ident">JsonTrueToUnitResponse</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">Update</span>, <span class="ident">UpdateKind</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">User</span>, <span class="ident">Group</span>, <span class="ident">Supergroup</span>, <span class="ident">Channel</span>, <span class="ident">Chat</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">User</span>, <span class="ident">Group</span>, <span class="ident">Supergroup</span>, <span class="ident">Channel</span>, <span class="ident">Chat</span>, <span class="ident">MessageChat</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">UserId</span>, <span class="ident">GroupId</span>, <span class="ident">SupergroupId</span>, <span class="ident">ChannelId</span>, <span class="ident">ChatId</span>, <span class="ident">ChatRef</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">CallbackQuery</span>, <span class="ident">CallbackQueryId</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">Message</span>, <span class="ident">MessageId</span>, <span class="ident">MessageKind</span>, <span class="ident">Forward</span>, <span class="ident">ForwardFrom</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">MessageId</span>, <span class="ident">MessageKind</span>, <span class="ident">Forward</span>, <span class="ident">ForwardFrom</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">MessageOrChannelPost</span>, <span class="ident">Message</span>, <span class="ident">ChannelPost</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">MessageEntity</span>, <span class="ident">MessageEntityKind</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">Audio</span>, <span class="ident">Document</span>, <span class="ident">PhotoSize</span>, <span class="ident">Sticker</span>, <span class="ident">Video</span>, <span class="ident">Voice</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">telegram_bot_raw</span>::{<span class="ident">Contact</span>, <span class="ident">Location</span>, <span class="ident">Venue</span>, <span class="ident">File</span>, <span class="ident">FileRef</span>};

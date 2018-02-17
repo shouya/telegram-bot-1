@@ -28,8 +28,9 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         
-        <p class='location'>Module types</p><div class="block items"><ul><li><a href="#reexports">Reexports</a></li><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'><a href='../index.html'>telegram_bot</a></p><script>window.sidebarCurrent = {name: 'types', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'>Module types</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#reexports">Reexports</a></li><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'><a href='../index.html'>telegram_bot</a></p><script>window.sidebarCurrent = {name: 'types', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script></div>
     </nav>
 
     <nav class="sub">
@@ -48,7 +49,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/telegram_bot/types/mod.rs.html#1-22' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/telegram_bot/types/mod.rs.html#1-23' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Telegram bot types.</p>
 </div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
 <table><tr><td><code>pub use <a class="mod" href="../../telegram_bot/types/requests/index.html" title="mod telegram_bot::types::requests">requests</a>::*;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
@@ -94,6 +95,13 @@
                                   title='struct telegram_bot::types::ChannelId'>ChannelId</a></td>
                            <td class='docblock-short'>
                                 <p>Unique channel identifier.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.ChannelPost.html"
+                                  title='struct telegram_bot::types::ChannelPost'>ChannelPost</a></td>
+                           <td class='docblock-short'>
+                                <p>This object represents a channel message.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -356,6 +364,13 @@ target channel (in the format @channelusername)</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class="enum" href="enum.MessageChat.html"
+                                  title='enum telegram_bot::types::MessageChat'>MessageChat</a></td>
+                           <td class='docblock-short'>
+                                <p>This object represents a private, group or supergroup.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class="enum" href="enum.MessageEntityKind.html"
                                   title='enum telegram_bot::types::MessageEntityKind'>MessageEntityKind</a></td>
                            <td class='docblock-short'>
@@ -367,6 +382,13 @@ target channel (in the format @channelusername)</p>
                                   title='enum telegram_bot::types::MessageKind'>MessageKind</a></td>
                            <td class='docblock-short'>
                                 <p>Kind of the message.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.MessageOrChannelPost.html"
+                                  title='enum telegram_bot::types::MessageOrChannelPost'>MessageOrChannelPost</a></td>
+                           <td class='docblock-short'>
+                                <p>This object represents a chat message or a channel post.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>

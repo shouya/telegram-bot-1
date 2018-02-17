@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-io-0.1.4/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-io-0.1.5/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -28,6 +28,7 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         
         
     </nav>
@@ -426,6 +427,12 @@
 <span id="381">381</span>
 <span id="382">382</span>
 <span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
+<span id="386">386</span>
+<span id="387">387</span>
+<span id="388">388</span>
+<span id="389">389</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! Core I/O traits and combinators when working with Tokio.</span>
 <span class="doccomment">//!</span>
@@ -657,6 +664,12 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This trait importantly means that the `write` method only works in the</span>
 <span class="doccomment">/// context of a future&#39;s task. The object may panic if used outside of a task.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Note that this trait also represents that the  `Write::flush` method works</span>
+<span class="doccomment">/// very similarly to the `write` method, notably that `Ok(())` means that the</span>
+<span class="doccomment">/// writer has successfully been flushed, a &quot;would block&quot; error means that the</span>
+<span class="doccomment">/// current task is ready to receive a notification when flushing can make more</span>
+<span class="doccomment">/// progress, and otherwise normal errors can happen as well.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">AsyncWrite</span>: <span class="ident">std_io</span>::<span class="ident">Write</span> {
     <span class="doccomment">/// Initiates or attempts to shut down this writer, returning success when</span>
     <span class="doccomment">/// the I/O connection has completely shut down.</span>

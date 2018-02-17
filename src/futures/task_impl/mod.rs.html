@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.17/src/task_impl/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.18/src/task_impl/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -28,6 +28,7 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         
         
     </nav>
@@ -731,6 +732,7 @@
 <span id="686">686</span>
 <span id="687">687</span>
 <span id="688">688</span>
+<span id="689">689</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">fmt</span>;
 <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span>;
@@ -950,7 +952,8 @@
     <span class="ident">obj</span>: <span class="ident">T</span>,
 }
 
-<span class="doccomment">/// Spawns a new future, returning the fused future and task.</span>
+<span class="doccomment">/// Spawns a future or stream, returning it and the new task responsible for</span>
+<span class="doccomment">/// running it to completion.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function is the termination endpoint for running futures. This method</span>
 <span class="doccomment">/// will conceptually allocate a new task to run the given object, which is</span>

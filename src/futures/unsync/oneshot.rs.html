@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.17/src/unsync/oneshot.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-0.1.18/src/unsync/oneshot.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>oneshot.rs.html -- source</title>
@@ -28,6 +28,7 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         
         
     </nav>
@@ -657,7 +658,7 @@
     <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">Future</span>,
           <span class="ident">E</span>: <span class="ident">Executor</span><span class="op">&lt;</span><span class="ident">Execute</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;&gt;</span>,
 {
-    <span class="kw">let</span> <span class="ident">flag</span> <span class="op">=</span> <span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">Cell</span>::<span class="ident">new</span>(<span class="bool-val">true</span>));
+    <span class="kw">let</span> <span class="ident">flag</span> <span class="op">=</span> <span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">Cell</span>::<span class="ident">new</span>(<span class="bool-val">false</span>));
     <span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">channel</span>();
     <span class="ident">executor</span>.<span class="ident">execute</span>(<span class="ident">Execute</span> {
         <span class="ident">future</span>: <span class="ident">future</span>,
@@ -690,7 +691,7 @@
     <span class="doccomment">/// well if the future hasn&#39;t already resolved. This function can be used</span>
     <span class="doccomment">/// when to drop this future but keep executing the underlying future.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">forget</span>(<span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">keep_running</span>.<span class="ident">set</span>(<span class="bool-val">false</span>);
+        <span class="self">self</span>.<span class="ident">keep_running</span>.<span class="ident">set</span>(<span class="bool-val">true</span>);
     }
 }
 
