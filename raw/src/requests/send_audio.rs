@@ -144,6 +144,6 @@ where
     where
         T: Into<Cow<'s, str>>,
     {
-        SendAudio::with_url(self.to_source_chat(), url)
+        SendAudio::with_url(self.to_chat_ref(), url)
     }
 }
