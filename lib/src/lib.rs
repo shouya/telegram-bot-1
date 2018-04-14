@@ -19,6 +19,8 @@ extern crate tokio_curl;
 extern crate hyper;
 #[cfg(feature = "hyper_connector")]
 extern crate hyper_tls;
+#[cfg(feature = "hyper_connector")]
+extern crate multipart;
 
 mod api;
 mod errors;

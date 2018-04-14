@@ -1,35 +1,44 @@
-use std::ops::Not;
 use std::borrow::Cow;
 
 use types::*;
 use requests::*;
 
 /// Use this method to send an audio
-#[derive(Debug, Clone, PartialEq, PartialOrd, Serialize)]
+#[derive(Debug, Clone, PartialEq, PartialOrd)]
 #[must_use = "requests do nothing unless sent"]
 pub struct SendAudio<'s, 'c, 'p, 't> {
     chat_id: ChatRef,
     audio: Cow<'s, str>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     caption: Option<Cow<'c, str>>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     parse_mode: Option<ParseMode>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     duration: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     performer: Option<Cow<'p, str>>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     title: Option<Cow<'t, str>>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     reply_to_message_id: Option<MessageId>,
-    #[serde(skip_serializing_if = "Not::not")]
     disable_notification: bool,
-    #[serde(skip_serializing_if = "Option::is_none")]
     reply_markup: Option<ReplyMarkup>,
 }
 
+impl<'s, 'c, 'p, 't> ToMultipart for SendAudio<'s, 'c, 'p, 't> {
+    fn to_multipart(&self) -> Multipart {
+        multipart_map! {
+            self,
+            (chat_id (text));
+            (audio (file));
+            (caption (text), optional);
+            (parse_mode (text), optional);
+            (duration (text), optional);
+            (performer (text), optional);
+            (title (text), optional);
+            (reply_to_message_id (text), optional);
+            (disable_notification (text), when_true);
+            (reply_markup (json), optional);
+        }
+    }
+}
+
 impl<'s, 'c, 'p, 't> Request for SendAudio<'s, 'c, 'p, 't> {
-    type Type = JsonRequestType<Self>;
+    type Type = MultipartRequestType<Self>;
     type Response = JsonTrueToUnitResponse;
 
     fn serialize(&self) -> Result<HttpRequest, Error> {
