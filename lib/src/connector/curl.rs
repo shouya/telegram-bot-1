@@ -1,8 +1,8 @@
 //! Connector with tokio-curl backend.
 
 use std::fmt;
-use std::sync::Arc;
 use std::rc::Rc;
+use std::sync::Arc;
 
 use antidote::Mutex;
 use curl::easy::{Easy, Form, List};
@@ -68,16 +68,22 @@ impl CurlConnector {
                         MultipartValue::Text(text) => {
                             let mut part = form.part(&k);
                             part.contents(text.as_bytes());
-                            part.add().unwrap();
+                            part.add()?;
                         }
-                        MultipartValue::File { filename, path } => {
+                        MultipartValue::File { path } => {
                             let mut part = form.part(&k);
-                            part.buffer(filename.as_str(), path.into_bytes());
-                            part.add().unwrap();
+                            part.file_content(path);
+                            part.add()?;
+                        }
+                        MultipartValue::Data { file_name, data } => {
+                            let file_name = file_name.unwrap_or("".into());
+                            let mut part = form.part(&k);
+                            part.buffer(file_name.as_str(), data);
+                            part.add()?;
                         }
                     }
                 }
-                handle.httppost(form).unwrap();
+                handle.httppost(form)?;
             }
             body => panic!("Unknown body type {:?}", body),
         }
